@@ -1,0 +1,331 @@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- ['tr_utils.P'].
+%:- ['tr_operators.P'].
+%:- ['tr_logger.P'].
+%:- ['tr_debugger.P'].
+:- ['tr_interpreter.P'].
+:- ['tr_tabling_ops.P'].
+%:- ['update_ops_no_length_with_trie_db.P'].
+:- ['update_ops_no_length.P'].
+%:- ['update_ops_with_hash_optimized.P'].
+%:- ['update_ops_original.P'].
+%:- ['tr_flags.P'].
+
+% debuging information during execution
+:- dynamic(tr_debug/1). % on or off
+
+% profiling during execution
+:- dynamic(tr_profile/1). % on or off
+
+:- import profile_call/1 from xsb_profiling.
+
+:- import length/2,
+        member/2 from basics.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+find_all(CTRfile):-
+        % output in file
+        output_handler(OH),
+        !,
+        find_all_internal(CTRfile,OH),
+        close(OH).
+find_all(CTRfile):-
+        % output on screen
+        find_all_internal(CTRfile,user_out).
+
+find_all_internal(CTRfile,OH):-
+        initializeCTRSystem(CTRfile,State0),% defined in v?/update_ops.P
+        write('_Test file: '),
+        write(CTRfile),
+        write('\n'),
+        test_description(Desc),
+        write('_Description: '),
+        write(Desc),
+        write('\n'),
+        test_query(Query),
+        write('_Query: '),
+        write(Query),
+        write('\n'),
+        my_cputime(T0),
+        % test
+        statistics(total_memory,[_,M0]),
+        statistics(tablespace,[_,TS0]),% Table Space
+        statistics(gl,[_,LS0]),% heap and Local environment Space
+        statistics(trie\_assert,[_,InternedTriesSpace0]),% Interned Tries Space
+        profile_or_not_for_findall(Query,State0,Results),
+        my_cputime(T1),
+        DT is T1 - T0,
+        write_table_header(OH,Version),
+        %write(OH,'Version '),
+        write(OH,Version),
+        write(OH,':\t'),
+        write(OH,DT),
+        write(OH,'\t'),
+        nl,
+        write('Time: '),
+        write(DT),
+        nl,
+        memory_statistics(OH,M0,TS0,LS0,InternedTriesSpace0),
+        length(Results,ResultLength),
+        debug_statistics(OH,Results),
+        write(OH,ResultLength),
+        write(OH,'\n'),
+        write('Number of results: '),
+        write(ResultLength),
+        %write('Results: '),
+        %write(Results),
+        nl.
+
+memory_statistics(OH,M0,TS0,LS0,InternedTriesSpace0):-
+        statistics(tablespace,[_,TS1]),% Table Space
+        statistics(gl,[_,LS1]),% heap and Local environment Space
+        statistics(trie\_assert,[_,InternedTriesSpace1]),% Interned Tries Space
+        statistics(total_memory,[_,M1]),% Memory in use
+        % the memory used by atoms in not used in tabling
+        %statistics(atoms,A),
+        DM is M1 - M0,
+        ( DM>0 -> M is DM//1000; M=0 ),
+        DTS is TS1 - TS0,
+        ( DTS>0 -> TS is DTS//1000; TS=0 ),
+        DLS is LS1 - LS0,
+        ( DLS>0 -> LS is DLS//1000; LS=0 ),
+        DInternedTriesSpace is InternedTriesSpace1 - InternedTriesSpace0,
+        ( DInternedTriesSpace>0
+                -> InternedTriesSpace is DInternedTriesSpace//1000
+                ; InternedTriesSpace=0 ),
+        !,
+        write('Total memory used by the test: \t'),
+        StatMem is InternedTriesSpace + TS + LS,
+        write(StatMem),
+        StatMem=StatMem, % for no warnings
+        %write(M),
+        M=M, % for no warnings
+        nl,
+        write('Memory used by the tabling: \t'),
+        write(TS),
+        nl,
+        %write('Memory used by the environment: \t'),
+        %write(LS),
+        %nl,
+        LS=LS, % not to generate warnings by commenting the lines above
+        write('Interned tries space: \t\t'),
+        write(InternedTriesSpace),
+        nl,
+        %M is TS + LS + InternedTriesSpace,% Memory in use
+        write(OH,StatMem),
+        %write(OH,M),
+        write(OH,'\t'),
+        write(OH,TS),
+        write(OH,'\t'),
+        write(OH,InternedTriesSpace),
+        write(OH,'\t'),
+        write(OH,LS),
+        write(OH,'\t').
+memory_statistics(OH,_M0):-
+        write(OH,'\t').
+
+debug_statistics(OH,Results):-
+        tr_debug(on),
+        !,
+        %write('_Results: '),
+        %write(Results),
+        %nl,
+        Results=Results, % for no warnings
+        debug_seen_states(NoStates), % defined in tr_debugging.P
+       %%see_tabled_states(TabledStates), % defined in vX/debug_testing_ops.P
+       %%length(TabledStates,NoTabledStates),
+        %debug_tabled_shell_states(NoTabledShellStates),
+        %debug_input_tabled_shell_states(NoInputTabledShellStates),
+        debug_tabled_shell_states(NoTabledStates),
+        NoNotTabledStates is NoStates-NoTabledStates,
+        % no warnings
+        NoInputTabledShellStates=NoInputTabledShellStates,
+        counter(state_comps,Comps),
+        counter(state_copies,Copies),
+        %%% Output to screen
+        write('_Number of seen states:\t\t\t\t'),
+        write(NoStates),
+        write('\n'),
+        write('_Number of states stored in global tries:\t'),
+        write(NoTabledStates),
+        write('\n'),
+        write('_Number of transient states:\t\t\t'),
+        write(NoNotTabledStates),
+        write('\n'),
+        write('_State comps.:\t\t\t\t\t'),
+        write(Comps),
+        write('\n'),
+        write('_State copies:\t\t\t\t\t'),
+        write(Copies),
+        write('\n'),
+        %write('_Number of states in tabled calls:\t\t'),
+        %write(NoTabledShellStates),
+        %write('\n'),
+        %%% write to file
+        write(OH,NoStates),
+        write(OH,'\t'),
+        write(OH,NoTabledStates),
+        write(OH,'\t'),
+        write(OH,NoNotTabledStates),
+        write(OH,'\t'),
+        write(OH,Comps),
+        write(OH,'\t'),
+        write(OH,Copies),
+        write(OH,'\t'),
+        %write(OH,NoTabledShellStates),
+        %write(OH,'\t'),
+        !.
+debug_statistics(_OH,_Results).
+
+% if tr_profile(on), profiles the query
+profile_or_not_for_findall(Query,State0,Result):-
+        tr_profile(on),
+        !,
+        profile_call(findall_ctr_intern(Query,State0,Result)).
+profile_or_not_for_findall(Query,State0,Result):-
+        findall_ctr_intern(Query,State0,Result),
+        !.
+
+% collects all results to Query
+findall_ctr_intern(Query,State0,Result):-
+        findall(result(Query),(
+                % ctr_query is defined in tr_interpreter.P
+                ctr_query(Query,State0,State1)
+                ,State1=State1 % for no warnings
+                %,debug_print_result(ctr_query(Query,State0,State1))
+                %,write('Result: '),
+                %write(ctr_query(Query,State0,State1)),
+                %nl,
+                %see_fact_store(L),write_list(L), nl
+        ),Result).
+
+debug_print_result(ctr_query(Query,State0,State1)):-
+        tr_debug(on),
+        !,
+        ctr_query(Query,State0,State1),
+        write('Result: '),
+        write(ctr_query(Query,State0,State1)),
+        nl.
+debug_print_result(_).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- dynamic(tr_output/2).
+% outputs the results of the execution in a file tr.results,
+%   outputing the version number (first argument),
+%   second argument is a flag: write or append
+output_handler(OH):-
+        tr_output(_Version,Mode),
+        open('tr.results',Mode,OH).
+
+write_table_header(OH,Version):-
+        tr_output(Version,write),
+        write(OH,'\tResults\tCputime\tMemory\n'),
+        !.
+write_table_header(_OH,Version):-
+        tr_output(Version,append),
+        !.
+write_table_header(_OH,_Version):-
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%find_one(CTRfile) % for XSB batched execution
+find_one(CTRfile):-
+        % output in file
+        output_handler(OH),
+        !,
+        find_one_internal(CTRfile,OH).
+find_one(CTRfile):-
+        % output on screen
+        find_one_internal(CTRfile,user_out).
+
+find_one_internal(CTRfile,OH):- % output on screen
+        initializeCTRSystem(CTRfile,State0),% defined in v?/update_ops.P
+        write('_Test file: '),
+        write(CTRfile),
+        write('\n'),
+        test_description(Desc),
+        write('_Description: '),
+        write(Desc),
+        write('\n'),
+        test_query(Query),
+        write('_Query: '),
+        write(Query),
+        write('\n'),
+        my_cputime(T0),
+        % test
+        statistics(total_memory,[_,M0]),
+        statistics(tablespace,[_,TS0]),% Table Space
+        statistics(gl,[_,LS0]),% heap and Local environment Space
+        statistics(trie\_assert,[_,InternedTriesSpace0]),% Interned Tries Space
+%	(early_termination -> 
+%              profile_or_not_for_findone_interrupted(Query,State0,Result) ; 
+              profile_or_not_for_findone(Query,State0,Result),
+        my_cputime(T1),
+        %write('_Results: '),
+        write(Result),
+        write('\n'),
+        DT is T1 - T0,
+        write_table_header(OH,Version),
+        %write(OH,'Version '),
+        write(OH,Version),
+        write(OH,':\t'),
+        %write(OH,'_Cputime: '),
+        write(OH,DT),
+        write(OH,'\t'),
+	nl,
+        debug_statistics(OH,Result),
+        memory_statistics(OH,M0,TS0,LS0,InternedTriesSpace0),
+        write(OH,'\t'),
+        %write(OH,'_Number of results (batched; it should be 1 (partial)): '),
+        length(Result,ResultLength),
+        write(OH,ResultLength),
+        write(OH,'\n'),
+        write('Number of results: '),
+        write(ResultLength),
+        nl.
+
+profile_or_not_for_findone(Query,State0,Result):-
+        tr_profile(on),
+        !,
+        profile_call(findone_ctr_intern(Query,State0,Result)).
+profile_or_not_for_findone(Query,State0,Result):-
+        findone_ctr_intern(Query,State0,Result),
+        !.
+
+findone_ctr_intern(Query,State0,Result):-
+        % ctr_query is defined in tr_interpreter.P
+        ctr_query(Query,State0,_State1),
+        Result = [Query].
+
+my_cputime(T):- % XSB
+        cputime(T),
+        !.
+
+profile_or_not_for_findone_interrupted(Query,State0,Result):-
+        tr_profile(on),
+        !,
+        profile_call(findone_ctr_intern_interrupted(Query,State0,Result)).
+profile_or_not_for_findone_interrupted(Query,State0,Result):-
+        findone_ctr_intern_interrupted(Query,State0,Result),
+        !.
+
+findone_ctr_intern_interrupted(Query,State0,Result):-
+        % ctr_query is defined in tr_interpreter.P
+        writeln('kire khar'),
+        catch(
+	       ctr_query(Query,State0,_State1),
+	       answer_found,
+	       writeln('Early Termination')),
+        Result = [Query].
+
+my_cputime(T):- % XSB
+        cputime(T),
+        !.
+%my_cputime(T):- % Yap
+%   T is cputime,
+%   !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

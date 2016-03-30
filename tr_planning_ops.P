@@ -1,0 +1,2635 @@
+tabled_predicate(shuffle_n_regress,3).
+tabled_predicate(shuffle_n_regress,4).
+tabled_predicate(shuffle_n_regress,5).
+tabled_predicate(shuffle_n_regress,6).
+tabled_predicate(shuffle_n_regress,7).
+tabled_predicate(shuffle_n_regress,8).
+tabled_predicate(shuffle_n_regress,9).
+tabled_predicate(shuffle_n_regress,10).
+tabled_predicate(shuffle_n_regress,11).
+tabled_predicate(shuffle_n_regress,12).
+tabled_predicate(shuffle_n_regress,13).
+tabled_predicate(shuffle_n_regress,14).
+tabled_predicate(shuffle_n_regress,15).
+tabled_predicate(shuffle_n_regress,16).
+tabled_predicate(shuffle_n_regress,17).
+tabled_predicate(shuffle_n_regress,18).
+tabled_predicate(shuffle_n_regress,19).
+tabled_predicate(shuffle_n_regress,20).
+tabled_predicate(shuffle_n_regress,21).
+tabled_predicate(shuffle_n_regress,22).
+tabled_predicate(shuffle_n_regress,23).
+tabled_predicate(shuffle_n_regress,24).
+tabled_predicate(shuffle_n_regress,25).
+tabled_predicate(shuffle_n_regress,26).
+
+
+:- import  empty_db/1, 
+    assert_in_db/3, 
+    retractall_in_db/3, 
+    clause_in_db/3 from prolog_db.
+
+enhanced_exec(achieve(A,_),achieve(A,PE),PE) :- !.
+
+enhanced_exec(avoid(A,_),avoid(A,PE),PE) :- !.
+
+enhanced_exec(X,X,_) :- X \= achieve(_,_), X \= avoid(_,_).
+    
+getGoal(achieve(A,_),achievedGoals(A)).
+
+getGoal(avoid(A,_),avoidedGoals(A)).
+
+tr_clause(
+	shuffle_n_regress(A,B,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		seq(enhanced_exec(B,EY,PE1),
+		    EY)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		seq(enhanced_exec(A,EY,PE1),
+		    EY)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE),
+		seq(enhanced_exec(O,EX,PE),
+		seq(EX,
+		seq(getGoal(O,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(O,EX,PE),
+		seq(EX,
+		seq(getGoal(O,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE),
+		seq(enhanced_exec(P,EX,PE),
+		seq(EX,
+		seq(getGoal(P,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(O,EX,PE),
+		seq(EX,
+		seq(getGoal(O,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(P,EX,PE),
+		seq(EX,
+		seq(getGoal(P,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE),
+		seq(enhanced_exec(Q,EX,PE),
+		seq(EX,
+		seq(getGoal(Q,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(O,EX,PE),
+		seq(EX,
+		seq(getGoal(O,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(P,EX,PE),
+		seq(EX,
+		seq(getGoal(P,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(Q,EX,PE),
+		seq(EX,
+		seq(getGoal(Q,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE),
+		seq(enhanced_exec(R,EX,PE),
+		seq(EX,
+		seq(getGoal(R,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(O,EX,PE),
+		seq(EX,
+		seq(getGoal(O,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(P,EX,PE),
+		seq(EX,
+		seq(getGoal(P,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(Q,EX,PE),
+		seq(EX,
+		seq(getGoal(Q,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(R,EX,PE),
+		seq(EX,
+		seq(getGoal(R,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE),
+		seq(enhanced_exec(S,EX,PE),
+		seq(EX,
+		seq(getGoal(S,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(O,EX,PE),
+		seq(EX,
+		seq(getGoal(O,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(P,EX,PE),
+		seq(EX,
+		seq(getGoal(P,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(Q,EX,PE),
+		seq(EX,
+		seq(getGoal(Q,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(R,EX,PE),
+		seq(EX,
+		seq(getGoal(R,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(S,EX,PE),
+		seq(EX,
+		seq(getGoal(S,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(T,EX,PE),
+		seq(EX,
+		seq(getGoal(T,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE),
+		seq(enhanced_exec(U,EX,PE),
+		seq(EX,
+		seq(getGoal(U,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(O,EX,PE),
+		seq(EX,
+		seq(getGoal(O,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(P,EX,PE),
+		seq(EX,
+		seq(getGoal(P,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(Q,EX,PE),
+		seq(EX,
+		seq(getGoal(Q,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(R,EX,PE),
+		seq(EX,
+		seq(getGoal(R,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(S,EX,PE),
+		seq(EX,
+		seq(getGoal(S,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,PE),
+		seq(enhanced_exec(T,EX,PE),
+		seq(EX,
+		seq(getGoal(T,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(O,EX,PE),
+		seq(EX,
+		seq(getGoal(O,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(P,EX,PE),
+		seq(EX,
+		seq(getGoal(P,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(Q,EX,PE),
+		seq(EX,
+		seq(getGoal(Q,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(R,EX,PE),
+		seq(EX,
+		seq(getGoal(R,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(S,EX,PE),
+		seq(EX,
+		seq(getGoal(S,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(T,EX,PE),
+		seq(EX,
+		seq(getGoal(T,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(V,EX,PE),
+		seq(EX,
+		seq(getGoal(V,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE),
+		seq(enhanced_exec(U,EX,PE),
+		seq(EX,
+		seq(getGoal(U,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(O,EX,PE),
+		seq(EX,
+		seq(getGoal(O,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(P,EX,PE),
+		seq(EX,
+		seq(getGoal(P,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(Q,EX,PE),
+		seq(EX,
+		seq(getGoal(Q,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(R,EX,PE),
+		seq(EX,
+		seq(getGoal(R,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(S,EX,PE),
+		seq(EX,
+		seq(getGoal(S,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(T,EX,PE),
+		seq(EX,
+		seq(getGoal(T,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(V,EX,PE),
+		seq(EX,
+		seq(getGoal(V,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(U,EX,PE),
+		seq(EX,
+		seq(getGoal(U,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE),
+		seq(enhanced_exec(W,EX,PE),
+		seq(EX,
+		seq(getGoal(W,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(O,EX,PE),
+		seq(EX,
+		seq(getGoal(O,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(P,EX,PE),
+		seq(EX,
+		seq(getGoal(P,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(Q,EX,PE),
+		seq(EX,
+		seq(getGoal(Q,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(R,EX,PE),
+		seq(EX,
+		seq(getGoal(R,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(S,EX,PE),
+		seq(EX,
+		seq(getGoal(S,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(T,EX,PE),
+		seq(EX,
+		seq(getGoal(T,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,V,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(V,EX,PE),
+		seq(EX,
+		seq(getGoal(V,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(U,EX,PE),
+		seq(EX,
+		seq(getGoal(U,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,W,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(W,EX,PE),
+		seq(EX,
+		seq(getGoal(W,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,X,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE),
+		seq(enhanced_exec(X,EX,PE),
+		seq(EX,
+		seq(getGoal(X,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(A,EX,PE),
+		seq(EX,
+		seq(getGoal(A,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(B,EX,PE),
+		seq(EX,
+		seq(getGoal(B,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(C,EX,PE),
+		seq(EX,
+		seq(getGoal(C,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(D,EX,PE),
+		seq(EX,
+		seq(getGoal(D,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(E,EX,PE),
+		seq(EX,
+		seq(getGoal(E,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(F,EX,PE),
+		seq(EX,
+		seq(getGoal(F,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(G,EX,PE),
+		seq(EX,
+		seq(getGoal(G,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(H,EX,PE),
+		seq(EX,
+		seq(getGoal(H,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(I,EX,PE),
+		seq(EX,
+		seq(getGoal(I,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(J,EX,PE),
+		seq(EX,
+		seq(getGoal(J,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(K,EX,PE),
+		seq(EX,
+		seq(getGoal(K,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(L,EX,PE),
+		seq(EX,
+		seq(getGoal(L,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(M,EX,PE),
+		seq(EX,
+		seq(getGoal(M,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(N,EX,PE),
+		seq(EX,
+		seq(getGoal(N,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(O,EX,PE),
+		seq(EX,
+		seq(getGoal(O,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(P,EX,PE),
+		seq(EX,
+		seq(getGoal(P,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(Q,EX,PE),
+		seq(EX,
+		seq(getGoal(Q,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(R,EX,PE),
+		seq(EX,
+		seq(getGoal(R,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(S,EX,PE),
+		seq(EX,
+		seq(getGoal(S,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(T,EX,PE),
+		seq(EX,
+		seq(getGoal(T,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,V,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(V,EX,PE),
+		seq(EX,
+		seq(getGoal(V,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(U,EX,PE),
+		seq(EX,
+		seq(getGoal(U,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,W,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(W,EX,PE),
+		seq(EX,
+		seq(getGoal(W,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,X,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(X,EX,PE),
+		seq(EX,
+		seq(getGoal(X,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,Y,PE1)))))).
+
+tr_clause(
+	shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y,PE),
+		seq(enhanced_exec(Y,EX,PE),
+		seq(EX,
+		seq(getGoal(Y,GOAL),
+		seq(assert_in_db(GOAL,PE,PE1),
+		shuffle_n_regress(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,PE1)))))).
+

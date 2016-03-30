@@ -1,0 +1,261 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:-import new_trie/1,
+        trie_intern/2,
+        trie_intern/4,
+        trie_interned/2,
+        trie_interned/4 from intern.
+
+:-import member/2,
+        length/2,
+        append/3,
+        select/3 from basics.
+
+:- import sort/2 from setof.
+
+% dynamic initial_state/1 predicate: "initial_state(FactId)"
+:- dynamic(initial_state/1).
+
+:- ['tr_utils.P'].
+
+% dynamic insDelsRoot/1 predicate containing the root of the trie that
+%  contains materialized state logs in the format:
+%  "ListOfAll_FactIds_Ins/Dels_Ordered,QueryIns/DelsRoot"
+:- dynamic(insDelsRoot/1).
+
+% dynamic stateRoot/1 predicate contains the root of the trie that
+%  contains the states: "state(InsLeaf,QueryInsRoot,DelsLeaf,QueryDelsRoot)"
+:- dynamic(stateRoot/1).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% initializeCTRSystem(+CTRProgram): initializes the transactional system
+initializeCTRSystem(CTRProgram,State0):-
+        retractall(dynamic_predicate(_,_)),
+        retractall(tr_database(_)),
+        retractall(tr_clause(_,_)),
+%	load_dyn('tr_operators'),
+%	load_dyn('tr_planning_ops'),
+        load_dyn(CTRProgram),
+        findall(Head,tr_database(Head),ListFacts),
+        no_backtracking_facts_to_factids(ListFacts,ListFactIds),
+        retractall(initial_state(_)),
+        flush_initial_state(ListFactIds),
+        new_trie(InsDelsRoot),
+        new_trie(StateRoot),
+        % saving the first state
+        trie_intern([],InsDelsRoot,InsLeaf,_),
+        trie_intern([],InsDelsRoot,DelsLeaf,_),
+        trie_intern(state(InsLeaf,DelsLeaf),StateRoot,State0,_),
+        (
+        	tr_debug(on)
+        	-> inc_counter(state_copies,_) % the initial state is created
+        	; true
+        ),
+        assert(insDelsRoot(InsDelsRoot)),
+        assert(stateRoot(StateRoot)),
+        !.
+
+% keeps the list of initial fact ids (for debugging purposes)
+:- dynamic(initial_state_list/1).
+
+% flush_initial_state/1
+flush_initial_state(ListFactIds):-
+	retractall(initial_state_list(_)),
+	sort(ListFactIds,OrdListFactIds),
+	assert(initial_state_list(OrdListFactIds)),
+	create_initialState(ListFactIds).
+
+% create_initialState/1
+% create_initialState(+ListFactIds)
+create_initialState([]).
+create_initialState([H|T]):-
+        assert(initial_state(H)),
+        create_initialState(T).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% check_store_tabled_state(+S1,-S1t): checks/puts the current state
+%  into the tabled states
+check_store_tabled_state(S1,S1t):-
+        S1 = S1t,
+	!.
+
+absolute_state(S1,S1t):-
+        S1 = S1t,
+        !.
+
+differential_state(S1,S1t):-
+        S1 = S1t,
+	!.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% db_select(+Fact,+S1): checks if a fact is in the state
+db_select(Fact,S1):-
+        stateRoot(StateRoot),
+        insDelsRoot(InsDelsRoot),
+        trie_interned(state(InsLeaf,DelsLeaf),StateRoot,S1,_),
+        fact_to_factid(Fact,FactId),
+        db_select_internal(FactId,S1,InsDelsRoot,InsLeaf,DelsLeaf).
+
+% db_select_internal/5
+db_select_internal(FactId,_S1,InsDelsRoot,InsLeaf,_DelsLeaf):-
+        % the fact was inserted
+        trie_interned(Ins,InsDelsRoot,InsLeaf,_),
+        member_ord(FactId,Ins),
+        !.
+db_select_internal(FactId,_S1,InsDelsRoot,_InsLeaf,DelsLeaf):-
+        % the fact was in the initial state and it was not deleted
+        initial_state(FactId),
+        trie_interned(Dels,InsDelsRoot,DelsLeaf,_),
+        \+( member_ord(FactId,Dels) ),
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% db_ins(+Fact,+S1,-S2)
+db_ins(Fact,S1,S2):-
+        stateRoot(StateRoot),
+        insDelsRoot(InsDelsRoot),
+        trie_interned(state(InsLeaf,DelsLeaf),StateRoot,S1,_),
+        trie_interned(Ins,InsDelsRoot,InsLeaf,_),
+        trie_interned(Dels,InsDelsRoot,DelsLeaf,_),
+        no_backtracking_fact_to_factid(Fact,FactId),
+        db_ins_internal(FactId,S1,S2,StateRoot,InsDelsRoot,InsLeaf,DelsLeaf,
+                Ins,Dels),
+        !.
+
+% db_ins_internal/11
+db_ins_internal(FactId,_S1,S2,StateRoot,InsDelsRoot,InsLeaf,_DelsLeaf,
+                _Ins,Dels):-
+        % re-insertion of a deleted fact
+        del_ord(FactId,Dels,NewDels),
+        (
+          %( % the set NewDels was seen before
+          % it's not necessary to check; solved by trie_intern
+          %        trie_interned(NewDels,InsDelsRoot,
+          %             NewDelsLeaf,_),
+          %        trie_intern(state(InsLeaf,NewDelsLeaf),StateRoot,S2,_)
+          %);( % the set NewDels was not seen before
+            trie_intern(NewDels,InsDelsRoot,NewDelsLeaf,_),
+            (
+        	tr_debug(on)
+        	-> inc_counter(state_comps,_)
+            	; true
+            ),
+            (
+		(tr_debug(on),
+		\+(trie_interned(state(InsLeaf,NewDelsLeaf),StateRoot)))
+		-> inc_counter(state_copies,_)
+		; true
+	    ),
+            trie_intern(state(InsLeaf,NewDelsLeaf),StateRoot,S2,_)
+          %)
+        ),
+        !.
+db_ins_internal(FactId,S1,S1,_,_,_,_,_,_):-
+        % non-strict updates: inserted but not deleted
+        initial_state(FactId),
+        !.
+db_ins_internal(FactId,S1,S1,_,_,_,_,Ins,_):-
+        % non-strict updates
+        member_ord(FactId,Ins),
+        !.
+db_ins_internal(FactId,_S1,S2,StateRoot,InsDelsRoot,_InsLeaf,DelsLeaf,
+                Ins,_Dels):-
+        % insertion of a new fact (not in the initial state):
+        %\+(initial_state(Pid))
+        ins_ord(FactId,Ins,NewIns),
+        (
+          %( % the set NewIns was seen before
+          %  trie_interned(NewIns,InsDelsRoot,NewInsLeaf,_),
+          %  trie_intern(state(NewInsLeaf,DelsLeaf),StateRoot,S2,_)
+          %);( % the set NewIns was not seen before
+            trie_intern(NewIns,InsDelsRoot,NewInsLeaf,_),
+            (
+        	tr_debug(on)
+        	-> inc_counter(state_comps,_)
+            	; true
+            ),
+            (
+		(tr_debug(on),
+		\+(trie_interned(state(NewInsLeaf,DelsLeaf),StateRoot)))
+		-> inc_counter(state_copies,_)
+		; true
+	    ),
+            trie_intern(state(NewInsLeaf,DelsLeaf),StateRoot,S2,_)
+          %)
+        ),
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% db_del(+Fact,+S1,-S2)
+db_del(Fact,S1,S2):-
+        stateRoot(StateRoot),
+        insDelsRoot(InsDelsRoot),
+        trie_interned(state(InsLeaf,DelsLeaf),StateRoot,S1,_),
+        trie_interned(Ins,InsDelsRoot,InsLeaf,_),
+        trie_interned(Dels,InsDelsRoot,DelsLeaf,_),
+        no_backtracking_fact_to_factid(Fact,FactId),
+        db_del_internal(FactId,S1,S2,StateRoot,InsDelsRoot,InsLeaf,DelsLeaf,
+                Ins,Dels),
+        !.
+
+% db_del_internal/11
+db_del_internal(FactId,_S1,S2,StateRoot,InsDelsRoot,_InsLeaf,DelsLeaf,
+                Ins,_Dels):-
+        % deletion of an inserted fact
+        del_ord(FactId,Ins,NewIns),
+        (
+          %( % the set NewDels was seen before
+          %  trie_interned(NewIns,InsDelsRoot,NewInsLeaf,_),
+          %  trie_intern(state(NewInsLeaf,DelsLeaf),StateRoot,S2,_)
+          %);( % the set NewDels was not seen before
+            trie_intern(NewIns,InsDelsRoot,NewInsLeaf,_),
+            (
+        	tr_debug(on)
+        	-> inc_counter(state_comps,_)
+            	; true
+            ),
+            (
+		(tr_debug(on),
+		\+(trie_interned(state(NewInsLeaf,DelsLeaf),StateRoot)))
+		-> inc_counter(state_copies,_)
+		; true
+	    ),
+            trie_intern(state(NewInsLeaf,DelsLeaf),StateRoot,S2,_)
+          %)
+        ),
+        !.
+db_del_internal(FactId,S1,S1,_,_,_,_,_,_):-
+        % non-strict updates: not in the initial state and not inserted
+        \+( initial_state(FactId) ),
+        !.
+db_del_internal(FactId,S1,S1,_,_,_,_,_,Dels):-
+        % non-strict updates
+        member_ord(FactId,Dels),
+        !.
+db_del_internal(FactId,_S1,S2,StateRoot,InsDelsRoot,InsLeaf,_DelsLeaf,
+                _Ins,Dels):-
+        % insertion of a new fact (not in the initial state):
+        %\+(initial_state(Pid))
+        ins_ord(FactId,Dels,NewDels),
+        (
+          %( % the set NewDels was seen before
+          %  trie_interned(NewNewDels,InsDelsRoot,NewDelsLeaf,_),
+          %  trie_intern(state(InsLeaf,NewDelsLeaf),StateRoot,S2,_)
+          %);( % the set NewDels was not seen before
+            trie_intern(NewDels,InsDelsRoot,NewDelsLeaf,_),
+            (
+        	tr_debug(on)
+        	-> inc_counter(state_comps,_)
+            	; true
+            ),
+            (
+		(tr_debug(on),
+		\+(trie_interned(state(InsLeaf,NewDelsLeaf),StateRoot)))
+		-> inc_counter(state_copies,_)
+		; true
+	    ),
+            trie_intern(state(InsLeaf,NewDelsLeaf),StateRoot,S2,_)
+          %)
+        ),
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

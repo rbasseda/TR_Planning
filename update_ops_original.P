@@ -1,0 +1,74 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- import
+        length/2,
+        member/2,
+        select/3 from basics.
+
+:- import sort/2 from setof.
+
+:- ['tr_utils.P'].
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% initializeCTRSystem(+CTRProgram): initializes the transactional system
+initializeCTRSystem(CTRProgram,state(Length,FactIds)):-
+        retractall(dynamic_predicate(_,_)),
+        retractall(tr_database(_)),
+        retractall(tr_clause(_,_)),
+        load_dyn(CTRProgram),
+        findall(Head,tr_database(Head),ListFacts),
+        reset_counter(counter_factId),
+        no_backtracking_facts_to_factids(ListFacts,FactIds),
+        length(FactIds,Length),
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% check_store_tabled_state(+S1,-S1t): checks/puts the current state into the
+%  tabled states
+check_store_tabled_state(state(Lgt,S1),state(Lgt,S1t)):-
+        sort(S1,S1t),
+        !.
+
+absolute_state(state(Lgt,S1),state(Lgt,S1t)):-
+        sort(S1,S1t),
+        !.
+
+differential_state(state(Lgt,S1),state(Lgt,S1t)):-
+        sort(S1,S1t),
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% db_select(+Fact,+State): checks if a fact is in the state
+db_select(Fact,state(_Lgt,FactIds)):-
+        fact_to_factid(Fact,FactId), % backtrackable
+        member(FactId,FactIds).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% db_ins(+Fact,+S1,-S2)
+db_ins(Fact,state(Lgt1,S1),state(Lgt2,S2)):-
+        no_backtracking_fact_to_factid(Fact,FactId),
+        db_ins_internal(FactId,Lgt1,S1,Lgt2,S2).
+
+db_ins_internal(FactId,Lgt1,L1,Lgt2,[FactId|L1]):-
+        % insert it at the beginning if it's not in
+        \+(member(FactId,L1)),
+        Lgt2 is Lgt1+1,
+        !.
+db_ins_internal(_FactId,Lgt1,L1,Lgt1,L1):- % non-strict updates
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% db_del(+Fact,+S1,-S2)
+db_del(Fact,state(Lgt1,S1),state(Lgt2,S2)):-
+        no_backtracking_fact_to_factid(Fact,FactId),
+        db_del_internal(FactId,Lgt1,S1,Lgt2,S2).
+
+db_del_internal(_FactId,Lgt1,[],Lgt1,[]):- % non-strict updates
+        !.
+db_del_internal(FactId,Lgt1,[FactId|S2],Lgt2,S2):-
+        Lgt2 is Lgt1-1,
+        !.
+db_del_internal(FactId,Lgt1,[H|T1],Lgt2,[H|T2]):-
+        db_del_internal(FactId,Lgt1,T1,Lgt2,T2),
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

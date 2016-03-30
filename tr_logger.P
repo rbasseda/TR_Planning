@@ -1,0 +1,210 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- dynamic(tr_logging/1). % can be on or off
+:- dynamic(tr_logFileName/1).
+:- dynamic(tr_stateLogFileName/1).
+:- dynamic(tr_logHandle/1).
+:- dynamic(tr_stateLogHandle/1).
+% log the explicit state (all facts in the state) or just the list of fact Ids
+:- dynamic(tr_logging_explicit_state/1).
+:- dynamic(success_tr_query_step/1).
+
+:- reset_counter(counter_logging).
+%:- ['debug_testing_ops.P'].
+% tr_log(+L,+Counter)
+tr_log(L,Counter):-
+        tr_logging(on),
+        !,
+        tr_logHandle(LogHandle),
+        inc_counter(counter_logging,Counter),
+        tr_log_internal(L,Counter,LogHandle).
+tr_log(_L,_Counter):-
+        !.
+
+% tr_log_internal(+L,+Counter,+LogHandle)
+tr_log_internal(L,Counter,LogHandle):-
+        write(LogHandle,'('),
+        write(LogHandle,Counter),
+        write(LogHandle,')Log:         '),
+        log_write(LogHandle,L),
+        write(LogHandle,'\n').
+% second call for backtracking
+%   a call can end either in either a success or a fail
+tr_log_internal(L,Counter,LogHandle):-
+        \+( success_tr_query_step(Counter) ),
+        !,
+        write(LogHandle,'('),
+        write(LogHandle,Counter),
+        write(LogHandle,') Fail:         '),
+        log_write(LogHandle,L),
+        write(LogHandle,'\n'),
+        fail.
+
+% tr_log_return(+L,+Counter)
+tr_log_return(L,Counter):-
+        tr_logging(on),
+        !,
+        assert(success_tr_query_step(Counter)),
+        tr_log_return_internal(L,Counter).
+tr_log_return(_L,_Counter):-
+        !.
+
+% tr_state_log(+S1,+S2)
+tr_state_log(S1,S2):-
+	ground(S2),
+        %tr_logging(on),
+        !,
+        tr_stateLogHandle(StateLogHandle),
+        %write(StateLogHandle,'('),
+        %write(StateLogHandle,Counter),
+        %write(StateLogHandle,')=>         '),
+        ( ground(S1) -> ( see_db(S1,SFacts1), write(StateLogHandle,SFacts1) ) ;
+                write(StateLogHandle,'_')
+        ),
+        write(StateLogHandle,'=> '),
+        ( ground(S2) -> ( see_db(S2,SFact2), write(StateLogHandle,SFacts2) ) ;
+                write(StateLogHandle,'_')
+        ),
+        write(StateLogHandle,'\n').
+
+tr_state_log(_S,_Counter):-
+        !.
+
+% tr_log_return_internal(+L,+Counter)
+tr_log_return_internal(L,Counter):-
+        tr_logHandle(LogHandle),
+        log_write(LogHandle,'('),
+        log_write(LogHandle,Counter),
+        log_write(LogHandle,')Exit:         '),
+        log_write(LogHandle,L),
+        log_write(LogHandle,'\n'),
+        !.
+
+% log_write/2
+log_write(Handle,Pred):-
+        Pred=..[whole|_],
+        write(Handle,Pred),
+        !.
+
+log_write(Handle,X):- % all versions
+        X=..[Pred,Query,S1,S2],
+        write(Handle,Pred),
+        write(Handle,'('),
+        write_query(Handle,Query),
+        write(Handle,','),
+        see_db(S1,S1Facts),
+        write(Handle,S1Facts),
+        write(Handle,','),
+        ( ground(S2) -> ( see_db(S2,S2Facts), write(Handle,S2Facts) ) ;
+                write(Handle,'_')
+        ),
+        write(Handle,')'),
+        !.
+
+write_query(Handle,Pred):-
+        atomic(Pred),
+        write(Handle,Pred),
+        !.
+write_query(Handle,Pred):-
+        Pred=..[PredName|Args],
+        write(Handle,PredName),
+        write(Handle,'('),
+        write_args(Handle,Args),
+        write(Handle,')'),
+        !.
+
+write_args(_Handle,[]):-
+        !.
+write_args(Handle,[A1]):-
+        write_arg(Handle,A1),
+        !.
+write_args(Handle,[A1|Rest]):-
+        write_arg(Handle,A1),
+        write(Handle,','),
+        write_args(Handle,Rest),
+        !.
+
+write_arg(Handle,A1):-
+        ( compound(A1) -> write_query(Handle,A1) ;
+                ( var(A1) -> write(Handle,'_') ; write(Handle,A1) )
+        ),
+        !.
+
+log_write(Handle,X):- % v1
+        tr_logFileName('v1.log'),
+        X=[X1|_],
+        number(X1),% usually,this is a state
+        \+( tr_logging_explicit_state(_)),
+        !,
+        %write(Handle,'currentState').
+        see_db(X,Facts),
+        %write(Handle,'state('),
+        log_write(Handle,Facts).
+        %write(Handle,')').
+log_write(Handle,X):- % v3
+        tr_logFileName('v3.log'),
+        nonvar(X),
+        X = state(_,_,_),% usually,this is a generated state id (trie leaf)
+        \+( tr_logging_explicit_state(_)),
+        !,
+        %write(Handle,'currentState').
+        see_db(X,Facts),
+        %write(Handle,'state('),
+        log_write(Handle,Facts).
+        %write(Handle,')').
+log_write(Handle,X):- % v2,v4,v5
+        number(X),
+        X > 1000000,% usually,this is a generated state id (trie leaf)
+        \+( tr_logging_explicit_state(_)),
+        !,
+        %write(Handle,'currentState').
+        see_db(X,Facts),
+        %write(Handle,'state('),
+        log_write(Handle,Facts).
+        %write(Handle,')').
+log_write(Handle,X):- % v6
+        tr_logFileName('v6.log'),
+        nonvar(X),
+        % usually,this is a generated state id (trie leaf)
+        X = log(_,_,_),
+        \+( tr_logging_explicit_state(_)),
+        !,
+        %write(Handle,'currentState').
+        see_db(X,Facts),
+        %write(Handle,'state('),
+        log_write(Handle,Facts).
+        %write(Handle,')').
+% other cases that are not treated above
+log_write(Handle,X):-
+        atomic(X),
+        !,
+        write(Handle,X).
+log_write(Handle,X):-
+        var(X),
+        !,
+        write(Handle,'_').
+log_write(Handle,X):-
+        is_list(X),
+        !,
+        write(Handle,'['),
+        log_write_list(Handle,X),
+        write(Handle,']').
+log_write(Handle,X):-
+        compound(X),
+        !,
+        X =.. [H|T],
+        write(Handle,H),
+        write(Handle,'('),
+        log_write_list(Handle,T),
+        write(Handle,')').
+
+% log_write_list(+OutputHandle,+List)
+log_write_list(_Handle,[]):-
+        !.
+log_write_list(Handle,[H1]):-
+        !,
+        log_write(Handle,H1).
+log_write_list(Handle,[H1,H2|T]):-
+        !,
+        log_write(Handle,H1),
+        write(Handle,','),
+        log_write_list(Handle,[H2|T]).

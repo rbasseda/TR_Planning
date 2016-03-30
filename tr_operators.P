@@ -1,0 +1,1402 @@
+/*
+
+dispatch(xseq(G1,G2,G3,G4,G5,G6,G7,G8,G9),S1,S2):-
+	!,
+        dispatch(G1,S1,S3),
+        dispatch(xseq(G2,G3,G4,G5,G6,G7,G8,G9),S3,S2).
+dispatch(xseq(G1,G2,G3,G4,G5,G6,G7,G8),S1,S2):-
+	!,
+        dispatch(G1,S1,S3),
+        dispatch(xseq(G2,G3,G4,G5,G6,G7,G8),S3,S2).
+dispatch(xseq(G1,G2,G3,G4,G5,G6,G7),S1,S2):-
+	!,
+        dispatch(G1,S1,S3),
+        dispatch(xseq(G2,G3,G4,G5,G6,G7),S3,S2).
+dispatch(xseq(G1,G2,G3,G4,G5,G6),S1,S2):-
+	!,
+        dispatch(G1,S1,S3),
+        dispatch(xseq(G2,G3,G4,G5,G6),S3,S2).
+dispatch(xseq(G1,G2,G3,G4,G5),S1,S2):-
+	!,
+        dispatch(G1,S1,S3),
+        dispatch(xseq(G2,G3,G4,G5),S3,S2).
+dispatch(xseq(G1,G2,G3,G4),S1,S2):-
+	!,
+        dispatch(G1,S1,S3),
+        dispatch(xseq(G2,G3,G4),S3,S2).
+dispatch(xseq(G1,G2,G3),S1,S2):-
+	!,
+        dispatch(G1,S1,S3),
+        dispatch(seq(G2,G3),S3,S2).
+dispatch(xseq(G11a,G12),S1,S2):-
+	!,
+        dispatch(G11a,S1,S3),
+        ctr_simplify(G12,G2),
+        dispatch(G2,S3,S2).
+
+*/
+%:- multifile tr_clause/2.
+/*:- index(tr_clause/1,trie).
+tr_clause(
+	  xseq(G1,G2,G3,G4,G5,G6,G7,G8,G9),
+	       seq(G1,xseq(G2,G3,G4,G5,G6,G7,G8,G9))).
+tr_clause(
+	  xseq(G1,G2,G3,G4,G5,G6,G7,G8),
+	       seq(G1,xseq(G2,G3,G4,G5,G6,G7,G8))).
+tr_clause(
+	  xseq(G1,G2,G3,G4,G5,G6,G7),
+	       seq(G1,xseq(G2,G3,G4,G5,G6,G7))).
+tr_clause(
+	  xseq(G1,G2,G3,G4,G5,G6),
+	       seq(G1,xseq(G2,G3,G4,G5,G6))).
+tr_clause(
+	  xseq(G1,G2,G3,G4,G5),
+	       seq(G1,xseq(G2,G3,G4,G5))).
+tr_clause(
+	  xseq(G1,G2,G3,G4),
+	       seq(G1,xseq(G2,G3,G4))).
+tr_clause(
+	  xseq(G1,G2,G3),
+	       seq(G1,xseq(G2,G3))).
+tr_clause(
+	  xseq(G1,G2),
+	       seq(G1,G2)).
+
+tabled_predicate(shuffle,2).
+tabled_predicate(shuffle,3).
+tabled_predicate(shuffle,4).
+tabled_predicate(shuffle,5).
+tabled_predicate(shuffle,6).
+tabled_predicate(shuffle,7).
+tabled_predicate(shuffle,8).
+tabled_predicate(shuffle,9).
+tabled_predicate(shuffle,10).
+tabled_predicate(shuffle,11).
+tabled_predicate(shuffle,12).
+tabled_predicate(shuffle,13).
+tabled_predicate(shuffle,14).
+tabled_predicate(shuffle,15).
+tabled_predicate(shuffle,16).
+tabled_predicate(shuffle,17).
+tabled_predicate(shuffle,18).
+tabled_predicate(shuffle,19).
+tabled_predicate(shuffle,20).
+tabled_predicate(shuffle,21).
+tabled_predicate(shuffle,22).
+tabled_predicate(shuffle,23).
+tabled_predicate(shuffle,24).
+tabled_predicate(shuffle,25).
+
+
+tr_clause(
+	shuffle(A,B),
+		seq(A,B)).
+
+tr_clause(
+	shuffle(A,B),
+		seq(B,A)).
+
+tr_clause(
+	shuffle(A,B,C),
+		seq(A,shuffle(B,C))).
+
+tr_clause(
+	shuffle(A,B,C),
+		seq(B,shuffle(A,C))).
+
+tr_clause(
+	shuffle(A,B,C),
+		seq(C,shuffle(A,B))).
+
+tr_clause(
+	shuffle(A,B,C,D),
+		seq(A,shuffle(B,C,D))).
+
+tr_clause(
+	shuffle(A,B,C,D),
+		seq(B,shuffle(A,C,D))).
+
+tr_clause(
+	shuffle(A,B,C,D),
+		seq(C,shuffle(A,B,D))).
+
+tr_clause(
+	shuffle(A,B,C,D),
+		seq(D,shuffle(A,B,C))).
+
+tr_clause(
+	shuffle(A,B,C,D,E),
+		seq(A,shuffle(B,C,D,E))).
+
+tr_clause(
+	shuffle(A,B,C,D,E),
+		seq(B,shuffle(A,C,D,E))).
+
+tr_clause(
+	shuffle(A,B,C,D,E),
+		seq(C,shuffle(A,B,D,E))).
+
+tr_clause(
+	shuffle(A,B,C,D,E),
+		seq(D,shuffle(A,B,C,E))).
+
+tr_clause(
+	shuffle(A,B,C,D,E),
+		seq(E,shuffle(A,B,C,D))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F),
+		seq(A,shuffle(B,C,D,E,F))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F),
+		seq(B,shuffle(A,C,D,E,F))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F),
+		seq(C,shuffle(A,B,D,E,F))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F),
+		seq(D,shuffle(A,B,C,E,F))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F),
+		seq(E,shuffle(A,B,C,D,F))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F),
+		seq(F,shuffle(A,B,C,D,E))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G),
+		seq(A,shuffle(B,C,D,E,F,G))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G),
+		seq(B,shuffle(A,C,D,E,F,G))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G),
+		seq(C,shuffle(A,B,D,E,F,G))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G),
+		seq(D,shuffle(A,B,C,E,F,G))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G),
+		seq(E,shuffle(A,B,C,D,F,G))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G),
+		seq(F,shuffle(A,B,C,D,E,G))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G),
+		seq(G,shuffle(A,B,C,D,E,F))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H),
+		seq(A,shuffle(B,C,D,E,F,G,H))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H),
+		seq(B,shuffle(A,C,D,E,F,G,H))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H),
+		seq(C,shuffle(A,B,D,E,F,G,H))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H),
+		seq(D,shuffle(A,B,C,E,F,G,H))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H),
+		seq(E,shuffle(A,B,C,D,F,G,H))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H),
+		seq(F,shuffle(A,B,C,D,E,G,H))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H),
+		seq(G,shuffle(A,B,C,D,E,F,H))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H),
+		seq(H,shuffle(A,B,C,D,E,F,G))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I),
+		seq(A,shuffle(B,C,D,E,F,G,H,I))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I),
+		seq(B,shuffle(A,C,D,E,F,G,H,I))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I),
+		seq(C,shuffle(A,B,D,E,F,G,H,I))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I),
+		seq(D,shuffle(A,B,C,E,F,G,H,I))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I),
+		seq(E,shuffle(A,B,C,D,F,G,H,I))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I),
+		seq(F,shuffle(A,B,C,D,E,G,H,I))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I),
+		seq(G,shuffle(A,B,C,D,E,F,H,I))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I),
+		seq(H,shuffle(A,B,C,D,E,F,G,I))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I),
+		seq(I,shuffle(A,B,C,D,E,F,G,H))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O),
+		seq(O,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(O,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P),
+		seq(P,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(O,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(P,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q),
+		seq(Q,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(O,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(P,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(Q,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R),
+		seq(R,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(O,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(P,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(Q,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(R,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S),
+		seq(S,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(O,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(P,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(Q,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(R,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(S,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(T,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U),
+		seq(U,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(O,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(P,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(Q,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(R,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(S,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T),
+		seq(T,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(O,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(P,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(Q,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(R,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(S,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(T,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(V,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U),
+		seq(U,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(O,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(P,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(Q,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(R,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(S,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(T,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(V,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(U,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W),
+		seq(W,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(O,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(P,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(Q,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(R,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(S,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(T,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,V,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(V,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(U,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,W,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(W,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,X))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X),
+		seq(X,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(A,shuffle(B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(B,shuffle(A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(C,shuffle(A,B,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(D,shuffle(A,B,C,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(E,shuffle(A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(F,shuffle(A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(G,shuffle(A,B,C,D,E,F,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(H,shuffle(A,B,C,D,E,F,G,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(I,shuffle(A,B,C,D,E,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(J,shuffle(A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(K,shuffle(A,B,C,D,E,F,G,H,I,J,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(L,shuffle(A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(M,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,N,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(N,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(O,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(P,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(Q,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(R,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,S,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(S,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,T,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(T,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,V,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(V,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(U,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,W,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(W,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,X,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(X,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,Y))).
+
+tr_clause(
+	shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X,Y),
+		seq(Y,shuffle(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,V,U,W,X))).
+
+*/
+
+:- table getGoal/2 as variant.
+
+getGoal(X,G) :-
+        functor(X,Func,Arity),
+	Func=achieve,
+	Arity=1,
+	arg(1,X,G).
+
+getGoal(X,not(G)) :-
+        functor(X,Func,Arity),
+	Func=avoid,
+	Arity=1,
+	arg(1,X,G).
+

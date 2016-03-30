@@ -1,0 +1,86 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- import new_trie/1,
+        trie_intern/2,
+        trie_intern/4,
+        trie_interned/2,
+        trie_interned/4,
+        trie_unintern/2  from intern.
+
+:- import sort/2 from setof.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% list_to_trie(+List,-Trie)
+%   creates a trie out of a list (creates a new trie if Trie is a variable)
+list_to_trie(L,Root):-
+        new_trie(Root),
+        !,
+        list_to_trie_intern(L,Root).
+list_to_trie_intern([],_Root) :- !.
+list_to_trie_intern([H|T],Root):-
+        trie_intern(H,Root),
+        list_to_trie_intern(T,Root).
+
+% trie_to_list(+Root,-L)
+%  convert trie to list (the list is not sorted)
+trie_to_list(Root,L):-
+        findall(P, trie_interned(P,Root),L).
+
+% write_trie_as_list(+Root)
+%  write trie as sorted list
+write_trie_as_list(Root):-
+        findall(P,trie_interned(P,Root),L),
+        sort(L,SL),
+        write(SL).
+
+% trie_to_sorted_list(+Root,-SL)
+%  convert trie to sorted list
+trie_to_sorted_list(Root,SL):-
+        findall(P, trie_interned(P,Root),L),
+        sort(L,SL).
+
+% trie copying: copy_trie(+Root1,-Root2)
+%   copies a trie into a new trie
+copy_trie(Root1,Root2):-
+        new_trie(Root2),
+        !,
+        copy_trie_intern(Root1,Root2).
+copy_trie_intern(Root1,Root2):-
+        trie_interned(X,Root1),
+        trie_intern(X,Root2),
+        fail.
+copy_trie_intern(_Root1,_Root2).
+
+% bk_trie_intern(+Term,+Root)
+%   backtrackable predicate: inserts a node in a trie,
+%   while at backtracking marks it as deleted
+%   STRICT version: if the term is already in the trie it fails
+bk_trie_intern(Term,Root):-
+        trie_interned(Term,Root),
+        !,
+        fail.
+bk_trie_intern(Term,Root):-
+        trie_intern(Term,Root).
+bk_trie_intern(Term,Root):-
+        trie_interned(Term,Root,Leaf,_),
+        trie_unintern(Root,Leaf),
+        !,
+        fail.
+
+% bk_trie_unintern/3
+% bk_trie_unintern(+Term,+Root,+Leaf)
+%   backtrackable predicate: deletes a node in a trie,
+%   while at backtracking inserts it
+%   STRICT version: if the term is not in the trie it fails
+bk_trie_unintern(_Term,Root,Leaf):-
+        \+( trie_interned(_Term,Root,Leaf,_) ),
+        !,
+        fail.
+bk_trie_unintern(_Term,Root,Leaf):-
+        trie_unintern(Root,Leaf).
+bk_trie_unintern(Term,Root,_Leaf):-
+        % inserts the term back into the trie at backtracking
+        trie_intern(Term,Root),
+        !,
+        fail.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

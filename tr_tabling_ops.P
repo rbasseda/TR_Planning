@@ -1,0 +1,89 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% dynamic predicates (predicateName,Arity) in the transactional program
+:- dynamic(dynamic_predicate/2),
+        retractall(dynamic_predicate(_,_)).
+
+% defines the initial database state as: "tr_database(Head)" facts
+:- dynamic(tr_database/1),
+        % default indexing is better here than *(1) and trie indexing - tested
+        %index(tr_database/1,[*(1)]),
+        %index(tr_database/1,trie),
+        retractall(tr_database(_)).
+
+% rules in the transactional program
+:- dynamic(tr_clause/2),
+        % default indexing is better here than *(1) and trie indexing - tested
+        %index(tr_clause/2,[*(1)]),
+        %index(tr_clause/2,trie),
+        retractall(tr_clause(_,_)).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% dynamic_predicate/1: checks if a predicate is in the dynamic database (i.e.,
+%  defined in the input transactional program as:
+%  dynamic_predicate(PredicateName,Arity))
+% dynamic_predicate(+P)
+dynamic_predicate(P):-
+        functor(P,Functor,Arity),
+        dynamic_predicate(Functor,Arity),
+        !.
+
+% tabled_predicate/1: checks if a predicate is tabled (i.e.,defined in the
+%  input transactional program as: tabled_predicate(PredicateName,Arity))
+% tabled_predicate(+P)
+tabled_predicate(P):-
+        functor(P,Functor,Arity),
+        tabled_predicate(Functor,Arity),
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- reset_counter(counter_factId).
+
+% associates an id to each fact transactioned in the dynamic database:
+%  "fact_store(Fact,Id)" ; it has to be doubled indexed: calls can have
+%  the first argument instantiated (where the Id is needed) or the second
+%  argument indexed (where the user has the Id and needs the Fact)
+:- dynamic(fact_store/2),
+        index(fact_store/2,[1]),
+        retractall(fact_store(_,_)).
+
+% no_backtracking_facts_to_factids/2
+% no_backtracking_facts_to_factids(+ListFacts,-ListFactIdsOrdered)
+%  Given a list of facts creates an id for each fact
+%  Returns the list of ids
+no_backtracking_facts_to_factids([H|T],[Id|R]):-
+        no_backtracking_fact_to_factid(H,Id),
+        no_backtracking_facts_to_factids(T,R).
+no_backtracking_facts_to_factids([],[]).
+
+% no_backtracking_fact_to_factid/2
+% no_backtracking_fact_to_factid(?Fact,?FactId)
+%  given a fact associates an id
+no_backtracking_fact_to_factid(Fact,FactId):-
+        % just a check that the fact is not already in the fact trie
+        fact_store(Fact,FactId),
+        !.
+no_backtracking_fact_to_factid(Fact,FactId):-
+        %% the fact was not seen before and we have to assign
+        %% a new id to it
+        %%\+( fact_store(Fact,_) ),
+        inc_counter(counter_factId,FactId),
+        assert(fact_store(Fact,FactId)),
+        !.
+
+% facts_to_factids/2: given a list of facts finds and id for each fact and
+%  returns the list of ids; allows backtracking; fails if a fact is not found
+%  already in the database
+% facts_to_factids(+ListFacts,-ListFactIdsOrdered)
+facts_to_factids([H|T],[Id|R]):-
+        fact_to_factid(H,Id),
+        facts_to_factids(T,R).
+facts_to_factids([],[]).
+% fact_to_factid/2
+% fact_to_factid(?Fact,?FactId)
+%  given a fact checks if it has associated an id
+fact_to_factid(Fact,Id):-
+        fact_store(Fact,Id).
+
+see_fact_store(L):-
+        findall(fact_store(Fact,FactId),fact_store(Fact,FactId),L).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

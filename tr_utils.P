@@ -1,0 +1,522 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- import append/3,
+        length/2,
+        member/2,
+        select/3 from basics.
+
+:- import sort/2 from setof.
+
+:- ['tr_trie_utils.P'].
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+spy_pred.
+%:- spy(spy_pred/0).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% counter
+:- dynamic(counter/2),
+        retractall(counter(_,_)). % counter(CounterName,Value)
+reset_counter(Name):-
+        retractall(counter(Name,_)),
+        assert(counter(Name,0)).
+inc_counter(Name,NewValue):-
+	counter(Name,Value),
+        !,
+        NewValue is Value+1,
+        retractall(counter(Name,_)),
+        assert(counter(Name,NewValue)).
+inc_counter(Name,NewValue):-
+        write('Warning: Counter does not exist: '),
+        write(Name),
+        nl,
+        reset_counter(Name),
+        counter(Name,Value),
+        !,
+        NewValue is Value+1,
+        retractall(counter(Name,_)),
+        assert(counter(Name,NewValue)).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% member_ord(+Element,+OrdList): member in ordered lists
+member_ord(X,L) :- member(X,L).
+
+member_ord(X,L):-
+        number(X),
+        !,
+        member_ord_number_internal(X,L).
+member_ord(X,L):-
+        ground(X),
+        !,
+        member_ord_internal(X,L).
+member_ord(X,L):-
+        % X contains variables
+        member(X,L).
+
+% member_ord_number_internal/2
+member_ord_number_internal(X,[X|_]).
+member_ord_number_internal(X,[H|T]):-
+        H < X,
+        !,
+        member_ord_number_internal(X,T).
+
+% member_ord_internal/2
+member_ord_internal(X,[X|_]).
+member_ord_internal(X,[H|T]):-
+        H @< X,
+        !,
+        member_ord_internal(X,T).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Insert element into ordered set
+%  ins_ord(+Element,+OrdList,-NewOrdList): inserts in ordered lists
+ins_ord(X,L1,L2):-
+        number(X),
+        !,
+        ins_ord_number_internal(X,L1,L2).
+ins_ord(X,L1,L2):-
+        ground(X),
+        !,
+        ins_ord_internal(X,L1,L2).
+ins_ord(X,L1,L2):-
+        % X contains variables
+        write('Warning tr_utils.P: insert non ground term in ordered list'),
+        nl,
+        L2=[X|L1].
+
+% ins_ord_number_internal/3
+ins_ord_number_internal(X,[],[X]):-
+        !.
+ins_ord_number_internal(X,[H|T],[X,H|T]):-
+        X < H,
+        !.
+ins_ord_number_internal(X,[H|T],[H|L]):-
+        ins_ord_number_internal(X,T,L),
+        !.
+
+% ins_ord_internal/3
+ins_ord_internal(X,[],[X]):-
+        !.
+ins_ord_internal(X,[H|T],[X,H|T]):-
+        X @< H,
+        !.
+ins_ord_internal(X,[H|T],[H|L]):-
+        ins_ord_internal(X,T,L),
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Delete element from ordered set
+% del_ord(+,+,-)
+del_ord(X,L1,L2):-
+        number(X),
+        !,
+        del_ord_number_internal(X,L1,L2).
+del_ord(X,L1,L2):-
+        ground(X),
+        !,
+        del_ord_internal(X,L1,L2).
+del_ord(X,L1,L2):-
+        % X contains variables
+        write('Warning tr_utils.P: delete non ground term in ordered list'),
+	nl,
+        select(X,L1,L2),
+        !.
+
+% del_ord_number_internal/3
+del_ord_number_internal(H,[H|T],T):-
+        !.
+del_ord_number_internal(X,[H|T],[H|R]):-
+        H < X,
+        !,
+        del_ord_number_internal(X,T,R).
+
+% del_ord_internal/3
+del_ord_internal(H,[H|T],T):-
+        !.
+del_ord_internal(X,[H|T],[H|R]):-
+        H @< X,
+        !,
+        del_ord_internal(X,T,R).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% merge two ordered lists into a single ordered list
+% merge_ord(+,+,-)
+% merge_ord_internal/3
+merge_ord(L,[],L):-
+	!.
+merge_ord([],L,L):-
+	!.
+merge_ord([H1|T1],[H2|T2],[H1|L]):-
+        H1 < H2,
+        !,
+        merge_ord(T1,[H2|T2],L).
+merge_ord([H|T1],[H|T2],[H|L]):-
+        !,
+        merge_ord(T1,T2,L).
+merge_ord([H1|T1],[H2|T2],[H2|L]):-
+        merge_ord([H1|T1],T2,L),
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Subtracts one ordered set from another
+% ordered_set_minus(+,+,-)
+ordered_set_minus(L,[],L):-
+        !.
+ordered_set_minus([],_,[]):-
+        !.
+ordered_set_minus([H|T1],[H|T2],L):-
+        !,
+        ordered_set_minus(T1,T2,L).
+ordered_set_minus([H1|T1],[H2|T2],[H1|L]):-
+        H1 < H2,
+        !,
+        ordered_set_minus(T1,[H2|T2],L).
+ordered_set_minus([H1|T1],[_H2|T2],L):-
+        !,
+        ordered_set_minus([H1|T1],T2,L).
+ordered_set_minus([H1|T1],[H2|T2],L):-
+        !,
+        write('Error tr_utils.P: ordered_set_minus sets are not ordered: '),
+        write(ordered_set_minus([H1|T1],[H2|T2],L)),
+        fail,
+        nl.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% write_list(L)
+write_list([H|T]):-
+        write('        '),
+        write(H),
+        nl,
+        write_list(T).
+write_list([]).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% mergeLogs(+Ins1,+Dels1,+Ins2,+Dels2,-Ins3,-Dels3)
+%  we assume that Ins1,Dels1,Ins2 and Dels2 are ordered
+
+%mergeLogs(IL1,DL1,IL2,DL2,IL,DL):-
+%	mergeLogs_internal(IL1,DL2,IL2,IL),
+%	mergeLogs_internal(DL1,IL2,DL2,DL),
+%	!.
+%
+%mergeLogs_internal([],_DL2,IL,IL):-
+%	%ordered_set_minus(IL2,DL2,IL),
+%	!.
+%mergeLogs_internal(IL1,[],IL2,IL):-
+%	!,
+%	merge_ord(IL1,IL2,IL).
+%mergeLogs_internal(IL1,DL2,[],IL):-
+%        !,
+%	ordered_set_minus(IL1,DL2,IL).
+%mergeLogs_internal([H|TIL1],[H|TDL2],IL2,IL):-
+%	!,
+%	mergeLogs_internal(TIL1,TDL2,IL2,IL).
+%mergeLogs_internal([H1|TIL1],[H2|TDL2],[H3|TIL2],[H1|TIL]):-
+%	H1 < H2,
+%	H1 < H3,
+%	!,
+%	mergeLogs_internal(TIL1,[H2|TDL2],[H3|TIL2],TIL).
+%mergeLogs_internal([H1|TIL1],[H2|TDL2],[H3|TIL2],IL):-
+%	H2 < H1,
+%	!,
+%	mergeLogs_internal([H1|TIL1],TDL2,[H3|TIL2],IL).
+%mergeLogs_internal([H1|TIL1],[H2|TDL2],[H3|TIL2],[H3|TIL]):-
+%	H3 < H1,
+%	!,
+%	mergeLogs_internal([H1|TIL1],[H2|TDL2],TIL2,TIL).
+%mergeLogs_internal([H|TIL1],[H2|TDL2],[H|TIL2],[H|TIL]):-
+%	!,
+%	mergeLogs_internal(TIL1,[H2|TDL2],TIL2,TIL).
+
+
+%mergeLogs(IL1,DL1,IL2,DL2,IL,DL):-
+%	 ordered_set_minus(IL1,DL2,ILp),
+%        merge_ord(ILp,IL2,IL),
+%        ordered_set_minus(DL1,IL2,DLp),
+%        merge_ord(DLp,DL2,DL),
+%        !.
+
+
+%mergeLogs(Ins1,Dels1,Ins2,Dels2,Ins3,Dels3):-
+%        mergeLogs1(Ins1,Dels1,Ins2,Dels2,Ins3,Dels3),
+%        !.
+
+% for debuging
+%mergeLogs(Ins1,Dels1,Ins2,Dels2,Ins3,Dels3):-
+%        mergeLogs1(Ins1,Dels1,Ins2,Dels2,Ins3,Dels3),
+%        mergeLogs2(Ins1,Dels1,Ins2,Dels2,Ins32,Dels32),
+%        ( (Ins3\=Ins32;Dels3\=Dels32) ->
+%                (write(why(mergeLogs1(Ins1,Dels1,Ins2,Dels2,Ins3,Dels3),
+%                        mergeLogs2(Ins1,Dels1,Ins2,Dels2,Ins32,Dels32))),nl)
+%                 ; true ).
+
+% mergeLogs1(+Ins1,+Dels1,+Ins2,+Dels2,-Ins3,-Dels3)
+%  we assume that Ins1,Dels1,Ins2 and Dels2 are ordered
+% ?- mergeLogs1([5,6,7],[1,2,3],[2,8],[5,7],X,Y).
+% expected: X=[6,8] and Y=[1,3]
+% ?- mergeLogs1([],[],[8],[5,7],X,Y). % expected: X=[8] and Y=[5,7]
+% Note: we don't assume that Ins2 and Dels2 are consistent with Ins1 and Dels1
+mergeLogs(Ins1,Dels1,Ins2,Dels2,Ins3Sorted,Dels3Sorted):-
+        mergeIns1(Ins1,Dels2,Ins31),
+        mergeIns2(Ins2,Dels1,Ins31,Ins3),
+        mergeDels1(Dels1,Ins2,Dels31),
+        mergeDels2(Dels2,Ins1,Dels31,Dels3),
+        sort(Ins3,Ins3Sorted),
+        sort(Dels3,Dels3Sorted),
+        !.
+
+% mergeIns1(+Ins1,+Dels2,-Ins31)
+mergeIns1([],_Dels2,[]):-
+        !.
+mergeIns1(Ins31,[],Ins31):-
+        !.
+mergeIns1([H1|T1],[H2|T2],Ins31):-
+        H1 = H2,
+        mergeIns1(T1,T2,Ins31),
+        !.
+mergeIns1([H1|T1],[H2|T2],Ins31):-
+        H1 < H2,
+        mergeIns1(T1,[H2|T2],Ins32),
+        Ins31 = [H1|Ins32],
+        !.
+mergeIns1([H1|T1],[_H2|T2],Ins31):-
+        mergeIns1([H1|T1],T2,Ins31),
+        !.
+% mergeIns2(+Ins2,+Dels1,+Ins31,-Ins3)
+mergeIns2([],_Dels1,TailIns31,TailIns31):-
+        !.
+mergeIns2(L1,[],L3,Ins3):-
+        merge_ord(L1,L3,Ins3),
+        !.
+mergeIns2([H1|T1],[H2|T2],[],Ins3):-
+        H1 = H2,
+        mergeIns2(T1,T2,[],Ins3),
+        !.
+mergeIns2([H1|T1],[H2|T2],[],Ins3):-
+        H1 < H2,
+        mergeIns2(T1,[H2|T2],[],Ins32),
+        Ins3 = [H1|Ins32],
+        !.
+mergeIns2([H1|T1],[_H2|T2],[],Ins3):-
+        mergeIns2([H1|T1],T2,[],Ins3),
+        !.
+mergeIns2([H1|T1],[H2|T2],[H3|T3],Ins3):-
+        H1 = H2,
+        H1 < H3,
+        mergeIns2(T1,T2,[H3|T3],Ins3),
+        !.
+mergeIns2([H1|T1],[H2|T2],[H3|T3],Ins3):-
+        H1 = H2,
+        H1 = H3,
+        mergeIns2(T1,T2,T3,Ins3),
+        !.
+mergeIns2([H1|T1],[H2|T2],[H3|T3],Ins3):-
+        H1 = H2,
+        mergeIns2(T1,T2,T3,Ins32),
+        Ins3 = [H3|Ins32],
+        !.
+mergeIns2([H1|T1],[H2|T2],[H3|T3],Ins3):-
+        H1 < H2,
+        H1 < H3,
+        mergeIns2(T1,[H2|T2],[H3|T3],Ins32),
+        Ins3 = [H1|Ins32],
+        !.
+mergeIns2([H1|T1],[H2|T2],[H3|T3],Ins3):-
+        H1 < H2,
+        H1 = H3,
+        mergeIns2(T1,[H2|T2],T3,Ins32),
+        Ins3 = [H1|Ins32],
+        !.
+mergeIns2([H1|T1],[H2|T2],[H3|T3],Ins3):-
+        H1 < H2,
+        mergeIns2(T1,[H2|T2],T3,Ins33),
+        Ins3 = [H1,H3|Ins33],
+        !.
+mergeIns2([H1|T1],[_H2|T2],[H3|T3],Ins3):-
+        mergeIns2([H1|T1],T2,[H3|T3],Ins3),
+        !.
+%mergeDels1(+Dels1,+Ins2,-Dels31)
+mergeDels1([],_Ins2,[]):-
+        !.
+mergeDels1(Dels31,[],Dels31):-
+        !.
+mergeDels1([H1|T1],[H2|T2],Dels31):-
+        H1 = H2,
+        mergeDels1(T1,T2,Dels31),
+        !.
+mergeDels1([H1|T1],[H2|T2],Dels31):-
+        H1 < H2,
+        mergeDels1(T1,[H2|T2],Dels32),
+        Dels31 = [H1|Dels32],
+        !.
+mergeDels1([H1|T1],[_H2|T2],Dels31):-
+        mergeDels1([H1|T1],T2,Dels31),
+        !.
+%mergeDels2(+Dels2,+Ins1,+Dels31,-Dels3)
+mergeDels2([],_Ins1,TailDels31,TailDels31):-
+        !.
+mergeDels2(L1,[],L3,Dels3):-
+        merge_ord(L1,L3,Dels3),
+        !.
+mergeDels2([H1|T1],[H2|T2],[],Dels3):-
+        H1 = H2,
+        mergeDels2(T1,T2,[],Dels3),
+        !.
+mergeDels2([H1|T1],[H2|T2],[],Dels3):-
+        H1 < H2,
+        mergeDels2(T1,[H2|T2],[],Dels32),
+        Dels3 = [H1|Dels32],
+        !.
+mergeDels2([H1|T1],[_H2|T2],[],Dels3):-
+        mergeDels2([H1|T1],T2,[],Dels3),
+        !.
+mergeDels2([H1|T1],[H2|T2],[H3|T3],Dels3):-
+        H1 = H2,
+        H1 < H3,
+        mergeDels2(T1,T2,[H3|T3],Dels3),
+        !.
+mergeDels2([H1|T1],[H2|T2],[H3|T3],Dels3):-
+        H1 = H2,
+        H1 = H3,
+        mergeDels2(T1,T2,T3,Dels3),
+        !.
+mergeDels2([H1|T1],[H2|T2],[H3|T3],Dels3):-
+        H1 = H2,
+        mergeDels2(T1,T2,T3,Dels32),
+        Dels3 = [H3|Dels32],
+        !.
+mergeDels2([H1|T1],[H2|T2],[H3|T3],Dels3):-
+        H1 < H2,
+        H1 < H3,
+        mergeDels2(T1,[H2|T2],[H3|T3],Dels32),
+        Dels3 = [H1|Dels32],
+        !.
+mergeDels2([H1|T1],[H2|T2],[H3|T3],Dels3):-
+        H1 < H2,
+        H1 = H3,
+        mergeDels2(T1,[H2|T2],T3,Dels32),
+        Dels3 = [H1|Dels32],
+        !.
+mergeDels2([H1|T1],[H2|T2],[H3|T3],Dels3):-
+        H1 < H2,
+        mergeDels2(T1,[H2|T2],T3,Dels33),
+        Dels3 = [H1,H3|Dels33],
+        !.
+mergeDels2([H1|T1],[_H2|T2],[H3|T3],Dels3):-
+        mergeDels2([H1|T1],T2,[H3|T3],Dels3),
+        !.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% second version of mergeLogs
+% ?- mergeLogs2([1,2,3],[4,5,6],[5,7],[1,3],X,Y).
+mergeLogs2(OrdCurrentRelativeStateIns,OrdCurrentRelativeStateDels,OrdinsLog,
+        OrdDelsLog,OrdMergedinsLog,OrdMergedDelsLog):-
+        mergeEliminate(OrdCurrentRelativeStateIns,OrdDelsLog,[],
+                MergedinsLog_temp1),
+        mergeEliminate(OrdinsLog,OrdCurrentRelativeStateDels,MergedinsLog_temp1,
+                MergedinsLog),
+        sort(MergedinsLog,OrdMergedinsLog),
+        mergeEliminate(OrdCurrentRelativeStateDels,OrdinsLog,[],
+                MergedDelsLog_temp1),
+        mergeEliminate(OrdDelsLog,OrdCurrentRelativeStateIns,
+                MergedDelsLog_temp1,MergedDelsLog),
+        sort(MergedDelsLog,OrdMergedDelsLog),
+        !.
+mergeEliminate([H1|L1],L2,Partial,Merged):-
+        \+( member(H1,L2) ),
+        !,
+        mergeEliminate(L1,L2,[H1|Partial],Merged).
+mergeEliminate([_H1|L1],L2,Partial,Merged):-
+        !,
+        mergeEliminate(L1,L2,Partial,Merged).
+mergeEliminate([],_,Merged,Merged).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+for(I,I,J) :- I =< J.
+for(K,I,J) :- I < J,
+	I1 is I + 1,
+	for(K,I1,J).
+
+measure(C,T):-
+        cputime(T1),
+        call(C),
+        cputime(T2),
+        T is T2-T1.
+
+numlist(I,J,List) :-
+	( I =< J ->
+	    List = [I|Rest],
+	    I1 is I + 1,
+	    numlist(I1,J,Rest)
+	;
+	    List = []
+	).
+
+int_width(N,Width) :-
+	( N > 9 ->
+	    M is N // 10,
+	    int_width(M,WidthM),
+	    Width is WidthM + 1
+	;
+	    Width = 1
+	).
+
+write_int(Int,Width) :-
+	int_width(Int,WidthInt),
+	Spaces is Width - WidthInt,
+	writeN(Spaces,' '),
+	write(Int).
+
+
+%map([],_,[]).
+%map([X|R],C,[CX|CR]) :-
+%  call(C,X,CX),
+%  map(R,C,CR).
+
+sublist([],[]).
+sublist([X|R],[X|S]) :- sublist(R,S).
+sublist([_|R],S) :- sublist(R,S).
+
+write_elements([]).
+write_elements([X|R]) :- write(X), write_elements(R).
+
+writeN(N,C) :-
+	( N > 0 ->
+	    M is N - 1,
+	    write(C),
+	    writeN(M,C)
+	;
+	    true
+	).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+copy_list([H|T1],[H|T2]):-
+	copy_list(T1,T2).
+
+create_trie_from_list(L,T):-
+	list_to_trie(L,T).
+
+
+test:-
+	numlist(1,20,List),
+	measure(test1_internal(List),T1),
+	write(T1),
+	nl,
+	measure(test2_internal(List),T2),
+	write(T2),
+	nl,
+	!.
+
+test1_internal(List):-
+	for(_I,1,50000),
+	copy_list(List,_List2),
+	fail.
+test1_internal(_List).
+
+test2_internal(List):-
+	for(_I,1,50000),
+	create_trie_from_list(List,_T),
+	fail.
+test2_internal(_List).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

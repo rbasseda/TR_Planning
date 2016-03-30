@@ -1,0 +1,91 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- import length/2,
+        member/2 from basics.
+:- ['debug_testing_ops.P'].
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% debug_check_store_seen_state(+S1): checks/puts the current state into the
+%   seen states
+
+debug_check_store_seen_state(S1):-
+        tr_debug(on),
+        !,
+        see_db(S1,S1Long), % defined in vX/update_ops_no_length.P
+        check_assert_seen_state(S1Long).
+debug_check_store_seen_state(_S1).
+
+:- dynamic(debug_check_store_seen_states_internal/1),
+	index(debug_check_store_seen_states_internal/1,trie).
+
+% check_assert_seen_state/1
+check_assert_seen_state(S1t):-
+	debug_check_store_seen_states_internal(S1t),
+	!.
+check_assert_seen_state(S1t):-	
+	assert(debug_check_store_seen_states_internal(S1t)).
+
+% debug_seen_states(+NumberStates)
+%  returns the list of all states that were encounted during the execution
+debug_seen_states(N):-
+        findall(S1t,debug_check_store_seen_states_internal(S1t),L),
+        length(L,N).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% put the current state into input_tabled states,
+%   so we know exactly what states were input_tabled
+%   used for tracing
+% debug_check_store_input_tabled_shell_state/1
+debug_check_store_input_tabled_shell_state(S1):-
+        tr_debug(on),
+        !,
+        absolute_state(S1,S1t),
+        check_assert_input_tabled_shell_state(S1t).
+debug_check_store_input_tabled_shell_state(_S1).
+
+:- dynamic(debug_check_store_input_tabled_shell_states_internal/1),
+	index(debug_check_store_input_tabled_shell_states_internal/1,trie).
+
+% check_assert_input_tabled_shell_state/1
+check_assert_input_tabled_shell_state(S1t):-
+	debug_check_store_input_tabled_shell_states_internal(S1t),
+	!.
+check_assert_input_tabled_shell_state(S1t):-	
+	assert(debug_check_store_input_tabled_shell_states_internal(S1t)).
+
+% debug_input_tabled_shell_states(+NumberStates)
+%  returns the list of all states that were input_tabled during the execution
+debug_input_tabled_shell_states(N):-
+        findall(S1t,debug_check_store_input_tabled_shell_states_internal(S1t),
+        	L),
+        length(L,N).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% put the current state into tabled states,
+%   so we know exactly what states were tabled
+%   used for tracing
+% debug_check_store_tabled_shell_state/1
+debug_check_store_tabled_shell_state(S1):-
+        tr_debug(on),
+        !,
+        absolute_state(S1,S1t),
+        check_assert_tabled_shell_state(S1t).
+debug_check_store_tabled_shell_state(_S1).
+
+:- dynamic(debug_check_store_tabled_shell_states_internal/1),
+	index(debug_check_store_tabled_shell_states_internal/1,trie).
+
+% check_assert_tabled_shell_state/1
+check_assert_tabled_shell_state(S1t):-
+	debug_check_store_tabled_shell_states_internal(S1t),
+	!.
+check_assert_tabled_shell_state(S1t):-	
+	assert(debug_check_store_tabled_shell_states_internal(S1t)).
+
+% debug_tabled_shell_states(+NumberStates)
+%  returns the list of all states that were tabled during the execution
+debug_tabled_shell_states(N):-
+        findall(S1t,debug_check_store_tabled_shell_states_internal(S1t),L),
+        length(L,N).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+

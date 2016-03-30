@@ -1,0 +1,777 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ctr_query/3
+% ctr_query(+G,+S1,-S2)
+%:- dynamic dispatch/3.
+%:- index(dispatch/3,1).
+ctr_query(G,S1,S2):-
+	differential_state(S1,S1d),
+        dispatch(G,S1d,S2).
+
+% dispatch/3
+% dispatch(+G,+S1,-S2)
+dispatch(seq(G11a,G12),S1,S2):-
+	!,
+        dispatch(G11a,S1,S3),
+        ctr_simplify(G12,G2),
+        dispatch(G2,S3,S2).
+% Original
+dispatch(ins(Fact),S1,S2):-
+        !,
+        db_ins(Fact,S1,S2).
+dispatch(del(Fact),S1,S2):-
+        !,
+        db_del(Fact,S1,S2).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shuffle up to 9%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=2,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	dispatch(seq(G11,G12),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=2,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	dispatch(seq(G12,G11),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=3,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	dispatch(seq(G11,shuffle(G12,G13)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=3,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	dispatch(seq(G12,shuffle(G11,G13)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=3,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	dispatch(seq(G13,shuffle(G11,G12)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=4,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	dispatch(seq(G11,shuffle(G12,G13,G14)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=4,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	dispatch(seq(G12,shuffle(G11,G13,G14)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=4,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	dispatch(seq(G13,shuffle(G11,G12,G14)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=4,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	dispatch(seq(G14,shuffle(G11,G12,G13)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=5,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	dispatch(seq(G11,shuffle(G12,G13,G14,G15)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=5,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	dispatch(seq(G12,shuffle(G11,G13,G14,G15)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=5,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	dispatch(seq(G13,shuffle(G11,G12,G14,G15)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=5,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	dispatch(seq(G14,shuffle(G11,G12,G13,G15)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=5,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	dispatch(seq(G15,shuffle(G11,G12,G13,G14)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=6,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	dispatch(seq(G11,shuffle(G12,G13,G14,G15,G16)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=6,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	dispatch(seq(G12,shuffle(G11,G13,G14,G15,G16)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=6,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	dispatch(seq(G13,shuffle(G11,G12,G14,G15,G16)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=6,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	dispatch(seq(G14,shuffle(G11,G12,G13,G15,G16)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=6,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	dispatch(seq(G15,shuffle(G11,G12,G13,G14,G16)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=6,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	dispatch(seq(G16,shuffle(G11,G12,G13,G14,G15)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=7,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	dispatch(seq(G11,shuffle(G12,G13,G14,G15,G16,G17)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=7,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	dispatch(seq(G12,shuffle(G11,G13,G14,G15,G16,G17)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=7,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	dispatch(seq(G13,shuffle(G11,G12,G14,G15,G16,G17)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=7,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	dispatch(seq(G14,shuffle(G11,G12,G13,G15,G16,G17)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=7,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	dispatch(seq(G15,shuffle(G11,G12,G13,G14,G16,G17)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=7,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	dispatch(seq(G16,shuffle(G11,G12,G13,G14,G15,G17)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=7,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	dispatch(seq(G17,shuffle(G11,G12,G13,G14,G15,G16)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=8,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	dispatch(seq(G11,shuffle(G12,G13,G14,G15,G16,G17,G18)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=8,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	dispatch(seq(G12,shuffle(G11,G13,G14,G15,G16,G17,G18)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=8,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	dispatch(seq(G13,shuffle(G11,G12,G14,G15,G16,G17,G18)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=8,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	dispatch(seq(G14,shuffle(G11,G12,G13,G15,G16,G17,G18)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=8,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	dispatch(seq(G15,shuffle(G11,G12,G13,G14,G16,G17,G18)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=8,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	dispatch(seq(G16,shuffle(G11,G12,G13,G14,G15,G17,G18)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=8,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	dispatch(seq(G17,shuffle(G11,G12,G13,G14,G15,G16,G18)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=8,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	dispatch(seq(G18,shuffle(G11,G12,G13,G14,G15,G16,G17)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=9,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	arg(9,G1,G19),
+	dispatch(seq(G11,shuffle(G12,G13,G14,G15,G16,G17,G18,G19)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=9,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	arg(9,G1,G19),
+	dispatch(seq(G12,shuffle(G11,G13,G14,G15,G16,G17,G18,G19)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=9,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	arg(9,G1,G19),
+	dispatch(seq(G13,shuffle(G11,G12,G14,G15,G16,G17,G18,G19)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=9,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	arg(9,G1,G19),
+	dispatch(seq(G14,shuffle(G11,G12,G13,G15,G16,G17,G18,G19)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=9,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	arg(9,G1,G19),
+	dispatch(seq(G15,shuffle(G11,G12,G13,G14,G16,G17,G18,G19)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=9,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	arg(9,G1,G19),
+	dispatch(seq(G16,shuffle(G11,G12,G13,G14,G15,G17,G18,G19)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=9,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	arg(9,G1,G19),
+	dispatch(seq(G17,shuffle(G11,G12,G13,G14,G15,G16,G18,G19)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=9,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	arg(9,G1,G19),
+	dispatch(seq(G18,shuffle(G11,G12,G13,G14,G15,G16,G17,G19)),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle,
+	Arity=9,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,G15),
+	arg(6,G1,G16),
+	arg(7,G1,G17),
+	arg(8,G1,G18),
+	arg(9,G1,G19),
+	dispatch(seq(G19,shuffle(G11,G12,G13,G14,G15,G16,G17,G18)),S1,S2).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Shuffle_regress up to 9%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle_regress,
+	Arity=3,
+	%write(G1),
+	%write('*********'),
+	%writeln(S1),
+	%writeln(dispatch1),
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,X),
+	getGoal(G11,Y),
+	dispatch(seq(G11,seq(X,seq(G12,seq(X,Y)))),S1,S2),
+	write(G1),
+	write('*********'),
+	write(S1),
+	write('*********'),
+	writeln(S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle_regress,
+	Arity=3,	
+	%write(G1),
+	%write('*********'),
+	%writeln(S1),
+	%writeln(dispatch2),
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,X),
+	getGoal(G12,Y),
+	dispatch(seq(G12,seq(X,seq(G11,seq(X,Y)))),S1,S2),
+	write(G1),
+	write('*********'),
+	write(S1),
+	write('*********'),
+	writeln(S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle_regress,
+	Arity=4,
+	%write(G1),
+	%write('*********'),
+	%writeln(S1),
+	%writeln(dispatch1),
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,X),
+	getGoal(G11,Y),
+	dispatch(seq(G11,seq(X,shuffle_regress(G12,G13,seq(X,Y)))),S1,S2),
+	write(G1),
+	write('*********'),
+	write(S1),
+	write('*********'),
+	writeln(S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle_regress,
+	Arity=4,
+	%write(G1),
+	%write('*********'),
+	%writeln(S1),
+	%writeln(dispatch2),
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,X),
+	getGoal(G12,Y),
+	dispatch(seq(G12,seq(X,shuffle_regress(G11,G13,seq(X,Y)))),S1,S2),
+	write(G1),
+	write('*********'),
+	write(S1),
+	write('*********'),
+	writeln(S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle_regress,
+	Arity=4,
+	%write(G1),
+	%write('*********'),
+	%writeln(S1),
+	%writeln(dispatch3),
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,X),
+	getGoal(G13,Y),
+	dispatch(seq(G13,seq(X,shuffle_regress(G11,G12,seq(X,Y)))),S1,S2),
+	write(G1),
+	write('*********'),
+	write(S1),
+	write('*********'),
+	writeln(S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle_regress,
+	Arity=5,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,X),
+	getGoal(G11,Y),
+	dispatch(seq(G11,
+		     seq(X,shuffle_regress(G12,G13,G14,seq(X,Y)))),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle_regress,
+	Arity=5,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,X),
+	getGoal(G12,Y),
+	dispatch(seq(G12,
+		     seq(X,shuffle_regress(G11,G13,G14,seq(X,Y)))),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle_regress,
+	Arity=5,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,X),
+	getGoal(G13,Y),
+	dispatch(seq(G13,
+		     seq(X,shuffle_regress(G11,G12,G14,seq(X,Y)))),S1,S2).
+
+dispatch(G1,S1,S2):-
+        functor(G1,Func,Arity),
+	Func=shuffle_regress,
+	Arity=5,
+	arg(1,G1,G11),
+	arg(2,G1,G12),
+	arg(3,G1,G13),
+	arg(4,G1,G14),
+	arg(5,G1,X),
+	getGoal(G14,Y),
+	dispatch(seq(G14,
+		     seq(X,shuffle_regress(G11,G12,G13,seq(X,Y)))),S1,S2).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+dispatch(G1,S1,S2):-
+        ctr_atomic_query(G1,S1,S2).
+
+:- table dispatch/3 as intern.
+
+:- table ctr_atomic_query/3 as intern.
+
+% ctr_atomic_query/1
+% ctr_atomic_query(+G)
+ctr_atomic_query(G1,S1,S1):-
+        dynamic_predicate(G1),
+        !,
+        db_select(G1,S1).
+ctr_atomic_query(G1,S1,S2):-
+        tr_clause(G1,Body),
+        dispatch(Body,S1,S2).
+ctr_atomic_query(not(G1),S1,S1):-
+        !,
+        \+(dispatch(G1,S1,_S2)).
+ctr_atomic_query(noop,S1,S1):-
+        !.
+ctr_atomic_query(big_query,S1,S1):-
+        (for(_,1,100000),fail;true),
+        !.
+ctr_atomic_query(G1,S1,S1):-
+        \+( tr_clause(G1,_Body) ),
+	functor(G1,Func,_),
+	Func \= shuffle,
+	Func \= shuffle_regress,
+	Func \= seq,
+	Func \= ins,
+	Func \= del,
+        !,
+        % Prolog predicate
+        call(G1).
+
+%:- table ctr_simplify/2 as intern.
+% ctr_simplify/2
+% ctr_simplify(+InputFormula,-OutputFormula)
+ctr_simplify(seq(state,G1),G2):-
+        !,
+        ctr_simplify(G1,G2).
+ctr_simplify(conc(state,G1),G2):-
+        !,
+        ctr_simplify(G1,G2).
+ctr_simplify(conc(G1,state),G2):-
+        !,
+        ctr_simplify(G1,G2).
+ctr_simplify(G1,G2):-
+        G1=G2.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
