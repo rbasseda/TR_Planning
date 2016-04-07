@@ -1,7 +1,0 @@
-:- compiler_options([xpp_on]).
-#include "smp.P"
-#include "smp_data.P"
-
-test_description('Test of Stat Modifying System with Movie Playing Example').
-test_query(play1(michael,zohan)).
-

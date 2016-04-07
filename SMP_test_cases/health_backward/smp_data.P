@@ -1,3 +1,0 @@
-tr_database(memberof(admin_001,admin)).
-tr_database(memberof(clinician_002,clinician)).
-tr_database(memberof(patient_003,patient)).
