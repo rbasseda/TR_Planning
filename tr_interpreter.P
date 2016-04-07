@@ -3,6 +3,23 @@
 % ctr_query(+G,+S1,-S2)
 %:- dynamic dispatch/3.
 %:- index(dispatch/3,1).
+:- dynamic latest_act/1.
+
+% To keep the plan, we use backtrackable updates
+
+:- import storage_find_fact/2 from storage.
+:- import storage_insert_fact_bt/3 from storage.
+:- import storage_delete_all/1 from storage.
+:- import storage_delete_fact_bt/3 from storage.
+:- import storage_commit/1 from storage.
+
+ctr_planning_query(G,S1,S2):-
+        storage_delete_all(planStorage),
+        storage_insert_fact_bt(planStorage,constructedPlan([]),_),
+	differential_state(S1,S1d),
+        ctr_query(G,S1d,S2),
+	storage_find_fact(planStorage, constructedPlan(GeneratedPlan)),
+	writeln(GeneratedPlan).
 
 ctr_query(G,S1,S2):-
 	differential_state(S1,S1d),
@@ -842,7 +859,8 @@ dispatch(G1,S1,S2):-
         ctr_atomic_query(G1,S1,S2).
 
 :- table dispatch/3 as intern.
-
+% Non-linear tabling must be activated if the plan generation module is 
+% activated
 :- table ctr_atomic_query/3 as intern.
 
 % ctr_atomic_query/1
@@ -853,7 +871,16 @@ ctr_atomic_query(G1,S1,S1):-
         db_select(G1,S1).
 ctr_atomic_query(G1,S1,S2):-
         tr_clause(G1,Body),
-        dispatch(Body,S1,S2).
+	functor(G1,Func,Arity),
+	( planning_action(Func,Arity) -> 
+	  	(storage_find_fact(planStorage,constructedPlan(GPlan)),
+		 GPlan1 = [ G1|GPlan],
+		 storage_delete_fact_bt(planStorage,constructedPlan(GPlan),_),
+		 storage_insert_fact_bt(planStorage,constructedPlan(GPlan1),_));
+	         true),
+        dispatch(Body,S1,S2).%,
+%	storage_commit(planStorage).
+
 ctr_atomic_query(not(G1),S1,S1):-
         !,
         \+(dispatch(G1,S1,_S2)).
@@ -875,5 +902,4 @@ ctr_atomic_query(G1,S1,S1):-
         call(G1).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
