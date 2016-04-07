@@ -1,0 +1,13 @@
+:- compiler_options([xpp_on]).
+#include "smp.P"
+#include "smp_data.P"
+
+test_description('Test of Stat Modifying System with Health System Example').
+%test_query(readEHR(michael,jon)).
+%test_query(activate(reza,clinician)).
+%test_query(deactivate(michael,clinician)).
+%test_query(readEHR(reza,jon)).
+%test_query(register(david,andy,clinician)).
+%test_query(unregister(david,michael,clinician)).
+%test_query(requestConsent(reza,jon,treatment)).
+test_query(requestConsent(michael,spyros,treatment)).

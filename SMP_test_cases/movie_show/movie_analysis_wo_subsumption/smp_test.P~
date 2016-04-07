@@ -1,0 +1,847 @@
+:- compiler_options([xpp_on]).
+#include "smp.P"
+#include "smp_data.P"
+tabled_predicate(test1,0).
+
+
+tr_clause(
+	shuffle(X,Y),
+	       seq(X,Y)).
+tr_clause(
+	shuffle(X,Y),
+	       seq(Y,X)).
+
+tr_clause(
+	shuffle(X,Y,Z),
+	       seq(X,shuffle(Y,Z))).
+
+tr_clause(
+	shuffle(X,Y,Z),
+	       seq(Y,shuffle(X,Z))).
+
+tr_clause(
+	shuffle(X,Y,Z),
+	       seq(Z,shuffle(X,Y))).
+
+tr_clause(
+	shuffle(W,X,Y,Z),
+	       seq(W,shuffle(X,Y,Z))).
+
+tr_clause(
+	shuffle(W,X,Y,Z),
+	       seq(X,shuffle(W,Y,Z))).
+
+tr_clause(
+	shuffle(W,X,Y,Z),
+	       seq(Y,shuffle(W,X,Z))).
+
+tr_clause(
+	shuffle(W,X,Y,Z),
+	       seq(Z,shuffle(W,X,Y))).
+
+tr_clause(
+	shuffle(V,W,X,Y,Z),
+	       seq(V,shuffle(W,X,Y,Z))).
+
+tr_clause(
+	shuffle(V,W,X,Y,Z),
+	       seq(W,shuffle(V,X,Y,Z))).
+
+tr_clause(
+	shuffle(V,W,X,Y,Z),
+	       seq(X,shuffle(V,W,Y,Z))).
+
+tr_clause(
+	shuffle(V,W,X,Y,Z),
+	       seq(Y,shuffle(V,W,X,Z))).
+
+tr_clause(
+	shuffle(Z,W,X,Y,Z),
+	       seq(Z,shuffle(V,W,X,Y))).
+
+tr_clause(
+	shuffle(U,V,W,X,Y,Z),
+	       seq(U,shuffle(V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(U,V,W,X,Y,Z),
+	       seq(V,shuffle(U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(U,V,W,X,Y,Z),
+	       seq(W,shuffle(U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(U,V,W,X,Y,Z),
+	       seq(X,shuffle(U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(U,V,W,X,Y,Z),
+	       seq(Y,shuffle(U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(U,V,W,X,Y,Z),
+	       seq(Z,shuffle(U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(T,U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(S,T,U,V,W,X,Y,Z),
+	       seq(S,shuffle(T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(S,T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(S,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(S,T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(S,T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(S,T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(S,T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(S,T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(S,T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(S,T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(S,T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(S,T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(S,T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(S,T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(S,T,U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(R,S,T,U,V,W,X,Y,Z),
+	       seq(R,shuffle(S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(R,S,T,U,V,W,X,Y,Z),
+	       seq(S,shuffle(R,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(R,S,T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(R,S,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(R,S,T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(R,S,T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(R,S,T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(R,S,T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(R,S,T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(R,S,T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(R,S,T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(R,S,T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(R,S,T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(R,S,T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(R,S,T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(R,S,T,U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Q,shuffle(R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(R,shuffle(Q,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(S,shuffle(Q,R,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(Q,R,S,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(Q,R,S,T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(Q,R,S,T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(Q,R,S,T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(Q,R,S,T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(Q,R,S,T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(Q,R,S,T,U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(P,shuffle(Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Q,shuffle(P,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(R,shuffle(P,Q,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(S,shuffle(P,Q,R,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(P,Q,R,S,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(P,Q,R,S,T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(P,Q,R,S,T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(P,Q,R,S,T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(P,Q,R,S,T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(P,Q,R,S,T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(P,Q,R,S,T,U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(O,shuffle(P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(P,shuffle(O,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Q,shuffle(O,P,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(R,shuffle(O,P,Q,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(S,shuffle(O,P,Q,R,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(O,P,Q,R,S,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(O,P,Q,R,S,T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(O,P,Q,R,S,T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(O,P,Q,R,S,T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(O,P,Q,R,S,T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(O,P,Q,R,S,T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(O,P,Q,R,S,T,U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(N,shuffle(O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(O,shuffle(N,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(P,shuffle(N,O,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Q,shuffle(N,O,P,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(R,shuffle(N,O,P,Q,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(S,shuffle(N,O,P,Q,R,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(N,O,P,Q,R,S,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(N,O,P,Q,R,S,T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(N,O,P,Q,R,S,T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(N,O,P,Q,R,S,T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(N,O,P,Q,R,S,T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(N,O,P,Q,R,S,T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(M,shuffle(N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(N,shuffle(M,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(O,shuffle(M,N,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(P,shuffle(M,N,O,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Q,shuffle(M,N,O,P,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(R,shuffle(M,N,O,P,Q,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(S,shuffle(M,N,O,P,Q,R,T,U,V,W,X,Y,Z))).
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(M,N,O,P,Q,R,S,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(M,N,O,P,Q,R,S,T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(M,N,O,P,Q,R,S,T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(M,N,O,P,Q,R,S,T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(M,N,O,P,Q,R,S,T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(L,shuffle(M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(M,shuffle(L,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(N,shuffle(L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(O,shuffle(L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(P,shuffle(L,M,N,O,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Q,shuffle(L,M,N,O,P,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(R,shuffle(L,M,N,O,P,Q,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(S,shuffle(L,M,N,O,P,Q,R,T,U,V,W,X,Y,Z))).
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(L,M,N,O,P,Q,R,S,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(L,M,N,O,P,Q,R,S,T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(L,M,N,O,P,Q,R,S,T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(L,M,N,O,P,Q,R,S,T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(K,shuffle(L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(L,shuffle(K,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(M,shuffle(K,L,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(N,shuffle(K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(O,shuffle(K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(P,shuffle(K,L,M,N,O,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Q,shuffle(K,L,M,N,O,P,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(R,shuffle(K,L,M,N,O,P,Q,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(S,shuffle(K,L,M,N,O,P,Q,R,T,U,V,W,X,Y,Z))).
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(K,L,M,N,O,P,Q,R,S,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(K,L,M,N,O,P,Q,R,S,T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(K,L,M,N,O,P,Q,R,S,T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(J,shuffle(K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(K,shuffle(J,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(L,shuffle(J,K,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(M,shuffle(J,K,L,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(N,shuffle(J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(O,shuffle(J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(P,shuffle(J,K,L,M,N,O,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Q,shuffle(J,K,L,M,N,O,P,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(R,shuffle(J,K,L,M,N,O,P,Q,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(S,shuffle(J,K,L,M,N,O,P,Q,R,T,U,V,W,X,Y,Z))).
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(J,K,L,M,N,O,P,Q,R,S,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(J,K,L,M,N,O,P,Q,R,S,T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(I,shuffle(J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(J,shuffle(I,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(K,shuffle(I,J,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(L,shuffle(I,J,K,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(M,shuffle(I,J,K,L,N,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(N,shuffle(I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(O,shuffle(I,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(P,shuffle(I,J,K,L,M,N,O,Q,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Q,shuffle(I,J,K,L,M,N,O,P,R,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(R,shuffle(I,J,K,L,M,N,O,P,Q,S,T,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(S,shuffle(I,J,K,L,M,N,O,P,Q,R,T,U,V,W,X,Y,Z))).
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(T,shuffle(I,J,K,L,M,N,O,P,Q,R,S,U,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(U,shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,V,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(V,shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,W,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(W,shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,X,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(X,shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,Y,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Y,shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Z))).
+
+tr_clause(
+	shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z),
+	       seq(Z,shuffle(I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y))).
+
+
+/*
+
+tr_clause(
+	shuffle(X,Y),
+	       seq(X,Y)).
+tr_clause(
+	shuffle(X,Y),
+	       seq(Y,X)).
+
+tr_clause(
+	shuffle(X,Y,Z),
+	       shuffle(X,shuffle(Y,Z))).
+
+tr_clause(
+	shuffle(W,X,Y,Z),
+	       shuffle(W,shuffle(X,Y,Z))).
+
+tr_clause(
+	shuffle(V,W,X,Y,Z),
+	       shuffle(V,shuffle(W,X,Y,Z))).
+*/
+
+
+
+tr_clause(
+	test1,
+		seq(shuffle(achieve(played1(customer_01,movie_01)),
+		            achieve(sold(customer_01,movie_01)),
+			    achieve(played3(customer_02,movie_02))),
+		seq(played1(customer_01,movie_01),
+		seq(sold(customer_01,movie_01),
+		played3(customer_02,movie_02))))).
+
+
+
+tr_clause(
+	test2,
+		seq(shuffle(achieve(played3(customer_08,movie_03)),
+		            avoid(bought(customer_01,movie_01)),
+			    achieve(played2(customer_01,movie_01)),
+			    achieve(sold(customer_02,movie_03))),
+		seq(played2(customer_01,movie_01),
+		seq(not(bought(customer_01,movie_01)),
+		seq(sold(customer_02,movie_03),
+		played3(customer_08,movie_03)))))).
+
+tr_clause(
+	test3,
+		seq(shuffle(achieve(played3(customer_08,movie_03)),
+		            achieve(played1(customer_07,movie_03)),
+		            avoid(bought(customer_01,movie_01)),
+			    achieve(played2(customer_01,movie_01)),
+			    achieve(sold(customer_02,movie_03))),
+		seq(played2(customer_01,movie_01),
+		seq(not(bought(customer_01,movie_01)),
+		seq(sold(customer_02,movie_03),
+		seq(played1(customer_07,movie_03),
+		played3(customer_08,movie_03))))))).
+
+tr_clause(
+	test4,
+		seq(shuffle(achieve(played3(customer_09,movie_03)),
+			    achieve(played2(customer_08,movie_03)),
+		            achieve(played2(customer_07,movie_03)),
+		            avoid(bought(customer_01,movie_01)),
+			    achieve(played2(customer_01,movie_01)),
+			    achieve(sold(customer_02,movie_03))),
+		seq(played2(customer_01,movie_01),
+		seq(not(bought(customer_01,movie_01)),
+		seq(sold(customer_02,movie_03),
+		seq(played2(customer_07,movie_03),
+		seq(played2(customer_08,movie_03),
+		played2(customer_08,movie_03)))))))).
+
+tr_clause(
+	test5,
+		seq(shuffle(achieve(played3(customer_09,movie_03)),
+			    achieve(played2(customer_08,movie_03)),
+		            achieve(played2(customer_07,movie_03)),
+		            avoid(bought(customer_01,movie_01)),
+		            avoid(bought(customer_11,movie_11)),
+			    achieve(played2(customer_01,movie_01)),
+			    achieve(played2(customer_11,movie_11)),
+			    achieve(sold(customer_02,movie_03)),
+			    achieve(sold(customer_12,movie_13))),
+		seq(played2(customer_01,movie_01),
+		seq(not(bought(customer_01,movie_01)),
+		seq(sold(customer_02,movie_03),
+		seq(played2(customer_07,movie_03),
+		seq(played2(customer_08,movie_03),
+		seq(played3(customer_09,movie_03),
+		seq(played2(customer_11,movie_11),
+		seq(not(bought(customer_11,movie_11)),
+		sold(customer_12,movie_13))))))))))).
+
+
+
+tr_clause(
+	test6,
+		seq(shuffle(achieve(played3(customer_09,movie_03)),
+		            achieve(played3(customer_19,movie_13)),
+			    achieve(played2(customer_08,movie_03)),
+			    achieve(played2(customer_18,movie_13)),
+		            achieve(played2(customer_07,movie_03)),
+		            achieve(played2(customer_17,movie_13)),
+		            avoid(bought(customer_01,movie_01)),
+		            avoid(bought(customer_11,movie_11)),
+			    achieve(played2(customer_01,movie_01)),
+			    achieve(played2(customer_11,movie_11)),
+			    achieve(sold(customer_02,movie_03)),
+			    achieve(sold(customer_12,movie_13))),
+		seq(played2(customer_01,movie_01),
+		seq(not(bought(customer_01,movie_01)),
+		seq(sold(customer_02,movie_03),
+		seq(played2(customer_07,movie_03),
+		seq(played2(customer_08,movie_03),
+		seq(played3(customer_09,movie_03),
+		seq(played2(customer_11,movie_11),
+		seq(not(bought(customer_11,movie_11)),
+		seq(sold(customer_12,movie_13),
+		seq(played2(customer_17,movie_13),
+		seq(played2(customer_18,movie_13),
+		played3(customer_19,movie_13)))))))))))))).
+
+tr_clause(
+	test7,
+		seq(shuffle(achieve(played3(customer_09,movie_03)),
+		            achieve(played3(customer_19,movie_13)),
+		            achieve(played3(customer_29,movie_23)),
+			    achieve(played2(customer_08,movie_03)),
+			    achieve(played2(customer_18,movie_13)),
+			    achieve(played2(customer_28,movie_23)),
+		            achieve(played2(customer_07,movie_03)),
+		            achieve(played2(customer_17,movie_13)),
+		            achieve(played2(customer_27,movie_23)),
+		            avoid(bought(customer_01,movie_01)),
+		            avoid(bought(customer_11,movie_11)),
+		            avoid(bought(customer_21,movie_21)),
+			    achieve(played2(customer_01,movie_01)),
+			    achieve(played2(customer_11,movie_11)),
+			    achieve(played2(customer_21,movie_21)),
+			    achieve(sold(customer_02,movie_03)),
+			    achieve(sold(customer_12,movie_13)),
+			    achieve(sold(customer_22,movie_23))),
+		seq(played2(customer_01,movie_01),
+		seq(not(bought(customer_01,movie_01)),
+		seq(sold(customer_02,movie_03),
+		seq(played2(customer_07,movie_03),
+		seq(played2(customer_08,movie_03),
+		seq(played2(customer_08,movie_03),
+		seq(played2(customer_11,movie_11),
+		seq(not(bought(customer_11,movie_11)),
+		seq(sold(customer_12,movie_13),
+		seq(played2(customer_17,movie_13),
+		seq(played2(customer_18,movie_13),
+		seq(played2(customer_18,movie_13),
+		seq(played2(customer_21,movie_21),
+		seq(not(bought(customer_21,movie_21)),
+		seq(sold(customer_22,movie_23),
+		seq(played2(customer_27,movie_23),
+		seq(played2(customer_28,movie_23),
+		played2(customer_28,movie_23)))))))))))))))))))).
+
+test_description('Test of Analysis of Stat Modifying System').
+test_query(test6).
+

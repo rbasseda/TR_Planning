@@ -1,0 +1,25 @@
+% Defines the database state as: "tr_database(Fact)" rules.
+
+tr_database(bought(person_001,movie_001)).
+tr_database(bought(person_002,movie_002)).
+tr_database(bought(person_003,movie_003)).
+tr_database(bought(person_004,movie_004)).
+tr_database(bought(person_005,movie_005)).
+tr_database(bought(person_006,movie_006)).
+tr_database(bought(person_007,movie_007)).
+tr_database(bought(person_008,movie_008)).
+tr_database(bought(person_009,movie_009)).
+tr_database(bought(person_010,movie_010)).
+tr_database(bought(person_011,movie_011)).
+tr_database(bought(person_012,movie_012)).
+tr_database(bought(person_013,movie_003)).
+tr_database(bought(person_014,movie_004)).
+tr_database(bought(person_015,movie_005)).
+tr_database(bought(person_016,movie_006)).
+tr_database(bought(person_017,movie_007)).
+tr_database(bought(person_018,movie_008)).
+tr_database(bought(person_019,movie_009)).
+
+
+
+

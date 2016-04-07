@@ -1,0 +1,102 @@
+dynamic_predicate(memberof,2).
+dynamic_predicate(hasActivated,2).
+dynamic_predicate(legitRelationship,2).
+dynamic_predicate(denied,2).
+dynamic_predicate(hasReadEHR,2).
+dynamic_predicate(hasConsented,3).
+dynamic_predicate(hasRequestedConsent,3).
+
+tabled_predicate(activate,2).
+tabled_predicate(deactivate,2).
+tabled_predicate(register,2).
+tabled_predicate(unregister,2).
+tabled_predicate(readEHR,2).
+tabled_predicate(denyAccess,2).
+tabled_predicate(removeDenyAccess,2).
+tabled_predicate(giveConsent,3).
+tabled_predicate(requestConsent,3).
+tabled_predicate(withdarConsent,3).
+tabled_predicate(cancelTreatment,2).
+tabled_predicate(legitRelationship,2).
+tabled_predicate(permitted,3).
+% Actions
+% tr_clause(+Head,+Body)
+
+tr_clause(
+	activate(X,patient),
+		seq(memberof(X,patient),
+		ins(hasActivated(X,patient)))).
+tr_clause(
+	deactivate(X,patient),
+		seq(hasActivated(X,patient),
+		del(hasActivated(X,patient)))).
+tr_clause(
+	activate(X,clinician),
+		seq(memberof(X,clinician),
+		seq(not(hasActivated(X,admin)),
+		ins(hasActivated(X,clinician))))).
+tr_clause(
+	deactivate(X,clinician),
+		seq(hasActivated(X,clinician),
+		del(hasActivated(X,clinician)))).
+tr_clause(
+	activate(X,admin),
+		seq(memberof(X,admin),
+		seq(not(hasActivated(X,clinician)),
+		ins(hasActivated(X,admin))))).
+tr_clause(
+	deactivate(X,admin),
+		seq(hasActivated(X,admin),
+		del(hasActivated(X,admin)))).
+tr_clause(
+	register(X,U,R),
+		seq(hasActivated(X,admin),
+		ins(memberof(U,R)))).
+tr_clause(
+	unregister(X,U,R),
+		seq(hasActivated(X,admin),
+		seq(memberof(U,R),
+		seq(del(memberof(U,R)),
+		del(hasActivated(U,R)))))).
+tr_clause(
+	permitted(X,read,P),
+		seq(hasActivated(X,clinician),
+		seq(legitRelationship(X,P),
+		not(denied(P,X))))).
+tr_clause(
+	readEHR(X,P),
+		seq(permitted(X,read,P),
+		ins(hasReadEHR(X,P)))).
+tr_clause(
+	denyAccess(P,X),
+		seq(hasActivated(P,patient),
+		ins(denied(P,X)))).
+tr_clause(
+	removeDenyAccess(P,X),
+		seq(hasActivated(P,patient),
+		seq(denied(P,X),
+		del(denied(P,X))))).
+tr_clause(
+	legitRelationship(X,P),
+		hasConsented(P,X,treatment)).
+tr_clause(
+	giveConsent(P,X,treatment),
+		seq(hasActivated(P,patient),
+		seq(hasRequestedConsent(X,P,treatment),
+		ins(hasConsented(P,X,treatment))))).
+tr_clause(
+	requestConsent(X,P,treatment),
+		seq(hasActivated(X,clinician),
+		ins(hasRequestedConsent(X,P,treatment)))).
+tr_clause(
+	withdrawConsent(P,X,treatment),
+		seq(hasActivated(P,patient),
+		seq(hasConsented(P,X,treatment),
+		del(hasConsented(P,X,treatment))))).
+tr_clause(
+	cancelTreatment(X,P),
+		seq(hasActivated(X,clinician),
+		seq(del(hasRequestedConsent(X,P,treatment)),
+		del(hasConsented(P,X,treatment))))).
+	
+

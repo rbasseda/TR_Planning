@@ -1,0 +1,24 @@
+dynamic_predicate(bought,2).
+dynamic_predicate(played1,2).
+dynamic_predicate(played2,2).
+
+tabled_predicate(buy,2).
+tabled_predicate(play1,2).
+tabled_predicate(play2,2).
+
+% Actions
+% tr_clause(+Head,+Body)
+tr_clause(
+	buy(X,M),
+		ins(bought(X,M))).
+tr_clause(
+	play1(X,M),
+		seq(bought(X,M),
+		seq(not(played1(X,M)),
+		ins(played1(X,M))))).
+tr_clause(
+	play2(X,M),
+		seq(played1(X,M),
+		seq(not(played2(X,M)),
+		ins(played2(X,M))))).
+

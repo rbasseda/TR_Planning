@@ -1,0 +1,13 @@
+This is a simplified version of Tabled Transaction Logic interpreter by Paul 
+Fodor. You can find more explanation about the interpreter in the following 
+paper:
+
+1- Paul Fodor, Michael Kifer, "Tabling for transaction logic", 
+PPDP 2010: 199-208
+
+The minimum required version of XSB for this interpreter is 3.6. (Gazpatcho). 
+
+The simplest way to run the interpreter is as follows:
+
+
+xsb -e "['tr_shell.P'],find_one('path-to-the-test-directory/test_file.P'),halt."

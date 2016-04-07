@@ -1,0 +1,26 @@
+:- compiler_options([xpp_on]).
+#include "smp.P"
+#include "smp_data.P"
+tabled_predicate(test1,0).
+
+tr_clause(
+	test1,
+		seq(plan,
+		hasReadEHR(clinician_002,patient_003))).
+tr_clause(
+	test2,
+		seq(plan,
+		hasReadEHR(clinician_002,patient_000))).
+tr_clause(
+	test3,
+		seq(plan,
+		memberof(patient_000,patient))).
+tr_clause(
+	test4,
+		seq(plan,
+		seq(hasReadEHR(clinician_002,patient_003),
+		denied(patient_003,clinician_002)))).
+
+test_description('Test of Analysis of Stat Modifying System').
+test_query(test1).
+

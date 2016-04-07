@@ -1,0 +1,5 @@
+% Defines the database state as: "tr_database(Fact)" rules.
+
+tr_database(bought(person_001,movie_001)).
+tr_database(bought(person_002,movie_002)).
+tr_database(bought(person_003,movie_003)).

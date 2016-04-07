@@ -1,0 +1,139 @@
+dynamic_predicate(bought,2).
+dynamic_predicate(played1,2).
+dynamic_predicate(played2,2).
+
+tabled_predicate(achieveThroughAtom,1).
+tabled_predicate(achieveThroughCommand,1).
+tabled_predicate(achieve,1).
+tabled_predicate(avoidThroughAtom,1).
+tabled_predicate(avoidThroughCommand,1).
+tabled_predicate(avoidThroughCommand,2).
+tabled_predicate(avoid,1).
+tabled_predicate(buy,2).
+tabled_predicate(play1,2).
+tabled_predicate(play2,2).
+
+% Actions
+% tr_clause(+Head,+Body)
+
+
+
+tr_clause(
+	buy(X,M),
+		ins(bought(X,M))).
+tr_clause(
+	play1(X,M),
+		seq(bought(X,M),
+		seq(not(played1(X,M)),
+		ins(played1(X,M))))).
+tr_clause(
+	play2(X,M),
+		seq(played1(X,M),
+		seq(not(played2(X,M)),
+		ins(played2(X,M))))).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% achieve( P_ext ) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% achieveThroguhAtom(P_ext) %%%%%%%%%%%%%%%%%%%%%%%%
+
+tr_clause(
+	achieveThroughAtom(bought(X,M)),
+		bought(X,M)).
+tr_clause(
+	achieveThroughAtom(played1(X,M)),
+		played1(X,M)).
+tr_clause(
+	achieveThroughAtom(played2(X,M)),
+		played2(X,M)).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% achieveThroguhCommand(P_ext) %%%%%%%%%%%%%%%%%%%%%%%
+
+tr_clause(
+	achieveThroughCommand(bought(X,M)),
+		seq(achievePre(buy(X,M)),
+		buy(X,M))).
+tr_clause(
+	achieveThroughCommand(played1(X,M)),
+		seq(achievePre(play1(X,M)),
+		play1(X,M))).
+tr_clause(
+	achieveThroughCommand(played2(X,M)),
+		seq(achievePre(play2(X,M)),
+		play2(X,M))).
+
+%%%%%%%%%%%%%%%%%%%%%%% Final conclusion for achieve(P_ext) %%%%%%%%%%%%%%%%%%%%
+
+tr_clause(
+	achieve(bought(X,M)),
+		achieveThroughAtom(bought(X,M))).
+tr_clause(
+	achieve(bought(X,M)),
+		achieveThroughCommand(bought(X,M))).
+tr_clause(
+	achieve(played1(X,M)),
+		achieveThroughAtom(played1(X,M))).
+tr_clause(
+	achieve(played1(X,M)),
+		achieveThroughCommand(played1(X,M))).
+tr_clause(
+	achieve(played2(X,M)),
+		achieveThroughAtom(played2(X,M))).
+tr_clause(
+	achieve(played2(X,M)),
+		achieveThroughCommand(played2(X,M))).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% avoid( P_ext ) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% avoidThroguhAtom(P_ext) %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+tr_clause(
+	avoidThroughAtom(bought(X,M)),
+		not(bought(X,M))).
+tr_clause(
+	avoidThroughAtom(played1(X,M)),
+		not(played1(X,M))).
+tr_clause(
+	avoidThroughAtom(played2(X,M)),
+		not(played2(X,M))).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% avoidThroguhCommand(P_ext) %%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%% Final conclusion for avoid(P_ext) %%%%%%%%%%%%%%%%%%%%%%
+
+tr_clause(
+	avoid(bought(X,M)),
+		avoidThroughAtom(bought(X,M))).
+tr_clause(
+	avoid(bought(X,M)),
+		avoidThroughCommand(bought(X,M))).
+tr_clause(
+	avoid(played1(X,M)),
+		avoidThroughAtom(played1(X,M))).
+tr_clause(
+	avoid(played1(X,M)),
+		avoidThroughCommand(played1(X,M))).
+tr_clause(
+	avoid(played2(X,M)),
+		avoidThroughAtom(played2(X,M))).
+tr_clause(
+	avoid(played2(X,M)),
+		avoidThroughCommand(played2(X,M))).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% achievePre(Q) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+tr_clause(
+	achievePre(buy(X,M)),
+		true).
+tr_clause(
+	achievePre(play1(X,M)),
+		seq(achieve(bought(X,M)),
+		avoid(played1(X,M)))).
+tr_clause(
+	achievePre(play2(X,M)),
+		seq(achieve(played1(X,M)),
+		avoid(played2(X,M)))).

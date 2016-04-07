@@ -1,0 +1,7 @@
+% Defines the database state as: "tr_database(Fact)" rules.
+
+tr_database(bought(michael,zohan)).
+tr_database(bought(reza,lincoln)).
+
+tr_database(p1ayed1(reza,lincoln)).
+
