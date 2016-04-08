@@ -1,0 +1,25 @@
+This test case is based on the movie store example for State Modifying Policies
+explained in:
+
+Moritz Y. Becker, Sebastian Nanz:
+A logic for state-modifying authorization policies. ACM Trans. Inf. Syst. Secur. 13(3) (2010)
+
+The first rule describes an action of a user,X, buying a movie,M. The action is
+possible only if the movie has not already been purchased by somebody. The 
+second rule says that, to play a movie for the first time, the user must buy it
+first and not have played it before. 
+The third rule deals with the case when the user is happy and decides to keep
+the movie. The remaining rules are self-explanatory.
+
+The complexity of state-modifying policies calls for analysis tools that support
+policy authors in debugging policies. We present a present a classical planning
+problem to describe all possible sequences of access requests which yield a 
+certain outcome. 
+
+To solve this classical planning problem, we described a sound and complete 
+planning algorithm, called fSTRIPS for finding minimal sequences in the
+propositional case. The interested reader can find a complete explanation 
+of this algorithm in Section 5 of the following paper:
+
+Reza Basseda, Michael Kifer, Anthony J. Bonner:
+Planning with Transaction Logic. RR 2014: 29-44

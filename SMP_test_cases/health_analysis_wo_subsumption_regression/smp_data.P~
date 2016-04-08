@@ -1,9 +1,0 @@
-tr_database(memberof(admin_001,admin)).
-tr_database(memberof(clinician_002,clinician)).
-tr_database(memberof(patient_003,patient)).
-tr_database(memberof(admin_004,admin)).
-tr_database(memberof(clinician_005,clinician)).
-tr_database(memberof(patient_006,patient)).
-tr_database(memberof(admin_007,admin)).
-tr_database(memberof(clinician_008,clinician)).
-tr_database(memberof(patient_009,patient)).

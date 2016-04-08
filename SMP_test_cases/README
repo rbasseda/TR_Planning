@@ -1,0 +1,13 @@
+The provided test cases here are taken from:
+
+Moritz Y. Becker, Sebastian Nanz,
+"A logic for state-modifying authorization policies", 
+ACM Trans. Inf. Syst. Secur. 13(3) (2010)
+
+These test cases represent so called State Modifying Policies (SMP). 
+A typical use of such a policy is to determine if a particular access request
+(say, to play digital contents) should be granted.
+Using SMP approach, updates to the state are factored out of the resource 
+guard, thus enhancing maintainability and facilitating more expressive 
+policies that take the history of access requests into account. 
+
