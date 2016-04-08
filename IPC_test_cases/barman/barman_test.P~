@@ -1,0 +1,77 @@
+%% Problem Name:prob
+%% Domain Name:barman
+%%%%%%%%%%%%%%%%%%%%%%  Test File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- compiler_options([xpp_on]).
+#include "barman.P"
+#include "barman_data.P"
+
+tabled_predicate(prob_STRIPS,0).
+tabled_predicate(prob_Naive,0).
+%%%%%%%%%%%%%%%%%%%%%%    Goal     %%%%%%%%%%%%%%%%%%%%%%%%%%
+planning_goal(contains(shot1,cocktail4)).
+planning_goal(contains(shot2,cocktail6)).
+planning_goal(contains(shot3,cocktail11)).
+planning_goal(contains(shot4,cocktail8)).
+planning_goal(contains(shot5,cocktail7)).
+planning_goal(contains(shot6,cocktail9)).
+planning_goal(contains(shot7,cocktail2)).
+planning_goal(contains(shot8,cocktail3)).
+planning_goal(contains(shot9,cocktail5)).
+planning_goal(contains(shot10,cocktail1)).
+planning_goal(contains(shot11,cocktail10)).
+planning_goal(contains(shot12,cocktail2)).
+planning_goal(contains(shot13,ingredient2)).
+planning_goal(contains(shot14,ingredient3)).
+
+
+tr_clause(
+	prob_STRIPS,
+		seq(shuffle(
+			achieve(contains(shot1,cocktail4)),
+			achieve(contains(shot2,cocktail6)),
+			achieve(contains(shot3,cocktail11)),
+			achieve(contains(shot4,cocktail8)),
+			achieve(contains(shot5,cocktail7)),
+			achieve(contains(shot6,cocktail9)),
+			achieve(contains(shot7,cocktail2)),
+			achieve(contains(shot8,cocktail3)),
+			achieve(contains(shot9,cocktail5)),
+			achieve(contains(shot10,cocktail1)),
+			achieve(contains(shot11,cocktail10)),
+			achieve(contains(shot12,cocktail2)),
+			achieve(contains(shot13,ingredient2)),
+			achieve(contains(shot14,ingredient3))),
+		seq(contains(shot1,cocktail4),
+		seq(contains(shot2,cocktail6),
+		seq(contains(shot3,cocktail11),
+		seq(contains(shot4,cocktail8),
+		seq(contains(shot5,cocktail7),
+		seq(contains(shot6,cocktail9),
+		seq(contains(shot7,cocktail2),
+		seq(contains(shot8,cocktail3),
+		seq(contains(shot9,cocktail5),
+		seq(contains(shot10,cocktail1),
+		seq(contains(shot11,cocktail10),
+		seq(contains(shot12,cocktail2),
+		seq(contains(shot13,ingredient2),contains(shot14,ingredient3)))))))))))))))).
+
+tr_clause(
+	prob_Naive,
+		seq(solutionPlan,
+		seq(contains(shot1,cocktail4),
+		seq(contains(shot2,cocktail6),
+		seq(contains(shot3,cocktail11),
+		seq(contains(shot4,cocktail8),
+		seq(contains(shot5,cocktail7),
+		seq(contains(shot6,cocktail9),
+		seq(contains(shot7,cocktail2),
+		seq(contains(shot8,cocktail3),
+		seq(contains(shot9,cocktail5),
+		seq(contains(shot10,cocktail1),
+		seq(contains(shot11,cocktail10),
+		seq(contains(shot12,cocktail2),
+		seq(contains(shot13,ingredient2),contains(shot14,ingredient3)))))))))))))))).
+
+test_description(test_elevator_planning_problem).
+test_query(prob_STRIPS).

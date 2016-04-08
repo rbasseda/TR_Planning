@@ -1,0 +1,37 @@
+%% Problem Name:p01_net1_b6_g2_rt0_instance
+%% Domain Name:pipesworld_strips
+%%%%%%%%%%%%%%%%%%%%%%  Test File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- compiler_options([xpp_on]).
+#include "pipesworld_strips.P"
+#include "pipesworld_strips_data.P"
+
+tabled_predicate(p01_net1_b6_g2_rt0_instance_STRIPS,0).
+tabled_predicate(p01_net1_b6_g2_rt0_instance_Naive,0).
+%%%%%%%%%%%%%%%%%%%%%%    Goal     %%%%%%%%%%%%%%%%%%%%%%%%%%
+planning_goal(on(b2,a3)).
+planning_goal(on(b5,a2)).
+planning_goal(normal(s12)).
+planning_goal(normal(s13)).
+
+
+tr_clause(
+	p01_net1_b6_g2_rt0_instance_STRIPS,
+		seq(shuffle(
+			achieve(on(b2,a3)),
+			achieve(on(b5,a2)),
+			achieve(normal(s12)),
+			achieve(normal(s13))),
+		seq(on(b2,a3),
+		seq(on(b5,a2),
+		seq(normal(s12),normal(s13)))))).
+
+tr_clause(
+	p01_net1_b6_g2_rt0_instance_Naive,
+		seq(solutionPlan,
+		seq(on(b2,a3),
+		seq(on(b5,a2),
+		seq(normal(s12),normal(s13)))))).
+
+test_description(test_elevator_planning_problem).
+test_query(p01_net1_b6_g2_rt0_instance_STRIPS).

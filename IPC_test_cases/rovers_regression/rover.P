@@ -1,0 +1,773 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% rover%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(navigate,3).
+tabled_predicate(sample_soil,3).
+tabled_predicate(sample_rock,3).
+tabled_predicate(drop,2).
+tabled_predicate(calibrate,4).
+tabled_predicate(take_image,5).
+tabled_predicate(communicate_soil_data,5).
+tabled_predicate(communicate_rock_data,5).
+tabled_predicate(communicate_image_data,6).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(at,2).
+dynamic_predicate(at_lander,2).
+dynamic_predicate(can_traverse,3).
+dynamic_predicate(equipped_for_soil_analysis,1).
+dynamic_predicate(equipped_for_rock_analysis,1).
+dynamic_predicate(equipped_for_imaging,1).
+dynamic_predicate(empty,1).
+dynamic_predicate(have_rock_analysis,2).
+dynamic_predicate(have_soil_analysis,2).
+dynamic_predicate(full,1).
+dynamic_predicate(calibrated,2).
+dynamic_predicate(supports,2).
+dynamic_predicate(available,1).
+dynamic_predicate(visible,2).
+dynamic_predicate(have_image,3).
+dynamic_predicate(communicated_soil_data,1).
+dynamic_predicate(communicated_rock_data,1).
+dynamic_predicate(communicated_image_data,2).
+dynamic_predicate(at_soil_sample,1).
+dynamic_predicate(at_rock_sample,1).
+dynamic_predicate(visible_from,2).
+dynamic_predicate(store_of,2).
+dynamic_predicate(calibration_target,2).
+dynamic_predicate(on_board,2).
+dynamic_predicate(channel_free,1).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	navigate(rover(VARx),waypoint(VARy),waypoint(VARz)),
+		seq(can_traverse(VARx,VARy,VARz),
+		seq(available(VARx),
+		seq(at(VARx,VARy),
+		seq(visible(VARy,VARz),
+		seq(ins(at(VARx,VARz)),del(at(VARx,VARy)))))))).
+
+tr_clause(
+	planningAction,
+		navigate(rover(VARx),waypoint(VARy),waypoint(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	sample_soil(rover(VARx),store(VARs),waypoint(VARp)),
+		seq(at(VARx,VARp),
+		seq(at_soil_sample(VARp),
+		seq(equipped_for_soil_analysis(VARx),
+		seq(store_of(VARs,VARx),
+		seq(empty(VARs),
+		seq(ins(full(VARs)),
+		seq(ins(have_soil_analysis(VARx,VARp)),
+		seq(del(empty(VARs)),del(at_soil_sample(VARp))))))))))).
+
+tr_clause(
+	planningAction,
+		sample_soil(rover(VARx),store(VARs),waypoint(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	sample_rock(rover(VARx),store(VARs),waypoint(VARp)),
+		seq(at(VARx,VARp),
+		seq(at_rock_sample(VARp),
+		seq(equipped_for_rock_analysis(VARx),
+		seq(store_of(VARs,VARx),
+		seq(empty(VARs),
+		seq(ins(full(VARs)),
+		seq(ins(have_rock_analysis(VARx,VARp)),
+		seq(del(empty(VARs)),del(at_rock_sample(VARp))))))))))).
+
+tr_clause(
+	planningAction,
+		sample_rock(rover(VARx),store(VARs),waypoint(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	drop(rover(VARx),store(VARy)),
+		seq(store_of(VARy,VARx),
+		seq(full(VARy),
+		seq(ins(empty(VARy)),del(full(VARy)))))).
+
+tr_clause(
+	planningAction,
+		drop(rover(VARx),store(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	calibrate(rover(VARr),camera(VARi),objective(VARt),waypoint(VARw)),
+		seq(equipped_for_imaging(VARr),
+		seq(calibration_target(VARi,VARt),
+		seq(at(VARr,VARw),
+		seq(visible_from(VARt,VARw),
+		seq(on_board(VARi,VARr),ins(calibrated(VARi,VARr)))))))).
+
+tr_clause(
+	planningAction,
+		calibrate(rover(VARr),camera(VARi),objective(VARt),waypoint(VARw))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	take_image(rover(VARr),waypoint(VARp),objective(VARo),camera(VARi),mode(VARm)),
+		seq(calibrated(VARi,VARr),
+		seq(on_board(VARi,VARr),
+		seq(equipped_for_imaging(VARr),
+		seq(supports(VARi,VARm),
+		seq(visible_from(VARo,VARp),
+		seq(at(VARr,VARp),
+		seq(ins(have_image(VARr,VARo,VARm)),del(calibrated(VARi,VARr)))))))))).
+
+tr_clause(
+	planningAction,
+		take_image(rover(VARr),waypoint(VARp),objective(VARo),camera(VARi),mode(VARm))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy)),
+		seq(at(VARr,VARx),
+		seq(at_lander(VARl,VARy),
+		seq(have_soil_analysis(VARr,VARp),
+		seq(visible(VARx,VARy),
+		seq(available(VARr),
+		seq(channel_free(VARl),
+		seq(ins(channel_free(VARl)),
+		seq(ins(communicated_soil_data(VARp)),
+		seq(ins(available(VARr)),
+		seq(del(available(VARr)),del(channel_free(VARl))))))))))))).
+
+tr_clause(
+	planningAction,
+		communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy)),
+		seq(at(VARr,VARx),
+		seq(at_lander(VARl,VARy),
+		seq(have_rock_analysis(VARr,VARp),
+		seq(visible(VARx,VARy),
+		seq(available(VARr),
+		seq(channel_free(VARl),
+		seq(ins(channel_free(VARl)),
+		seq(ins(communicated_rock_data(VARp)),
+		seq(ins(available(VARr)),
+		seq(del(available(VARr)),del(channel_free(VARl))))))))))))).
+
+tr_clause(
+	planningAction,
+		communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy)),
+		seq(at(VARr,VARx),
+		seq(at_lander(VARl,VARy),
+		seq(have_image(VARr,VARo,VARm),
+		seq(visible(VARx,VARy),
+		seq(available(VARr),
+		seq(channel_free(VARl),
+		seq(ins(channel_free(VARl)),
+		seq(ins(communicated_image_data(VARo,VARm)),
+		seq(ins(available(VARr)),
+		seq(del(available(VARr)),del(channel_free(VARl))))))))))))).
+
+tr_clause(
+	planningAction,
+		communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARx,VARy)),
+		at(VARx,VARy)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_lander(VARx,VARy)),
+		at_lander(VARx,VARy)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(can_traverse(VARr,VARx,VARy)),
+		can_traverse(VARr,VARx,VARy)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(equipped_for_soil_analysis(VARr)),
+		equipped_for_soil_analysis(VARr)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(equipped_for_rock_analysis(VARr)),
+		equipped_for_rock_analysis(VARr)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(equipped_for_imaging(VARr)),
+		equipped_for_imaging(VARr)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(empty(VARs)),
+		empty(VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(have_rock_analysis(VARr,VARw)),
+		have_rock_analysis(VARr,VARw)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(have_soil_analysis(VARr,VARw)),
+		have_soil_analysis(VARr,VARw)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(full(VARs)),
+		full(VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(calibrated(VARc,VARr)),
+		calibrated(VARc,VARr)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(supports(VARc,VARm)),
+		supports(VARc,VARm)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(available(VARr)),
+		available(VARr)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(visible(VARw,VARp)),
+		visible(VARw,VARp)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(have_image(VARr,VARo,VARm)),
+		have_image(VARr,VARo,VARm)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(communicated_soil_data(VARw)),
+		communicated_soil_data(VARw)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(communicated_rock_data(VARw)),
+		communicated_rock_data(VARw)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(communicated_image_data(VARo,VARm)),
+		communicated_image_data(VARo,VARm)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_soil_sample(VARw)),
+		at_soil_sample(VARw)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_rock_sample(VARw)),
+		at_rock_sample(VARw)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(visible_from(VARo,VARw)),
+		visible_from(VARo,VARw)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(store_of(VARs,VARr)),
+		store_of(VARs,VARr)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(calibration_target(VARi,VARo)),
+		calibration_target(VARi,VARo)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on_board(VARi,VARr)),
+		on_board(VARi,VARr)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(channel_free(VARl)),
+		channel_free(VARl)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARx,VARy)),
+		not(at(VARx,VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_lander(VARx,VARy)),
+		not(at_lander(VARx,VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(can_traverse(VARr,VARx,VARy)),
+		not(can_traverse(VARr,VARx,VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(equipped_for_soil_analysis(VARr)),
+		not(equipped_for_soil_analysis(VARr))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(equipped_for_rock_analysis(VARr)),
+		not(equipped_for_rock_analysis(VARr))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(equipped_for_imaging(VARr)),
+		not(equipped_for_imaging(VARr))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(empty(VARs)),
+		not(empty(VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(have_rock_analysis(VARr,VARw)),
+		not(have_rock_analysis(VARr,VARw))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(have_soil_analysis(VARr,VARw)),
+		not(have_soil_analysis(VARr,VARw))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(full(VARs)),
+		not(full(VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(calibrated(VARc,VARr)),
+		not(calibrated(VARc,VARr))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(supports(VARc,VARm)),
+		not(supports(VARc,VARm))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(available(VARr)),
+		not(available(VARr))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(visible(VARw,VARp)),
+		not(visible(VARw,VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(have_image(VARr,VARo,VARm)),
+		not(have_image(VARr,VARo,VARm))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(communicated_soil_data(VARw)),
+		not(communicated_soil_data(VARw))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(communicated_rock_data(VARw)),
+		not(communicated_rock_data(VARw))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(communicated_image_data(VARo,VARm)),
+		not(communicated_image_data(VARo,VARm))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_soil_sample(VARw)),
+		not(at_soil_sample(VARw))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_rock_sample(VARw)),
+		not(at_rock_sample(VARw))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(visible_from(VARo,VARw)),
+		not(visible_from(VARo,VARw))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(store_of(VARs,VARr)),
+		not(store_of(VARs,VARr))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(calibration_target(VARi,VARo)),
+		not(calibration_target(VARi,VARo))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on_board(VARi,VARr)),
+		not(on_board(VARi,VARr))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(channel_free(VARl)),
+		not(channel_free(VARl))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARx,VARz)),
+		seq(not(at(VARx,VARz)),
+		execute(navigate(rover(VARx),waypoint(VARy),waypoint(VARz))))).
+
+
+achieves(at(VARx,VARz),navigate(rover(VARx),waypoint(VARy),waypoint(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(full(VARs)),
+		seq(not(full(VARs)),
+		execute(sample_soil(rover(VARx),store(VARs),waypoint(VARp))))).
+
+
+achieves(full(VARs),sample_soil(rover(VARx),store(VARs),waypoint(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(have_soil_analysis(VARx,VARp)),
+		seq(not(have_soil_analysis(VARx,VARp)),
+		execute(sample_soil(rover(VARx),store(VARs),waypoint(VARp))))).
+
+
+achieves(have_soil_analysis(VARx,VARp),sample_soil(rover(VARx),store(VARs),waypoint(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(full(VARs)),
+		seq(not(full(VARs)),
+		execute(sample_rock(rover(VARx),store(VARs),waypoint(VARp))))).
+
+
+achieves(full(VARs),sample_rock(rover(VARx),store(VARs),waypoint(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(have_rock_analysis(VARx,VARp)),
+		seq(not(have_rock_analysis(VARx,VARp)),
+		execute(sample_rock(rover(VARx),store(VARs),waypoint(VARp))))).
+
+
+achieves(have_rock_analysis(VARx,VARp),sample_rock(rover(VARx),store(VARs),waypoint(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(empty(VARy)),
+		seq(not(empty(VARy)),
+		execute(drop(rover(VARx),store(VARy))))).
+
+
+achieves(empty(VARy),drop(rover(VARx),store(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(calibrated(VARi,VARr)),
+		seq(not(calibrated(VARi,VARr)),
+		execute(calibrate(rover(VARr),camera(VARi),objective(VARt),waypoint(VARw))))).
+
+
+achieves(calibrated(VARi,VARr),calibrate(rover(VARr),camera(VARi),objective(VARt),waypoint(VARw))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(have_image(VARr,VARo,VARm)),
+		seq(not(have_image(VARr,VARo,VARm)),
+		execute(take_image(rover(VARr),waypoint(VARp),objective(VARo),camera(VARi),mode(VARm))))).
+
+
+achieves(have_image(VARr,VARo,VARm),take_image(rover(VARr),waypoint(VARp),objective(VARo),camera(VARi),mode(VARm))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(channel_free(VARl)),
+		seq(not(channel_free(VARl)),
+		execute(communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))))).
+
+
+achieves(channel_free(VARl),communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(communicated_soil_data(VARp)),
+		seq(not(communicated_soil_data(VARp)),
+		execute(communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))))).
+
+
+achieves(communicated_soil_data(VARp),communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(available(VARr)),
+		seq(not(available(VARr)),
+		execute(communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))))).
+
+
+achieves(available(VARr),communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(channel_free(VARl)),
+		seq(not(channel_free(VARl)),
+		execute(communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))))).
+
+
+achieves(channel_free(VARl),communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(communicated_rock_data(VARp)),
+		seq(not(communicated_rock_data(VARp)),
+		execute(communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))))).
+
+
+achieves(communicated_rock_data(VARp),communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(available(VARr)),
+		seq(not(available(VARr)),
+		execute(communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))))).
+
+
+achieves(available(VARr),communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(channel_free(VARl)),
+		seq(not(channel_free(VARl)),
+		execute(communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))))).
+
+
+achieves(channel_free(VARl),communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(communicated_image_data(VARo,VARm)),
+		seq(not(communicated_image_data(VARo,VARm)),
+		execute(communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))))).
+
+
+achieves(communicated_image_data(VARo,VARm),communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(available(VARr)),
+		seq(not(available(VARr)),
+		execute(communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))))).
+
+
+achieves(available(VARr),communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARx,VARy)),
+		seq(at(VARx,VARy),
+		execute(navigate(rover(VARx),waypoint(VARy),waypoint(VARz))))).
+
+
+avoids(at(VARx,VARy),navigate(rover(VARx),waypoint(VARy),waypoint(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(empty(VARs)),
+		seq(empty(VARs),
+		execute(sample_soil(rover(VARx),store(VARs),waypoint(VARp))))).
+
+
+avoids(empty(VARs),sample_soil(rover(VARx),store(VARs),waypoint(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_soil_sample(VARp)),
+		seq(at_soil_sample(VARp),
+		execute(sample_soil(rover(VARx),store(VARs),waypoint(VARp))))).
+
+
+avoids(at_soil_sample(VARp),sample_soil(rover(VARx),store(VARs),waypoint(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(empty(VARs)),
+		seq(empty(VARs),
+		execute(sample_rock(rover(VARx),store(VARs),waypoint(VARp))))).
+
+
+avoids(empty(VARs),sample_rock(rover(VARx),store(VARs),waypoint(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_rock_sample(VARp)),
+		seq(at_rock_sample(VARp),
+		execute(sample_rock(rover(VARx),store(VARs),waypoint(VARp))))).
+
+
+avoids(at_rock_sample(VARp),sample_rock(rover(VARx),store(VARs),waypoint(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(full(VARy)),
+		seq(full(VARy),
+		execute(drop(rover(VARx),store(VARy))))).
+
+
+avoids(full(VARy),drop(rover(VARx),store(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(calibrated(VARi,VARr)),
+		seq(calibrated(VARi,VARr),
+		execute(take_image(rover(VARr),waypoint(VARp),objective(VARo),camera(VARi),mode(VARm))))).
+
+
+avoids(calibrated(VARi,VARr),take_image(rover(VARr),waypoint(VARp),objective(VARo),camera(VARi),mode(VARm))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(available(VARr)),
+		seq(available(VARr),
+		execute(communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))))).
+
+
+avoids(available(VARr),communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(channel_free(VARl)),
+		seq(channel_free(VARl),
+		execute(communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))))).
+
+
+avoids(channel_free(VARl),communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(available(VARr)),
+		seq(available(VARr),
+		execute(communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))))).
+
+
+avoids(available(VARr),communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(channel_free(VARl)),
+		seq(channel_free(VARl),
+		execute(communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))))).
+
+
+avoids(channel_free(VARl),communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(available(VARr)),
+		seq(available(VARr),
+		execute(communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))))).
+
+
+avoids(available(VARr),communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(channel_free(VARl)),
+		seq(channel_free(VARl),
+		execute(communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))))).
+
+
+avoids(channel_free(VARl),communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(navigate(rover(VARx),waypoint(VARy),waypoint(VARz))),
+		seq(shuffle_regress(
+			achieve(can_traverse(VARx,VARy,VARz)),
+			achieve(available(VARx)),
+			achieve(at(VARx,VARy)),
+			achieve(visible(VARy,VARz)),true),
+			navigate(rover(VARx),waypoint(VARy),waypoint(VARz)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(sample_soil(rover(VARx),store(VARs),waypoint(VARp))),
+		seq(shuffle_regress(
+			achieve(at(VARx,VARp)),
+			achieve(at_soil_sample(VARp)),
+			achieve(equipped_for_soil_analysis(VARx)),
+			achieve(store_of(VARs,VARx)),
+			achieve(empty(VARs)),true),
+			sample_soil(rover(VARx),store(VARs),waypoint(VARp)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(sample_rock(rover(VARx),store(VARs),waypoint(VARp))),
+		seq(shuffle_regress(
+			achieve(at(VARx,VARp)),
+			achieve(at_rock_sample(VARp)),
+			achieve(equipped_for_rock_analysis(VARx)),
+			achieve(store_of(VARs,VARx)),
+			achieve(empty(VARs)),true),
+			sample_rock(rover(VARx),store(VARs),waypoint(VARp)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(drop(rover(VARx),store(VARy))),
+		seq(shuffle_regress(
+			achieve(store_of(VARy,VARx)),
+			achieve(full(VARy)),true),
+			drop(rover(VARx),store(VARy)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(calibrate(rover(VARr),camera(VARi),objective(VARt),waypoint(VARw))),
+		seq(shuffle_regress(
+			achieve(equipped_for_imaging(VARr)),
+			achieve(calibration_target(VARi,VARt)),
+			achieve(at(VARr,VARw)),
+			achieve(visible_from(VARt,VARw)),
+			achieve(on_board(VARi,VARr)),true),
+			calibrate(rover(VARr),camera(VARi),objective(VARt),waypoint(VARw)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(take_image(rover(VARr),waypoint(VARp),objective(VARo),camera(VARi),mode(VARm))),
+		seq(shuffle_regress(
+			achieve(calibrated(VARi,VARr)),
+			achieve(on_board(VARi,VARr)),
+			achieve(equipped_for_imaging(VARr)),
+			achieve(supports(VARi,VARm)),
+			achieve(visible_from(VARo,VARp)),
+			achieve(at(VARr,VARp)),true),
+			take_image(rover(VARr),waypoint(VARp),objective(VARo),camera(VARi),mode(VARm)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))),
+		seq(shuffle_regress(
+			achieve(at(VARr,VARx)),
+			achieve(at_lander(VARl,VARy)),
+			achieve(have_soil_analysis(VARr,VARp)),
+			achieve(visible(VARx,VARy)),
+			achieve(available(VARr)),
+			achieve(channel_free(VARl)),true),
+			communicate_soil_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy))),
+		seq(shuffle_regress(
+			achieve(at(VARr,VARx)),
+			achieve(at_lander(VARl,VARy)),
+			achieve(have_rock_analysis(VARr,VARp)),
+			achieve(visible(VARx,VARy)),
+			achieve(available(VARr)),
+			achieve(channel_free(VARl)),true),
+			communicate_rock_data(rover(VARr),lander(VARl),waypoint(VARp),waypoint(VARx),waypoint(VARy)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy))),
+		seq(shuffle_regress(
+			achieve(at(VARr,VARx)),
+			achieve(at_lander(VARl,VARy)),
+			achieve(have_image(VARr,VARo,VARm)),
+			achieve(visible(VARx,VARy)),
+			achieve(available(VARr)),
+			achieve(channel_free(VARl)),true),
+			communicate_image_data(rover(VARr),lander(VARl),objective(VARo),mode(VARm),waypoint(VARx),waypoint(VARy)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		not(avoids(G2,planningAction)))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		not(avoids(G1,planningAction))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(2)).
+

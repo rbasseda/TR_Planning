@@ -1,0 +1,307 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% blocks%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(pick_up,2).
+tabled_predicate(put_down,1).
+tabled_predicate(stack,2).
+tabled_predicate(unstack,3).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(on,2).
+dynamic_predicate(ontable,1).
+dynamic_predicate(clear,1).
+dynamic_predicate(holding,1).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	pick_up(block(VARx),block(VARz)),
+		seq(clear(VARx),
+		seq(ontable(VARx),
+		seq(not(holding(VARz)),
+		seq(ins(holding(VARx)),
+		seq(del(ontable(VARx)),del(clear(VARx)))))))).
+
+tr_clause(
+	planningAction,
+		pick_up(block(VARx),block(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	put_down(block(VARx)),
+		seq(holding(VARx),
+		seq(ins(clear(VARx)),
+		seq(ins(ontable(VARx)),del(holding(VARx)))))).
+
+tr_clause(
+	planningAction,
+		put_down(block(VARx))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	stack(block(VARx),block(VARy)),
+		seq(holding(VARx),
+		seq(clear(VARy),
+		seq(ins(clear(VARx)),
+		seq(ins(on(VARx,VARy)),
+		seq(del(holding(VARx)),del(clear(VARy)))))))).
+
+tr_clause(
+	planningAction,
+		stack(block(VARx),block(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	unstack(block(VARx),block(VARy),block(VARz)),
+		seq(on(VARx,VARy),
+		seq(clear(VARx),
+		seq(not(holding(VARz)),
+		seq(ins(holding(VARx)),
+		seq(ins(clear(VARy)),
+		seq(del(clear(VARx)),del(on(VARx,VARy))))))))).
+
+tr_clause(
+	planningAction,
+		unstack(block(VARx),block(VARy),block(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARx,VARy)),
+		on(VARx,VARy)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(ontable(VARx)),
+		ontable(VARx)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARx)),
+		clear(VARx)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(holding(VARx)),
+		holding(VARx)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARx,VARy)),
+		not(on(VARx,VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(ontable(VARx)),
+		not(ontable(VARx))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARx)),
+		not(clear(VARx))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(holding(VARx)),
+		not(holding(VARx))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(holding(VARx)),
+		seq(not(holding(VARx)),
+		execute(pick_up(block(VARx),block(VARz))))).
+
+
+achieves(holding(VARx),pick_up(block(VARx),block(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARx)),
+		seq(not(clear(VARx)),
+		execute(put_down(block(VARx))))).
+
+
+achieves(clear(VARx),put_down(block(VARx))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(ontable(VARx)),
+		seq(not(ontable(VARx)),
+		execute(put_down(block(VARx))))).
+
+
+achieves(ontable(VARx),put_down(block(VARx))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARx)),
+		seq(not(clear(VARx)),
+		execute(stack(block(VARx),block(VARy))))).
+
+
+achieves(clear(VARx),stack(block(VARx),block(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARx,VARy)),
+		seq(not(on(VARx,VARy)),
+		execute(stack(block(VARx),block(VARy))))).
+
+
+achieves(on(VARx,VARy),stack(block(VARx),block(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(holding(VARx)),
+		seq(not(holding(VARx)),
+		execute(unstack(block(VARx),block(VARy),block(VARz))))).
+
+
+achieves(holding(VARx),unstack(block(VARx),block(VARy),block(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARy)),
+		seq(not(clear(VARy)),
+		execute(unstack(block(VARx),block(VARy),block(VARz))))).
+
+
+achieves(clear(VARy),unstack(block(VARx),block(VARy),block(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(ontable(VARx)),
+		seq(ontable(VARx),
+		execute(pick_up(block(VARx),block(VARz))))).
+
+
+avoids(ontable(VARx),pick_up(block(VARx),block(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARx)),
+		seq(clear(VARx),
+		execute(pick_up(block(VARx),block(VARz))))).
+
+
+avoids(clear(VARx),pick_up(block(VARx),block(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(holding(VARx)),
+		seq(holding(VARx),
+		execute(put_down(block(VARx))))).
+
+
+avoids(holding(VARx),put_down(block(VARx))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(holding(VARx)),
+		seq(holding(VARx),
+		execute(stack(block(VARx),block(VARy))))).
+
+
+avoids(holding(VARx),stack(block(VARx),block(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARy)),
+		seq(clear(VARy),
+		execute(stack(block(VARx),block(VARy))))).
+
+
+avoids(clear(VARy),stack(block(VARx),block(VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARx)),
+		seq(clear(VARx),
+		execute(unstack(block(VARx),block(VARy),block(VARz))))).
+
+
+avoids(clear(VARx),unstack(block(VARx),block(VARy),block(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARx,VARy)),
+		seq(on(VARx,VARy),
+		execute(unstack(block(VARx),block(VARy),block(VARz))))).
+
+
+avoids(on(VARx,VARy),unstack(block(VARx),block(VARy),block(VARz))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(pick_up(block(VARx),block(VARz))),
+		seq(shuffle_regress(
+			achieve(
+clear(VARx)),			achieve(
+ontable(VARx)),			avoid(holding(VARz)),true),
+			pick_up(block(VARx),block(VARz)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(put_down(block(VARx))),
+		seq(			achieve(holding(VARx)),
+		put_down(block(VARx)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(stack(block(VARx),block(VARy))),
+		seq(shuffle_regress(
+			achieve(
+holding(VARx)),			achieve(clear(VARy)),true),
+			stack(block(VARx),block(VARy)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(unstack(block(VARx),block(VARy),block(VARz))),
+		seq(shuffle_regress(
+			achieve(
+on(VARx,VARy)),			achieve(
+clear(VARx)),			avoid(holding(VARz)),true),
+			unstack(block(VARx),block(VARy),block(VARz)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		not(avoids(G2,planningAction)))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		not(avoids(G1,planningAction))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(2)).
+

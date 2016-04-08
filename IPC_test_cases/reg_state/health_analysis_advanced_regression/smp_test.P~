@@ -1,0 +1,158 @@
+:- compiler_options([xpp_on]).
+
+#include "../../tr_operators.P"
+#include "../../tr_planning_ops.P"
+#include "smp.P"
+#include "smp_data.P"
+
+tabled_predicate(test1,0).
+tabled_predicate(test2,0).
+tabled_predicate(test3,0).
+tabled_predicate(test4,0).
+tabled_predicate(test5,0).
+tabled_predicate(test6,0).
+tabled_predicate(test7,0).
+tabled_predicate(test8,0).
+tabled_predicate(test9,0).
+tabled_predicate(test10,0).
+tabled_predicate(test11,0).
+
+
+tr_clause(
+	test1,
+		seq(achieve(hasReadEHR(clinician_002,patient_003)),
+		hasReadEHR(clinician_002,patient_003))).
+tr_clause(
+	test2,
+		seq(achieve(hasReadEHR(clinician_002,patient_000)),
+		hasReadEHR(clinician_002,patient_000))).
+tr_clause(
+	test3,
+		seq(achieve(memberof(patient_000,patient)),
+		memberof(patient_000,patient))).
+tr_clause(
+	test4,
+		seq(achieve(hasReadEHR(clinician_002,patient_003)),
+		seq(achieve(denied(patient_003,clinician_002)),
+		seq(hasReadEHR(clinician_002,patient_003),
+		denied(patient_003,clinician_002))))).
+
+tr_clause(
+	test5,
+		seq(shuffle(achieve(denied(patient_003,clinician_002),goal),
+	                achieve(hasReadEHR(clinician_002,patient_000),goal),
+	                achieve(hasReadEHR(clinician_002,patient_003),goal)),
+		seq(hasReadEHR(clinician_002,patient_003),
+		seq(denied(patient_003,clinician_002),
+		hasReadEHR(clinician_002,patient_000))))).
+
+
+tr_clause(
+	test6,
+		seq(shuffle(achieve(denied(patient_003,clinician_002)),
+	                achieve(hasReadEHR(clinician_002,patient_000)),
+	                achieve(hasReadEHR(clinician_002,patient_003)),
+	                achieve(hasReadEHR(clinician_005,patient_006))),
+		seq(hasReadEHR(clinician_002,patient_003),
+		seq(denied(patient_003,clinician_002),
+		seq(hasReadEHR(clinician_002,patient_000),
+		hasReadEHR(clinician_005,patient_006)))))).
+
+
+tr_clause(
+	test7,
+		seq(shuffle(achieve(denied(patient_003,clinician_002)),
+			achieve(denied(patient_006,clinician_005)),
+	                achieve(hasReadEHR(clinician_002,patient_000)),
+	                achieve(hasReadEHR(clinician_002,patient_003)),
+	                achieve(hasReadEHR(clinician_005,patient_006))),
+		seq(hasReadEHR(clinician_002,patient_003),
+		seq(denied(patient_003,clinician_002),
+		seq(hasReadEHR(clinician_002,patient_000),
+		seq(hasReadEHR(clinician_005,patient_006),
+		denied(patient_006,clinician_005))))))).
+
+tr_clause(
+	test8,
+		seq(shuffle(achieve(denied(patient_003,clinician_002)),
+	                achieve(hasReadEHR(clinician_002,patient_000)),
+	                achieve(hasReadEHR(clinician_002,patient_003)),
+			achieve(denied(patient_006,clinician_005)),
+	                achieve(hasReadEHR(clinician_005,patient_000)),
+	                achieve(hasReadEHR(clinician_005,patient_006))),
+		seq(hasReadEHR(clinician_002,patient_003),
+		seq(denied(patient_003,clinician_002),
+		seq(hasReadEHR(clinician_002,patient_000),
+		seq(hasReadEHR(clinician_005,patient_006),
+		seq(denied(patient_006,clinician_005),
+		hasReadEHR(clinician_005,patient_000)))))))).
+
+tr_clause(
+	test9,
+		seq(shuffle(achieve(denied(patient_003,clinician_002)),
+	                achieve(hasReadEHR(clinician_002,patient_000)),
+	                achieve(hasReadEHR(clinician_002,patient_003)),
+			achieve(denied(patient_006,clinician_005)),
+	                achieve(hasReadEHR(clinician_005,patient_000)),
+	                achieve(hasReadEHR(clinician_005,patient_006))),
+		seq(hasReadEHR(clinician_002,patient_003),
+		seq(denied(patient_003,clinician_002),
+		seq(hasReadEHR(clinician_002,patient_000),
+		seq(hasReadEHR(clinician_005,patient_006),
+		seq(denied(patient_006,clinician_005),
+		hasReadEHR(clinician_005,patient_000)))))))).
+
+
+tr_clause(
+	test10,
+		seq(shuffle(
+			achieve(denied(patient_003,clinician_002),goal),
+	                achieve(hasReadEHR(clinician_002,patient_000),goal),
+	                achieve(hasReadEHR(clinician_002,patient_003),goal),
+			achieve(denied(patient_006,clinician_005),goal),
+	                achieve(hasReadEHR(clinician_005,patient_000),goal),
+	                achieve(hasReadEHR(clinician_005,patient_006),goal),
+			achieve(denied(patient_009,clinician_008),goal),
+	                achieve(hasReadEHR(clinician_008,patient_000),goal),
+	                achieve(hasReadEHR(clinician_008,patient_009),goal)),
+		seq(hasReadEHR(clinician_002,patient_003),
+		seq(denied(patient_003,clinician_002),
+		seq(hasReadEHR(clinician_002,patient_000),
+		seq(hasReadEHR(clinician_005,patient_006),
+		seq(denied(patient_006,clinician_005),
+		seq(hasReadEHR(clinician_005,patient_000),
+		seq(hasReadEHR(clinician_008,patient_009),
+		seq(denied(patient_009,clinician_008),
+		hasReadEHR(clinician_008,patient_000))))))))))).
+
+tr_clause(
+	test11,
+		seq(shuffle(
+			achieve(denied(patient_003,clinician_002),goal),
+	                achieve(hasReadEHR(clinician_002,patient_000),goal),
+	                achieve(hasReadEHR(clinician_002,patient_003),goal),
+			achieve(denied(patient_006,clinician_005),goal),
+	                achieve(hasReadEHR(clinician_005,patient_000),goal),
+	                achieve(hasReadEHR(clinician_005,patient_006),goal),
+			achieve(denied(patient_009,clinician_008),goal),
+	                achieve(hasReadEHR(clinician_008,patient_000),goal),
+	                achieve(hasReadEHR(clinician_008,patient_009),goal),
+			achieve(denied(patient_012,clinician_011),goal),
+	                achieve(hasReadEHR(clinician_011,patient_000),goal),
+	                achieve(hasReadEHR(clinician_011,patient_012),goal)),
+		seq(hasReadEHR(clinician_002,patient_003),
+		seq(denied(patient_003,clinician_002),
+		seq(hasReadEHR(clinician_002,patient_000),
+		seq(hasReadEHR(clinician_005,patient_006),
+		seq(denied(patient_006,clinician_005),
+		seq(hasReadEHR(clinician_005,patient_000),
+		seq(hasReadEHR(clinician_008,patient_009),
+		seq(denied(patient_009,clinician_008),
+		seq(hasReadEHR(clinician_008,patient_000),
+		seq(hasReadEHR(clinician_011,patient_012),
+		seq(denied(patient_012,clinician_011),
+		hasReadEHR(clinician_011,patient_000)))))))))))))).
+
+test_description('Test of Analysis of State Modifying Policy').
+test_query(test11).
+

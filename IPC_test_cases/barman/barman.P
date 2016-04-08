@@ -1,0 +1,867 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% barman%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(grasp,2).
+tabled_predicate(leave,2).
+tabled_predicate(fill_shot,5).
+tabled_predicate(refill_shot,5).
+tabled_predicate(empty_shot,3).
+tabled_predicate(clean_shot,4).
+tabled_predicate(pour_shot_to_clean_shaker,6).
+tabled_predicate(pour_shot_to_used_shaker,6).
+tabled_predicate(empty_shaker,5).
+tabled_predicate(clean_shaker,3).
+tabled_predicate(shake,6).
+tabled_predicate(pour_shaker_to_shot,6).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(ontable,1).
+dynamic_predicate(holding,2).
+dynamic_predicate(handempty,1).
+dynamic_predicate(empty,1).
+dynamic_predicate(contains,2).
+dynamic_predicate(clean,1).
+dynamic_predicate(used,2).
+dynamic_predicate(dispenses,2).
+dynamic_predicate(shaker_empty_level,2).
+dynamic_predicate(shaker_level,2).
+dynamic_predicate(next,2).
+dynamic_predicate(unshaked,1).
+dynamic_predicate(shaked,1).
+dynamic_predicate(cocktail_part1,2).
+dynamic_predicate(cocktail_part2,2).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	grasp(hand(VARh),container(VARc)),
+		seq(ontable(VARc),
+		seq(handempty(VARh),
+		seq(ins(holding(VARh,VARc)),
+		seq(del(ontable(VARc)),del(handempty(VARh))))))).
+
+tr_clause(
+	planningAction,
+		grasp(hand(VARh),container(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	leave(hand(VARh),container(VARc)),
+		seq(holding(VARh,VARc),
+		seq(ins(handempty(VARh)),
+		seq(ins(ontable(VARc)),del(holding(VARh,VARc)))))).
+
+tr_clause(
+	planningAction,
+		leave(hand(VARh),container(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd)),
+		seq(holding(VARh1,VARs),
+		seq(handempty(VARh2),
+		seq(dispenses(VARd,VARi),
+		seq(empty(VARs),
+		seq(clean(VARs),
+		seq(ins(contains(VARs,VARi)),
+		seq(ins(used(VARs,VARi)),
+		seq(del(empty(VARs)),del(clean(VARs))))))))))).
+
+tr_clause(
+	planningAction,
+		fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	refill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd)),
+		seq(holding(VARh1,VARs),
+		seq(handempty(VARh2),
+		seq(dispenses(VARd,VARi),
+		seq(empty(VARs),
+		seq(used(VARs,VARi),
+		seq(ins(contains(VARs,VARi)),del(empty(VARs))))))))).
+
+tr_clause(
+	planningAction,
+		refill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	empty_shot(hand(VARh),shot(VARp),beverage(VARb)),
+		seq(holding(VARh,VARp),
+		seq(contains(VARp,VARb),
+		seq(ins(empty(VARp)),del(contains(VARp,VARb)))))).
+
+tr_clause(
+	planningAction,
+		empty_shot(hand(VARh),shot(VARp),beverage(VARb))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	clean_shot(shot(VARs),beverage(VARb),hand(VARh1),hand(VARh2)),
+		seq(holding(VARh1,VARs),
+		seq(handempty(VARh2),
+		seq(empty(VARs),
+		seq(used(VARs,VARb),
+		seq(ins(clean(VARs)),del(used(VARs,VARb)))))))).
+
+tr_clause(
+	planningAction,
+		clean_shot(shot(VARs),beverage(VARb),hand(VARh1),hand(VARh2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1)),
+		seq(holding(VARh1,VARs),
+		seq(contains(VARs,VARi),
+		seq(empty(VARd),
+		seq(clean(VARd),
+		seq(shaker_level(VARd,VARl),
+		seq(next(VARl,VARl1),
+		seq(ins(empty(VARs)),
+		seq(ins(contains(VARd,VARi)),
+		seq(ins(unshaked(VARd)),
+		seq(ins(shaker_level(VARd,VARl1)),
+		seq(del(contains(VARs,VARi)),
+		seq(del(empty(VARd)),
+		seq(del(clean(VARd)),del(shaker_level(VARd,VARl)))))))))))))))).
+
+tr_clause(
+	planningAction,
+		pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1)),
+		seq(holding(VARh1,VARs),
+		seq(contains(VARs,VARi),
+		seq(unshaked(VARd),
+		seq(shaker_level(VARd,VARl),
+		seq(next(VARl,VARl1),
+		seq(ins(contains(VARd,VARi)),
+		seq(ins(empty(VARs)),
+		seq(ins(shaker_level(VARd,VARl1)),
+		seq(del(contains(VARs,VARi)),del(shaker_level(VARd,VARl)))))))))))).
+
+tr_clause(
+	planningAction,
+		pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1)),
+		seq(holding(VARh,VARs),
+		seq(contains(VARs,VARb),
+		seq(shaked(VARs),
+		seq(shaker_level(VARs,VARl),
+		seq(shaker_empty_level(VARs,VARl1),
+		seq(ins(shaker_level(VARs,VARl1)),
+		seq(ins(empty(VARs)),
+		seq(del(shaked(VARs)),
+		seq(del(shaker_level(VARs,VARl)),del(contains(VARs,VARb)))))))))))).
+
+tr_clause(
+	planningAction,
+		empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	clean_shaker(hand(VARh1),hand(VARh2),shaker(VARs)),
+		seq(holding(VARh1,VARs),
+		seq(handempty(VARh2),
+		seq(empty(VARs),ins(clean(VARs)))))).
+
+tr_clause(
+	planningAction,
+		clean_shaker(hand(VARh1),hand(VARh2),shaker(VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2)),
+		seq(holding(VARh1,VARs),
+		seq(handempty(VARh2),
+		seq(contains(VARs,VARd1),
+		seq(contains(VARs,VARd2),
+		seq(cocktail_part1(VARb,VARd1),
+		seq(cocktail_part2(VARb,VARd2),
+		seq(unshaked(VARs),
+		seq(ins(shaked(VARs)),
+		seq(ins(contains(VARs,VARb)),
+		seq(del(unshaked(VARs)),
+		seq(del(contains(VARs,VARd1)),del(contains(VARs,VARd2)))))))))))))).
+
+tr_clause(
+	planningAction,
+		shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1)),
+		seq(holding(VARh,VARs),
+		seq(shaked(VARs),
+		seq(empty(VARd),
+		seq(clean(VARd),
+		seq(contains(VARs,VARb),
+		seq(shaker_level(VARs,VARl),
+		seq(next(VARl1,VARl),
+		seq(ins(contains(VARd,VARb)),
+		seq(ins(shaker_level(VARs,VARl1)),
+		seq(del(clean(VARd)),
+		seq(del(empty(VARd)),del(shaker_level(VARs,VARl)))))))))))))).
+
+tr_clause(
+	planningAction,
+		pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(ontable(VARc)),
+		ontable(VARc)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(holding(VARh,VARc)),
+		holding(VARh,VARc)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(handempty(VARh)),
+		handempty(VARh)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(empty(VARc)),
+		empty(VARc)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(contains(VARc,VARb)),
+		contains(VARc,VARb)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clean(VARc)),
+		clean(VARc)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(used(VARc,VARb)),
+		used(VARc,VARb)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(dispenses(VARd,VARi)),
+		dispenses(VARd,VARi)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(shaker_empty_level(VARs,VARl)),
+		shaker_empty_level(VARs,VARl)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(shaker_level(VARs,VARl)),
+		shaker_level(VARs,VARl)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(next(VARl1,VARl2)),
+		next(VARl1,VARl2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(unshaked(VARs)),
+		unshaked(VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(shaked(VARs)),
+		shaked(VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(cocktail_part1(VARc,VARi)),
+		cocktail_part1(VARc,VARi)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(cocktail_part2(VARc,VARi)),
+		cocktail_part2(VARc,VARi)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(ontable(VARc)),
+		not(ontable(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(holding(VARh,VARc)),
+		not(holding(VARh,VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(handempty(VARh)),
+		not(handempty(VARh))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(empty(VARc)),
+		not(empty(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(contains(VARc,VARb)),
+		not(contains(VARc,VARb))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clean(VARc)),
+		not(clean(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(used(VARc,VARb)),
+		not(used(VARc,VARb))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(dispenses(VARd,VARi)),
+		not(dispenses(VARd,VARi))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(shaker_empty_level(VARs,VARl)),
+		not(shaker_empty_level(VARs,VARl))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(shaker_level(VARs,VARl)),
+		not(shaker_level(VARs,VARl))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(next(VARl1,VARl2)),
+		not(next(VARl1,VARl2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(unshaked(VARs)),
+		not(unshaked(VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(shaked(VARs)),
+		not(shaked(VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(cocktail_part1(VARc,VARi)),
+		not(cocktail_part1(VARc,VARi))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(cocktail_part2(VARc,VARi)),
+		not(cocktail_part2(VARc,VARi))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(holding(VARh,VARc)),
+		seq(not(holding(VARh,VARc)),
+		execute(grasp(hand(VARh),container(VARc))))).
+
+
+achieves(holding(VARh,VARc),grasp(hand(VARh),container(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(handempty(VARh)),
+		seq(not(handempty(VARh)),
+		execute(leave(hand(VARh),container(VARc))))).
+
+
+achieves(handempty(VARh),leave(hand(VARh),container(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(ontable(VARc)),
+		seq(not(ontable(VARc)),
+		execute(leave(hand(VARh),container(VARc))))).
+
+
+achieves(ontable(VARc),leave(hand(VARh),container(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(contains(VARs,VARi)),
+		seq(not(contains(VARs,VARi)),
+		execute(fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))))).
+
+
+achieves(contains(VARs,VARi),fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(used(VARs,VARi)),
+		seq(not(used(VARs,VARi)),
+		execute(fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))))).
+
+
+achieves(used(VARs,VARi),fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(contains(VARs,VARi)),
+		seq(not(contains(VARs,VARi)),
+		execute(refill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))))).
+
+
+achieves(contains(VARs,VARi),refill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(empty(VARp)),
+		seq(not(empty(VARp)),
+		execute(empty_shot(hand(VARh),shot(VARp),beverage(VARb))))).
+
+
+achieves(empty(VARp),empty_shot(hand(VARh),shot(VARp),beverage(VARb))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clean(VARs)),
+		seq(not(clean(VARs)),
+		execute(clean_shot(shot(VARs),beverage(VARb),hand(VARh1),hand(VARh2))))).
+
+
+achieves(clean(VARs),clean_shot(shot(VARs),beverage(VARb),hand(VARh1),hand(VARh2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(empty(VARs)),
+		seq(not(empty(VARs)),
+		execute(pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+achieves(empty(VARs),pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(contains(VARd,VARi)),
+		seq(not(contains(VARd,VARi)),
+		execute(pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+achieves(contains(VARd,VARi),pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(unshaked(VARd)),
+		seq(not(unshaked(VARd)),
+		execute(pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+achieves(unshaked(VARd),pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(shaker_level(VARd,VARl1)),
+		seq(not(shaker_level(VARd,VARl1)),
+		execute(pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+achieves(shaker_level(VARd,VARl1),pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(contains(VARd,VARi)),
+		seq(not(contains(VARd,VARi)),
+		execute(pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+achieves(contains(VARd,VARi),pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(empty(VARs)),
+		seq(not(empty(VARs)),
+		execute(pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+achieves(empty(VARs),pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(shaker_level(VARd,VARl1)),
+		seq(not(shaker_level(VARd,VARl1)),
+		execute(pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+achieves(shaker_level(VARd,VARl1),pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(shaker_level(VARs,VARl1)),
+		seq(not(shaker_level(VARs,VARl1)),
+		execute(empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))))).
+
+
+achieves(shaker_level(VARs,VARl1),empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(empty(VARs)),
+		seq(not(empty(VARs)),
+		execute(empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))))).
+
+
+achieves(empty(VARs),empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clean(VARs)),
+		seq(not(clean(VARs)),
+		execute(clean_shaker(hand(VARh1),hand(VARh2),shaker(VARs))))).
+
+
+achieves(clean(VARs),clean_shaker(hand(VARh1),hand(VARh2),shaker(VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(shaked(VARs)),
+		seq(not(shaked(VARs)),
+		execute(shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))))).
+
+
+achieves(shaked(VARs),shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(contains(VARs,VARb)),
+		seq(not(contains(VARs,VARb)),
+		execute(shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))))).
+
+
+achieves(contains(VARs,VARb),shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(contains(VARd,VARb)),
+		seq(not(contains(VARd,VARb)),
+		execute(pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))))).
+
+
+achieves(contains(VARd,VARb),pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(shaker_level(VARs,VARl1)),
+		seq(not(shaker_level(VARs,VARl1)),
+		execute(pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))))).
+
+
+achieves(shaker_level(VARs,VARl1),pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(ontable(VARc)),
+		seq(ontable(VARc),
+		execute(grasp(hand(VARh),container(VARc))))).
+
+
+avoids(ontable(VARc),grasp(hand(VARh),container(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(handempty(VARh)),
+		seq(handempty(VARh),
+		execute(grasp(hand(VARh),container(VARc))))).
+
+
+avoids(handempty(VARh),grasp(hand(VARh),container(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(holding(VARh,VARc)),
+		seq(holding(VARh,VARc),
+		execute(leave(hand(VARh),container(VARc))))).
+
+
+avoids(holding(VARh,VARc),leave(hand(VARh),container(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(empty(VARs)),
+		seq(empty(VARs),
+		execute(fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))))).
+
+
+avoids(empty(VARs),fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clean(VARs)),
+		seq(clean(VARs),
+		execute(fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))))).
+
+
+avoids(clean(VARs),fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(empty(VARs)),
+		seq(empty(VARs),
+		execute(refill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))))).
+
+
+avoids(empty(VARs),refill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(contains(VARp,VARb)),
+		seq(contains(VARp,VARb),
+		execute(empty_shot(hand(VARh),shot(VARp),beverage(VARb))))).
+
+
+avoids(contains(VARp,VARb),empty_shot(hand(VARh),shot(VARp),beverage(VARb))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(used(VARs,VARb)),
+		seq(used(VARs,VARb),
+		execute(clean_shot(shot(VARs),beverage(VARb),hand(VARh1),hand(VARh2))))).
+
+
+avoids(used(VARs,VARb),clean_shot(shot(VARs),beverage(VARb),hand(VARh1),hand(VARh2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(contains(VARs,VARi)),
+		seq(contains(VARs,VARi),
+		execute(pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+avoids(contains(VARs,VARi),pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(empty(VARd)),
+		seq(empty(VARd),
+		execute(pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+avoids(empty(VARd),pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clean(VARd)),
+		seq(clean(VARd),
+		execute(pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+avoids(clean(VARd),pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(shaker_level(VARd,VARl)),
+		seq(shaker_level(VARd,VARl),
+		execute(pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+avoids(shaker_level(VARd,VARl),pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(contains(VARs,VARi)),
+		seq(contains(VARs,VARi),
+		execute(pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+avoids(contains(VARs,VARi),pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(shaker_level(VARd,VARl)),
+		seq(shaker_level(VARd,VARl),
+		execute(pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))))).
+
+
+avoids(shaker_level(VARd,VARl),pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(shaked(VARs)),
+		seq(shaked(VARs),
+		execute(empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))))).
+
+
+avoids(shaked(VARs),empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(shaker_level(VARs,VARl)),
+		seq(shaker_level(VARs,VARl),
+		execute(empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))))).
+
+
+avoids(shaker_level(VARs,VARl),empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(contains(VARs,VARb)),
+		seq(contains(VARs,VARb),
+		execute(empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))))).
+
+
+avoids(contains(VARs,VARb),empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(unshaked(VARs)),
+		seq(unshaked(VARs),
+		execute(shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))))).
+
+
+avoids(unshaked(VARs),shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(contains(VARs,VARd1)),
+		seq(contains(VARs,VARd1),
+		execute(shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))))).
+
+
+avoids(contains(VARs,VARd1),shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(contains(VARs,VARd2)),
+		seq(contains(VARs,VARd2),
+		execute(shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))))).
+
+
+avoids(contains(VARs,VARd2),shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clean(VARd)),
+		seq(clean(VARd),
+		execute(pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))))).
+
+
+avoids(clean(VARd),pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(empty(VARd)),
+		seq(empty(VARd),
+		execute(pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))))).
+
+
+avoids(empty(VARd),pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(shaker_level(VARs,VARl)),
+		seq(shaker_level(VARs,VARl),
+		execute(pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))))).
+
+
+avoids(shaker_level(VARs,VARl),pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(grasp(hand(VARh),container(VARc))),
+		seq(shuffle(
+			achieve(ontable(VARc)),
+			achieve(handempty(VARh))),
+			grasp(hand(VARh),container(VARc)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(leave(hand(VARh),container(VARc))),
+		seq(achieve(holding(VARh,VARc)),
+		leave(hand(VARh),container(VARc)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))),
+		seq(shuffle(
+			achieve(holding(VARh1,VARs)),
+			achieve(handempty(VARh2)),
+			achieve(dispenses(VARd,VARi)),
+			achieve(empty(VARs)),
+			achieve(clean(VARs))),
+			fill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(refill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd))),
+		seq(shuffle(
+			achieve(holding(VARh1,VARs)),
+			achieve(handempty(VARh2)),
+			achieve(dispenses(VARd,VARi)),
+			achieve(empty(VARs)),
+			achieve(used(VARs,VARi))),
+			refill_shot(shot(VARs),ingredient(VARi),hand(VARh1),hand(VARh2),dispenser(VARd)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(empty_shot(hand(VARh),shot(VARp),beverage(VARb))),
+		seq(shuffle(
+			achieve(holding(VARh,VARp)),
+			achieve(contains(VARp,VARb))),
+			empty_shot(hand(VARh),shot(VARp),beverage(VARb)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(clean_shot(shot(VARs),beverage(VARb),hand(VARh1),hand(VARh2))),
+		seq(shuffle(
+			achieve(holding(VARh1,VARs)),
+			achieve(handempty(VARh2)),
+			achieve(empty(VARs)),
+			achieve(used(VARs,VARb))),
+			clean_shot(shot(VARs),beverage(VARb),hand(VARh1),hand(VARh2)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))),
+		seq(shuffle(
+			achieve(holding(VARh1,VARs)),
+			achieve(contains(VARs,VARi)),
+			achieve(empty(VARd)),
+			achieve(clean(VARd)),
+			achieve(shaker_level(VARd,VARl)),
+			achieve(next(VARl,VARl1))),
+			pour_shot_to_clean_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1))),
+		seq(shuffle(
+			achieve(holding(VARh1,VARs)),
+			achieve(contains(VARs,VARi)),
+			achieve(unshaked(VARd)),
+			achieve(shaker_level(VARd,VARl)),
+			achieve(next(VARl,VARl1))),
+			pour_shot_to_used_shaker(shot(VARs),ingredient(VARi),shaker(VARd),hand(VARh1),level(VARl),level(VARl1)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1))),
+		seq(shuffle(
+			achieve(holding(VARh,VARs)),
+			achieve(contains(VARs,VARb)),
+			achieve(shaked(VARs)),
+			achieve(shaker_level(VARs,VARl)),
+			achieve(shaker_empty_level(VARs,VARl1))),
+			empty_shaker(hand(VARh),shaker(VARs),cocktail(VARb),level(VARl),level(VARl1)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(clean_shaker(hand(VARh1),hand(VARh2),shaker(VARs))),
+		seq(shuffle(
+			achieve(holding(VARh1,VARs)),
+			achieve(handempty(VARh2)),
+			achieve(empty(VARs))),
+			clean_shaker(hand(VARh1),hand(VARh2),shaker(VARs)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2))),
+		seq(shuffle(
+			achieve(holding(VARh1,VARs)),
+			achieve(handempty(VARh2)),
+			achieve(contains(VARs,VARd1)),
+			achieve(contains(VARs,VARd2)),
+			achieve(cocktail_part1(VARb,VARd1)),
+			achieve(cocktail_part2(VARb,VARd2)),
+			achieve(unshaked(VARs))),
+			shake(cocktail(VARb),ingredient(VARd1),ingredient(VARd2),shaker(VARs),hand(VARh1),hand(VARh2)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1))),
+		seq(shuffle(
+			achieve(holding(VARh,VARs)),
+			achieve(shaked(VARs)),
+			achieve(empty(VARd)),
+			achieve(clean(VARd)),
+			achieve(contains(VARs,VARb)),
+			achieve(shaker_level(VARs,VARl)),
+			achieve(next(VARl1,VARl))),
+			pour_shaker_to_shot(beverage(VARb),shot(VARd),hand(VARh),shaker(VARs),level(VARl),level(VARl1)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		not(avoids(G2,planningAction)))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		not(avoids(G1,planningAction))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(2)).
+

@@ -1,0 +1,24 @@
+%% Problem Name:hiking_1_2
+%% Domain Name:hiking
+%%%%%%%%%%%%%%%%%%%%%%  Test File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- compiler_options([xpp_on]).
+#include "hiking.P"
+#include "hiking_data.P"
+
+tabled_predicate(hiking_1_2_STRIPS,0).
+tabled_predicate(hiking_1_2_Naive,0).
+%%%%%%%%%%%%%%%%%%%%%%    Goal     %%%%%%%%%%%%%%%%%%%%%%%%%%
+planning_goal(walked(couple0,place6)).
+
+
+tr_clause(
+	hiking_1_2_STRIPS,
+		seq(achieve(walked(couple0,place6)),walked(couple0,place6))).
+
+tr_clause(
+	hiking_1_2_Naive,
+		seq(solutionPlan,walked(couple0,place6))).
+
+test_description(test_elevator_planning_problem).
+test_query(hiking_1_2_STRIPS).

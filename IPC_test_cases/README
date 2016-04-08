@@ -1,0 +1,28 @@
+State space planning algorithms have been considered as one of the
+main classical planning techniques to solve classical planning problems since
+1960. In this paper, we show that Transaction Logic is an appropriate language
+and framework to study and compare these planning algorithms, which enables
+one to have more efficient planners in logic programming frameworks. 
+Specifically, we take STRIPS planning and forward state space planning 
+algorithms, and show that the specification of these algorithms in Transaction 
+Logic lets one implement complicated planning algorithms in declarative 
+programming languages (e.g. Prolog). The provided test cases can be used by any 
+tabled TR interpreter.
+
+The provided test cases here are taken from:
+
+http://www.icaps-conference.org/index.php/Main/Competitions
+
+
+The international planning competition is a (nearly) biennial event organized 
+in the context of the International Conference on Planning and Scheduling 
+(ICAPS).
+
+The competition has different goals, including, providing an empirical 
+comparison of the state of the art of planning systems, highlighting challenges
+to the Planning community, proposing new directions for research and new links 
+with other fields of AI, and providing new data sets to be used by the research 
+community as benchmarks.
+
+
+

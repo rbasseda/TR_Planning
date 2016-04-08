@@ -1,0 +1,709 @@
+Not all planners worked on every problem
+No planner worked on the following problems:
+    (STRIPS-MPRIME-X-22 STRIPS-MPRIME-X-13 STRIPS-MPRIME-X-10
+                    STRIPS-MPRIME-X-30 STRIPS-MPRIME-X-23
+                    STRIPS-MPRIME-X-20 STRIPS-MPRIME-X-19
+                    STRIPS-MPRIME-X-18 STRIPS-MPRIME-X-15
+                    STRIPS-MPRIME-X-14 STRIPS-MPRIME-X-6
+                    STRIPS-MYSTY-X-24 STRIPS-MYSTY-X-23
+                    STRIPS-MYSTY-X-22 STRIPS-MYSTY-X-21
+                    STRIPS-MYSTY-X-20 STRIPS-MYSTY-X-18
+                    STRIPS-MYSTY-X-16 STRIPS-MYSTY-X-15
+                    STRIPS-MYSTY-X-14 STRIPS-MYSTY-X-12
+                    STRIPS-MYSTY-X-8 STRIPS-MYSTY-X-7 STRIPS-MYSTY-X-6
+                    STRIPS-MYSTY-X-5 STRIPS-MYSTY-X-4 STRIPS-LOG-X-30
+                    STRIPS-LOG-X-29 STRIPS-LOG-X-28 STRIPS-LOG-X-27
+                    STRIPS-LOG-X-26 STRIPS-LOG-X-25 STRIPS-LOG-X-24
+                    STRIPS-LOG-X-23 STRIPS-LOG-X-22 STRIPS-LOG-X-21
+                    STRIPS-LOG-X-20 STRIPS-LOG-X-19 STRIPS-LOG-X-18
+                    STRIPS-LOG-X-17 STRIPS-LOG-X-16 STRIPS-LOG-X-15
+                    STRIPS-LOG-X-14 STRIPS-LOG-X-13 STRIPS-LOG-X-12
+                    STRIPS-LOG-X-10 STRIPS-LOG-X-9 STRIPS-LOG-X-8
+                    STRIPS-LOG-X-6 STRIPS-LOG-X-4 STRIPS-LOG-X-3
+                    STRIPS-MPRIME-X-24)
+STAN omitted (STRIPS-LOG-X-3 STRIPS-LOG-X-4 STRIPS-LOG-X-6 STRIPS-LOG-X-8
+                STRIPS-LOG-X-9 STRIPS-LOG-X-10 STRIPS-LOG-X-12
+                STRIPS-LOG-X-13 STRIPS-LOG-X-14 STRIPS-LOG-X-15
+                STRIPS-LOG-X-16 STRIPS-LOG-X-17 STRIPS-LOG-X-18
+                STRIPS-LOG-X-19 STRIPS-LOG-X-20 STRIPS-LOG-X-21
+                STRIPS-LOG-X-22 STRIPS-LOG-X-23 STRIPS-LOG-X-24
+                STRIPS-LOG-X-25 STRIPS-LOG-X-26 STRIPS-LOG-X-27
+                STRIPS-LOG-X-28 STRIPS-LOG-X-29 STRIPS-LOG-X-30
+                STRIPS-MPRIME-X-6 STRIPS-MPRIME-X-10 STRIPS-MPRIME-X-13
+                STRIPS-MPRIME-X-14 STRIPS-MPRIME-X-15
+                STRIPS-MPRIME-X-18 STRIPS-MPRIME-X-19
+                STRIPS-MPRIME-X-20 STRIPS-MPRIME-X-22
+                STRIPS-MPRIME-X-23 STRIPS-MPRIME-X-24
+                STRIPS-MPRIME-X-30 STRIPS-MYSTY-X-4 STRIPS-MYSTY-X-5
+                STRIPS-MYSTY-X-6 STRIPS-MYSTY-X-7 STRIPS-MYSTY-X-8
+                STRIPS-MYSTY-X-12 STRIPS-MYSTY-X-14 STRIPS-MYSTY-X-15
+                STRIPS-MYSTY-X-16 STRIPS-MYSTY-X-18 STRIPS-MYSTY-X-20
+                STRIPS-MYSTY-X-21 STRIPS-MYSTY-X-22 STRIPS-MYSTY-X-23
+                STRIPS-MYSTY-X-24)
+IPP omitted (STRIPS-GRIPPER-X-6 STRIPS-GRIPPER-X-7 STRIPS-GRIPPER-X-8
+                    STRIPS-GRIPPER-X-9 STRIPS-GRIPPER-X-10
+                    STRIPS-GRIPPER-X-11 STRIPS-GRIPPER-X-12
+                    STRIPS-GRIPPER-X-13 STRIPS-GRIPPER-X-14
+                    STRIPS-GRIPPER-X-15 STRIPS-GRIPPER-X-16
+                    STRIPS-GRIPPER-X-17 STRIPS-GRIPPER-X-18
+                    STRIPS-GRIPPER-X-19 STRIPS-GRIPPER-X-20
+                    STRIPS-LOG-X-2 STRIPS-LOG-X-3 STRIPS-LOG-X-4
+                    STRIPS-LOG-X-6 STRIPS-LOG-X-7 STRIPS-LOG-X-8
+                    STRIPS-LOG-X-9 STRIPS-LOG-X-10 STRIPS-LOG-X-12
+                    STRIPS-LOG-X-13 STRIPS-LOG-X-14 STRIPS-LOG-X-15
+                    STRIPS-LOG-X-16 STRIPS-LOG-X-17 STRIPS-LOG-X-18
+                    STRIPS-LOG-X-19 STRIPS-LOG-X-20 STRIPS-LOG-X-21
+                    STRIPS-LOG-X-22 STRIPS-LOG-X-23 STRIPS-LOG-X-24
+                    STRIPS-LOG-X-25 STRIPS-LOG-X-26 STRIPS-LOG-X-27
+                    STRIPS-LOG-X-28 STRIPS-LOG-X-29 STRIPS-LOG-X-30
+                    STRIPS-MOVIE-X-9 STRIPS-MPRIME-X-6
+                    STRIPS-MPRIME-X-10 STRIPS-MPRIME-X-13
+                    STRIPS-MPRIME-X-14 STRIPS-MPRIME-X-15
+                    STRIPS-MPRIME-X-18 STRIPS-MPRIME-X-19
+                    STRIPS-MPRIME-X-20 STRIPS-MPRIME-X-22
+                    STRIPS-MPRIME-X-23 STRIPS-MPRIME-X-24
+                    STRIPS-MPRIME-X-30 STRIPS-MYSTY-X-4
+                    STRIPS-MYSTY-X-5 STRIPS-MYSTY-X-6 STRIPS-MYSTY-X-7
+                    STRIPS-MYSTY-X-8 STRIPS-MYSTY-X-10
+                    STRIPS-MYSTY-X-12 STRIPS-MYSTY-X-13
+                    STRIPS-MYSTY-X-14 STRIPS-MYSTY-X-15
+                    STRIPS-MYSTY-X-16 STRIPS-MYSTY-X-18
+                    STRIPS-MYSTY-X-20 STRIPS-MYSTY-X-21
+                    STRIPS-MYSTY-X-22 STRIPS-MYSTY-X-23
+                    STRIPS-MYSTY-X-24)
+HSP omitted (STRIPS-LOG-X-3 STRIPS-LOG-X-4 STRIPS-LOG-X-6 STRIPS-LOG-X-8
+                STRIPS-LOG-X-9 STRIPS-LOG-X-10 STRIPS-LOG-X-12
+                STRIPS-LOG-X-13 STRIPS-LOG-X-14 STRIPS-LOG-X-15
+                STRIPS-LOG-X-16 STRIPS-LOG-X-17 STRIPS-LOG-X-18
+                STRIPS-LOG-X-19 STRIPS-LOG-X-20 STRIPS-LOG-X-21
+                STRIPS-LOG-X-22 STRIPS-LOG-X-23 STRIPS-LOG-X-24
+                STRIPS-LOG-X-25 STRIPS-LOG-X-26 STRIPS-LOG-X-27
+                STRIPS-LOG-X-28 STRIPS-LOG-X-29 STRIPS-LOG-X-30
+                STRIPS-MPRIME-X-5 STRIPS-MPRIME-X-6 STRIPS-MPRIME-X-10
+                STRIPS-MPRIME-X-13 STRIPS-MPRIME-X-14
+                STRIPS-MPRIME-X-15 STRIPS-MPRIME-X-18
+                STRIPS-MPRIME-X-19 STRIPS-MPRIME-X-20
+                STRIPS-MPRIME-X-21 STRIPS-MPRIME-X-22
+                STRIPS-MPRIME-X-23 STRIPS-MPRIME-X-24
+                STRIPS-MPRIME-X-30 STRIPS-MYSTY-X-4 STRIPS-MYSTY-X-5
+                STRIPS-MYSTY-X-6 STRIPS-MYSTY-X-7 STRIPS-MYSTY-X-8
+                STRIPS-MYSTY-X-10 STRIPS-MYSTY-X-12 STRIPS-MYSTY-X-13
+                STRIPS-MYSTY-X-14 STRIPS-MYSTY-X-15 STRIPS-MYSTY-X-16
+                STRIPS-MYSTY-X-18 STRIPS-MYSTY-X-19 STRIPS-MYSTY-X-20
+                STRIPS-MYSTY-X-21 STRIPS-MYSTY-X-22 STRIPS-MYSTY-X-23
+                STRIPS-MYSTY-X-24)
+BLACKBOX omitted (STRIPS-GRIPPER-X-3 STRIPS-GRIPPER-X-4 STRIPS-GRIPPER-X-5
+                    STRIPS-GRIPPER-X-6 STRIPS-GRIPPER-X-7
+                    STRIPS-GRIPPER-X-8 STRIPS-GRIPPER-X-9
+                    STRIPS-GRIPPER-X-10 STRIPS-GRIPPER-X-11
+                    STRIPS-GRIPPER-X-12 STRIPS-GRIPPER-X-13
+                    STRIPS-GRIPPER-X-14 STRIPS-GRIPPER-X-15
+                    STRIPS-GRIPPER-X-16 STRIPS-GRIPPER-X-17
+                    STRIPS-GRIPPER-X-18 STRIPS-GRIPPER-X-19
+                    STRIPS-GRIPPER-X-20 STRIPS-LOG-X-3 STRIPS-LOG-X-4
+                    STRIPS-LOG-X-5 STRIPS-LOG-X-6 STRIPS-LOG-X-7
+                    STRIPS-LOG-X-8 STRIPS-LOG-X-9 STRIPS-LOG-X-10
+                    STRIPS-LOG-X-12 STRIPS-LOG-X-13 STRIPS-LOG-X-14
+                    STRIPS-LOG-X-15 STRIPS-LOG-X-16 STRIPS-LOG-X-17
+                    STRIPS-LOG-X-18 STRIPS-LOG-X-19 STRIPS-LOG-X-20
+                    STRIPS-LOG-X-21 STRIPS-LOG-X-22 STRIPS-LOG-X-23
+                    STRIPS-LOG-X-24 STRIPS-LOG-X-25 STRIPS-LOG-X-26
+                    STRIPS-LOG-X-27 STRIPS-LOG-X-28 STRIPS-LOG-X-29
+                    STRIPS-LOG-X-30 STRIPS-MPRIME-X-6
+                    STRIPS-MPRIME-X-10 STRIPS-MPRIME-X-13
+                    STRIPS-MPRIME-X-14 STRIPS-MPRIME-X-15
+                    STRIPS-MPRIME-X-18 STRIPS-MPRIME-X-19
+                    STRIPS-MPRIME-X-20 STRIPS-MPRIME-X-22
+                    STRIPS-MPRIME-X-23 STRIPS-MPRIME-X-24
+                    STRIPS-MPRIME-X-30 STRIPS-MYSTY-X-4
+                    STRIPS-MYSTY-X-5 STRIPS-MYSTY-X-6 STRIPS-MYSTY-X-7
+                    STRIPS-MYSTY-X-8 STRIPS-MYSTY-X-12
+                    STRIPS-MYSTY-X-14 STRIPS-MYSTY-X-15
+                    STRIPS-MYSTY-X-16 STRIPS-MYSTY-X-18
+                    STRIPS-MYSTY-X-20 STRIPS-MYSTY-X-21
+                    STRIPS-MYSTY-X-22 STRIPS-MYSTY-X-23
+                    STRIPS-MYSTY-X-24)
+
+1   STRIPS-GRIPPER-X-1 Weight 0.00671
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0       46    11      2.69
+    1   IPP              *    0.0       50    15      2.01
+    2   BLACKBOX         *    0.0      113    11      1.34
+    3   HSP              *    0.0     2007    13      0.67
+
+2   STRIPS-GRIPPER-X-2 Weight 0.01090
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0      380    23      4.36
+    1   STAN             *    0.0     1075    17      3.27
+    2   HSP              *    0.0     2150    21      2.18
+    3   BLACKBOX         *    0.0     7820    17      1.09
+
+3   STRIPS-GRIPPER-X-3 Weight 0.01149
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0     2485    31      4.60
+    1   IPP              *    0.0     3270    31      3.45
+    2   STAN             *    0.0    54693    23      2.30
+
+4   STRIPS-GRIPPER-X-4 Weight 0.01447
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0     3060    37      5.79
+    1   IPP              *    0.0    26680    39      4.34
+    2   STAN             *    0.0  3038381    29      2.89
+
+5   STRIPS-GRIPPER-X-5 Weight 0.01751
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0     3320    47      7.00
+    1   IPP              *    0.0   226460    47      5.25
+    2   STAN             _    0.0  3600100    -1      0.00
+
+6   STRIPS-GRIPPER-X-6 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0     3779    53      8.58
+    1   STAN             _    0.0  3600413    -1      0.00
+
+7   STRIPS-GRIPPER-X-7 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0     4797    63      8.58
+    1   STAN             _    0.0  3600862    -1      0.00
+
+8   STRIPS-GRIPPER-X-8 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0     5565    71      8.58
+    1   STAN             _    0.0  3600935    -1      0.00
+
+9   STRIPS-GRIPPER-X-9 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0     6675    79      8.58
+    1   STAN             _    0.0  3605896    -1      0.00
+
+10  STRIPS-GRIPPER-X-10 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0     7583    85      8.58
+    1   STAN             _    0.0  3602702    -1      0.00
+
+11  STRIPS-GRIPPER-X-11 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0     9060    93      8.58
+    1   STAN             _    0.0  3600646    -1      0.00
+
+12  STRIPS-GRIPPER-X-12 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0    10617   101      8.58
+    1   STAN             _    0.0  3600893    -1      0.00
+
+13  STRIPS-GRIPPER-X-13 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0    12499   109      8.58
+    1   STAN             _    0.0  3600621    -1      0.00
+
+14  STRIPS-GRIPPER-X-14 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0    15050   119      8.58
+    1   STAN             _    0.0  3600735    -1      0.00
+
+15  STRIPS-GRIPPER-X-15 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0    16886   125      8.58
+    1   STAN             _    0.0  3600666    -1      0.00
+
+16  STRIPS-GRIPPER-X-16 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0    20084   135      8.58
+    1   STAN             _    0.0  3600684    -1      0.00
+
+17  STRIPS-GRIPPER-X-17 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0    23613   143      8.58
+    1   STAN             _    0.0  3600716    -1      0.00
+
+18  STRIPS-GRIPPER-X-18 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0    26973   151      8.58
+    1   STAN             _    0.0  3600689    -1      0.00
+
+19  STRIPS-GRIPPER-X-19 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0    29851   157      8.58
+    1   STAN             _    0.0  3600699    -1      0.00
+
+20  STRIPS-GRIPPER-X-20 Weight 0.02144
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0    33210   165      8.58
+    1   STAN             _    0.0  3600687    -1      0.00
+
+21  STRIPS-LOG-X-1 Weight 0.01084
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0      767    27      4.34
+    1   IPP              *    0.0      900    26      3.25
+    2   BLACKBOX         *    0.0     2062    27      2.17
+    3   HSP              *    0.0    79682    43      1.08
+
+22  STRIPS-LOG-X-2 Weight 0.01245
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0     4319    32      4.98
+    1   BLACKBOX         *    0.0     6436    32      3.74
+    2   HSP              *    0.0    97114    44      2.49
+
+23  STRIPS-LOG-X-5 Weight 0.01360
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     2400    24      5.44
+    1   HSP              *    0.0    14413    26      4.08
+    2   STAN             *    0.0   364932    29      2.72
+
+24  STRIPS-LOG-X-7 Weight 0.01928
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   HSP              *    0.0   788914   112      7.71
+    1   STAN             _    0.0    15973    -1      0.00
+
+25  STRIPS-LOG-X-11 Weight 0.01343
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     6544    32      5.37
+    1   IPP              *    0.0     6940    33      4.03
+    2   STAN             *    0.0    12806    34      2.69
+    3   HSP              *    0.0    86195    30      1.34
+
+26  STRIPS-MOVIE-X-1 Weight 0.00418
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.67
+    1   BLACKBOX         *    0.0       11     7      1.25
+    2   STAN             *    0.0       19     7      0.84
+    3   HSP              *    0.0     2121     7      0.42
+
+27  STRIPS-MOVIE-X-2 Weight 0.00410
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.64
+    1   BLACKBOX         *    0.0       12     7      1.23
+    2   STAN             *    0.0       18     7      0.82
+    3   HSP              *    0.0     2104     7      0.41
+
+28  STRIPS-MOVIE-X-3 Weight 0.00418
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.67
+    1   BLACKBOX         *    0.0       14     7      1.25
+    2   STAN             *    0.0       19     7      0.84
+    3   HSP              *    0.0     2144     7      0.42
+
+29  STRIPS-MOVIE-X-4 Weight 0.00425
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.70
+    1   BLACKBOX         *    0.0       16     7      1.28
+    2   STAN             *    0.0       20     7      0.85
+    3   HSP              *    0.0     2188     7      0.43
+
+30  STRIPS-MOVIE-X-5 Weight 0.00432
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.73
+    1   BLACKBOX         *    0.0       18     7      1.30
+    2   STAN             *    0.0       21     7      0.86
+    3   HSP              *    0.0     2208     7      0.43
+
+31  STRIPS-MOVIE-X-6 Weight 0.00439
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.76
+    1   BLACKBOX         *    0.0       20     7      1.32
+    2   STAN             *    0.0       22     7      0.88
+    3   HSP              *    0.0     2617     7      0.44
+
+32  STRIPS-MOVIE-X-7 Weight 0.00439
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      1.76
+    1   BLACKBOX         *    0.0       22     7      1.32
+    2   STAN             *    0.0       22     7      0.88
+    3   HSP              *    0.0     2316     7      0.44
+
+33  STRIPS-MOVIE-X-8 Weight 0.00451
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      1.81
+    1   STAN             *    0.0       23     7      1.35
+    2   BLACKBOX         *    0.0       24     7      0.90
+    3   HSP              *    0.0     2315     7      0.45
+
+34  STRIPS-MOVIE-X-9 Weight 0.00463
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0       25     7      1.85
+    1   BLACKBOX         *    0.0       26     7      1.39
+    2   HSP              *    0.0     2357     7      0.93
+
+35  STRIPS-MOVIE-X-10 Weight 0.00478
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.91
+    1   STAN             *    0.0       26     7      1.43
+    2   BLACKBOX         *    0.0       29     7      0.96
+    3   HSP              *    0.0     2511     7      0.48
+
+36  STRIPS-MOVIE-X-11 Weight 0.00483
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0       27     7      1.93
+    1   BLACKBOX         *    0.0       30     7      1.45
+    2   IPP              *    0.0       30     7      0.97
+    3   HSP              *    0.0     2427     7      0.48
+
+37  STRIPS-MOVIE-X-12 Weight 0.00492
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0       28     7      1.97
+    1   IPP              *    0.0       30     7      1.48
+    2   BLACKBOX         *    0.0       32     7      0.98
+    3   HSP              *    0.0     2456     7      0.49
+
+38  STRIPS-MOVIE-X-13 Weight 0.00509
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      2.04
+    1   STAN             *    0.0       29     7      1.53
+    2   BLACKBOX         *    0.0       36     7      1.02
+    3   HSP              *    0.0     3070     7      0.51
+
+39  STRIPS-MOVIE-X-14 Weight 0.00505
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       30     7      2.02
+    1   STAN             *    0.0       31     7      1.51
+    2   BLACKBOX         *    0.0       35     7      1.01
+    3   HSP              *    0.0     2573     7      0.50
+
+40  STRIPS-MOVIE-X-15 Weight 0.00517
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       30     7      2.07
+    1   STAN             *    0.0       32     7      1.55
+    2   BLACKBOX         *    0.0       38     7      1.03
+    3   HSP              *    0.0     2577     7      0.52
+
+41  STRIPS-MOVIE-X-16 Weight 0.00520
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      2.08
+    1   STAN             *    0.0       34     7      1.56
+    2   BLACKBOX         *    0.0       39     7      1.04
+    3   HSP              *    0.0     2699     7      0.52
+
+42  STRIPS-MOVIE-X-17 Weight 0.00527
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       30     7      2.11
+    1   STAN             *    0.0       35     7      1.58
+    2   BLACKBOX         *    0.0       41     7      1.05
+    3   HSP              *    0.0     2645     7      0.53
+
+43  STRIPS-MOVIE-X-18 Weight 0.00534
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      2.14
+    1   STAN             *    0.0       37     7      1.60
+    2   BLACKBOX         *    0.0       43     7      1.07
+    3   HSP              *    0.0     2686     7      0.53
+
+44  STRIPS-MOVIE-X-19 Weight 0.00541
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       30     7      2.16
+    1   STAN             *    0.0       39     7      1.62
+    2   BLACKBOX         *    0.0       45     7      1.08
+    3   HSP              *    0.0     2727     7      0.54
+
+45  STRIPS-MOVIE-X-20 Weight 0.00547
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      2.19
+    1   STAN             *    0.0       40     7      1.64
+    2   BLACKBOX         *    0.0       47     7      1.09
+    3   HSP              *    0.0     2787     7      0.55
+
+46  STRIPS-MOVIE-X-21 Weight 0.00553
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      2.21
+    1   STAN             *    0.0       42     7      1.66
+    2   BLACKBOX         *    0.0       49     7      1.11
+    3   HSP              *    0.0     2834     7      0.55
+
+47  STRIPS-MOVIE-X-22 Weight 0.00558
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      2.23
+    1   STAN             *    0.0       45     7      1.68
+    2   BLACKBOX         *    0.0       51     7      1.12
+    3   HSP              *    0.0     2834     7      0.56
+
+48  STRIPS-MOVIE-X-23 Weight 0.00564
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      2.26
+    1   STAN             *    0.0       48     7      1.69
+    2   BLACKBOX         *    0.0       53     7      1.13
+    3   HSP              *    0.0     2866     7      0.56
+
+49  STRIPS-MOVIE-X-24 Weight 0.00569
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      2.28
+    1   STAN             *    0.0       50     7      1.71
+    2   BLACKBOX         *    0.0       55     7      1.14
+    3   HSP              *    0.0     3341     7      0.57
+
+50  STRIPS-MOVIE-X-25 Weight 0.00574
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       30     7      2.30
+    1   STAN             *    0.0       52     7      1.72
+    2   BLACKBOX         *    0.0       57     7      1.15
+    3   HSP              *    0.0     2997     7      0.57
+
+51  STRIPS-MOVIE-X-26 Weight 0.00577
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       40     7      2.31
+    1   STAN             *    0.0       54     7      1.73
+    2   BLACKBOX         *    0.0       58     7      1.15
+    3   HSP              *    0.0     3013     7      0.58
+
+52  STRIPS-MOVIE-X-27 Weight 0.00581
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       50     7      2.33
+    1   STAN             *    0.0       57     7      1.74
+    2   BLACKBOX         *    0.0       60     7      1.16
+    3   HSP              *    0.0     3253     7      0.58
+
+53  STRIPS-MOVIE-X-28 Weight 0.00588
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       40     7      2.35
+    1   STAN             *    0.0       62     7      1.77
+    2   BLACKBOX         *    0.0       63     7      1.18
+    3   HSP              *    0.0     3049     7      0.59
+
+54  STRIPS-MOVIE-X-29 Weight 0.00591
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       50     7      2.36
+    1   BLACKBOX         *    0.0       64     7      1.77
+    2   STAN             *    0.0       64     7      1.18
+    3   HSP              *    0.0     3384     7      0.59
+
+55  STRIPS-MOVIE-X-30 Weight 0.00597
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       40     7      2.39
+    1   BLACKBOX         *    0.0       66     7      1.79
+    2   STAN             *    0.0       67     7      1.19
+    3   HSP              *    0.0     3127     7      0.60
+
+56  STRIPS-MPRIME-X-1 Weight 0.01158
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0      856     9      4.63
+    1   STAN             *    0.0     2451    11      3.47
+    2   HSP              *    0.0     3662     5      2.32
+    3   IPP              *    0.0     3480    11      1.16
+
+57  STRIPS-MPRIME-X-2 Weight 0.01419
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0     2839    13      5.68
+    1   BLACKBOX         *    0.0     6470     9      4.26
+    2   IPP              *    0.0    21910     9      2.84
+    3   HSP              *    0.0   110100    12      1.42
+
+58  STRIPS-MPRIME-X-3 Weight 0.01243
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0      882     4      4.97
+    1   HSP              *    0.0     5629     4      3.73
+    2   IPP              *    0.0     6320     5      2.49
+    3   STAN             *    0.0    10195     6      1.24
+
+59  STRIPS-MPRIME-X-4 Weight 0.01146
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0      836     9      4.58
+    1   HSP              *    0.0     3191    10      3.44
+    2   IPP              *    0.0     3720    12      2.29
+    3   STAN             _    0.0       40    -1      0.00
+
+60  STRIPS-MPRIME-X-5 Weight 0.01314
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0     1289    15      5.26
+    1   IPP              *    0.0    10420    11      3.94
+    2   BLACKBOX         _    0.0    20000    -1      0.00
+
+61  STRIPS-MPRIME-X-7 Weight 0.01106
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0     1345     6      4.42
+    1   IPP              *    0.0     5240     5      3.32
+    2   BLACKBOX         _    0.0     1707    -1      0.00
+    3   HSP              _    0.0     2405    -1      0.00
+
+62  STRIPS-MPRIME-X-8 Weight 0.01431
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     2843     7      5.73
+    1   HSP              *    0.0    23830     7      4.29
+    2   IPP              *    0.0    31990    10      2.86
+    3   STAN             _    0.0     4004    -1      0.00
+
+63  STRIPS-MPRIME-X-9 Weight 0.01263
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     1890     8      5.05
+    1   STAN             *    0.0     2047    16      3.79
+    2   IPP              *    0.0     7300     9      2.53
+    3   HSP              *    0.0     9352     8      1.26
+
+64  STRIPS-MPRIME-X-11 Weight 0.01257
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     1824     8      5.03
+    1   IPP              *    0.0     6200     8      3.77
+    2   STAN             *    0.0     7005    17      2.51
+    3   HSP              *    0.0     7342    19      1.26
+
+65  STRIPS-MPRIME-X-12 Weight 0.01288
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     2329    10      5.15
+    1   IPP              *    0.0     8670     9      3.86
+    2   HSP              *    0.0    51017    10      2.58
+    3   STAN             _    0.0     7646    -1      0.00
+
+66  STRIPS-MPRIME-X-16 Weight 0.01320
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     5214    11      5.28
+    1   HSP              *    0.0   207350    13      3.96
+    2   STAN             _    0.0     6881    -1      0.00
+    3   IPP              _    0.0    10910    -1      0.00
+
+67  STRIPS-MPRIME-X-17 Weight 0.01299
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     7141     4      5.20
+    1   HSP              *    0.0   608495     4      3.90
+    2   IPP              _    0.0     8530    -1      0.00
+    3   STAN             _    0.0     9417    -1      0.00
+
+68  STRIPS-MPRIME-X-21 Weight 0.01406
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0     1063     7      5.63
+    1   BLACKBOX         _    0.0    20000    -1      0.00
+    2   IPP              _    0.0    50020    -1      0.00
+
+69  STRIPS-MPRIME-X-25 Weight 0.01029
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0      145     4      4.12
+    1   STAN             *    0.0      276     6      3.09
+    2   IPP              *    0.0     1400     4      2.06
+    3   HSP              *    0.0     2505     4      1.03
+
+70  STRIPS-MPRIME-X-26 Weight 0.01401
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     3211     8      5.60
+    1   IPP              *    0.0    19230     7      4.20
+    2   HSP              *    0.0    23945     8      2.80
+    3   STAN             _    0.0     8554    -1      0.00
+
+71  STRIPS-MPRIME-X-27 Weight 0.01298
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     3195     8      5.19
+    1   HSP              *    0.0    67421     8      3.89
+    2   STAN             _    0.0     4699    -1      0.00
+    3   IPP              _    0.0     9300    -1      0.00
+
+72  STRIPS-MPRIME-X-28 Weight 0.01256
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     1981    11      5.03
+    1   STAN             *    0.0     2957    14      3.77
+    2   IPP              *    0.0     6950    10      2.51
+    3   HSP              *    0.0    79684     7      1.26
+
+73  STRIPS-MPRIME-X-29 Weight 0.01396
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     2272     5      5.58
+    1   STAN             *    0.0    13495     7      4.19
+    2   HSP              *    0.0    24073     6      2.79
+    3   IPP              _    0.0    18570    -1      0.00
+
+74  STRIPS-MYSTY-X-1 Weight 0.00669
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0       40     5      2.68
+    1   IPP              *    0.0      100     5      2.01
+    2   BLACKBOX         *    0.0      111     5      1.34
+    3   HSP              *    0.0     2233     5      0.67
+
+75  STRIPS-MYSTY-X-2 Weight 0.01340
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0      409     9      5.36
+    1   BLACKBOX         *    0.0     6122     9      4.02
+    2   IPP              *    0.0    12500     9      2.68
+    3   HSP              *    0.0    67303    22      1.34
+
+76  STRIPS-MYSTY-X-3 Weight 0.01009
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0      197     4      4.04
+    1   BLACKBOX         *    0.0      615     4      3.03
+    2   IPP              *    0.0     1220     4      2.02
+    3   HSP              *    0.0     3948     4      1.01
+
+77  STRIPS-MYSTY-X-9 Weight 0.01074
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0      165     8      4.30
+    1   BLACKBOX         *    0.0     1436     8      3.22
+    2   IPP              *    0.0     1930     8      2.15
+    3   HSP              *    0.0     7275     8      1.07
+
+78  STRIPS-MYSTY-X-10 Weight 0.01406
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0     9163     8      5.63
+    1   BLACKBOX         _    0.0    20000    -1      0.00
+
+79  STRIPS-MYSTY-X-11 Weight 0.00939
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0      109     7      3.75
+    1   IPP              *    0.0      390     7      2.82
+    2   BLACKBOX         *    0.0      742     7      1.88
+    3   HSP              *    0.0     4489    12      0.94
+
+80  STRIPS-MYSTY-X-13 Weight 0.01406
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0     1789    16      5.63
+    1   BLACKBOX         _    0.0    20000    -1      0.00
+
+81  STRIPS-MYSTY-X-17 Weight 0.01411
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0     1746     4      5.64
+    1   BLACKBOX         *    0.0     3484     4      4.23
+    2   IPP              *    0.0    20640     4      2.82
+    3   HSP              *    0.0    86878    10      1.41
+
+82  STRIPS-MYSTY-X-19 Weight 0.01268
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0      877     8      5.07
+    1   BLACKBOX         *    0.0     7552     8      3.80
+    2   IPP              *    0.0    14940     9      2.54
+
+83  STRIPS-MYSTY-X-25 Weight 0.00676
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0       46     6      2.71
+    1   IPP              *    0.0      110     4      2.03
+    2   BLACKBOX         *    0.0      117     4      1.35
+    3   HSP              *    0.0     2275     4      0.68
+
+84  STRIPS-MYSTY-X-26 Weight 0.01087
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0      685    10      4.35
+    1   BLACKBOX         *    0.0     1737     8      3.26
+    2   IPP              *    0.0     2110     6      2.17
+    3   HSP              *    0.0    11287    13      1.09
+
+85  STRIPS-MYSTY-X-27 Weight 0.00984
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0      281     7      3.94
+    1   BLACKBOX         *    0.0      598     7      2.95
+    2   IPP              *    0.0     1020     7      1.97
+    3   HSP              *    0.0     4279     5      0.98
+
+86  STRIPS-MYSTY-X-28 Weight 0.00895
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0       64     7      3.58
+    1   IPP              *    0.0      260     7      2.68
+    2   BLACKBOX         *    0.0      545     7      1.79
+    3   HSP              *    0.0     2746    18      0.89
+
+87  STRIPS-MYSTY-X-29 Weight 0.00964
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   STAN             *    0.0      107     4      3.86
+    1   BLACKBOX         *    0.0      507     4      2.89
+    2   IPP              *    0.0      890     4      1.93
+    3   HSP              *    0.0     3360     5      0.96
+
+88  STRIPS-MYSTY-X-30 Weight 0.01308
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   BLACKBOX         *    0.0     5642    12      5.23
+    1   STAN             *    0.0     7729    13      3.92
+    2   IPP              *    0.0    10020    13      2.62
+    3   HSP              *    0.0   100143    18      1.31
+
+
+
+TOTAL SCORES: 
+
+Planner             Score     Problems Solved Won
+
+   HSP             233.64                82   19
+   STAN            176.53                64   24
+   BLACKBOX        163.83                63   16
+   IPP             158.29                63   29
+
+ Solved 88 problems

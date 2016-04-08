@@ -1,0 +1,42 @@
+%% Problem Name:blocks_4_2
+%% Domain Name:blocks
+%%%%%%%%%%%%%%%%%%%%%%  Test File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- compiler_options([xpp_on]).
+#include "blocks.P"
+#include "blocks_data.P"
+
+tabled_predicate(blocks_4_2_STRIPS,0).
+tabled_predicate(blocks_4_2_Naive,0).
+%%%%%%%%%%%%%%%%%%%%%%    Goal     %%%%%%%%%%%%%%%%%%%%%%%%%%
+block(b).
+block(d).
+block(c).
+block(a).
+tr_database(clear(a)).
+tr_database(clear(c)).
+tr_database(clear(d)).
+tr_database(ontable(a)).
+tr_database(ontable(b)).
+tr_database(ontable(d)).
+tr_database(on(c,b)).
+tr_database(handempty).
+
+
+tr_clause(
+	blocks_4_2_STRIPS,
+		seq(shuffle(
+			achieve(on(a,b)),
+			achieve(on(b,c)),
+			achieve(on(c,d))),
+		seq(on(a,b),
+		seq(on(b,c),on(c,d))))).
+
+tr_clause(
+	blocks_4_2_Naive,
+		seq(solutionPlan,
+		seq(on(a,b),
+		seq(on(b,c),on(c,d))))).
+
+test_description(test_elevator_planning_problem).
+test_query(blocks_4_2_STRIPS).

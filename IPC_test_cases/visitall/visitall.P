@@ -1,0 +1,150 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% visitall%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(move,2).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(connected,2).
+dynamic_predicate(at_robot,1).
+dynamic_predicate(visited,1).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move(place(VARcurpos),place(VARnextpos)),
+		seq(at_robot(VARcurpos),
+		seq(connected(VARcurpos,VARnextpos),
+		seq(ins(at_robot(VARnextpos)),
+		seq(ins(visited(VARnextpos)),del(at_robot(VARcurpos))))))).
+
+tr_clause(
+	planningAction,
+		move(place(VARcurpos),place(VARnextpos))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(connected(VARx,VARy)),
+		connected(VARx,VARy)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_robot(VARx)),
+		at_robot(VARx)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(visited(VARx)),
+		visited(VARx)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(connected(VARx,VARy)),
+		not(connected(VARx,VARy))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_robot(VARx)),
+		not(at_robot(VARx))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(visited(VARx)),
+		not(visited(VARx))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_robot(VARnextpos)),
+		seq(not(at_robot(VARnextpos)),
+		execute(move(place(VARcurpos),place(VARnextpos))))).
+
+
+achieves(at_robot(VARnextpos),move(place(VARcurpos),place(VARnextpos))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(visited(VARnextpos)),
+		seq(not(visited(VARnextpos)),
+		execute(move(place(VARcurpos),place(VARnextpos))))).
+
+
+achieves(visited(VARnextpos),move(place(VARcurpos),place(VARnextpos))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_robot(VARcurpos)),
+		seq(at_robot(VARcurpos),
+		execute(move(place(VARcurpos),place(VARnextpos))))).
+
+
+avoids(at_robot(VARcurpos),move(place(VARcurpos),place(VARnextpos))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move(place(VARcurpos),place(VARnextpos))),
+		seq(shuffle(
+			achieve(at_robot(VARcurpos)),
+			achieve(connected(VARcurpos,VARnextpos))),
+			move(place(VARcurpos),place(VARnextpos)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		not(avoids(G2,planningAction)))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		not(avoids(G1,planningAction))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(2)).
+

@@ -1,0 +1,134 @@
+%% Problem Name:freecell_2_2
+%% Domain Name:freecell
+%%%%%%%%%%%%%%%%%%%%%%  Test File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- compiler_options([xpp_on]).
+#include "freecell.P"
+#include "freecell_data.P"
+
+tabled_predicate(freecell_2_2_STRIPS,0).
+tabled_predicate(freecell_2_2_Naive,0).
+%%%%%%%%%%%%%%%%%%%%%%    Goal     %%%%%%%%%%%%%%%%%%%%%%%%%%
+card(sa).
+card(s2).
+card(s0).
+card(ha).
+card(h2).
+card(h0).
+card(da).
+card(d2).
+card(d0).
+card(ca).
+card(c2).
+card(c0).
+num(n8).
+num(n7).
+num(n6).
+num(n5).
+num(n4).
+num(n3).
+num(n13).
+num(n12).
+num(n11).
+num(n9).
+num(n10).
+num(n1).
+num(n2).
+num(n0).
+suit(s).
+suit(h).
+suit(d).
+suit(c).
+tr_database(value(c0,n0)).
+tr_database(value(c2,n2)).
+tr_database(value(ca,n1)).
+tr_database(value(d0,n0)).
+tr_database(value(d2,n2)).
+tr_database(value(da,n1)).
+tr_database(value(h0,n0)).
+tr_database(value(h2,n2)).
+tr_database(value(ha,n1)).
+tr_database(value(s0,n0)).
+tr_database(value(s2,n2)).
+tr_database(value(sa,n1)).
+tr_database(successor(n1,n0)).
+tr_database(successor(n10,n9)).
+tr_database(successor(n11,n10)).
+tr_database(successor(n12,n11)).
+tr_database(successor(n13,n12)).
+tr_database(successor(n2,n1)).
+tr_database(successor(n3,n2)).
+tr_database(successor(n4,n3)).
+tr_database(successor(n5,n4)).
+tr_database(successor(n6,n5)).
+tr_database(successor(n7,n6)).
+tr_database(successor(n8,n7)).
+tr_database(successor(n9,n8)).
+tr_database(suit(c0,c)).
+tr_database(suit(c2,c)).
+tr_database(suit(ca,c)).
+tr_database(suit(d0,d)).
+tr_database(suit(d2,d)).
+tr_database(suit(da,d)).
+tr_database(suit(h0,h)).
+tr_database(suit(h2,h)).
+tr_database(suit(ha,h)).
+tr_database(suit(s0,s)).
+tr_database(suit(s2,s)).
+tr_database(suit(sa,s)).
+tr_database(canstack(ca,d2)).
+tr_database(canstack(ca,h2)).
+tr_database(canstack(da,c2)).
+tr_database(canstack(da,s2)).
+tr_database(canstack(ha,c2)).
+tr_database(canstack(ha,s2)).
+tr_database(canstack(sa,d2)).
+tr_database(canstack(sa,h2)).
+tr_database(home(c0)).
+tr_database(home(d0)).
+tr_database(home(h0)).
+tr_database(home(s0)).
+tr_database(cellspace(n4)).
+tr_database(colspace(n2)).
+tr_database(on(ca,d2)).
+tr_database(on(sa,ha)).
+tr_database(clear(c2)).
+tr_database(clear(ca)).
+tr_database(clear(da)).
+tr_database(clear(h2)).
+tr_database(clear(s2)).
+tr_database(clear(sa)).
+tr_database(bottomcol(c2)).
+tr_database(bottomcol(d2)).
+tr_database(bottomcol(da)).
+tr_database(bottomcol(h2)).
+tr_database(bottomcol(ha)).
+tr_database(bottomcol(s2)).
+
+
+planning_goal(home(c2)).
+planning_goal(home(d2)).
+planning_goal(home(h2)).
+planning_goal(home(s2)).
+
+
+tr_clause(
+	freecell_2_2_STRIPS,
+		seq(shuffle(
+			achieve(home(c2)),
+			achieve(home(d2)),
+			achieve(home(h2)),
+			achieve(home(s2))),
+		seq(home(c2),
+		seq(home(d2),
+		seq(home(h2),home(s2)))))).
+
+tr_clause(
+	freecell_2_2_Naive,
+		seq(solutionPlan,
+		seq(home(c2),
+		seq(home(d2),
+		seq(home(h2),home(s2)))))).
+
+test_description(test_elevator_planning_problem).
+test_query(freecell_2_2_STRIPS).

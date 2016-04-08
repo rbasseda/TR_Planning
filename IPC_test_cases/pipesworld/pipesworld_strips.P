@@ -1,0 +1,869 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% pipesworld_strips%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(push_start,8).
+tabled_predicate(push_end,7).
+tabled_predicate(pop_start,8).
+tabled_predicate(pop_end,7).
+tabled_predicate(push_unitarypipe,9).
+tabled_predicate(pop_unitarypipe,9).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(connect,3).
+dynamic_predicate(unitary,1).
+dynamic_predicate(not_unitary,1).
+dynamic_predicate(last,2).
+dynamic_predicate(first,2).
+dynamic_predicate(follow,2).
+dynamic_predicate(is_product,2).
+dynamic_predicate(on,2).
+dynamic_predicate(may_interface,2).
+dynamic_predicate(normal,1).
+dynamic_predicate(push_updating,1).
+dynamic_predicate(pop_updating,1).
+dynamic_predicate(tank_slot_product_location,3).
+dynamic_predicate(occupied,1).
+dynamic_predicate(not_occupied,1).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot)),
+		seq(normal(VARpipe),
+		seq(not_unitary(VARpipe),
+		seq(connect(VARfrom_area,VARto_area,VARpipe),
+		seq(first(VARfirst_batch_atom,VARpipe),
+		seq(on(VARbatch_atom_in,VARfrom_area),
+		seq(is_product(VARbatch_atom_in,VARproduct_batch_atom_in),
+		seq(is_product(VARfirst_batch_atom,VARproduct_first_batch),
+		seq(may_interface(VARproduct_batch_atom_in,VARproduct_first_batch),
+		seq(tank_slot_product_location(VARtank_slot,VARproduct_batch_atom_in,VARfrom_area),
+		seq(occupied(VARtank_slot),
+		seq(ins(push_updating(VARpipe)),
+		seq(ins(first(VARbatch_atom_in,VARpipe)),
+		seq(ins(follow(VARfirst_batch_atom,VARbatch_atom_in)),
+		seq(ins(not_occupied(VARtank_slot)),
+		seq(del(normal(VARpipe)),
+		seq(del(first(VARfirst_batch_atom,VARpipe)),
+		seq(del(on(VARbatch_atom_in,VARfrom_area)),del(occupied(VARtank_slot)))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot)),
+		seq(push_updating(VARpipe),
+		seq(not_unitary(VARpipe),
+		seq(connect(VARfrom_area,VARto_area,VARpipe),
+		seq(last(VARlast_batch_atom,VARpipe),
+		seq(follow(VARlast_batch_atom,VARnext_last_batch_atom),
+		seq(is_product(VARlast_batch_atom,VARproduct_last_batch),
+		seq(tank_slot_product_location(VARtank_slot,VARproduct_last_batch,VARto_area),
+		seq(not_occupied(VARtank_slot),
+		seq(ins(normal(VARpipe)),
+		seq(ins(last(VARnext_last_batch_atom,VARpipe)),
+		seq(ins(on(VARlast_batch_atom,VARto_area)),
+		seq(ins(occupied(VARtank_slot)),
+		seq(del(push_updating(VARpipe)),
+		seq(del(follow(VARlast_batch_atom,VARnext_last_batch_atom)),
+		seq(del(last(VARlast_batch_atom,VARpipe)),del(not_occupied(VARtank_slot)))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot)),
+		seq(normal(VARpipe),
+		seq(not_unitary(VARpipe),
+		seq(connect(VARfrom_area,VARto_area,VARpipe),
+		seq(last(VARlast_batch_atom,VARpipe),
+		seq(on(VARbatch_atom_in,VARto_area),
+		seq(is_product(VARbatch_atom_in,VARproduct_batch_atom_in),
+		seq(is_product(VARlast_batch_atom,VARproduct_last_batch),
+		seq(may_interface(VARproduct_batch_atom_in,VARproduct_last_batch),
+		seq(tank_slot_product_location(VARtank_slot,VARproduct_batch_atom_in,VARto_area),
+		seq(occupied(VARtank_slot),
+		seq(ins(pop_updating(VARpipe)),
+		seq(ins(last(VARbatch_atom_in,VARpipe)),
+		seq(ins(follow(VARbatch_atom_in,VARlast_batch_atom)),
+		seq(ins(not_occupied(VARtank_slot)),
+		seq(del(normal(VARpipe)),
+		seq(del(last(VARlast_batch_atom,VARpipe)),
+		seq(del(on(VARbatch_atom_in,VARto_area)),del(occupied(VARtank_slot)))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot)),
+		seq(pop_updating(VARpipe),
+		seq(not_unitary(VARpipe),
+		seq(connect(VARfrom_area,VARto_area,VARpipe),
+		seq(first(VARfirst_batch_atom,VARpipe),
+		seq(follow(VARnext_first_batch_atom,VARfirst_batch_atom),
+		seq(tank_slot_product_location(VARtank_slot,VARproduct_first_batch,VARfrom_area),
+		seq(not_occupied(VARtank_slot),
+		seq(ins(normal(VARpipe)),
+		seq(ins(first(VARnext_first_batch_atom,VARpipe)),
+		seq(ins(on(VARfirst_batch_atom,VARfrom_area)),
+		seq(ins(occupied(VARtank_slot)),
+		seq(del(pop_updating(VARpipe)),
+		seq(del(follow(VARnext_first_batch_atom,VARfirst_batch_atom)),
+		seq(del(first(VARfirst_batch_atom,VARpipe)),del(not_occupied(VARtank_slot))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot)),
+		seq(first(VARfirst_batch_atom,VARpipe),
+		seq(connect(VARfrom_area,VARto_area,VARpipe),
+		seq(on(VARbatch_atom_in,VARfrom_area),
+		seq(unitary(VARpipe),
+		seq(is_product(VARbatch_atom_in,VARproduct_batch_atom_in),
+		seq(is_product(VARfirst_batch_atom,VARproduct_first_batch),
+		seq(may_interface(VARproduct_batch_atom_in,VARproduct_first_batch),
+		seq(tank_slot_product_location(VARfrom_tank_slot,VARproduct_batch_atom_in,VARfrom_area),
+		seq(occupied(VARfrom_tank_slot),
+		seq(tank_slot_product_location(VARto_tank_slot,VARproduct_first_batch,VARto_area),
+		seq(not_occupied(VARto_tank_slot),
+		seq(ins(first(VARbatch_atom_in,VARpipe)),
+		seq(ins(last(VARbatch_atom_in,VARpipe)),
+		seq(ins(not_occupied(VARfrom_tank_slot)),
+		seq(ins(on(VARfirst_batch_atom,VARto_area)),
+		seq(ins(occupied(VARto_tank_slot)),
+		seq(del(first(VARfirst_batch_atom,VARpipe)),
+		seq(del(last(VARfirst_batch_atom,VARpipe)),
+		seq(del(on(VARbatch_atom_in,VARfrom_area)),
+		seq(del(occupied(VARfrom_tank_slot)),del(not_occupied(VARto_tank_slot))))))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot)),
+		seq(first(VARfirst_batch_atom,VARpipe),
+		seq(connect(VARfrom_area,VARto_area,VARpipe),
+		seq(on(VARbatch_atom_in,VARto_area),
+		seq(unitary(VARpipe),
+		seq(is_product(VARbatch_atom_in,VARproduct_batch_atom_in),
+		seq(is_product(VARfirst_batch_atom,VARproduct_first_batch),
+		seq(may_interface(VARproduct_batch_atom_in,VARproduct_first_batch),
+		seq(tank_slot_product_location(VARto_tank_slot,VARproduct_batch_atom_in,VARto_area),
+		seq(occupied(VARto_tank_slot),
+		seq(tank_slot_product_location(VARfrom_tank_slot,VARproduct_first_batch,VARfrom_area),
+		seq(not_occupied(VARfrom_tank_slot),
+		seq(ins(last(VARbatch_atom_in,VARpipe)),
+		seq(ins(first(VARbatch_atom_in,VARpipe)),
+		seq(ins(not_occupied(VARto_tank_slot)),
+		seq(ins(on(VARfirst_batch_atom,VARfrom_area)),
+		seq(ins(occupied(VARfrom_tank_slot)),
+		seq(del(last(VARfirst_batch_atom,VARpipe)),
+		seq(del(first(VARfirst_batch_atom,VARpipe)),
+		seq(del(on(VARbatch_atom_in,VARto_area)),
+		seq(del(occupied(VARto_tank_slot)),del(not_occupied(VARfrom_tank_slot))))))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(connect(VARfrom,VARto,VARpipe)),
+		connect(VARfrom,VARto,VARpipe)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(unitary(VARpipe)),
+		unitary(VARpipe)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_unitary(VARpipe)),
+		not_unitary(VARpipe)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(last(VARbatch_atom,VARpipe)),
+		last(VARbatch_atom,VARpipe)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(first(VARbatch_atom,VARpipe)),
+		first(VARbatch_atom,VARpipe)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(follow(VARnext,VARprevious)),
+		follow(VARnext,VARprevious)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_product(VARbatch_atom,VARproduct)),
+		is_product(VARbatch_atom,VARproduct)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARbatch_atom,VARarea)),
+		on(VARbatch_atom,VARarea)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(may_interface(VARproduct_a,VARproduct_b)),
+		may_interface(VARproduct_a,VARproduct_b)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(normal(VARpipe)),
+		normal(VARpipe)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(push_updating(VARpipe)),
+		push_updating(VARpipe)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(pop_updating(VARpipe)),
+		pop_updating(VARpipe)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(tank_slot_product_location(VARtank_slot,VARproduct,VARarea)),
+		tank_slot_product_location(VARtank_slot,VARproduct,VARarea)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(VARtank_slot)),
+		occupied(VARtank_slot)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(VARtank_slot)),
+		not_occupied(VARtank_slot)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(connect(VARfrom,VARto,VARpipe)),
+		not(connect(VARfrom,VARto,VARpipe))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(unitary(VARpipe)),
+		not(unitary(VARpipe))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_unitary(VARpipe)),
+		not(not_unitary(VARpipe))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(last(VARbatch_atom,VARpipe)),
+		not(last(VARbatch_atom,VARpipe))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(first(VARbatch_atom,VARpipe)),
+		not(first(VARbatch_atom,VARpipe))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(follow(VARnext,VARprevious)),
+		not(follow(VARnext,VARprevious))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_product(VARbatch_atom,VARproduct)),
+		not(is_product(VARbatch_atom,VARproduct))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARbatch_atom,VARarea)),
+		not(on(VARbatch_atom,VARarea))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(may_interface(VARproduct_a,VARproduct_b)),
+		not(may_interface(VARproduct_a,VARproduct_b))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(normal(VARpipe)),
+		not(normal(VARpipe))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(push_updating(VARpipe)),
+		not(push_updating(VARpipe))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(pop_updating(VARpipe)),
+		not(pop_updating(VARpipe))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(tank_slot_product_location(VARtank_slot,VARproduct,VARarea)),
+		not(tank_slot_product_location(VARtank_slot,VARproduct,VARarea))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(VARtank_slot)),
+		not(occupied(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(VARtank_slot)),
+		not(not_occupied(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(push_updating(VARpipe)),
+		seq(not(push_updating(VARpipe)),
+		execute(push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(push_updating(VARpipe),push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(first(VARbatch_atom_in,VARpipe)),
+		seq(not(first(VARbatch_atom_in,VARpipe)),
+		execute(push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(first(VARbatch_atom_in,VARpipe),push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(follow(VARfirst_batch_atom,VARbatch_atom_in)),
+		seq(not(follow(VARfirst_batch_atom,VARbatch_atom_in)),
+		execute(push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(follow(VARfirst_batch_atom,VARbatch_atom_in),push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(VARtank_slot)),
+		seq(not(not_occupied(VARtank_slot)),
+		execute(push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(not_occupied(VARtank_slot),push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(normal(VARpipe)),
+		seq(not(normal(VARpipe)),
+		execute(push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(normal(VARpipe),push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(last(VARnext_last_batch_atom,VARpipe)),
+		seq(not(last(VARnext_last_batch_atom,VARpipe)),
+		execute(push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(last(VARnext_last_batch_atom,VARpipe),push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARlast_batch_atom,VARto_area)),
+		seq(not(on(VARlast_batch_atom,VARto_area)),
+		execute(push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(on(VARlast_batch_atom,VARto_area),push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(VARtank_slot)),
+		seq(not(occupied(VARtank_slot)),
+		execute(push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(occupied(VARtank_slot),push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(pop_updating(VARpipe)),
+		seq(not(pop_updating(VARpipe)),
+		execute(pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(pop_updating(VARpipe),pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(last(VARbatch_atom_in,VARpipe)),
+		seq(not(last(VARbatch_atom_in,VARpipe)),
+		execute(pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(last(VARbatch_atom_in,VARpipe),pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(follow(VARbatch_atom_in,VARlast_batch_atom)),
+		seq(not(follow(VARbatch_atom_in,VARlast_batch_atom)),
+		execute(pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(follow(VARbatch_atom_in,VARlast_batch_atom),pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(VARtank_slot)),
+		seq(not(not_occupied(VARtank_slot)),
+		execute(pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(not_occupied(VARtank_slot),pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(normal(VARpipe)),
+		seq(not(normal(VARpipe)),
+		execute(pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(normal(VARpipe),pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(first(VARnext_first_batch_atom,VARpipe)),
+		seq(not(first(VARnext_first_batch_atom,VARpipe)),
+		execute(pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(first(VARnext_first_batch_atom,VARpipe),pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARfirst_batch_atom,VARfrom_area)),
+		seq(not(on(VARfirst_batch_atom,VARfrom_area)),
+		execute(pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(on(VARfirst_batch_atom,VARfrom_area),pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(VARtank_slot)),
+		seq(not(occupied(VARtank_slot)),
+		execute(pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+achieves(occupied(VARtank_slot),pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(first(VARbatch_atom_in,VARpipe)),
+		seq(not(first(VARbatch_atom_in,VARpipe)),
+		execute(push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+achieves(first(VARbatch_atom_in,VARpipe),push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(last(VARbatch_atom_in,VARpipe)),
+		seq(not(last(VARbatch_atom_in,VARpipe)),
+		execute(push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+achieves(last(VARbatch_atom_in,VARpipe),push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(VARfrom_tank_slot)),
+		seq(not(not_occupied(VARfrom_tank_slot)),
+		execute(push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+achieves(not_occupied(VARfrom_tank_slot),push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARfirst_batch_atom,VARto_area)),
+		seq(not(on(VARfirst_batch_atom,VARto_area)),
+		execute(push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+achieves(on(VARfirst_batch_atom,VARto_area),push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(VARto_tank_slot)),
+		seq(not(occupied(VARto_tank_slot)),
+		execute(push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+achieves(occupied(VARto_tank_slot),push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(last(VARbatch_atom_in,VARpipe)),
+		seq(not(last(VARbatch_atom_in,VARpipe)),
+		execute(pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+achieves(last(VARbatch_atom_in,VARpipe),pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(first(VARbatch_atom_in,VARpipe)),
+		seq(not(first(VARbatch_atom_in,VARpipe)),
+		execute(pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+achieves(first(VARbatch_atom_in,VARpipe),pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(VARto_tank_slot)),
+		seq(not(not_occupied(VARto_tank_slot)),
+		execute(pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+achieves(not_occupied(VARto_tank_slot),pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARfirst_batch_atom,VARfrom_area)),
+		seq(not(on(VARfirst_batch_atom,VARfrom_area)),
+		execute(pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+achieves(on(VARfirst_batch_atom,VARfrom_area),pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(VARfrom_tank_slot)),
+		seq(not(occupied(VARfrom_tank_slot)),
+		execute(pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+achieves(occupied(VARfrom_tank_slot),pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(normal(VARpipe)),
+		seq(normal(VARpipe),
+		execute(push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(normal(VARpipe),push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(first(VARfirst_batch_atom,VARpipe)),
+		seq(first(VARfirst_batch_atom,VARpipe),
+		execute(push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(first(VARfirst_batch_atom,VARpipe),push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARbatch_atom_in,VARfrom_area)),
+		seq(on(VARbatch_atom_in,VARfrom_area),
+		execute(push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(on(VARbatch_atom_in,VARfrom_area),push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(VARtank_slot)),
+		seq(occupied(VARtank_slot),
+		execute(push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(occupied(VARtank_slot),push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(push_updating(VARpipe)),
+		seq(push_updating(VARpipe),
+		execute(push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(push_updating(VARpipe),push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(follow(VARlast_batch_atom,VARnext_last_batch_atom)),
+		seq(follow(VARlast_batch_atom,VARnext_last_batch_atom),
+		execute(push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(follow(VARlast_batch_atom,VARnext_last_batch_atom),push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(last(VARlast_batch_atom,VARpipe)),
+		seq(last(VARlast_batch_atom,VARpipe),
+		execute(push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(last(VARlast_batch_atom,VARpipe),push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(VARtank_slot)),
+		seq(not_occupied(VARtank_slot),
+		execute(push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(not_occupied(VARtank_slot),push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(normal(VARpipe)),
+		seq(normal(VARpipe),
+		execute(pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(normal(VARpipe),pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(last(VARlast_batch_atom,VARpipe)),
+		seq(last(VARlast_batch_atom,VARpipe),
+		execute(pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(last(VARlast_batch_atom,VARpipe),pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARbatch_atom_in,VARto_area)),
+		seq(on(VARbatch_atom_in,VARto_area),
+		execute(pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(on(VARbatch_atom_in,VARto_area),pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(VARtank_slot)),
+		seq(occupied(VARtank_slot),
+		execute(pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(occupied(VARtank_slot),pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(pop_updating(VARpipe)),
+		seq(pop_updating(VARpipe),
+		execute(pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(pop_updating(VARpipe),pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(follow(VARnext_first_batch_atom,VARfirst_batch_atom)),
+		seq(follow(VARnext_first_batch_atom,VARfirst_batch_atom),
+		execute(pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(follow(VARnext_first_batch_atom,VARfirst_batch_atom),pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(first(VARfirst_batch_atom,VARpipe)),
+		seq(first(VARfirst_batch_atom,VARpipe),
+		execute(pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(first(VARfirst_batch_atom,VARpipe),pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(VARtank_slot)),
+		seq(not_occupied(VARtank_slot),
+		execute(pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))))).
+
+
+avoids(not_occupied(VARtank_slot),pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(first(VARfirst_batch_atom,VARpipe)),
+		seq(first(VARfirst_batch_atom,VARpipe),
+		execute(push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+avoids(first(VARfirst_batch_atom,VARpipe),push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(last(VARfirst_batch_atom,VARpipe)),
+		seq(last(VARfirst_batch_atom,VARpipe),
+		execute(push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+avoids(last(VARfirst_batch_atom,VARpipe),push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARbatch_atom_in,VARfrom_area)),
+		seq(on(VARbatch_atom_in,VARfrom_area),
+		execute(push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+avoids(on(VARbatch_atom_in,VARfrom_area),push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(VARfrom_tank_slot)),
+		seq(occupied(VARfrom_tank_slot),
+		execute(push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+avoids(occupied(VARfrom_tank_slot),push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(VARto_tank_slot)),
+		seq(not_occupied(VARto_tank_slot),
+		execute(push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+avoids(not_occupied(VARto_tank_slot),push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(last(VARfirst_batch_atom,VARpipe)),
+		seq(last(VARfirst_batch_atom,VARpipe),
+		execute(pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+avoids(last(VARfirst_batch_atom,VARpipe),pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(first(VARfirst_batch_atom,VARpipe)),
+		seq(first(VARfirst_batch_atom,VARpipe),
+		execute(pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+avoids(first(VARfirst_batch_atom,VARpipe),pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARbatch_atom_in,VARto_area)),
+		seq(on(VARbatch_atom_in,VARto_area),
+		execute(pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+avoids(on(VARbatch_atom_in,VARto_area),pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(VARto_tank_slot)),
+		seq(occupied(VARto_tank_slot),
+		execute(pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+avoids(occupied(VARto_tank_slot),pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(VARfrom_tank_slot)),
+		seq(not_occupied(VARfrom_tank_slot),
+		execute(pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))))).
+
+
+avoids(not_occupied(VARfrom_tank_slot),pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot))),
+		seq(shuffle(
+			achieve(normal(VARpipe)),
+			achieve(not_unitary(VARpipe)),
+			achieve(connect(VARfrom_area,VARto_area,VARpipe)),
+			achieve(first(VARfirst_batch_atom,VARpipe)),
+			achieve(on(VARbatch_atom_in,VARfrom_area)),
+			achieve(is_product(VARbatch_atom_in,VARproduct_batch_atom_in)),
+			achieve(is_product(VARfirst_batch_atom,VARproduct_first_batch)),
+			achieve(may_interface(VARproduct_batch_atom_in,VARproduct_first_batch)),
+			achieve(tank_slot_product_location(VARtank_slot,VARproduct_batch_atom_in,VARfrom_area)),
+			achieve(occupied(VARtank_slot))),
+			push_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARtank_slot)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot))),
+		seq(shuffle(
+			achieve(push_updating(VARpipe)),
+			achieve(not_unitary(VARpipe)),
+			achieve(connect(VARfrom_area,VARto_area,VARpipe)),
+			achieve(last(VARlast_batch_atom,VARpipe)),
+			achieve(follow(VARlast_batch_atom,VARnext_last_batch_atom)),
+			achieve(is_product(VARlast_batch_atom,VARproduct_last_batch)),
+			achieve(tank_slot_product_location(VARtank_slot,VARproduct_last_batch,VARto_area)),
+			achieve(not_occupied(VARtank_slot))),
+			push_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),batch_atom(VARnext_last_batch_atom),product(VARproduct_last_batch),tank_slot(VARtank_slot)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot))),
+		seq(shuffle(
+			achieve(normal(VARpipe)),
+			achieve(not_unitary(VARpipe)),
+			achieve(connect(VARfrom_area,VARto_area,VARpipe)),
+			achieve(last(VARlast_batch_atom,VARpipe)),
+			achieve(on(VARbatch_atom_in,VARto_area)),
+			achieve(is_product(VARbatch_atom_in,VARproduct_batch_atom_in)),
+			achieve(is_product(VARlast_batch_atom,VARproduct_last_batch)),
+			achieve(may_interface(VARproduct_batch_atom_in,VARproduct_last_batch)),
+			achieve(tank_slot_product_location(VARtank_slot,VARproduct_batch_atom_in,VARto_area)),
+			achieve(occupied(VARtank_slot))),
+			pop_start(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARlast_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_last_batch),tank_slot(VARtank_slot)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot))),
+		seq(shuffle(
+			achieve(pop_updating(VARpipe)),
+			achieve(not_unitary(VARpipe)),
+			achieve(connect(VARfrom_area,VARto_area,VARpipe)),
+			achieve(first(VARfirst_batch_atom,VARpipe)),
+			achieve(follow(VARnext_first_batch_atom,VARfirst_batch_atom)),
+			achieve(tank_slot_product_location(VARtank_slot,VARproduct_first_batch,VARfrom_area)),
+			achieve(not_occupied(VARtank_slot))),
+			pop_end(pipe(VARpipe),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),batch_atom(VARnext_first_batch_atom),product(VARproduct_first_batch),tank_slot(VARtank_slot)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))),
+		seq(shuffle(
+			achieve(first(VARfirst_batch_atom,VARpipe)),
+			achieve(connect(VARfrom_area,VARto_area,VARpipe)),
+			achieve(on(VARbatch_atom_in,VARfrom_area)),
+			achieve(unitary(VARpipe)),
+			achieve(is_product(VARbatch_atom_in,VARproduct_batch_atom_in)),
+			achieve(is_product(VARfirst_batch_atom,VARproduct_first_batch)),
+			achieve(may_interface(VARproduct_batch_atom_in,VARproduct_first_batch)),
+			achieve(tank_slot_product_location(VARfrom_tank_slot,VARproduct_batch_atom_in,VARfrom_area)),
+			achieve(occupied(VARfrom_tank_slot)),
+			achieve(tank_slot_product_location(VARto_tank_slot,VARproduct_first_batch,VARto_area)),
+			achieve(not_occupied(VARto_tank_slot))),
+			push_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot))),
+		seq(shuffle(
+			achieve(first(VARfirst_batch_atom,VARpipe)),
+			achieve(connect(VARfrom_area,VARto_area,VARpipe)),
+			achieve(on(VARbatch_atom_in,VARto_area)),
+			achieve(unitary(VARpipe)),
+			achieve(is_product(VARbatch_atom_in,VARproduct_batch_atom_in)),
+			achieve(is_product(VARfirst_batch_atom,VARproduct_first_batch)),
+			achieve(may_interface(VARproduct_batch_atom_in,VARproduct_first_batch)),
+			achieve(tank_slot_product_location(VARto_tank_slot,VARproduct_batch_atom_in,VARto_area)),
+			achieve(occupied(VARto_tank_slot)),
+			achieve(tank_slot_product_location(VARfrom_tank_slot,VARproduct_first_batch,VARfrom_area)),
+			achieve(not_occupied(VARfrom_tank_slot))),
+			pop_unitarypipe(pipe(VARpipe),batch_atom(VARbatch_atom_in),area(VARfrom_area),area(VARto_area),batch_atom(VARfirst_batch_atom),product(VARproduct_batch_atom_in),product(VARproduct_first_batch),tank_slot(VARfrom_tank_slot),tank_slot(VARto_tank_slot)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		not(avoids(G2,planningAction)))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		not(avoids(G1,planningAction))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(2)).
+

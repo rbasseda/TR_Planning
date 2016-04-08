@@ -1,0 +1,25 @@
+%%%%%%%%%%%%%%%%%%%%%%    Data     %%%%%%%%%%%%%%%%%%%%%%%%%%
+storearea(depot0_1_1).
+storearea(depot0_1_2).
+storearea(container_0_0).
+hoist(hoist0).
+hoist(hoist1).
+crate(crate0).
+container(container0).
+depot(depot0).
+transitarea(loadarea).
+tr_database(connected(depot0_1_1,depot0_1_2)).
+tr_database(connected(depot0_1_2,depot0_1_1)).
+tr_database(in(depot0_1_1,depot0)).
+tr_database(in(depot0_1_2,depot0)).
+tr_database(on(crate0,container_0_0)).
+tr_database(in(crate0,container0)).
+tr_database(in(container_0_0,container0)).
+tr_database(connected(loadarea,container_0_0)).
+tr_database(connected(container_0_0,loadarea)).
+tr_database(connected(depot0_1_1,loadarea)).
+tr_database(connected(loadarea,depot0_1_1)).
+tr_database(at(hoist0,depot0_1_1)).
+tr_database(available(hoist0)).
+tr_database(at(hoist1,depot0_1_2)).
+tr_database(available(hoist1)).

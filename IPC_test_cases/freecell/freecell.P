@@ -1,0 +1,925 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% freecell%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(move,3).
+tabled_predicate(move_b,4).
+tabled_predicate(sendtofree,4).
+tabled_predicate(sendtofree_b,5).
+tabled_predicate(sendtonewcol,4).
+tabled_predicate(sendtohome,6).
+tabled_predicate(sendtohome_b,7).
+tabled_predicate(homefromfreecell,7).
+tabled_predicate(colfromfreecell,4).
+tabled_predicate(newcolfromfreecell,5).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(on,2).
+dynamic_predicate(incell,1).
+dynamic_predicate(clear,1).
+dynamic_predicate(cellspace,1).
+dynamic_predicate(colspace,1).
+dynamic_predicate(home,1).
+dynamic_predicate(bottomcol,1).
+dynamic_predicate(canstack,2).
+dynamic_predicate(suit,2).
+dynamic_predicate(value,2).
+dynamic_predicate(successor,2).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move(card(VARcard),card(VARoldcard),card(VARnewcard)),
+		seq(clear(VARcard),
+		seq(clear(VARnewcard),
+		seq(canstack(VARcard,VARnewcard),
+		seq(on(VARcard,VARoldcard),
+		seq(ins(on(VARcard,VARnewcard)),
+		seq(ins(clear(VARoldcard)),
+		seq(del(on(VARcard,VARoldcard)),del(clear(VARnewcard)))))))))).
+
+tr_clause(
+	planningAction,
+		move(card(VARcard),card(VARoldcard),card(VARnewcard))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols)),
+		seq(clear(VARcard),
+		seq(bottomcol(VARcard),
+		seq(clear(VARnewcard),
+		seq(canstack(VARcard,VARnewcard),
+		seq(colspace(VARcols),
+		seq(successor(VARncols,VARcols),
+		seq(ins(on(VARcard,VARnewcard)),
+		seq(ins(colspace(VARncols)),
+		seq(del(bottomcol(VARcard)),
+		seq(del(clear(VARnewcard)),del(colspace(VARcols))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells)),
+		seq(clear(VARcard),
+		seq(on(VARcard,VARoldcard),
+		seq(cellspace(VARcells),
+		seq(successor(VARcells,VARncells),
+		seq(ins(incell(VARcard)),
+		seq(ins(clear(VARoldcard)),
+		seq(ins(cellspace(VARncells)),
+		seq(del(on(VARcard,VARoldcard)),
+		seq(del(clear(VARcard)),del(cellspace(VARcells)))))))))))).
+
+tr_clause(
+	planningAction,
+		sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols)),
+		seq(clear(VARcard),
+		seq(bottomcol(VARcard),
+		seq(cellspace(VARcells),
+		seq(successor(VARcells,VARncells),
+		seq(colspace(VARcols),
+		seq(successor(VARncols,VARcols),
+		seq(ins(incell(VARcard)),
+		seq(ins(colspace(VARncols)),
+		seq(ins(cellspace(VARncells)),
+		seq(del(bottomcol(VARcard)),
+		seq(del(clear(VARcard)),
+		seq(del(colspace(VARcols)),del(cellspace(VARcells))))))))))))))).
+
+tr_clause(
+	planningAction,
+		sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols)),
+		seq(clear(VARcard),
+		seq(colspace(VARcols),
+		seq(successor(VARcols,VARncols),
+		seq(on(VARcard,VARoldcard),
+		seq(ins(bottomcol(VARcard)),
+		seq(ins(clear(VARoldcard)),
+		seq(ins(colspace(VARncols)),
+		seq(del(on(VARcard,VARoldcard)),del(colspace(VARcols))))))))))).
+
+tr_clause(
+	planningAction,
+		sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard)),
+		seq(clear(VARcard),
+		seq(on(VARcard,VARoldcard),
+		seq(home(VARhomecard),
+		seq(suit(VARcard,VARsuit),
+		seq(suit(VARhomecard,VARsuit),
+		seq(value(VARcard,VARvcard),
+		seq(value(VARhomecard,VARvhomecard),
+		seq(successor(VARvcard,VARvhomecard),
+		seq(ins(home(VARcard)),
+		seq(ins(clear(VARoldcard)),
+		seq(del(on(VARcard,VARoldcard)),
+		seq(del(home(VARhomecard)),del(clear(VARcard))))))))))))))).
+
+tr_clause(
+	planningAction,
+		sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols)),
+		seq(clear(VARcard),
+		seq(bottomcol(VARcard),
+		seq(home(VARhomecard),
+		seq(suit(VARcard,VARsuit),
+		seq(suit(VARhomecard,VARsuit),
+		seq(value(VARcard,VARvcard),
+		seq(value(VARhomecard,VARvhomecard),
+		seq(successor(VARvcard,VARvhomecard),
+		seq(colspace(VARcols),
+		seq(successor(VARncols,VARcols),
+		seq(ins(home(VARcard)),
+		seq(ins(colspace(VARncols)),
+		seq(del(home(VARhomecard)),
+		seq(del(clear(VARcard)),
+		seq(del(bottomcol(VARcard)),del(colspace(VARcols)))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells)),
+		seq(incell(VARcard),
+		seq(home(VARhomecard),
+		seq(suit(VARcard,VARsuit),
+		seq(suit(VARhomecard,VARsuit),
+		seq(value(VARcard,VARvcard),
+		seq(value(VARhomecard,VARvhomecard),
+		seq(successor(VARvcard,VARvhomecard),
+		seq(cellspace(VARcells),
+		seq(successor(VARncells,VARcells),
+		seq(ins(home(VARcard)),
+		seq(ins(cellspace(VARncells)),
+		seq(del(incell(VARcard)),
+		seq(del(cellspace(VARcells)),del(home(VARhomecard)))))))))))))))).
+
+tr_clause(
+	planningAction,
+		homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells)),
+		seq(incell(VARcard),
+		seq(clear(VARnewcard),
+		seq(canstack(VARcard,VARnewcard),
+		seq(cellspace(VARcells),
+		seq(successor(VARncells,VARcells),
+		seq(ins(cellspace(VARncells)),
+		seq(ins(clear(VARcard)),
+		seq(ins(on(VARcard,VARnewcard)),
+		seq(del(incell(VARcard)),
+		seq(del(cellspace(VARcells)),del(clear(VARnewcard))))))))))))).
+
+tr_clause(
+	planningAction,
+		colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells)),
+		seq(incell(VARcard),
+		seq(colspace(VARcols),
+		seq(cellspace(VARcells),
+		seq(successor(VARcols,VARncols),
+		seq(successor(VARncells,VARcells),
+		seq(ins(bottomcol(VARcard)),
+		seq(ins(clear(VARcard)),
+		seq(ins(colspace(VARncols)),
+		seq(ins(cellspace(VARncells)),
+		seq(del(incell(VARcard)),
+		seq(del(colspace(VARcols)),del(cellspace(VARcells)))))))))))))).
+
+tr_clause(
+	planningAction,
+		newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARc1,VARc2)),
+		on(VARc1,VARc2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(incell(VARc)),
+		incell(VARc)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARc)),
+		clear(VARc)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(cellspace(VARn)),
+		cellspace(VARn)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(colspace(VARn)),
+		colspace(VARn)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(home(VARc)),
+		home(VARc)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(bottomcol(VARc)),
+		bottomcol(VARc)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(canstack(VARc1,VARc2)),
+		canstack(VARc1,VARc2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(suit(VARc,VARs)),
+		suit(VARc,VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(value(VARc,VARv)),
+		value(VARc,VARv)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(successor(VARn1,VARn0)),
+		successor(VARn1,VARn0)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARc1,VARc2)),
+		not(on(VARc1,VARc2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(incell(VARc)),
+		not(incell(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARc)),
+		not(clear(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(cellspace(VARn)),
+		not(cellspace(VARn))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(colspace(VARn)),
+		not(colspace(VARn))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(home(VARc)),
+		not(home(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(bottomcol(VARc)),
+		not(bottomcol(VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(canstack(VARc1,VARc2)),
+		not(canstack(VARc1,VARc2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(suit(VARc,VARs)),
+		not(suit(VARc,VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(value(VARc,VARv)),
+		not(value(VARc,VARv))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(successor(VARn1,VARn0)),
+		not(successor(VARn1,VARn0))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARcard,VARnewcard)),
+		seq(not(on(VARcard,VARnewcard)),
+		execute(move(card(VARcard),card(VARoldcard),card(VARnewcard))))).
+
+
+achieves(on(VARcard,VARnewcard),move(card(VARcard),card(VARoldcard),card(VARnewcard))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARoldcard)),
+		seq(not(clear(VARoldcard)),
+		execute(move(card(VARcard),card(VARoldcard),card(VARnewcard))))).
+
+
+achieves(clear(VARoldcard),move(card(VARcard),card(VARoldcard),card(VARnewcard))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARcard,VARnewcard)),
+		seq(not(on(VARcard,VARnewcard)),
+		execute(move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))))).
+
+
+achieves(on(VARcard,VARnewcard),move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(colspace(VARncols)),
+		seq(not(colspace(VARncols)),
+		execute(move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))))).
+
+
+achieves(colspace(VARncols),move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(incell(VARcard)),
+		seq(not(incell(VARcard)),
+		execute(sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))))).
+
+
+achieves(incell(VARcard),sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARoldcard)),
+		seq(not(clear(VARoldcard)),
+		execute(sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))))).
+
+
+achieves(clear(VARoldcard),sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(cellspace(VARncells)),
+		seq(not(cellspace(VARncells)),
+		execute(sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))))).
+
+
+achieves(cellspace(VARncells),sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(incell(VARcard)),
+		seq(not(incell(VARcard)),
+		execute(sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))))).
+
+
+achieves(incell(VARcard),sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(colspace(VARncols)),
+		seq(not(colspace(VARncols)),
+		execute(sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))))).
+
+
+achieves(colspace(VARncols),sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(cellspace(VARncells)),
+		seq(not(cellspace(VARncells)),
+		execute(sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))))).
+
+
+achieves(cellspace(VARncells),sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(bottomcol(VARcard)),
+		seq(not(bottomcol(VARcard)),
+		execute(sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))))).
+
+
+achieves(bottomcol(VARcard),sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARoldcard)),
+		seq(not(clear(VARoldcard)),
+		execute(sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))))).
+
+
+achieves(clear(VARoldcard),sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(colspace(VARncols)),
+		seq(not(colspace(VARncols)),
+		execute(sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))))).
+
+
+achieves(colspace(VARncols),sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(home(VARcard)),
+		seq(not(home(VARcard)),
+		execute(sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))))).
+
+
+achieves(home(VARcard),sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARoldcard)),
+		seq(not(clear(VARoldcard)),
+		execute(sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))))).
+
+
+achieves(clear(VARoldcard),sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(home(VARcard)),
+		seq(not(home(VARcard)),
+		execute(sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))))).
+
+
+achieves(home(VARcard),sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(colspace(VARncols)),
+		seq(not(colspace(VARncols)),
+		execute(sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))))).
+
+
+achieves(colspace(VARncols),sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(home(VARcard)),
+		seq(not(home(VARcard)),
+		execute(homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))))).
+
+
+achieves(home(VARcard),homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(cellspace(VARncells)),
+		seq(not(cellspace(VARncells)),
+		execute(homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))))).
+
+
+achieves(cellspace(VARncells),homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(cellspace(VARncells)),
+		seq(not(cellspace(VARncells)),
+		execute(colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))))).
+
+
+achieves(cellspace(VARncells),colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARcard)),
+		seq(not(clear(VARcard)),
+		execute(colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))))).
+
+
+achieves(clear(VARcard),colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARcard,VARnewcard)),
+		seq(not(on(VARcard,VARnewcard)),
+		execute(colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))))).
+
+
+achieves(on(VARcard,VARnewcard),colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(bottomcol(VARcard)),
+		seq(not(bottomcol(VARcard)),
+		execute(newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))))).
+
+
+achieves(bottomcol(VARcard),newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARcard)),
+		seq(not(clear(VARcard)),
+		execute(newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))))).
+
+
+achieves(clear(VARcard),newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(colspace(VARncols)),
+		seq(not(colspace(VARncols)),
+		execute(newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))))).
+
+
+achieves(colspace(VARncols),newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(cellspace(VARncells)),
+		seq(not(cellspace(VARncells)),
+		execute(newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))))).
+
+
+achieves(cellspace(VARncells),newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARcard,VARoldcard)),
+		seq(on(VARcard,VARoldcard),
+		execute(move(card(VARcard),card(VARoldcard),card(VARnewcard))))).
+
+
+avoids(on(VARcard,VARoldcard),move(card(VARcard),card(VARoldcard),card(VARnewcard))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARnewcard)),
+		seq(clear(VARnewcard),
+		execute(move(card(VARcard),card(VARoldcard),card(VARnewcard))))).
+
+
+avoids(clear(VARnewcard),move(card(VARcard),card(VARoldcard),card(VARnewcard))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(bottomcol(VARcard)),
+		seq(bottomcol(VARcard),
+		execute(move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))))).
+
+
+avoids(bottomcol(VARcard),move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARnewcard)),
+		seq(clear(VARnewcard),
+		execute(move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))))).
+
+
+avoids(clear(VARnewcard),move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(colspace(VARcols)),
+		seq(colspace(VARcols),
+		execute(move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))))).
+
+
+avoids(colspace(VARcols),move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARcard,VARoldcard)),
+		seq(on(VARcard,VARoldcard),
+		execute(sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))))).
+
+
+avoids(on(VARcard,VARoldcard),sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARcard)),
+		seq(clear(VARcard),
+		execute(sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))))).
+
+
+avoids(clear(VARcard),sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(cellspace(VARcells)),
+		seq(cellspace(VARcells),
+		execute(sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))))).
+
+
+avoids(cellspace(VARcells),sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(bottomcol(VARcard)),
+		seq(bottomcol(VARcard),
+		execute(sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))))).
+
+
+avoids(bottomcol(VARcard),sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARcard)),
+		seq(clear(VARcard),
+		execute(sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))))).
+
+
+avoids(clear(VARcard),sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(colspace(VARcols)),
+		seq(colspace(VARcols),
+		execute(sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))))).
+
+
+avoids(colspace(VARcols),sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(cellspace(VARcells)),
+		seq(cellspace(VARcells),
+		execute(sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))))).
+
+
+avoids(cellspace(VARcells),sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARcard,VARoldcard)),
+		seq(on(VARcard,VARoldcard),
+		execute(sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))))).
+
+
+avoids(on(VARcard,VARoldcard),sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(colspace(VARcols)),
+		seq(colspace(VARcols),
+		execute(sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))))).
+
+
+avoids(colspace(VARcols),sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARcard,VARoldcard)),
+		seq(on(VARcard,VARoldcard),
+		execute(sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))))).
+
+
+avoids(on(VARcard,VARoldcard),sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(home(VARhomecard)),
+		seq(home(VARhomecard),
+		execute(sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))))).
+
+
+avoids(home(VARhomecard),sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARcard)),
+		seq(clear(VARcard),
+		execute(sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))))).
+
+
+avoids(clear(VARcard),sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(home(VARhomecard)),
+		seq(home(VARhomecard),
+		execute(sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))))).
+
+
+avoids(home(VARhomecard),sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARcard)),
+		seq(clear(VARcard),
+		execute(sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))))).
+
+
+avoids(clear(VARcard),sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(bottomcol(VARcard)),
+		seq(bottomcol(VARcard),
+		execute(sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))))).
+
+
+avoids(bottomcol(VARcard),sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(colspace(VARcols)),
+		seq(colspace(VARcols),
+		execute(sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))))).
+
+
+avoids(colspace(VARcols),sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(incell(VARcard)),
+		seq(incell(VARcard),
+		execute(homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))))).
+
+
+avoids(incell(VARcard),homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(cellspace(VARcells)),
+		seq(cellspace(VARcells),
+		execute(homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))))).
+
+
+avoids(cellspace(VARcells),homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(home(VARhomecard)),
+		seq(home(VARhomecard),
+		execute(homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))))).
+
+
+avoids(home(VARhomecard),homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(incell(VARcard)),
+		seq(incell(VARcard),
+		execute(colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))))).
+
+
+avoids(incell(VARcard),colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(cellspace(VARcells)),
+		seq(cellspace(VARcells),
+		execute(colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))))).
+
+
+avoids(cellspace(VARcells),colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARnewcard)),
+		seq(clear(VARnewcard),
+		execute(colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))))).
+
+
+avoids(clear(VARnewcard),colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(incell(VARcard)),
+		seq(incell(VARcard),
+		execute(newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))))).
+
+
+avoids(incell(VARcard),newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(colspace(VARcols)),
+		seq(colspace(VARcols),
+		execute(newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))))).
+
+
+avoids(colspace(VARcols),newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(cellspace(VARcells)),
+		seq(cellspace(VARcells),
+		execute(newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))))).
+
+
+avoids(cellspace(VARcells),newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move(card(VARcard),card(VARoldcard),card(VARnewcard))),
+		seq(shuffle(
+			achieve(clear(VARcard)),
+			achieve(clear(VARnewcard)),
+			achieve(canstack(VARcard,VARnewcard)),
+			achieve(on(VARcard,VARoldcard))),
+			move(card(VARcard),card(VARoldcard),card(VARnewcard)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols))),
+		seq(shuffle(
+			achieve(clear(VARcard)),
+			achieve(bottomcol(VARcard)),
+			achieve(clear(VARnewcard)),
+			achieve(canstack(VARcard,VARnewcard)),
+			achieve(colspace(VARcols)),
+			achieve(successor(VARncols,VARcols))),
+			move_b(card(VARcard),card(VARnewcard),num(VARcols),num(VARncols)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells))),
+		seq(shuffle(
+			achieve(clear(VARcard)),
+			achieve(on(VARcard,VARoldcard)),
+			achieve(cellspace(VARcells)),
+			achieve(successor(VARcells,VARncells))),
+			sendtofree(card(VARcard),card(VARoldcard),num(VARcells),num(VARncells)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols))),
+		seq(shuffle(
+			achieve(clear(VARcard)),
+			achieve(bottomcol(VARcard)),
+			achieve(cellspace(VARcells)),
+			achieve(successor(VARcells,VARncells)),
+			achieve(colspace(VARcols)),
+			achieve(successor(VARncols,VARcols))),
+			sendtofree_b(card(VARcard),num(VARcells),num(VARncells),num(VARcols),num(VARncols)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols))),
+		seq(shuffle(
+			achieve(clear(VARcard)),
+			achieve(colspace(VARcols)),
+			achieve(successor(VARcols,VARncols)),
+			achieve(on(VARcard,VARoldcard))),
+			sendtonewcol(card(VARcard),card(VARoldcard),num(VARcols),num(VARncols)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard))),
+		seq(shuffle(
+			achieve(clear(VARcard)),
+			achieve(on(VARcard,VARoldcard)),
+			achieve(home(VARhomecard)),
+			achieve(suit(VARcard,VARsuit)),
+			achieve(suit(VARhomecard,VARsuit)),
+			achieve(value(VARcard,VARvcard)),
+			achieve(value(VARhomecard,VARvhomecard)),
+			achieve(successor(VARvcard,VARvhomecard))),
+			sendtohome(card(VARcard),card(VARoldcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols))),
+		seq(shuffle(
+			achieve(clear(VARcard)),
+			achieve(bottomcol(VARcard)),
+			achieve(home(VARhomecard)),
+			achieve(suit(VARcard,VARsuit)),
+			achieve(suit(VARhomecard,VARsuit)),
+			achieve(value(VARcard,VARvcard)),
+			achieve(value(VARhomecard,VARvhomecard)),
+			achieve(successor(VARvcard,VARvhomecard)),
+			achieve(colspace(VARcols)),
+			achieve(successor(VARncols,VARcols))),
+			sendtohome_b(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcols),num(VARncols)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells))),
+		seq(shuffle(
+			achieve(incell(VARcard)),
+			achieve(home(VARhomecard)),
+			achieve(suit(VARcard,VARsuit)),
+			achieve(suit(VARhomecard,VARsuit)),
+			achieve(value(VARcard,VARvcard)),
+			achieve(value(VARhomecard,VARvhomecard)),
+			achieve(successor(VARvcard,VARvhomecard)),
+			achieve(cellspace(VARcells)),
+			achieve(successor(VARncells,VARcells))),
+			homefromfreecell(card(VARcard),suit(VARsuit),num(VARvcard),card(VARhomecard),num(VARvhomecard),num(VARcells),num(VARncells)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells))),
+		seq(shuffle(
+			achieve(incell(VARcard)),
+			achieve(clear(VARnewcard)),
+			achieve(canstack(VARcard,VARnewcard)),
+			achieve(cellspace(VARcells)),
+			achieve(successor(VARncells,VARcells))),
+			colfromfreecell(card(VARcard),card(VARnewcard),num(VARcells),num(VARncells)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells))),
+		seq(shuffle(
+			achieve(incell(VARcard)),
+			achieve(colspace(VARcols)),
+			achieve(cellspace(VARcells)),
+			achieve(successor(VARcols,VARncols)),
+			achieve(successor(VARncells,VARcells))),
+			newcolfromfreecell(card(VARcard),num(VARcols),num(VARncols),num(VARcells),num(VARncells)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		not(avoids(G2,planningAction)))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		not(avoids(G1,planningAction))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(2)).
+

@@ -1,0 +1,3852 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% airport_fixed_structure%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium,1).
+tabled_predicate(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium,1).
+tabled_predicate(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium,1).
+tabled_predicate(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium,1).
+tabled_predicate(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium,1).
+tabled_predicate(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium,1).
+tabled_predicate(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium,1).
+tabled_predicate(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium,1).
+tabled_predicate(move_seg_rw_0_400_seg_rww_0_50_south_south_medium,1).
+tabled_predicate(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium,1).
+tabled_predicate(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium,1).
+tabled_predicate(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium,1).
+tabled_predicate(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium,1).
+tabled_predicate(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium,1).
+tabled_predicate(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium,1).
+tabled_predicate(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium,1).
+tabled_predicate(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium,1).
+tabled_predicate(takeoff_seg_rww_0_50_north,1).
+tabled_predicate(takeoff_seg_rwe_0_50_south,1).
+tabled_predicate(park_seg_pp_0_60_north,1).
+tabled_predicate(park_seg_pp_0_60_south,1).
+tabled_predicate(startup_seg_pp_0_60_north_medium,1).
+tabled_predicate(startup_seg_pp_0_60_south_medium,1).
+tabled_predicate(startup_seg_ppdoor_0_40_north_medium,1).
+tabled_predicate(startup_seg_ppdoor_0_40_south_medium,1).
+tabled_predicate(startup_seg_tww1_0_200_north_medium,1).
+tabled_predicate(startup_seg_tww1_0_200_south_medium,1).
+tabled_predicate(startup_seg_twe1_0_200_north_medium,1).
+tabled_predicate(startup_seg_twe1_0_200_south_medium,1).
+tabled_predicate(startup_seg_tww2_0_50_north_medium,1).
+tabled_predicate(startup_seg_tww2_0_50_south_medium,1).
+tabled_predicate(startup_seg_tww3_0_50_north_medium,1).
+tabled_predicate(startup_seg_tww3_0_50_south_medium,1).
+tabled_predicate(startup_seg_tww4_0_50_north_medium,1).
+tabled_predicate(startup_seg_tww4_0_50_south_medium,1).
+tabled_predicate(startup_seg_twe4_0_50_north_medium,1).
+tabled_predicate(startup_seg_twe4_0_50_south_medium,1).
+tabled_predicate(startup_seg_twe3_0_50_north_medium,1).
+tabled_predicate(startup_seg_twe3_0_50_south_medium,1).
+tabled_predicate(startup_seg_twe2_0_50_north_medium,1).
+tabled_predicate(startup_seg_twe2_0_50_south_medium,1).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(has_type,2).
+dynamic_predicate(at_segment,2).
+dynamic_predicate(facing,2).
+dynamic_predicate(occupied,1).
+dynamic_predicate(not_occupied,1).
+dynamic_predicate(blocked,2).
+dynamic_predicate(not_blocked,2).
+dynamic_predicate(is_start_runway,2).
+dynamic_predicate(airborne,2).
+dynamic_predicate(is_moving,1).
+dynamic_predicate(is_pushing,1).
+dynamic_predicate(is_parked,2).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,north),
+		seq(at_segment(VARa,seg_pp_0_60),
+		seq(not_occupied(seg_ppdoor_0_40),
+		seq(not_blocked(seg_ppdoor_0_40,airplane_cfbeg),
+		seq(not_blocked(seg_ppdoor_0_40,airplane_daewh),
+		seq(ins(not_occupied(seg_pp_0_60)),
+		seq(ins(occupied(seg_ppdoor_0_40)),
+		seq(ins(blocked(seg_ppdoor_0_40,VARa)),
+		seq(ins(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(del(occupied(seg_pp_0_60)),
+		seq(del(at_segment(VARa,seg_pp_0_60)),
+		seq(del(not_occupied(seg_ppdoor_0_40)),del(not_blocked(seg_ppdoor_0_40,VARa))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,north),
+		seq(at_segment(VARa,seg_ppdoor_0_40),
+		seq(not_occupied(seg_tww1_0_200),
+		seq(not_blocked(seg_tww1_0_200,airplane_cfbeg),
+		seq(not_blocked(seg_tww1_0_200,airplane_daewh),
+		seq(not_occupied(seg_twe1_0_200),
+		seq(ins(not_occupied(seg_ppdoor_0_40)),
+		seq(ins(occupied(seg_tww1_0_200)),
+		seq(ins(blocked(seg_tww1_0_200,VARa)),
+		seq(ins(at_segment(VARa,seg_tww1_0_200)),
+		seq(ins(facing(VARa,south)),
+		seq(ins(not_blocked(seg_pp_0_60,VARa)),
+		seq(ins(blocked(seg_twe1_0_200,VARa)),
+		seq(del(occupied(seg_ppdoor_0_40)),
+		seq(del(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(del(not_occupied(seg_tww1_0_200)),
+		seq(del(not_blocked(seg_tww1_0_200,VARa)),
+		seq(del(facing(VARa,north)),
+		seq(del(blocked(seg_pp_0_60,VARa)),del(not_blocked(seg_twe1_0_200,VARa)))))))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,north),
+		seq(at_segment(VARa,seg_tww1_0_200),
+		seq(not_occupied(seg_twe1_0_200),
+		seq(not_blocked(seg_twe1_0_200,airplane_cfbeg),
+		seq(not_blocked(seg_twe1_0_200,airplane_daewh),
+		seq(not_occupied(seg_ppdoor_0_40),
+		seq(ins(not_occupied(seg_tww1_0_200)),
+		seq(ins(occupied(seg_twe1_0_200)),
+		seq(ins(blocked(seg_twe1_0_200,VARa)),
+		seq(ins(at_segment(VARa,seg_twe1_0_200)),
+		seq(ins(facing(VARa,south)),
+		seq(ins(not_blocked(seg_tww2_0_50,VARa)),
+		seq(ins(blocked(seg_ppdoor_0_40,VARa)),
+		seq(del(occupied(seg_tww1_0_200)),
+		seq(del(at_segment(VARa,seg_tww1_0_200)),
+		seq(del(not_occupied(seg_twe1_0_200)),
+		seq(del(not_blocked(seg_twe1_0_200,VARa)),
+		seq(del(facing(VARa,north)),
+		seq(del(blocked(seg_tww2_0_50,VARa)),del(not_blocked(seg_ppdoor_0_40,VARa)))))))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,south),
+		seq(at_segment(VARa,seg_twe1_0_200),
+		seq(not_occupied(seg_twe2_0_50),
+		seq(not_blocked(seg_twe2_0_50,airplane_cfbeg),
+		seq(not_blocked(seg_twe2_0_50,airplane_daewh),
+		seq(ins(not_occupied(seg_twe1_0_200)),
+		seq(ins(occupied(seg_twe2_0_50)),
+		seq(ins(blocked(seg_twe2_0_50,VARa)),
+		seq(ins(at_segment(VARa,seg_twe2_0_50)),
+		seq(ins(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(ins(not_blocked(seg_tww1_0_200,VARa)),
+		seq(del(occupied(seg_twe1_0_200)),
+		seq(del(at_segment(VARa,seg_twe1_0_200)),
+		seq(del(not_occupied(seg_twe2_0_50)),
+		seq(del(not_blocked(seg_twe2_0_50,VARa)),
+		seq(del(blocked(seg_ppdoor_0_40,VARa)),del(blocked(seg_tww1_0_200,VARa))))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,south),
+		seq(at_segment(VARa,seg_twe2_0_50),
+		seq(not_occupied(seg_twe3_0_50),
+		seq(not_blocked(seg_twe3_0_50,airplane_cfbeg),
+		seq(not_blocked(seg_twe3_0_50,airplane_daewh),
+		seq(ins(not_occupied(seg_twe2_0_50)),
+		seq(ins(occupied(seg_twe3_0_50)),
+		seq(ins(blocked(seg_twe3_0_50,VARa)),
+		seq(ins(at_segment(VARa,seg_twe3_0_50)),
+		seq(ins(not_blocked(seg_twe1_0_200,VARa)),
+		seq(del(occupied(seg_twe2_0_50)),
+		seq(del(at_segment(VARa,seg_twe2_0_50)),
+		seq(del(not_occupied(seg_twe3_0_50)),
+		seq(del(not_blocked(seg_twe3_0_50,VARa)),del(blocked(seg_twe1_0_200,VARa))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,south),
+		seq(at_segment(VARa,seg_twe3_0_50),
+		seq(not_occupied(seg_twe4_0_50),
+		seq(not_blocked(seg_twe4_0_50,airplane_cfbeg),
+		seq(not_blocked(seg_twe4_0_50,airplane_daewh),
+		seq(ins(not_occupied(seg_twe3_0_50)),
+		seq(ins(occupied(seg_twe4_0_50)),
+		seq(ins(blocked(seg_twe4_0_50,VARa)),
+		seq(ins(at_segment(VARa,seg_twe4_0_50)),
+		seq(ins(not_blocked(seg_twe2_0_50,VARa)),
+		seq(del(occupied(seg_twe3_0_50)),
+		seq(del(at_segment(VARa,seg_twe3_0_50)),
+		seq(del(not_occupied(seg_twe4_0_50)),
+		seq(del(not_blocked(seg_twe4_0_50,VARa)),del(blocked(seg_twe2_0_50,VARa))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,south),
+		seq(at_segment(VARa,seg_twe4_0_50),
+		seq(not_occupied(seg_rwe_0_50),
+		seq(not_blocked(seg_rwe_0_50,airplane_cfbeg),
+		seq(not_blocked(seg_rwe_0_50,airplane_daewh),
+		seq(ins(not_occupied(seg_twe4_0_50)),
+		seq(ins(occupied(seg_rwe_0_50)),
+		seq(ins(blocked(seg_rwe_0_50,VARa)),
+		seq(ins(at_segment(VARa,seg_rwe_0_50)),
+		seq(ins(not_blocked(seg_twe3_0_50,VARa)),
+		seq(del(occupied(seg_twe4_0_50)),
+		seq(del(at_segment(VARa,seg_twe4_0_50)),
+		seq(del(not_occupied(seg_rwe_0_50)),
+		seq(del(not_blocked(seg_rwe_0_50,VARa)),del(blocked(seg_twe3_0_50,VARa))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,south),
+		seq(at_segment(VARa,seg_rwe_0_50),
+		seq(not_occupied(seg_rw_0_400),
+		seq(not_blocked(seg_rw_0_400,airplane_cfbeg),
+		seq(not_blocked(seg_rw_0_400,airplane_daewh),
+		seq(ins(not_occupied(seg_rwe_0_50)),
+		seq(ins(occupied(seg_rw_0_400)),
+		seq(ins(blocked(seg_rw_0_400,VARa)),
+		seq(ins(at_segment(VARa,seg_rw_0_400)),
+		seq(ins(not_blocked(seg_twe4_0_50,VARa)),
+		seq(ins(not_blocked(seg_twe4_0_50,VARa)),
+		seq(del(occupied(seg_rwe_0_50)),
+		seq(del(at_segment(VARa,seg_rwe_0_50)),
+		seq(del(not_occupied(seg_rw_0_400)),
+		seq(del(not_blocked(seg_rw_0_400,VARa)),
+		seq(del(blocked(seg_twe4_0_50,VARa)),del(blocked(seg_twe4_0_50,VARa))))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,south),
+		seq(at_segment(VARa,seg_rw_0_400),
+		seq(not_occupied(seg_rww_0_50),
+		seq(not_blocked(seg_rww_0_50,airplane_cfbeg),
+		seq(not_blocked(seg_rww_0_50,airplane_daewh),
+		seq(not_occupied(seg_rwe_0_50),
+		seq(ins(not_occupied(seg_rw_0_400)),
+		seq(ins(occupied(seg_rww_0_50)),
+		seq(ins(blocked(seg_rww_0_50,VARa)),
+		seq(ins(at_segment(VARa,seg_rww_0_50)),
+		seq(del(occupied(seg_rw_0_400)),
+		seq(del(at_segment(VARa,seg_rw_0_400)),
+		seq(del(not_occupied(seg_rww_0_50)),del(not_blocked(seg_rww_0_50,VARa)))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,south),
+		seq(at_segment(VARa,seg_rww_0_50),
+		seq(not_occupied(seg_tww4_0_50),
+		seq(not_blocked(seg_tww4_0_50,airplane_cfbeg),
+		seq(not_blocked(seg_tww4_0_50,airplane_daewh),
+		seq(not_occupied(seg_rwtw1_0_10),
+		seq(ins(not_occupied(seg_rww_0_50)),
+		seq(ins(occupied(seg_tww4_0_50)),
+		seq(ins(blocked(seg_tww4_0_50,VARa)),
+		seq(ins(at_segment(VARa,seg_tww4_0_50)),
+		seq(ins(facing(VARa,north)),
+		seq(ins(not_blocked(seg_rwe_0_50,VARa)),
+		seq(ins(not_blocked(seg_rw_0_400,VARa)),
+		seq(ins(blocked(seg_rwtw1_0_10,VARa)),
+		seq(del(occupied(seg_rww_0_50)),
+		seq(del(at_segment(VARa,seg_rww_0_50)),
+		seq(del(not_occupied(seg_tww4_0_50)),
+		seq(del(not_blocked(seg_tww4_0_50,VARa)),
+		seq(del(facing(VARa,south)),
+		seq(del(blocked(seg_rwe_0_50,VARa)),
+		seq(del(blocked(seg_rw_0_400,VARa)),del(not_blocked(seg_rwtw1_0_10,VARa)))))))))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,north),
+		seq(at_segment(VARa,seg_tww4_0_50),
+		seq(not_occupied(seg_tww3_0_50),
+		seq(not_blocked(seg_tww3_0_50,airplane_cfbeg),
+		seq(not_blocked(seg_tww3_0_50,airplane_daewh),
+		seq(ins(not_occupied(seg_tww4_0_50)),
+		seq(ins(occupied(seg_tww3_0_50)),
+		seq(ins(blocked(seg_tww3_0_50,VARa)),
+		seq(ins(at_segment(VARa,seg_tww3_0_50)),
+		seq(ins(not_blocked(seg_rww_0_50,VARa)),
+		seq(ins(not_blocked(seg_rwtw1_0_10,VARa)),
+		seq(del(occupied(seg_tww4_0_50)),
+		seq(del(at_segment(VARa,seg_tww4_0_50)),
+		seq(del(not_occupied(seg_tww3_0_50)),
+		seq(del(not_blocked(seg_tww3_0_50,VARa)),
+		seq(del(blocked(seg_rww_0_50,VARa)),del(blocked(seg_rwtw1_0_10,VARa))))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,north),
+		seq(at_segment(VARa,seg_tww3_0_50),
+		seq(not_occupied(seg_tww2_0_50),
+		seq(not_blocked(seg_tww2_0_50,airplane_cfbeg),
+		seq(not_blocked(seg_tww2_0_50,airplane_daewh),
+		seq(ins(not_occupied(seg_tww3_0_50)),
+		seq(ins(occupied(seg_tww2_0_50)),
+		seq(ins(blocked(seg_tww2_0_50,VARa)),
+		seq(ins(at_segment(VARa,seg_tww2_0_50)),
+		seq(ins(not_blocked(seg_tww4_0_50,VARa)),
+		seq(del(occupied(seg_tww3_0_50)),
+		seq(del(at_segment(VARa,seg_tww3_0_50)),
+		seq(del(not_occupied(seg_tww2_0_50)),
+		seq(del(not_blocked(seg_tww2_0_50,VARa)),del(blocked(seg_tww4_0_50,VARa))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,north),
+		seq(at_segment(VARa,seg_tww2_0_50),
+		seq(not_occupied(seg_tww1_0_200),
+		seq(not_blocked(seg_tww1_0_200,airplane_cfbeg),
+		seq(not_blocked(seg_tww1_0_200,airplane_daewh),
+		seq(ins(not_occupied(seg_tww2_0_50)),
+		seq(ins(occupied(seg_tww1_0_200)),
+		seq(ins(blocked(seg_tww1_0_200,VARa)),
+		seq(ins(at_segment(VARa,seg_tww1_0_200)),
+		seq(ins(not_blocked(seg_tww3_0_50,VARa)),
+		seq(del(occupied(seg_tww2_0_50)),
+		seq(del(at_segment(VARa,seg_tww2_0_50)),
+		seq(del(not_occupied(seg_tww1_0_200)),
+		seq(del(not_blocked(seg_tww1_0_200,VARa)),del(blocked(seg_tww3_0_50,VARa))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,north),
+		seq(at_segment(VARa,seg_tww1_0_200),
+		seq(not_occupied(seg_ppdoor_0_40),
+		seq(not_blocked(seg_ppdoor_0_40,airplane_cfbeg),
+		seq(not_blocked(seg_ppdoor_0_40,airplane_daewh),
+		seq(not_occupied(seg_twe1_0_200),
+		seq(ins(not_occupied(seg_tww1_0_200)),
+		seq(ins(occupied(seg_ppdoor_0_40)),
+		seq(ins(blocked(seg_ppdoor_0_40,VARa)),
+		seq(ins(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(ins(facing(VARa,south)),
+		seq(ins(not_blocked(seg_tww2_0_50,VARa)),
+		seq(ins(blocked(seg_twe1_0_200,VARa)),
+		seq(del(occupied(seg_tww1_0_200)),
+		seq(del(at_segment(VARa,seg_tww1_0_200)),
+		seq(del(not_occupied(seg_ppdoor_0_40)),
+		seq(del(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(del(facing(VARa,north)),
+		seq(del(blocked(seg_tww2_0_50,VARa)),del(not_blocked(seg_twe1_0_200,VARa)))))))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_moving(VARa),
+		seq(facing(VARa,south),
+		seq(at_segment(VARa,seg_ppdoor_0_40),
+		seq(not_occupied(seg_pp_0_60),
+		seq(not_blocked(seg_pp_0_60,airplane_cfbeg),
+		seq(not_blocked(seg_pp_0_60,airplane_daewh),
+		seq(ins(not_occupied(seg_ppdoor_0_40)),
+		seq(ins(occupied(seg_pp_0_60)),
+		seq(ins(blocked(seg_pp_0_60,VARa)),
+		seq(ins(at_segment(VARa,seg_pp_0_60)),
+		seq(ins(not_blocked(seg_tww1_0_200,VARa)),
+		seq(ins(not_blocked(seg_twe1_0_200,VARa)),
+		seq(del(occupied(seg_ppdoor_0_40)),
+		seq(del(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(del(not_occupied(seg_pp_0_60)),
+		seq(del(not_blocked(seg_pp_0_60,VARa)),
+		seq(del(blocked(seg_tww1_0_200,VARa)),del(blocked(seg_twe1_0_200,VARa))))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_pushing(VARa),
+		seq(facing(VARa,south),
+		seq(at_segment(VARa,seg_pp_0_60),
+		seq(not_occupied(seg_ppdoor_0_40),
+		seq(not_blocked(seg_ppdoor_0_40,airplane_cfbeg),
+		seq(not_blocked(seg_ppdoor_0_40,airplane_daewh),
+		seq(ins(not_occupied(seg_pp_0_60)),
+		seq(ins(not_blocked(seg_pp_0_60,VARa)),
+		seq(ins(occupied(seg_ppdoor_0_40)),
+		seq(ins(blocked(seg_ppdoor_0_40,VARa)),
+		seq(ins(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(del(occupied(seg_pp_0_60)),
+		seq(del(blocked(seg_pp_0_60,VARa)),
+		seq(del(at_segment(VARa,seg_pp_0_60)),
+		seq(del(not_occupied(seg_ppdoor_0_40)),del(not_blocked(seg_ppdoor_0_40,VARa))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa)),
+		seq(has_type(VARa,medium),
+		seq(is_pushing(VARa),
+		seq(facing(VARa,south),
+		seq(at_segment(VARa,seg_ppdoor_0_40),
+		seq(not_occupied(seg_tww1_0_200),
+		seq(not_blocked(seg_tww1_0_200,airplane_cfbeg),
+		seq(not_blocked(seg_tww1_0_200,airplane_daewh),
+		seq(ins(not_occupied(seg_ppdoor_0_40)),
+		seq(ins(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(ins(occupied(seg_tww1_0_200)),
+		seq(ins(blocked(seg_tww1_0_200,VARa)),
+		seq(ins(at_segment(VARa,seg_tww1_0_200)),
+		seq(ins(facing(VARa,north)),
+		seq(del(occupied(seg_ppdoor_0_40)),
+		seq(del(blocked(seg_ppdoor_0_40,VARa)),
+		seq(del(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(del(not_occupied(seg_tww1_0_200)),
+		seq(del(not_blocked(seg_tww1_0_200,VARa)),del(facing(VARa,south))))))))))))))))))))).
+
+tr_clause(
+	planningAction,
+		pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	takeoff_seg_rww_0_50_north(airplane(VARa)),
+		seq(at_segment(VARa,seg_rww_0_50),
+		seq(facing(VARa,north),
+		seq(is_moving(VARa),
+		seq(ins(not_occupied(seg_rww_0_50)),
+		seq(ins(not_blocked(seg_rww_0_50,VARa)),
+		seq(ins(airborne(VARa,seg_rww_0_50)),
+		seq(ins(not_blocked(seg_tww4_0_50,VARa)),
+		seq(ins(not_blocked(seg_tww4_0_50,VARa)),
+		seq(del(occupied(seg_rww_0_50)),
+		seq(del(blocked(seg_rww_0_50,VARa)),
+		seq(del(at_segment(VARa,seg_rww_0_50)),
+		seq(del(is_moving(VARa)),
+		seq(del(blocked(seg_tww4_0_50,VARa)),del(blocked(seg_tww4_0_50,VARa)))))))))))))))).
+
+tr_clause(
+	planningAction,
+		takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	takeoff_seg_rwe_0_50_south(airplane(VARa)),
+		seq(at_segment(VARa,seg_rwe_0_50),
+		seq(facing(VARa,south),
+		seq(is_moving(VARa),
+		seq(ins(not_occupied(seg_rwe_0_50)),
+		seq(ins(not_blocked(seg_rwe_0_50,VARa)),
+		seq(ins(airborne(VARa,seg_rwe_0_50)),
+		seq(ins(not_blocked(seg_twe4_0_50,VARa)),
+		seq(ins(not_blocked(seg_twe4_0_50,VARa)),
+		seq(del(occupied(seg_rwe_0_50)),
+		seq(del(blocked(seg_rwe_0_50,VARa)),
+		seq(del(at_segment(VARa,seg_rwe_0_50)),
+		seq(del(is_moving(VARa)),
+		seq(del(blocked(seg_twe4_0_50,VARa)),del(blocked(seg_twe4_0_50,VARa)))))))))))))))).
+
+tr_clause(
+	planningAction,
+		takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	park_seg_pp_0_60_north(airplane(VARa)),
+		seq(at_segment(VARa,seg_pp_0_60),
+		seq(facing(VARa,north),
+		seq(is_moving(VARa),ins(is_parked(VARa,seg_pp_0_60)))))).
+
+tr_clause(
+	planningAction,
+		park_seg_pp_0_60_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	park_seg_pp_0_60_south(airplane(VARa)),
+		seq(at_segment(VARa,seg_pp_0_60),
+		seq(facing(VARa,south),
+		seq(is_moving(VARa),
+		seq(ins(is_parked(VARa,seg_pp_0_60)),
+		seq(ins(not_blocked(seg_ppdoor_0_40,VARa)),del(blocked(seg_ppdoor_0_40,VARa)))))))).
+
+tr_clause(
+	planningAction,
+		park_seg_pp_0_60_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_pp_0_60_north_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_pp_0_60),
+		seq(ins(is_moving(VARa)),del(is_pushing(VARa)))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_pp_0_60_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_pp_0_60_south_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_pp_0_60),
+		seq(not_occupied(seg_ppdoor_0_40),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_ppdoor_0_40,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_ppdoor_0_40,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_pp_0_60_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_ppdoor_0_40_north_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_ppdoor_0_40),
+		seq(not_occupied(seg_pp_0_60),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_pp_0_60,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_pp_0_60,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_ppdoor_0_40_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_ppdoor_0_40_south_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_ppdoor_0_40),
+		seq(not_occupied(seg_tww1_0_200),
+		seq(not_occupied(seg_twe1_0_200),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_tww1_0_200,VARa)),
+		seq(ins(blocked(seg_twe1_0_200,VARa)),
+		seq(del(is_pushing(VARa)),
+		seq(del(not_blocked(seg_tww1_0_200,VARa)),del(not_blocked(seg_twe1_0_200,VARa)))))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_ppdoor_0_40_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_tww1_0_200_north_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_tww1_0_200),
+		seq(not_occupied(seg_tww2_0_50),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_tww2_0_50,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_tww2_0_50,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_tww1_0_200_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_tww1_0_200_south_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_tww1_0_200),
+		seq(not_occupied(seg_ppdoor_0_40),
+		seq(not_occupied(seg_twe1_0_200),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_ppdoor_0_40,VARa)),
+		seq(ins(blocked(seg_twe1_0_200,VARa)),
+		seq(del(is_pushing(VARa)),
+		seq(del(not_blocked(seg_ppdoor_0_40,VARa)),del(not_blocked(seg_twe1_0_200,VARa)))))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_tww1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_twe1_0_200_north_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_twe1_0_200),
+		seq(not_occupied(seg_twe2_0_50),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_twe2_0_50,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_twe2_0_50,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_twe1_0_200_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_twe1_0_200_south_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_twe1_0_200),
+		seq(not_occupied(seg_ppdoor_0_40),
+		seq(not_occupied(seg_tww1_0_200),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_ppdoor_0_40,VARa)),
+		seq(ins(blocked(seg_tww1_0_200,VARa)),
+		seq(del(is_pushing(VARa)),
+		seq(del(not_blocked(seg_ppdoor_0_40,VARa)),del(not_blocked(seg_tww1_0_200,VARa)))))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_twe1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_tww2_0_50_north_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_tww2_0_50),
+		seq(not_occupied(seg_tww3_0_50),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_tww3_0_50,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_tww3_0_50,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_tww2_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_tww2_0_50_south_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_tww2_0_50),
+		seq(not_occupied(seg_tww1_0_200),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_tww1_0_200,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_tww1_0_200,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_tww2_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_tww3_0_50_north_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_tww3_0_50),
+		seq(not_occupied(seg_tww4_0_50),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_tww4_0_50,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_tww4_0_50,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_tww3_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_tww3_0_50_south_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_tww3_0_50),
+		seq(not_occupied(seg_tww2_0_50),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_tww2_0_50,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_tww2_0_50,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_tww3_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_tww4_0_50_north_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_tww4_0_50),
+		seq(not_occupied(seg_rww_0_50),
+		seq(not_occupied(seg_rwtw1_0_10),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_rww_0_50,VARa)),
+		seq(ins(blocked(seg_rwtw1_0_10,VARa)),
+		seq(del(is_pushing(VARa)),
+		seq(del(not_blocked(seg_rww_0_50,VARa)),del(not_blocked(seg_rwtw1_0_10,VARa)))))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_tww4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_tww4_0_50_south_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_tww4_0_50),
+		seq(not_occupied(seg_tww3_0_50),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_tww3_0_50,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_tww3_0_50,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_tww4_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_twe4_0_50_north_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_twe4_0_50),
+		seq(not_occupied(seg_rwte1_0_10),
+		seq(not_occupied(seg_rwe_0_50),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_rwte1_0_10,VARa)),
+		seq(ins(blocked(seg_rwe_0_50,VARa)),
+		seq(del(is_pushing(VARa)),
+		seq(del(not_blocked(seg_rwte1_0_10,VARa)),del(not_blocked(seg_rwe_0_50,VARa)))))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_twe4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_twe4_0_50_south_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_twe4_0_50),
+		seq(not_occupied(seg_twe3_0_50),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_twe3_0_50,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_twe3_0_50,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_twe4_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_twe3_0_50_north_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_twe3_0_50),
+		seq(not_occupied(seg_twe4_0_50),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_twe4_0_50,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_twe4_0_50,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_twe3_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_twe3_0_50_south_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_twe3_0_50),
+		seq(not_occupied(seg_twe2_0_50),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_twe2_0_50,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_twe2_0_50,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_twe3_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_twe2_0_50_north_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_twe2_0_50),
+		seq(not_occupied(seg_twe3_0_50),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_twe3_0_50,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_twe3_0_50,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_twe2_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	startup_seg_twe2_0_50_south_medium(airplane(VARa)),
+		seq(is_pushing(VARa),
+		seq(at_segment(VARa,seg_twe2_0_50),
+		seq(not_occupied(seg_twe1_0_200),
+		seq(ins(is_moving(VARa)),
+		seq(ins(blocked(seg_twe1_0_200,VARa)),
+		seq(del(is_pushing(VARa)),del(not_blocked(seg_twe1_0_200,VARa))))))))).
+
+tr_clause(
+	planningAction,
+		startup_seg_twe2_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(has_type(VARa,VARt)),
+		has_type(VARa,VARt)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,VARs)),
+		at_segment(VARa,VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(facing(VARa,VARd)),
+		facing(VARa,VARd)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(VARs)),
+		occupied(VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(VARs)),
+		not_occupied(VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(VARs,VARa)),
+		blocked(VARs,VARa)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(VARs,VARa)),
+		not_blocked(VARs,VARa)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_start_runway(VARs,VARd)),
+		is_start_runway(VARs,VARd)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(airborne(VARa,VARs)),
+		airborne(VARa,VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		is_moving(VARa)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_pushing(VARa)),
+		is_pushing(VARa)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_parked(VARa,VARs)),
+		is_parked(VARa,VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(has_type(VARa,VARt)),
+		not(has_type(VARa,VARt))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,VARs)),
+		not(at_segment(VARa,VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(facing(VARa,VARd)),
+		not(facing(VARa,VARd))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(VARs)),
+		not(occupied(VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(VARs)),
+		not(not_occupied(VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(VARs,VARa)),
+		not(blocked(VARs,VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(VARs,VARa)),
+		not(not_blocked(VARs,VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_start_runway(VARs,VARd)),
+		not(is_start_runway(VARs,VARd))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(airborne(VARa,VARs)),
+		not(airborne(VARa,VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_moving(VARa)),
+		not(is_moving(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		not(is_pushing(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_parked(VARa,VARs)),
+		not(is_parked(VARa,VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_pp_0_60)),
+		seq(not(not_occupied(seg_pp_0_60)),
+		execute(move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_pp_0_60),move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_ppdoor_0_40)),
+		seq(not(occupied(seg_ppdoor_0_40)),
+		execute(move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_ppdoor_0_40),move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_ppdoor_0_40,VARa)),
+		seq(not(blocked(seg_ppdoor_0_40,VARa)),
+		execute(move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_ppdoor_0_40,VARa),move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(not(at_segment(VARa,seg_ppdoor_0_40)),
+		execute(move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_ppdoor_0_40),move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_ppdoor_0_40)),
+		seq(not(not_occupied(seg_ppdoor_0_40)),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_ppdoor_0_40),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_tww1_0_200)),
+		seq(not(occupied(seg_tww1_0_200)),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_tww1_0_200),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww1_0_200,VARa)),
+		seq(not(blocked(seg_tww1_0_200,VARa)),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww1_0_200,VARa),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_tww1_0_200)),
+		seq(not(at_segment(VARa,seg_tww1_0_200)),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_tww1_0_200),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(facing(VARa,south)),
+		seq(not(facing(VARa,south)),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(facing(VARa,south),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_pp_0_60,VARa)),
+		seq(not(not_blocked(seg_pp_0_60,VARa)),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_pp_0_60,VARa),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe1_0_200,VARa)),
+		seq(not(blocked(seg_twe1_0_200,VARa)),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe1_0_200,VARa),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_tww1_0_200)),
+		seq(not(not_occupied(seg_tww1_0_200)),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_tww1_0_200),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_twe1_0_200)),
+		seq(not(occupied(seg_twe1_0_200)),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_twe1_0_200),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe1_0_200,VARa)),
+		seq(not(blocked(seg_twe1_0_200,VARa)),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe1_0_200,VARa),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_twe1_0_200)),
+		seq(not(at_segment(VARa,seg_twe1_0_200)),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_twe1_0_200),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(facing(VARa,south)),
+		seq(not(facing(VARa,south)),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(facing(VARa,south),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_tww2_0_50,VARa)),
+		seq(not(not_blocked(seg_tww2_0_50,VARa)),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_tww2_0_50,VARa),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_ppdoor_0_40,VARa)),
+		seq(not(blocked(seg_ppdoor_0_40,VARa)),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_ppdoor_0_40,VARa),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_twe1_0_200)),
+		seq(not(not_occupied(seg_twe1_0_200)),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_twe1_0_200),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_twe2_0_50)),
+		seq(not(occupied(seg_twe2_0_50)),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_twe2_0_50),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe2_0_50,VARa)),
+		seq(not(blocked(seg_twe2_0_50,VARa)),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe2_0_50,VARa),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_twe2_0_50)),
+		seq(not(at_segment(VARa,seg_twe2_0_50)),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_twe2_0_50),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(not(not_blocked(seg_ppdoor_0_40,VARa)),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_ppdoor_0_40,VARa),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_tww1_0_200,VARa)),
+		seq(not(not_blocked(seg_tww1_0_200,VARa)),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_tww1_0_200,VARa),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_twe2_0_50)),
+		seq(not(not_occupied(seg_twe2_0_50)),
+		execute(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_twe2_0_50),move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_twe3_0_50)),
+		seq(not(occupied(seg_twe3_0_50)),
+		execute(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_twe3_0_50),move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe3_0_50,VARa)),
+		seq(not(blocked(seg_twe3_0_50,VARa)),
+		execute(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe3_0_50,VARa),move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_twe3_0_50)),
+		seq(not(at_segment(VARa,seg_twe3_0_50)),
+		execute(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_twe3_0_50),move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_twe1_0_200,VARa)),
+		seq(not(not_blocked(seg_twe1_0_200,VARa)),
+		execute(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_twe1_0_200,VARa),move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_twe3_0_50)),
+		seq(not(not_occupied(seg_twe3_0_50)),
+		execute(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_twe3_0_50),move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_twe4_0_50)),
+		seq(not(occupied(seg_twe4_0_50)),
+		execute(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_twe4_0_50),move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe4_0_50,VARa)),
+		seq(not(blocked(seg_twe4_0_50,VARa)),
+		execute(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe4_0_50,VARa),move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_twe4_0_50)),
+		seq(not(at_segment(VARa,seg_twe4_0_50)),
+		execute(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_twe4_0_50),move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_twe2_0_50,VARa)),
+		seq(not(not_blocked(seg_twe2_0_50,VARa)),
+		execute(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_twe2_0_50,VARa),move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_twe4_0_50)),
+		seq(not(not_occupied(seg_twe4_0_50)),
+		execute(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_twe4_0_50),move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_rwe_0_50)),
+		seq(not(occupied(seg_rwe_0_50)),
+		execute(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_rwe_0_50),move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_rwe_0_50,VARa)),
+		seq(not(blocked(seg_rwe_0_50,VARa)),
+		execute(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_rwe_0_50,VARa),move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_rwe_0_50)),
+		seq(not(at_segment(VARa,seg_rwe_0_50)),
+		execute(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_rwe_0_50),move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_twe3_0_50,VARa)),
+		seq(not(not_blocked(seg_twe3_0_50,VARa)),
+		execute(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_twe3_0_50,VARa),move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_rwe_0_50)),
+		seq(not(not_occupied(seg_rwe_0_50)),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_rwe_0_50),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_rw_0_400)),
+		seq(not(occupied(seg_rw_0_400)),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_rw_0_400),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_rw_0_400,VARa)),
+		seq(not(blocked(seg_rw_0_400,VARa)),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_rw_0_400,VARa),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_rw_0_400)),
+		seq(not(at_segment(VARa,seg_rw_0_400)),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_rw_0_400),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_twe4_0_50,VARa)),
+		seq(not(not_blocked(seg_twe4_0_50,VARa)),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_twe4_0_50,VARa),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_twe4_0_50,VARa)),
+		seq(not(not_blocked(seg_twe4_0_50,VARa)),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_twe4_0_50,VARa),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_rw_0_400)),
+		seq(not(not_occupied(seg_rw_0_400)),
+		execute(move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_rw_0_400),move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_rww_0_50)),
+		seq(not(occupied(seg_rww_0_50)),
+		execute(move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_rww_0_50),move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_rww_0_50,VARa)),
+		seq(not(blocked(seg_rww_0_50,VARa)),
+		execute(move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_rww_0_50,VARa),move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_rww_0_50)),
+		seq(not(at_segment(VARa,seg_rww_0_50)),
+		execute(move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_rww_0_50),move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_rww_0_50)),
+		seq(not(not_occupied(seg_rww_0_50)),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_rww_0_50),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_tww4_0_50)),
+		seq(not(occupied(seg_tww4_0_50)),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_tww4_0_50),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww4_0_50,VARa)),
+		seq(not(blocked(seg_tww4_0_50,VARa)),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww4_0_50,VARa),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_tww4_0_50)),
+		seq(not(at_segment(VARa,seg_tww4_0_50)),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_tww4_0_50),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(facing(VARa,north)),
+		seq(not(facing(VARa,north)),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+achieves(facing(VARa,north),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_rwe_0_50,VARa)),
+		seq(not(not_blocked(seg_rwe_0_50,VARa)),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_rwe_0_50,VARa),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_rw_0_400,VARa)),
+		seq(not(not_blocked(seg_rw_0_400,VARa)),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_rw_0_400,VARa),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_rwtw1_0_10,VARa)),
+		seq(not(blocked(seg_rwtw1_0_10,VARa)),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_rwtw1_0_10,VARa),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_tww4_0_50)),
+		seq(not(not_occupied(seg_tww4_0_50)),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_tww4_0_50),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_tww3_0_50)),
+		seq(not(occupied(seg_tww3_0_50)),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_tww3_0_50),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww3_0_50,VARa)),
+		seq(not(blocked(seg_tww3_0_50,VARa)),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww3_0_50,VARa),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_tww3_0_50)),
+		seq(not(at_segment(VARa,seg_tww3_0_50)),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_tww3_0_50),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_rww_0_50,VARa)),
+		seq(not(not_blocked(seg_rww_0_50,VARa)),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_rww_0_50,VARa),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_rwtw1_0_10,VARa)),
+		seq(not(not_blocked(seg_rwtw1_0_10,VARa)),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_rwtw1_0_10,VARa),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_tww3_0_50)),
+		seq(not(not_occupied(seg_tww3_0_50)),
+		execute(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_tww3_0_50),move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_tww2_0_50)),
+		seq(not(occupied(seg_tww2_0_50)),
+		execute(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_tww2_0_50),move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww2_0_50,VARa)),
+		seq(not(blocked(seg_tww2_0_50,VARa)),
+		execute(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww2_0_50,VARa),move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_tww2_0_50)),
+		seq(not(at_segment(VARa,seg_tww2_0_50)),
+		execute(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_tww2_0_50),move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_tww4_0_50,VARa)),
+		seq(not(not_blocked(seg_tww4_0_50,VARa)),
+		execute(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_tww4_0_50,VARa),move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_tww2_0_50)),
+		seq(not(not_occupied(seg_tww2_0_50)),
+		execute(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_tww2_0_50),move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_tww1_0_200)),
+		seq(not(occupied(seg_tww1_0_200)),
+		execute(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_tww1_0_200),move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww1_0_200,VARa)),
+		seq(not(blocked(seg_tww1_0_200,VARa)),
+		execute(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww1_0_200,VARa),move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_tww1_0_200)),
+		seq(not(at_segment(VARa,seg_tww1_0_200)),
+		execute(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_tww1_0_200),move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_tww3_0_50,VARa)),
+		seq(not(not_blocked(seg_tww3_0_50,VARa)),
+		execute(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_tww3_0_50,VARa),move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_tww1_0_200)),
+		seq(not(not_occupied(seg_tww1_0_200)),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_tww1_0_200),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_ppdoor_0_40)),
+		seq(not(occupied(seg_ppdoor_0_40)),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_ppdoor_0_40),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_ppdoor_0_40,VARa)),
+		seq(not(blocked(seg_ppdoor_0_40,VARa)),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_ppdoor_0_40,VARa),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(not(at_segment(VARa,seg_ppdoor_0_40)),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_ppdoor_0_40),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(facing(VARa,south)),
+		seq(not(facing(VARa,south)),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+achieves(facing(VARa,south),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_tww2_0_50,VARa)),
+		seq(not(not_blocked(seg_tww2_0_50,VARa)),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_tww2_0_50,VARa),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe1_0_200,VARa)),
+		seq(not(blocked(seg_twe1_0_200,VARa)),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe1_0_200,VARa),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_ppdoor_0_40)),
+		seq(not(not_occupied(seg_ppdoor_0_40)),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_ppdoor_0_40),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_pp_0_60)),
+		seq(not(occupied(seg_pp_0_60)),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_pp_0_60),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_pp_0_60,VARa)),
+		seq(not(blocked(seg_pp_0_60,VARa)),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_pp_0_60,VARa),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_pp_0_60)),
+		seq(not(at_segment(VARa,seg_pp_0_60)),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_pp_0_60),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_tww1_0_200,VARa)),
+		seq(not(not_blocked(seg_tww1_0_200,VARa)),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_tww1_0_200,VARa),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_twe1_0_200,VARa)),
+		seq(not(not_blocked(seg_twe1_0_200,VARa)),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_twe1_0_200,VARa),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_pp_0_60)),
+		seq(not(not_occupied(seg_pp_0_60)),
+		execute(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_pp_0_60),pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_pp_0_60,VARa)),
+		seq(not(not_blocked(seg_pp_0_60,VARa)),
+		execute(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_pp_0_60,VARa),pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_ppdoor_0_40)),
+		seq(not(occupied(seg_ppdoor_0_40)),
+		execute(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_ppdoor_0_40),pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_ppdoor_0_40,VARa)),
+		seq(not(blocked(seg_ppdoor_0_40,VARa)),
+		execute(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_ppdoor_0_40,VARa),pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(not(at_segment(VARa,seg_ppdoor_0_40)),
+		execute(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_ppdoor_0_40),pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_ppdoor_0_40)),
+		seq(not(not_occupied(seg_ppdoor_0_40)),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_ppdoor_0_40),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(not(not_blocked(seg_ppdoor_0_40,VARa)),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_ppdoor_0_40,VARa),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(occupied(seg_tww1_0_200)),
+		seq(not(occupied(seg_tww1_0_200)),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+achieves(occupied(seg_tww1_0_200),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww1_0_200,VARa)),
+		seq(not(blocked(seg_tww1_0_200,VARa)),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww1_0_200,VARa),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_segment(VARa,seg_tww1_0_200)),
+		seq(not(at_segment(VARa,seg_tww1_0_200)),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+achieves(at_segment(VARa,seg_tww1_0_200),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(facing(VARa,north)),
+		seq(not(facing(VARa,north)),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+achieves(facing(VARa,north),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_rww_0_50)),
+		seq(not(not_occupied(seg_rww_0_50)),
+		execute(takeoff_seg_rww_0_50_north(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_rww_0_50),takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_rww_0_50,VARa)),
+		seq(not(not_blocked(seg_rww_0_50,VARa)),
+		execute(takeoff_seg_rww_0_50_north(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_rww_0_50,VARa),takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(airborne(VARa,seg_rww_0_50)),
+		seq(not(airborne(VARa,seg_rww_0_50)),
+		execute(takeoff_seg_rww_0_50_north(airplane(VARa))))).
+
+
+achieves(airborne(VARa,seg_rww_0_50),takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_tww4_0_50,VARa)),
+		seq(not(not_blocked(seg_tww4_0_50,VARa)),
+		execute(takeoff_seg_rww_0_50_north(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_tww4_0_50,VARa),takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_tww4_0_50,VARa)),
+		seq(not(not_blocked(seg_tww4_0_50,VARa)),
+		execute(takeoff_seg_rww_0_50_north(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_tww4_0_50,VARa),takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_occupied(seg_rwe_0_50)),
+		seq(not(not_occupied(seg_rwe_0_50)),
+		execute(takeoff_seg_rwe_0_50_south(airplane(VARa))))).
+
+
+achieves(not_occupied(seg_rwe_0_50),takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_rwe_0_50,VARa)),
+		seq(not(not_blocked(seg_rwe_0_50,VARa)),
+		execute(takeoff_seg_rwe_0_50_south(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_rwe_0_50,VARa),takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(airborne(VARa,seg_rwe_0_50)),
+		seq(not(airborne(VARa,seg_rwe_0_50)),
+		execute(takeoff_seg_rwe_0_50_south(airplane(VARa))))).
+
+
+achieves(airborne(VARa,seg_rwe_0_50),takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_twe4_0_50,VARa)),
+		seq(not(not_blocked(seg_twe4_0_50,VARa)),
+		execute(takeoff_seg_rwe_0_50_south(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_twe4_0_50,VARa),takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_twe4_0_50,VARa)),
+		seq(not(not_blocked(seg_twe4_0_50,VARa)),
+		execute(takeoff_seg_rwe_0_50_south(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_twe4_0_50,VARa),takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_parked(VARa,seg_pp_0_60)),
+		seq(not(is_parked(VARa,seg_pp_0_60)),
+		execute(park_seg_pp_0_60_north(airplane(VARa))))).
+
+
+achieves(is_parked(VARa,seg_pp_0_60),park_seg_pp_0_60_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_parked(VARa,seg_pp_0_60)),
+		seq(not(is_parked(VARa,seg_pp_0_60)),
+		execute(park_seg_pp_0_60_south(airplane(VARa))))).
+
+
+achieves(is_parked(VARa,seg_pp_0_60),park_seg_pp_0_60_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(not(not_blocked(seg_ppdoor_0_40,VARa)),
+		execute(park_seg_pp_0_60_south(airplane(VARa))))).
+
+
+achieves(not_blocked(seg_ppdoor_0_40,VARa),park_seg_pp_0_60_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_pp_0_60_north_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_pp_0_60_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_pp_0_60_south_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_pp_0_60_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_ppdoor_0_40,VARa)),
+		seq(not(blocked(seg_ppdoor_0_40,VARa)),
+		execute(startup_seg_pp_0_60_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_ppdoor_0_40,VARa),startup_seg_pp_0_60_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_ppdoor_0_40_north_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_ppdoor_0_40_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_pp_0_60,VARa)),
+		seq(not(blocked(seg_pp_0_60,VARa)),
+		execute(startup_seg_ppdoor_0_40_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_pp_0_60,VARa),startup_seg_ppdoor_0_40_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_ppdoor_0_40_south_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_ppdoor_0_40_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww1_0_200,VARa)),
+		seq(not(blocked(seg_tww1_0_200,VARa)),
+		execute(startup_seg_ppdoor_0_40_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww1_0_200,VARa),startup_seg_ppdoor_0_40_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe1_0_200,VARa)),
+		seq(not(blocked(seg_twe1_0_200,VARa)),
+		execute(startup_seg_ppdoor_0_40_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe1_0_200,VARa),startup_seg_ppdoor_0_40_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_tww1_0_200_north_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_tww1_0_200_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww2_0_50,VARa)),
+		seq(not(blocked(seg_tww2_0_50,VARa)),
+		execute(startup_seg_tww1_0_200_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww2_0_50,VARa),startup_seg_tww1_0_200_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_tww1_0_200_south_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_tww1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_ppdoor_0_40,VARa)),
+		seq(not(blocked(seg_ppdoor_0_40,VARa)),
+		execute(startup_seg_tww1_0_200_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_ppdoor_0_40,VARa),startup_seg_tww1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe1_0_200,VARa)),
+		seq(not(blocked(seg_twe1_0_200,VARa)),
+		execute(startup_seg_tww1_0_200_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe1_0_200,VARa),startup_seg_tww1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_twe1_0_200_north_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_twe1_0_200_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe2_0_50,VARa)),
+		seq(not(blocked(seg_twe2_0_50,VARa)),
+		execute(startup_seg_twe1_0_200_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe2_0_50,VARa),startup_seg_twe1_0_200_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_twe1_0_200_south_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_twe1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_ppdoor_0_40,VARa)),
+		seq(not(blocked(seg_ppdoor_0_40,VARa)),
+		execute(startup_seg_twe1_0_200_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_ppdoor_0_40,VARa),startup_seg_twe1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww1_0_200,VARa)),
+		seq(not(blocked(seg_tww1_0_200,VARa)),
+		execute(startup_seg_twe1_0_200_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww1_0_200,VARa),startup_seg_twe1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_tww2_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_tww2_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww3_0_50,VARa)),
+		seq(not(blocked(seg_tww3_0_50,VARa)),
+		execute(startup_seg_tww2_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww3_0_50,VARa),startup_seg_tww2_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_tww2_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_tww2_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww1_0_200,VARa)),
+		seq(not(blocked(seg_tww1_0_200,VARa)),
+		execute(startup_seg_tww2_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww1_0_200,VARa),startup_seg_tww2_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_tww3_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_tww3_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww4_0_50,VARa)),
+		seq(not(blocked(seg_tww4_0_50,VARa)),
+		execute(startup_seg_tww3_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww4_0_50,VARa),startup_seg_tww3_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_tww3_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_tww3_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww2_0_50,VARa)),
+		seq(not(blocked(seg_tww2_0_50,VARa)),
+		execute(startup_seg_tww3_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww2_0_50,VARa),startup_seg_tww3_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_tww4_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_tww4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_rww_0_50,VARa)),
+		seq(not(blocked(seg_rww_0_50,VARa)),
+		execute(startup_seg_tww4_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_rww_0_50,VARa),startup_seg_tww4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_rwtw1_0_10,VARa)),
+		seq(not(blocked(seg_rwtw1_0_10,VARa)),
+		execute(startup_seg_tww4_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_rwtw1_0_10,VARa),startup_seg_tww4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_tww4_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_tww4_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_tww3_0_50,VARa)),
+		seq(not(blocked(seg_tww3_0_50,VARa)),
+		execute(startup_seg_tww4_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_tww3_0_50,VARa),startup_seg_tww4_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_twe4_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_twe4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_rwte1_0_10,VARa)),
+		seq(not(blocked(seg_rwte1_0_10,VARa)),
+		execute(startup_seg_twe4_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_rwte1_0_10,VARa),startup_seg_twe4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_rwe_0_50,VARa)),
+		seq(not(blocked(seg_rwe_0_50,VARa)),
+		execute(startup_seg_twe4_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_rwe_0_50,VARa),startup_seg_twe4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_twe4_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_twe4_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe3_0_50,VARa)),
+		seq(not(blocked(seg_twe3_0_50,VARa)),
+		execute(startup_seg_twe4_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe3_0_50,VARa),startup_seg_twe4_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_twe3_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_twe3_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe4_0_50,VARa)),
+		seq(not(blocked(seg_twe4_0_50,VARa)),
+		execute(startup_seg_twe3_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe4_0_50,VARa),startup_seg_twe3_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_twe3_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_twe3_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe2_0_50,VARa)),
+		seq(not(blocked(seg_twe2_0_50,VARa)),
+		execute(startup_seg_twe3_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe2_0_50,VARa),startup_seg_twe3_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_twe2_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_twe2_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe3_0_50,VARa)),
+		seq(not(blocked(seg_twe3_0_50,VARa)),
+		execute(startup_seg_twe2_0_50_north_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe3_0_50,VARa),startup_seg_twe2_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(is_moving(VARa)),
+		seq(not(is_moving(VARa)),
+		execute(startup_seg_twe2_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(is_moving(VARa),startup_seg_twe2_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(blocked(seg_twe1_0_200,VARa)),
+		seq(not(blocked(seg_twe1_0_200,VARa)),
+		execute(startup_seg_twe2_0_50_south_medium(airplane(VARa))))).
+
+
+achieves(blocked(seg_twe1_0_200,VARa),startup_seg_twe2_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_pp_0_60)),
+		seq(occupied(seg_pp_0_60),
+		execute(move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_pp_0_60),move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_pp_0_60)),
+		seq(at_segment(VARa,seg_pp_0_60),
+		execute(move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_pp_0_60),move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_ppdoor_0_40)),
+		seq(not_occupied(seg_ppdoor_0_40),
+		execute(move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_ppdoor_0_40),move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(not_blocked(seg_ppdoor_0_40,VARa),
+		execute(move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_ppdoor_0_40,VARa),move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_ppdoor_0_40)),
+		seq(occupied(seg_ppdoor_0_40),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_ppdoor_0_40),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(at_segment(VARa,seg_ppdoor_0_40),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_ppdoor_0_40),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_tww1_0_200)),
+		seq(not_occupied(seg_tww1_0_200),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_tww1_0_200),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww1_0_200,VARa)),
+		seq(not_blocked(seg_tww1_0_200,VARa),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww1_0_200,VARa),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(facing(VARa,north)),
+		seq(facing(VARa,north),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(facing(VARa,north),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_pp_0_60,VARa)),
+		seq(blocked(seg_pp_0_60,VARa),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_pp_0_60,VARa),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe1_0_200,VARa)),
+		seq(not_blocked(seg_twe1_0_200,VARa),
+		execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe1_0_200,VARa),move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_tww1_0_200)),
+		seq(occupied(seg_tww1_0_200),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_tww1_0_200),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_tww1_0_200)),
+		seq(at_segment(VARa,seg_tww1_0_200),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_tww1_0_200),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_twe1_0_200)),
+		seq(not_occupied(seg_twe1_0_200),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_twe1_0_200),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe1_0_200,VARa)),
+		seq(not_blocked(seg_twe1_0_200,VARa),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe1_0_200,VARa),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(facing(VARa,north)),
+		seq(facing(VARa,north),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(facing(VARa,north),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_tww2_0_50,VARa)),
+		seq(blocked(seg_tww2_0_50,VARa),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_tww2_0_50,VARa),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(not_blocked(seg_ppdoor_0_40,VARa),
+		execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_ppdoor_0_40,VARa),move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_twe1_0_200)),
+		seq(occupied(seg_twe1_0_200),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_twe1_0_200),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_twe1_0_200)),
+		seq(at_segment(VARa,seg_twe1_0_200),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_twe1_0_200),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_twe2_0_50)),
+		seq(not_occupied(seg_twe2_0_50),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_twe2_0_50),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe2_0_50,VARa)),
+		seq(not_blocked(seg_twe2_0_50,VARa),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe2_0_50,VARa),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_ppdoor_0_40,VARa)),
+		seq(blocked(seg_ppdoor_0_40,VARa),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_ppdoor_0_40,VARa),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_tww1_0_200,VARa)),
+		seq(blocked(seg_tww1_0_200,VARa),
+		execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_tww1_0_200,VARa),move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_twe2_0_50)),
+		seq(occupied(seg_twe2_0_50),
+		execute(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_twe2_0_50),move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_twe2_0_50)),
+		seq(at_segment(VARa,seg_twe2_0_50),
+		execute(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_twe2_0_50),move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_twe3_0_50)),
+		seq(not_occupied(seg_twe3_0_50),
+		execute(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_twe3_0_50),move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe3_0_50,VARa)),
+		seq(not_blocked(seg_twe3_0_50,VARa),
+		execute(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe3_0_50,VARa),move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_twe1_0_200,VARa)),
+		seq(blocked(seg_twe1_0_200,VARa),
+		execute(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_twe1_0_200,VARa),move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_twe3_0_50)),
+		seq(occupied(seg_twe3_0_50),
+		execute(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_twe3_0_50),move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_twe3_0_50)),
+		seq(at_segment(VARa,seg_twe3_0_50),
+		execute(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_twe3_0_50),move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_twe4_0_50)),
+		seq(not_occupied(seg_twe4_0_50),
+		execute(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_twe4_0_50),move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe4_0_50,VARa)),
+		seq(not_blocked(seg_twe4_0_50,VARa),
+		execute(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe4_0_50,VARa),move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_twe2_0_50,VARa)),
+		seq(blocked(seg_twe2_0_50,VARa),
+		execute(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_twe2_0_50,VARa),move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_twe4_0_50)),
+		seq(occupied(seg_twe4_0_50),
+		execute(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_twe4_0_50),move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_twe4_0_50)),
+		seq(at_segment(VARa,seg_twe4_0_50),
+		execute(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_twe4_0_50),move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_rwe_0_50)),
+		seq(not_occupied(seg_rwe_0_50),
+		execute(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_rwe_0_50),move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_rwe_0_50,VARa)),
+		seq(not_blocked(seg_rwe_0_50,VARa),
+		execute(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_rwe_0_50,VARa),move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_twe3_0_50,VARa)),
+		seq(blocked(seg_twe3_0_50,VARa),
+		execute(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_twe3_0_50,VARa),move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_rwe_0_50)),
+		seq(occupied(seg_rwe_0_50),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_rwe_0_50),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_rwe_0_50)),
+		seq(at_segment(VARa,seg_rwe_0_50),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_rwe_0_50),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_rw_0_400)),
+		seq(not_occupied(seg_rw_0_400),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_rw_0_400),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_rw_0_400,VARa)),
+		seq(not_blocked(seg_rw_0_400,VARa),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_rw_0_400,VARa),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_twe4_0_50,VARa)),
+		seq(blocked(seg_twe4_0_50,VARa),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_twe4_0_50,VARa),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_twe4_0_50,VARa)),
+		seq(blocked(seg_twe4_0_50,VARa),
+		execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_twe4_0_50,VARa),move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_rw_0_400)),
+		seq(occupied(seg_rw_0_400),
+		execute(move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_rw_0_400),move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_rw_0_400)),
+		seq(at_segment(VARa,seg_rw_0_400),
+		execute(move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_rw_0_400),move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_rww_0_50)),
+		seq(not_occupied(seg_rww_0_50),
+		execute(move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_rww_0_50),move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_rww_0_50,VARa)),
+		seq(not_blocked(seg_rww_0_50,VARa),
+		execute(move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_rww_0_50,VARa),move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_rww_0_50)),
+		seq(occupied(seg_rww_0_50),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_rww_0_50),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_rww_0_50)),
+		seq(at_segment(VARa,seg_rww_0_50),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_rww_0_50),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_tww4_0_50)),
+		seq(not_occupied(seg_tww4_0_50),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_tww4_0_50),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww4_0_50,VARa)),
+		seq(not_blocked(seg_tww4_0_50,VARa),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww4_0_50,VARa),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(facing(VARa,south)),
+		seq(facing(VARa,south),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+avoids(facing(VARa,south),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_rwe_0_50,VARa)),
+		seq(blocked(seg_rwe_0_50,VARa),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_rwe_0_50,VARa),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_rw_0_400,VARa)),
+		seq(blocked(seg_rw_0_400,VARa),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_rw_0_400,VARa),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_rwtw1_0_10,VARa)),
+		seq(not_blocked(seg_rwtw1_0_10,VARa),
+		execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_rwtw1_0_10,VARa),move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_tww4_0_50)),
+		seq(occupied(seg_tww4_0_50),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_tww4_0_50),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_tww4_0_50)),
+		seq(at_segment(VARa,seg_tww4_0_50),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_tww4_0_50),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_tww3_0_50)),
+		seq(not_occupied(seg_tww3_0_50),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_tww3_0_50),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww3_0_50,VARa)),
+		seq(not_blocked(seg_tww3_0_50,VARa),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww3_0_50,VARa),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_rww_0_50,VARa)),
+		seq(blocked(seg_rww_0_50,VARa),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_rww_0_50,VARa),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_rwtw1_0_10,VARa)),
+		seq(blocked(seg_rwtw1_0_10,VARa),
+		execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_rwtw1_0_10,VARa),move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_tww3_0_50)),
+		seq(occupied(seg_tww3_0_50),
+		execute(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_tww3_0_50),move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_tww3_0_50)),
+		seq(at_segment(VARa,seg_tww3_0_50),
+		execute(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_tww3_0_50),move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_tww2_0_50)),
+		seq(not_occupied(seg_tww2_0_50),
+		execute(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_tww2_0_50),move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww2_0_50,VARa)),
+		seq(not_blocked(seg_tww2_0_50,VARa),
+		execute(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww2_0_50,VARa),move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_tww4_0_50,VARa)),
+		seq(blocked(seg_tww4_0_50,VARa),
+		execute(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_tww4_0_50,VARa),move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_tww2_0_50)),
+		seq(occupied(seg_tww2_0_50),
+		execute(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_tww2_0_50),move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_tww2_0_50)),
+		seq(at_segment(VARa,seg_tww2_0_50),
+		execute(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_tww2_0_50),move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_tww1_0_200)),
+		seq(not_occupied(seg_tww1_0_200),
+		execute(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_tww1_0_200),move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww1_0_200,VARa)),
+		seq(not_blocked(seg_tww1_0_200,VARa),
+		execute(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww1_0_200,VARa),move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_tww3_0_50,VARa)),
+		seq(blocked(seg_tww3_0_50,VARa),
+		execute(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_tww3_0_50,VARa),move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_tww1_0_200)),
+		seq(occupied(seg_tww1_0_200),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_tww1_0_200),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_tww1_0_200)),
+		seq(at_segment(VARa,seg_tww1_0_200),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_tww1_0_200),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_ppdoor_0_40)),
+		seq(not_occupied(seg_ppdoor_0_40),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_ppdoor_0_40),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(not_blocked(seg_ppdoor_0_40,VARa),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_ppdoor_0_40,VARa),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(facing(VARa,north)),
+		seq(facing(VARa,north),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+avoids(facing(VARa,north),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_tww2_0_50,VARa)),
+		seq(blocked(seg_tww2_0_50,VARa),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_tww2_0_50,VARa),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe1_0_200,VARa)),
+		seq(not_blocked(seg_twe1_0_200,VARa),
+		execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe1_0_200,VARa),move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_ppdoor_0_40)),
+		seq(occupied(seg_ppdoor_0_40),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_ppdoor_0_40),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(at_segment(VARa,seg_ppdoor_0_40),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_ppdoor_0_40),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_pp_0_60)),
+		seq(not_occupied(seg_pp_0_60),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_pp_0_60),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_pp_0_60,VARa)),
+		seq(not_blocked(seg_pp_0_60,VARa),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_pp_0_60,VARa),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_tww1_0_200,VARa)),
+		seq(blocked(seg_tww1_0_200,VARa),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_tww1_0_200,VARa),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_twe1_0_200,VARa)),
+		seq(blocked(seg_twe1_0_200,VARa),
+		execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_twe1_0_200,VARa),move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_pp_0_60)),
+		seq(occupied(seg_pp_0_60),
+		execute(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_pp_0_60),pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_pp_0_60,VARa)),
+		seq(blocked(seg_pp_0_60,VARa),
+		execute(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_pp_0_60,VARa),pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_pp_0_60)),
+		seq(at_segment(VARa,seg_pp_0_60),
+		execute(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_pp_0_60),pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_ppdoor_0_40)),
+		seq(not_occupied(seg_ppdoor_0_40),
+		execute(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_ppdoor_0_40),pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(not_blocked(seg_ppdoor_0_40,VARa),
+		execute(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_ppdoor_0_40,VARa),pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_ppdoor_0_40)),
+		seq(occupied(seg_ppdoor_0_40),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+avoids(occupied(seg_ppdoor_0_40),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_ppdoor_0_40,VARa)),
+		seq(blocked(seg_ppdoor_0_40,VARa),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+avoids(blocked(seg_ppdoor_0_40,VARa),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_ppdoor_0_40)),
+		seq(at_segment(VARa,seg_ppdoor_0_40),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_ppdoor_0_40),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_occupied(seg_tww1_0_200)),
+		seq(not_occupied(seg_tww1_0_200),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+avoids(not_occupied(seg_tww1_0_200),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww1_0_200,VARa)),
+		seq(not_blocked(seg_tww1_0_200,VARa),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww1_0_200,VARa),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(facing(VARa,south)),
+		seq(facing(VARa,south),
+		execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))))).
+
+
+avoids(facing(VARa,south),pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_rww_0_50)),
+		seq(occupied(seg_rww_0_50),
+		execute(takeoff_seg_rww_0_50_north(airplane(VARa))))).
+
+
+avoids(occupied(seg_rww_0_50),takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_rww_0_50,VARa)),
+		seq(blocked(seg_rww_0_50,VARa),
+		execute(takeoff_seg_rww_0_50_north(airplane(VARa))))).
+
+
+avoids(blocked(seg_rww_0_50,VARa),takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_rww_0_50)),
+		seq(at_segment(VARa,seg_rww_0_50),
+		execute(takeoff_seg_rww_0_50_north(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_rww_0_50),takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_moving(VARa)),
+		seq(is_moving(VARa),
+		execute(takeoff_seg_rww_0_50_north(airplane(VARa))))).
+
+
+avoids(is_moving(VARa),takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_tww4_0_50,VARa)),
+		seq(blocked(seg_tww4_0_50,VARa),
+		execute(takeoff_seg_rww_0_50_north(airplane(VARa))))).
+
+
+avoids(blocked(seg_tww4_0_50,VARa),takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_tww4_0_50,VARa)),
+		seq(blocked(seg_tww4_0_50,VARa),
+		execute(takeoff_seg_rww_0_50_north(airplane(VARa))))).
+
+
+avoids(blocked(seg_tww4_0_50,VARa),takeoff_seg_rww_0_50_north(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(occupied(seg_rwe_0_50)),
+		seq(occupied(seg_rwe_0_50),
+		execute(takeoff_seg_rwe_0_50_south(airplane(VARa))))).
+
+
+avoids(occupied(seg_rwe_0_50),takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_rwe_0_50,VARa)),
+		seq(blocked(seg_rwe_0_50,VARa),
+		execute(takeoff_seg_rwe_0_50_south(airplane(VARa))))).
+
+
+avoids(blocked(seg_rwe_0_50,VARa),takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_segment(VARa,seg_rwe_0_50)),
+		seq(at_segment(VARa,seg_rwe_0_50),
+		execute(takeoff_seg_rwe_0_50_south(airplane(VARa))))).
+
+
+avoids(at_segment(VARa,seg_rwe_0_50),takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_moving(VARa)),
+		seq(is_moving(VARa),
+		execute(takeoff_seg_rwe_0_50_south(airplane(VARa))))).
+
+
+avoids(is_moving(VARa),takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_twe4_0_50,VARa)),
+		seq(blocked(seg_twe4_0_50,VARa),
+		execute(takeoff_seg_rwe_0_50_south(airplane(VARa))))).
+
+
+avoids(blocked(seg_twe4_0_50,VARa),takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_twe4_0_50,VARa)),
+		seq(blocked(seg_twe4_0_50,VARa),
+		execute(takeoff_seg_rwe_0_50_south(airplane(VARa))))).
+
+
+avoids(blocked(seg_twe4_0_50,VARa),takeoff_seg_rwe_0_50_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(blocked(seg_ppdoor_0_40,VARa)),
+		seq(blocked(seg_ppdoor_0_40,VARa),
+		execute(park_seg_pp_0_60_south(airplane(VARa))))).
+
+
+avoids(blocked(seg_ppdoor_0_40,VARa),park_seg_pp_0_60_south(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_pp_0_60_north_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_pp_0_60_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_pp_0_60_south_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_pp_0_60_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(not_blocked(seg_ppdoor_0_40,VARa),
+		execute(startup_seg_pp_0_60_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_ppdoor_0_40,VARa),startup_seg_pp_0_60_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_ppdoor_0_40_north_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_ppdoor_0_40_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_pp_0_60,VARa)),
+		seq(not_blocked(seg_pp_0_60,VARa),
+		execute(startup_seg_ppdoor_0_40_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_pp_0_60,VARa),startup_seg_ppdoor_0_40_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_ppdoor_0_40_south_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_ppdoor_0_40_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww1_0_200,VARa)),
+		seq(not_blocked(seg_tww1_0_200,VARa),
+		execute(startup_seg_ppdoor_0_40_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww1_0_200,VARa),startup_seg_ppdoor_0_40_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe1_0_200,VARa)),
+		seq(not_blocked(seg_twe1_0_200,VARa),
+		execute(startup_seg_ppdoor_0_40_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe1_0_200,VARa),startup_seg_ppdoor_0_40_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_tww1_0_200_north_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_tww1_0_200_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww2_0_50,VARa)),
+		seq(not_blocked(seg_tww2_0_50,VARa),
+		execute(startup_seg_tww1_0_200_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww2_0_50,VARa),startup_seg_tww1_0_200_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_tww1_0_200_south_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_tww1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(not_blocked(seg_ppdoor_0_40,VARa),
+		execute(startup_seg_tww1_0_200_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_ppdoor_0_40,VARa),startup_seg_tww1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe1_0_200,VARa)),
+		seq(not_blocked(seg_twe1_0_200,VARa),
+		execute(startup_seg_tww1_0_200_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe1_0_200,VARa),startup_seg_tww1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_twe1_0_200_north_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_twe1_0_200_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe2_0_50,VARa)),
+		seq(not_blocked(seg_twe2_0_50,VARa),
+		execute(startup_seg_twe1_0_200_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe2_0_50,VARa),startup_seg_twe1_0_200_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_twe1_0_200_south_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_twe1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_ppdoor_0_40,VARa)),
+		seq(not_blocked(seg_ppdoor_0_40,VARa),
+		execute(startup_seg_twe1_0_200_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_ppdoor_0_40,VARa),startup_seg_twe1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww1_0_200,VARa)),
+		seq(not_blocked(seg_tww1_0_200,VARa),
+		execute(startup_seg_twe1_0_200_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww1_0_200,VARa),startup_seg_twe1_0_200_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_tww2_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_tww2_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww3_0_50,VARa)),
+		seq(not_blocked(seg_tww3_0_50,VARa),
+		execute(startup_seg_tww2_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww3_0_50,VARa),startup_seg_tww2_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_tww2_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_tww2_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww1_0_200,VARa)),
+		seq(not_blocked(seg_tww1_0_200,VARa),
+		execute(startup_seg_tww2_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww1_0_200,VARa),startup_seg_tww2_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_tww3_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_tww3_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww4_0_50,VARa)),
+		seq(not_blocked(seg_tww4_0_50,VARa),
+		execute(startup_seg_tww3_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww4_0_50,VARa),startup_seg_tww3_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_tww3_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_tww3_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww2_0_50,VARa)),
+		seq(not_blocked(seg_tww2_0_50,VARa),
+		execute(startup_seg_tww3_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww2_0_50,VARa),startup_seg_tww3_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_tww4_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_tww4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_rww_0_50,VARa)),
+		seq(not_blocked(seg_rww_0_50,VARa),
+		execute(startup_seg_tww4_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_rww_0_50,VARa),startup_seg_tww4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_rwtw1_0_10,VARa)),
+		seq(not_blocked(seg_rwtw1_0_10,VARa),
+		execute(startup_seg_tww4_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_rwtw1_0_10,VARa),startup_seg_tww4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_tww4_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_tww4_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_tww3_0_50,VARa)),
+		seq(not_blocked(seg_tww3_0_50,VARa),
+		execute(startup_seg_tww4_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_tww3_0_50,VARa),startup_seg_tww4_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_twe4_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_twe4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_rwte1_0_10,VARa)),
+		seq(not_blocked(seg_rwte1_0_10,VARa),
+		execute(startup_seg_twe4_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_rwte1_0_10,VARa),startup_seg_twe4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_rwe_0_50,VARa)),
+		seq(not_blocked(seg_rwe_0_50,VARa),
+		execute(startup_seg_twe4_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_rwe_0_50,VARa),startup_seg_twe4_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_twe4_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_twe4_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe3_0_50,VARa)),
+		seq(not_blocked(seg_twe3_0_50,VARa),
+		execute(startup_seg_twe4_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe3_0_50,VARa),startup_seg_twe4_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_twe3_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_twe3_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe4_0_50,VARa)),
+		seq(not_blocked(seg_twe4_0_50,VARa),
+		execute(startup_seg_twe3_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe4_0_50,VARa),startup_seg_twe3_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_twe3_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_twe3_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe2_0_50,VARa)),
+		seq(not_blocked(seg_twe2_0_50,VARa),
+		execute(startup_seg_twe3_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe2_0_50,VARa),startup_seg_twe3_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_twe2_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_twe2_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe3_0_50,VARa)),
+		seq(not_blocked(seg_twe3_0_50,VARa),
+		execute(startup_seg_twe2_0_50_north_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe3_0_50,VARa),startup_seg_twe2_0_50_north_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(is_pushing(VARa)),
+		seq(is_pushing(VARa),
+		execute(startup_seg_twe2_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(is_pushing(VARa),startup_seg_twe2_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_blocked(seg_twe1_0_200,VARa)),
+		seq(not_blocked(seg_twe1_0_200,VARa),
+		execute(startup_seg_twe2_0_50_south_medium(airplane(VARa))))).
+
+
+avoids(not_blocked(seg_twe1_0_200,VARa),startup_seg_twe2_0_50_south_medium(airplane(VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,north)),
+			achieve(at_segment(VARa,seg_pp_0_60)),
+			achieve(not_occupied(seg_ppdoor_0_40)),
+			achieve(not_blocked(seg_ppdoor_0_40,airplane_cfbeg)),
+			achieve(not_blocked(seg_ppdoor_0_40,airplane_daewh))),
+			move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,north)),
+			achieve(at_segment(VARa,seg_ppdoor_0_40)),
+			achieve(not_occupied(seg_tww1_0_200)),
+			achieve(not_blocked(seg_tww1_0_200,airplane_cfbeg)),
+			achieve(not_blocked(seg_tww1_0_200,airplane_daewh)),
+			achieve(not_occupied(seg_twe1_0_200))),
+			move_seg_ppdoor_0_40_seg_tww1_0_200_north_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,north)),
+			achieve(at_segment(VARa,seg_tww1_0_200)),
+			achieve(not_occupied(seg_twe1_0_200)),
+			achieve(not_blocked(seg_twe1_0_200,airplane_cfbeg)),
+			achieve(not_blocked(seg_twe1_0_200,airplane_daewh)),
+			achieve(not_occupied(seg_ppdoor_0_40))),
+			move_seg_tww1_0_200_seg_twe1_0_200_north_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,south)),
+			achieve(at_segment(VARa,seg_twe1_0_200)),
+			achieve(not_occupied(seg_twe2_0_50)),
+			achieve(not_blocked(seg_twe2_0_50,airplane_cfbeg)),
+			achieve(not_blocked(seg_twe2_0_50,airplane_daewh))),
+			move_seg_twe1_0_200_seg_twe2_0_50_south_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,south)),
+			achieve(at_segment(VARa,seg_twe2_0_50)),
+			achieve(not_occupied(seg_twe3_0_50)),
+			achieve(not_blocked(seg_twe3_0_50,airplane_cfbeg)),
+			achieve(not_blocked(seg_twe3_0_50,airplane_daewh))),
+			move_seg_twe2_0_50_seg_twe3_0_50_south_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,south)),
+			achieve(at_segment(VARa,seg_twe3_0_50)),
+			achieve(not_occupied(seg_twe4_0_50)),
+			achieve(not_blocked(seg_twe4_0_50,airplane_cfbeg)),
+			achieve(not_blocked(seg_twe4_0_50,airplane_daewh))),
+			move_seg_twe3_0_50_seg_twe4_0_50_south_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,south)),
+			achieve(at_segment(VARa,seg_twe4_0_50)),
+			achieve(not_occupied(seg_rwe_0_50)),
+			achieve(not_blocked(seg_rwe_0_50,airplane_cfbeg)),
+			achieve(not_blocked(seg_rwe_0_50,airplane_daewh))),
+			move_seg_twe4_0_50_seg_rwe_0_50_south_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,south)),
+			achieve(at_segment(VARa,seg_rwe_0_50)),
+			achieve(not_occupied(seg_rw_0_400)),
+			achieve(not_blocked(seg_rw_0_400,airplane_cfbeg)),
+			achieve(not_blocked(seg_rw_0_400,airplane_daewh))),
+			move_seg_rwe_0_50_seg_rw_0_400_south_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,south)),
+			achieve(at_segment(VARa,seg_rw_0_400)),
+			achieve(not_occupied(seg_rww_0_50)),
+			achieve(not_blocked(seg_rww_0_50,airplane_cfbeg)),
+			achieve(not_blocked(seg_rww_0_50,airplane_daewh)),
+			achieve(not_occupied(seg_rwe_0_50))),
+			move_seg_rw_0_400_seg_rww_0_50_south_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,south)),
+			achieve(at_segment(VARa,seg_rww_0_50)),
+			achieve(not_occupied(seg_tww4_0_50)),
+			achieve(not_blocked(seg_tww4_0_50,airplane_cfbeg)),
+			achieve(not_blocked(seg_tww4_0_50,airplane_daewh)),
+			achieve(not_occupied(seg_rwtw1_0_10))),
+			move_seg_rww_0_50_seg_tww4_0_50_south_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,north)),
+			achieve(at_segment(VARa,seg_tww4_0_50)),
+			achieve(not_occupied(seg_tww3_0_50)),
+			achieve(not_blocked(seg_tww3_0_50,airplane_cfbeg)),
+			achieve(not_blocked(seg_tww3_0_50,airplane_daewh))),
+			move_seg_tww4_0_50_seg_tww3_0_50_north_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,north)),
+			achieve(at_segment(VARa,seg_tww3_0_50)),
+			achieve(not_occupied(seg_tww2_0_50)),
+			achieve(not_blocked(seg_tww2_0_50,airplane_cfbeg)),
+			achieve(not_blocked(seg_tww2_0_50,airplane_daewh))),
+			move_seg_tww3_0_50_seg_tww2_0_50_north_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,north)),
+			achieve(at_segment(VARa,seg_tww2_0_50)),
+			achieve(not_occupied(seg_tww1_0_200)),
+			achieve(not_blocked(seg_tww1_0_200,airplane_cfbeg)),
+			achieve(not_blocked(seg_tww1_0_200,airplane_daewh))),
+			move_seg_tww2_0_50_seg_tww1_0_200_north_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,north)),
+			achieve(at_segment(VARa,seg_tww1_0_200)),
+			achieve(not_occupied(seg_ppdoor_0_40)),
+			achieve(not_blocked(seg_ppdoor_0_40,airplane_cfbeg)),
+			achieve(not_blocked(seg_ppdoor_0_40,airplane_daewh)),
+			achieve(not_occupied(seg_twe1_0_200))),
+			move_seg_tww1_0_200_seg_ppdoor_0_40_north_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_moving(VARa)),
+			achieve(facing(VARa,south)),
+			achieve(at_segment(VARa,seg_ppdoor_0_40)),
+			achieve(not_occupied(seg_pp_0_60)),
+			achieve(not_blocked(seg_pp_0_60,airplane_cfbeg)),
+			achieve(not_blocked(seg_pp_0_60,airplane_daewh))),
+			move_seg_ppdoor_0_40_seg_pp_0_60_south_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_pushing(VARa)),
+			achieve(facing(VARa,south)),
+			achieve(at_segment(VARa,seg_pp_0_60)),
+			achieve(not_occupied(seg_ppdoor_0_40)),
+			achieve(not_blocked(seg_ppdoor_0_40,airplane_cfbeg)),
+			achieve(not_blocked(seg_ppdoor_0_40,airplane_daewh))),
+			pushback_seg_pp_0_60_seg_ppdoor_0_40_south_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(has_type(VARa,medium)),
+			achieve(is_pushing(VARa)),
+			achieve(facing(VARa,south)),
+			achieve(at_segment(VARa,seg_ppdoor_0_40)),
+			achieve(not_occupied(seg_tww1_0_200)),
+			achieve(not_blocked(seg_tww1_0_200,airplane_cfbeg)),
+			achieve(not_blocked(seg_tww1_0_200,airplane_daewh))),
+			pushback_seg_ppdoor_0_40_seg_tww1_0_200_south_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(takeoff_seg_rww_0_50_north(airplane(VARa))),
+		seq(shuffle(
+			achieve(at_segment(VARa,seg_rww_0_50)),
+			achieve(facing(VARa,north)),
+			achieve(is_moving(VARa))),
+			takeoff_seg_rww_0_50_north(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(takeoff_seg_rwe_0_50_south(airplane(VARa))),
+		seq(shuffle(
+			achieve(at_segment(VARa,seg_rwe_0_50)),
+			achieve(facing(VARa,south)),
+			achieve(is_moving(VARa))),
+			takeoff_seg_rwe_0_50_south(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(park_seg_pp_0_60_north(airplane(VARa))),
+		seq(shuffle(
+			achieve(at_segment(VARa,seg_pp_0_60)),
+			achieve(facing(VARa,north)),
+			achieve(is_moving(VARa))),
+			park_seg_pp_0_60_north(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(park_seg_pp_0_60_south(airplane(VARa))),
+		seq(shuffle(
+			achieve(at_segment(VARa,seg_pp_0_60)),
+			achieve(facing(VARa,south)),
+			achieve(is_moving(VARa))),
+			park_seg_pp_0_60_south(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_pp_0_60_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_pp_0_60))),
+			startup_seg_pp_0_60_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_pp_0_60_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_pp_0_60)),
+			achieve(not_occupied(seg_ppdoor_0_40))),
+			startup_seg_pp_0_60_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_ppdoor_0_40_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_ppdoor_0_40)),
+			achieve(not_occupied(seg_pp_0_60))),
+			startup_seg_ppdoor_0_40_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_ppdoor_0_40_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_ppdoor_0_40)),
+			achieve(not_occupied(seg_tww1_0_200)),
+			achieve(not_occupied(seg_twe1_0_200))),
+			startup_seg_ppdoor_0_40_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_tww1_0_200_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_tww1_0_200)),
+			achieve(not_occupied(seg_tww2_0_50))),
+			startup_seg_tww1_0_200_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_tww1_0_200_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_tww1_0_200)),
+			achieve(not_occupied(seg_ppdoor_0_40)),
+			achieve(not_occupied(seg_twe1_0_200))),
+			startup_seg_tww1_0_200_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_twe1_0_200_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_twe1_0_200)),
+			achieve(not_occupied(seg_twe2_0_50))),
+			startup_seg_twe1_0_200_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_twe1_0_200_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_twe1_0_200)),
+			achieve(not_occupied(seg_ppdoor_0_40)),
+			achieve(not_occupied(seg_tww1_0_200))),
+			startup_seg_twe1_0_200_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_tww2_0_50_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_tww2_0_50)),
+			achieve(not_occupied(seg_tww3_0_50))),
+			startup_seg_tww2_0_50_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_tww2_0_50_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_tww2_0_50)),
+			achieve(not_occupied(seg_tww1_0_200))),
+			startup_seg_tww2_0_50_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_tww3_0_50_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_tww3_0_50)),
+			achieve(not_occupied(seg_tww4_0_50))),
+			startup_seg_tww3_0_50_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_tww3_0_50_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_tww3_0_50)),
+			achieve(not_occupied(seg_tww2_0_50))),
+			startup_seg_tww3_0_50_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_tww4_0_50_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_tww4_0_50)),
+			achieve(not_occupied(seg_rww_0_50)),
+			achieve(not_occupied(seg_rwtw1_0_10))),
+			startup_seg_tww4_0_50_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_tww4_0_50_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_tww4_0_50)),
+			achieve(not_occupied(seg_tww3_0_50))),
+			startup_seg_tww4_0_50_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_twe4_0_50_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_twe4_0_50)),
+			achieve(not_occupied(seg_rwte1_0_10)),
+			achieve(not_occupied(seg_rwe_0_50))),
+			startup_seg_twe4_0_50_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_twe4_0_50_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_twe4_0_50)),
+			achieve(not_occupied(seg_twe3_0_50))),
+			startup_seg_twe4_0_50_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_twe3_0_50_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_twe3_0_50)),
+			achieve(not_occupied(seg_twe4_0_50))),
+			startup_seg_twe3_0_50_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_twe3_0_50_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_twe3_0_50)),
+			achieve(not_occupied(seg_twe2_0_50))),
+			startup_seg_twe3_0_50_south_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_twe2_0_50_north_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_twe2_0_50)),
+			achieve(not_occupied(seg_twe3_0_50))),
+			startup_seg_twe2_0_50_north_medium(airplane(VARa)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(startup_seg_twe2_0_50_south_medium(airplane(VARa))),
+		seq(shuffle(
+			achieve(is_pushing(VARa)),
+			achieve(at_segment(VARa,seg_twe2_0_50)),
+			achieve(not_occupied(seg_twe1_0_200))),
+			startup_seg_twe2_0_50_south_medium(airplane(VARa)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		not(avoids(G2,planningAction)))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		not(avoids(G1,planningAction))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(2)).
+

@@ -1,0 +1,39 @@
+%% Problem Name:blocks_6_0
+%% Domain Name:blocks
+%%%%%%%%%%%%%%%%%%%%%%  Test File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- compiler_options([xpp_on]).
+#include "../../tr_operators.P"
+#include "blocks.P"
+#include "blocks_data.P"
+
+tabled_predicate(blocks_6_0_RSTRIPS,0).
+tabled_predicate(blocks_6_0_Naive,0).
+%%%%%%%%%%%%%%%%%%%%%%    Goal     %%%%%%%%%%%%%%%%%%%%%%%%%%
+planning_goal(on(c,b)).
+planning_goal(on(b,a)).
+planning_goal(on(a,e)).
+planning_goal(on(e,f)).
+planning_goal(on(f,d)).
+
+
+tr_clause(
+	blocks_6_0_RSTRIPS,
+		shuffle_regress(
+			achieve(on(c,b)),
+			achieve(on(b,a)),
+			achieve(on(a,e)),
+			achieve(on(e,f)),
+			achieve(on(f,d)),true)).
+
+
+tr_clause(
+	blocks_6_0_Naive,
+		seq(solutionPlan,
+		seq(on(c,b),
+		seq(on(b,a),
+		seq(on(a,e),
+		seq(on(e,f),on(f,d))))))).
+
+test_description(test_elevator_planning_problem).
+test_query(blocks_6_0_RSTRIPS).

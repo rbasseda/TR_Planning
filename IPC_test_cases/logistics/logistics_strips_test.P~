@@ -1,0 +1,49 @@
+%% Problem Name:strips_log_x_4
+%% Domain Name:logistics_strips
+%%%%%%%%%%%%%%%%%%%%%%  Test File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- compiler_options([xpp_on]).
+#include "logistics_strips.P"
+#include "logistics_strips_data.P"
+
+tabled_predicate(strips_log_x_4_STRIPS,0).
+tabled_predicate(strips_log_x_4_Naive,0).
+%%%%%%%%%%%%%%%%%%%%%%    Goal     %%%%%%%%%%%%%%%%%%%%%%%%%%
+planning_goal(at(package7,city12_3)).
+planning_goal(at(package6,city9_3)).
+planning_goal(at(package5,city12_3)).
+planning_goal(at(package4,city8_4)).
+planning_goal(at(package3,city13_4)).
+planning_goal(at(package2,city7_1)).
+planning_goal(at(package1,city13_1)).
+
+
+tr_clause(
+	strips_log_x_4_STRIPS,
+		seq(shuffle(
+			achieve(at(package7,city12_3)),
+			achieve(at(package6,city9_3)),
+			achieve(at(package5,city12_3)),
+			achieve(at(package4,city8_4)),
+			achieve(at(package3,city13_4)),
+			achieve(at(package2,city7_1)),
+			achieve(at(package1,city13_1))),
+		seq(at(package7,city12_3),
+		seq(at(package6,city9_3),
+		seq(at(package5,city12_3),
+		seq(at(package4,city8_4),
+		seq(at(package3,city13_4),
+		seq(at(package2,city7_1),at(package1,city13_1))))))))).
+
+tr_clause(
+	strips_log_x_4_Naive,
+		seq(solutionPlan,
+		seq(at(package7,city12_3),
+		seq(at(package6,city9_3),
+		seq(at(package5,city12_3),
+		seq(at(package4,city8_4),
+		seq(at(package3,city13_4),
+		seq(at(package2,city7_1),at(package1,city13_1))))))))).
+
+test_description(test_elevator_planning_problem).
+test_query(strips_log_x_4_STRIPS).

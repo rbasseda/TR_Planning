@@ -1,0 +1,33 @@
+%% Problem Name:roverprob1234
+%% Domain Name:rover
+%%%%%%%%%%%%%%%%%%%%%%  Test File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- compiler_options([xpp_on]).
+#include "../../tr_operators.P"
+#include "rover.P"
+#include "rover_data.P"
+
+tabled_predicate(roverprob1234_RSTRIPS,0).
+tabled_predicate(roverprob1234_Naive,0).
+%%%%%%%%%%%%%%%%%%%%%%    Goal     %%%%%%%%%%%%%%%%%%%%%%%%%%
+planning_goal(communicated_soil_data(waypoint2)).
+planning_goal(communicated_rock_data(waypoint3)).
+planning_goal(communicated_image_data(objective1,high_res)).
+
+
+tr_clause(
+	roverprob1234_RSTRIPS,
+		shuffle_regress(
+			achieve(communicated_soil_data(waypoint2)),
+			achieve(communicated_rock_data(waypoint3)),
+			achieve(communicated_image_data(objective1,high_res)),true)).
+
+
+tr_clause(
+	roverprob1234_Naive,
+		seq(solutionPlan,
+		seq(communicated_soil_data(waypoint2),
+		seq(communicated_rock_data(waypoint3),communicated_image_data(objective1,high_res))))).
+
+test_description(test_elevator_planning_problem).
+test_query(roverprob1234_RSTRIPS).

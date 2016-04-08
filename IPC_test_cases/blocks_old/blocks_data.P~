@@ -1,0 +1,14 @@
+%%%%%%%%%%%%%%%%%%%%%%    Data     %%%%%%%%%%%%%%%%%%%%%%%%%%
+block(b).
+block(e).
+block(a).
+block(c).
+block(d).
+tr_database(clear(d)).
+tr_database(clear(c)).
+tr_database(ontable(d)).
+tr_database(ontable(a)).
+tr_database(on(c,e)).
+tr_database(on(e,b)).
+tr_database(on(b,a)).
+tr_database(handempty).

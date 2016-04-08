@@ -1,0 +1,403 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% logistics_strips%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(load_truck,3).
+tabled_predicate(load_airplane,3).
+tabled_predicate(unload_truck,3).
+tabled_predicate(unload_airplane,3).
+tabled_predicate(drive_truck,4).
+tabled_predicate(fly_airplane,3).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(obj,1).
+dynamic_predicate(truck,1).
+dynamic_predicate(location,1).
+dynamic_predicate(airplane,1).
+dynamic_predicate(city,1).
+dynamic_predicate(airport,1).
+dynamic_predicate(at,2).
+dynamic_predicate(in,2).
+dynamic_predicate(in_city,2).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	load_truck(?(obj),?(truck),?(loc)),
+		seq(obj(VARobj),
+		seq(truck(VARtruck),
+		seq(location(VARloc),
+		seq(at(VARtruck,VARloc),
+		seq(at(VARobj,VARloc),
+		seq(ins(in(VARobj,VARtruck)),del(at(VARobj,VARloc))))))))).
+
+tr_clause(
+	planningAction,
+		load_truck(?(obj),?(truck),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	load_airplane(?(obj),?(airplane),?(loc)),
+		seq(obj(VARobj),
+		seq(airplane(VARairplane),
+		seq(location(VARloc),
+		seq(at(VARobj,VARloc),
+		seq(at(VARairplane,VARloc),
+		seq(ins(in(VARobj,VARairplane)),del(at(VARobj,VARloc))))))))).
+
+tr_clause(
+	planningAction,
+		load_airplane(?(obj),?(airplane),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	unload_truck(?(obj),?(truck),?(loc)),
+		seq(obj(VARobj),
+		seq(truck(VARtruck),
+		seq(location(VARloc),
+		seq(at(VARtruck,VARloc),
+		seq(in(VARobj,VARtruck),
+		seq(ins(at(VARobj,VARloc)),del(in(VARobj,VARtruck))))))))).
+
+tr_clause(
+	planningAction,
+		unload_truck(?(obj),?(truck),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	unload_airplane(?(obj),?(airplane),?(loc)),
+		seq(obj(VARobj),
+		seq(airplane(VARairplane),
+		seq(location(VARloc),
+		seq(in(VARobj,VARairplane),
+		seq(at(VARairplane,VARloc),
+		seq(ins(at(VARobj,VARloc)),del(in(VARobj,VARairplane))))))))).
+
+tr_clause(
+	planningAction,
+		unload_airplane(?(obj),?(airplane),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	drive_truck(?(truck),?(loc_from),?(loc_to),?(city)),
+		seq(truck(VARtruck),
+		seq(location(VARloc_from),
+		seq(location(VARloc_to),
+		seq(city(VARcity),
+		seq(at(VARtruck,VARloc_from),
+		seq(in_city(VARloc_from,VARcity),
+		seq(in_city(VARloc_to,VARcity),
+		seq(ins(at(VARtruck,VARloc_to)),del(at(VARtruck,VARloc_from))))))))))).
+
+tr_clause(
+	planningAction,
+		drive_truck(?(truck),?(loc_from),?(loc_to),?(city))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	fly_airplane(?(airplane),?(loc_from),?(loc_to)),
+		seq(airplane(VARairplane),
+		seq(airport(VARloc_from),
+		seq(airport(VARloc_to),
+		seq(at(VARairplane,VARloc_from),
+		seq(ins(at(VARairplane,VARloc_to)),del(at(VARairplane,VARloc_from)))))))).
+
+tr_clause(
+	planningAction,
+		fly_airplane(?(airplane),?(loc_from),?(loc_to))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(obj(obj)),
+		obj(obj)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(truck(truck)),
+		truck(truck)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(location(loc)),
+		location(loc)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(airplane(airplane)),
+		airplane(airplane)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(city(city)),
+		city(city)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(airport(airport)),
+		airport(airport)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(obj,loc)),
+		at(obj,loc)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(in(obj1,obj2)),
+		in(obj1,obj2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(in_city(obj,city)),
+		in_city(obj,city)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(obj(obj)),
+		not(obj(obj))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(truck(truck)),
+		not(truck(truck))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(location(loc)),
+		not(location(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(airplane(airplane)),
+		not(airplane(airplane))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(city(city)),
+		not(city(city))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(airport(airport)),
+		not(airport(airport))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(obj,loc)),
+		not(at(obj,loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(in(obj1,obj2)),
+		not(in(obj1,obj2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(in_city(obj,city)),
+		not(in_city(obj,city))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(in(VARobj,VARtruck)),
+		seq(not(in(VARobj,VARtruck)),
+		execute(load_truck(?(obj),?(truck),?(loc))))).
+
+
+achieves(in(VARobj,VARtruck),load_truck(?(obj),?(truck),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(in(VARobj,VARairplane)),
+		seq(not(in(VARobj,VARairplane)),
+		execute(load_airplane(?(obj),?(airplane),?(loc))))).
+
+
+achieves(in(VARobj,VARairplane),load_airplane(?(obj),?(airplane),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARobj,VARloc)),
+		seq(not(at(VARobj,VARloc)),
+		execute(unload_truck(?(obj),?(truck),?(loc))))).
+
+
+achieves(at(VARobj,VARloc),unload_truck(?(obj),?(truck),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARobj,VARloc)),
+		seq(not(at(VARobj,VARloc)),
+		execute(unload_airplane(?(obj),?(airplane),?(loc))))).
+
+
+achieves(at(VARobj,VARloc),unload_airplane(?(obj),?(airplane),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARtruck,VARloc_to)),
+		seq(not(at(VARtruck,VARloc_to)),
+		execute(drive_truck(?(truck),?(loc_from),?(loc_to),?(city))))).
+
+
+achieves(at(VARtruck,VARloc_to),drive_truck(?(truck),?(loc_from),?(loc_to),?(city))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARairplane,VARloc_to)),
+		seq(not(at(VARairplane,VARloc_to)),
+		execute(fly_airplane(?(airplane),?(loc_from),?(loc_to))))).
+
+
+achieves(at(VARairplane,VARloc_to),fly_airplane(?(airplane),?(loc_from),?(loc_to))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARobj,VARloc)),
+		seq(at(VARobj,VARloc),
+		execute(load_truck(?(obj),?(truck),?(loc))))).
+
+
+avoids(at(VARobj,VARloc),load_truck(?(obj),?(truck),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARobj,VARloc)),
+		seq(at(VARobj,VARloc),
+		execute(load_airplane(?(obj),?(airplane),?(loc))))).
+
+
+avoids(at(VARobj,VARloc),load_airplane(?(obj),?(airplane),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(in(VARobj,VARtruck)),
+		seq(in(VARobj,VARtruck),
+		execute(unload_truck(?(obj),?(truck),?(loc))))).
+
+
+avoids(in(VARobj,VARtruck),unload_truck(?(obj),?(truck),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(in(VARobj,VARairplane)),
+		seq(in(VARobj,VARairplane),
+		execute(unload_airplane(?(obj),?(airplane),?(loc))))).
+
+
+avoids(in(VARobj,VARairplane),unload_airplane(?(obj),?(airplane),?(loc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARtruck,VARloc_from)),
+		seq(at(VARtruck,VARloc_from),
+		execute(drive_truck(?(truck),?(loc_from),?(loc_to),?(city))))).
+
+
+avoids(at(VARtruck,VARloc_from),drive_truck(?(truck),?(loc_from),?(loc_to),?(city))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARairplane,VARloc_from)),
+		seq(at(VARairplane,VARloc_from),
+		execute(fly_airplane(?(airplane),?(loc_from),?(loc_to))))).
+
+
+avoids(at(VARairplane,VARloc_from),fly_airplane(?(airplane),?(loc_from),?(loc_to))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(load_truck(?(obj),?(truck),?(loc))),
+		seq(shuffle(
+			achieve(obj(VARobj)),
+			achieve(truck(VARtruck)),
+			achieve(location(VARloc)),
+			achieve(at(VARtruck,VARloc)),
+			achieve(at(VARobj,VARloc))),
+			load_truck(?(obj),?(truck),?(loc)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(load_airplane(?(obj),?(airplane),?(loc))),
+		seq(shuffle(
+			achieve(obj(VARobj)),
+			achieve(airplane(VARairplane)),
+			achieve(location(VARloc)),
+			achieve(at(VARobj,VARloc)),
+			achieve(at(VARairplane,VARloc))),
+			load_airplane(?(obj),?(airplane),?(loc)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(unload_truck(?(obj),?(truck),?(loc))),
+		seq(shuffle(
+			achieve(obj(VARobj)),
+			achieve(truck(VARtruck)),
+			achieve(location(VARloc)),
+			achieve(at(VARtruck,VARloc)),
+			achieve(in(VARobj,VARtruck))),
+			unload_truck(?(obj),?(truck),?(loc)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(unload_airplane(?(obj),?(airplane),?(loc))),
+		seq(shuffle(
+			achieve(obj(VARobj)),
+			achieve(airplane(VARairplane)),
+			achieve(location(VARloc)),
+			achieve(in(VARobj,VARairplane)),
+			achieve(at(VARairplane,VARloc))),
+			unload_airplane(?(obj),?(airplane),?(loc)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(drive_truck(?(truck),?(loc_from),?(loc_to),?(city))),
+		seq(shuffle(
+			achieve(truck(VARtruck)),
+			achieve(location(VARloc_from)),
+			achieve(location(VARloc_to)),
+			achieve(city(VARcity)),
+			achieve(at(VARtruck,VARloc_from)),
+			achieve(in_city(VARloc_from,VARcity)),
+			achieve(in_city(VARloc_to,VARcity))),
+			drive_truck(?(truck),?(loc_from),?(loc_to),?(city)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(fly_airplane(?(airplane),?(loc_from),?(loc_to))),
+		seq(shuffle(
+			achieve(airplane(VARairplane)),
+			achieve(airport(VARloc_from)),
+			achieve(airport(VARloc_to)),
+			achieve(at(VARairplane,VARloc_from))),
+			fly_airplane(?(airplane),?(loc_from),?(loc_to)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		not(avoids(G2,planningAction)))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		not(avoids(G1,planningAction))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(2)).
+

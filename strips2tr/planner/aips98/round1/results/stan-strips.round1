@@ -1,0 +1,1010 @@
+STAN
+strips-log-x-1
+((load-truck package4 truck1 city1-1)
+(load-airplane package5 plane2 city4-2)
+(load-truck package3 truck1 city1-1)
+(load-truck package6 truck3 city3-1)
+(fly-airplane plane1 city4-2 city3-2)
+(drive-truck truck6 city6-1 city6-2 city6)
+(drive-truck truck3 city3-1 city3-2 city3)
+(drive-truck truck1 city1-1 city1-2 city1)
+(fly-airplane plane2 city4-2 city1-2)
+(unload-truck package4 truck1 city1-2)
+(load-airplane package2 plane2 city1-2)
+(unload-truck package3 truck1 city1-2)
+(unload-truck package6 truck3 city3-2)
+(load-airplane package6 plane1 city3-2)
+(load-airplane package3 plane2 city1-2)
+(fly-airplane plane2 city1-2 city6-2)
+(fly-airplane plane1 city3-2 city1-2)
+(unload-airplane package2 plane2 city6-2)
+(load-airplane package4 plane1 city1-2)
+(unload-airplane package5 plane2 city6-2)
+(unload-airplane package6 plane1 city1-2)
+(unload-airplane package3 plane2 city6-2)
+(load-truck package3 truck6 city6-2)
+(fly-airplane plane1 city1-2 city3-2)
+(drive-truck truck6 city6-2 city6-1 city6)
+(unload-airplane package4 plane1 city3-2)
+(unload-truck package3 truck6 city6-1))
+767
+strips-log-x-2
+((load-airplane package4 plane3 city7-2)
+(load-airplane package3 plane2 city3-2)
+(load-truck package2 truck10 city10-1)
+(fly-airplane plane4 city3-2 city2-2)
+(drive-truck truck6 city6-1 city6-2 city6)
+(drive-truck truck1 city1-1 city1-2 city1)
+(fly-airplane plane1 city6-2 city10-2)
+(drive-truck truck3 city3-1 city3-2 city3)
+(load-airplane package1 plane4 city2-2)
+(drive-truck truck10 city10-1 city10-2 city10)
+(fly-airplane plane2 city3-2 city1-2)
+(fly-airplane plane3 city7-2 city6-2)
+(load-airplane package5 plane2 city1-2)
+(fly-airplane plane4 city2-2 city3-2)
+(unload-airplane package4 plane3 city6-2)
+(unload-airplane package3 plane2 city1-2)
+(unload-truck package2 truck10 city10-2)
+(load-airplane package2 plane1 city10-2)
+(load-truck package3 truck1 city1-2)
+(load-truck package4 truck6 city6-2)
+(fly-airplane plane2 city1-2 city4-2)
+(unload-airplane package1 plane4 city3-2)
+(load-truck package1 truck3 city3-2)
+(unload-airplane package5 plane2 city4-2)
+(drive-truck truck6 city6-2 city6-1 city6)
+(drive-truck truck1 city1-2 city1-1 city1)
+(fly-airplane plane1 city10-2 city9-2)
+(drive-truck truck3 city3-2 city3-1 city3)
+(unload-airplane package2 plane1 city9-2)
+(unload-truck package3 truck1 city1-1)
+(unload-truck package4 truck6 city6-1)
+(unload-truck package1 truck3 city3-1))
+4319
+strips-log-x-3
+NO SOLUTION
+18364
+strips-log-x-4
+NO SOLUTION
+15821
+strips-log-x-5
+((load-truck package3 truck11 city9-1)
+(load-truck package4 truck2 city8-1)
+(fly-airplane plane1 city8-2 city6-2)
+(drive-truck truck5 city3-1 city3-2 city3)
+(drive-truck truck9 city7-1 city7-2 city7)
+(load-airplane package1 plane1 city6-2)
+(drive-truck truck2 city8-1 city8-2 city8)
+(drive-truck truck11 city9-1 city9-2 city9)
+(fly-airplane plane1 city6-2 city8-2)
+(unload-truck package3 truck11 city9-2)
+(unload-truck package4 truck2 city8-2)
+(load-airplane package4 plane1 city8-2)
+(load-airplane package2 plane1 city8-2)
+(fly-airplane plane1 city8-2 city3-2)
+(unload-airplane package2 plane1 city3-2)
+(fly-airplane plane1 city3-2 city9-2)
+(load-truck package2 truck5 city3-2)
+(load-airplane package3 plane1 city9-2)
+(drive-truck truck5 city3-2 city3-1 city3)
+(unload-airplane package1 plane1 city9-2)
+(load-truck package1 truck11 city9-2)
+(fly-airplane plane1 city9-2 city7-2)
+(unload-airplane package3 plane1 city7-2)
+(load-truck package3 truck9 city7-2)
+(fly-airplane plane1 city7-2 city2-2)
+(unload-airplane package4 plane1 city2-2)
+(unload-truck package3 truck9 city7-2)
+(unload-truck package2 truck5 city3-1)
+(unload-truck package1 truck11 city9-2))
+364932
+strips-log-x-6
+NO SOLUTION
+22424
+strips-log-x-7
+NO SOLUTION
+15973
+strips-log-x-8
+NO SOLUTION
+27342
+strips-log-x-9
+NO SOLUTION
+21610
+strips-log-x-10
+NO SOLUTION
+4133
+strips-log-x-11
+((load-truck package3 truck3 city2-2)
+(load-truck package8 truck18 city1-2)
+(load-truck package7 truck16 city2-1)
+(load-truck package2 truck4 city3-2)
+(fly-airplane plane1 city1-3 city2-3)
+(fly-airplane plane2 city2-3 city1-3)
+(drive-truck truck2 city1-1 city1-3 city1)
+(drive-truck truck13 city1-2 city1-3 city1)
+(load-truck package1 truck13 city1-3)
+(drive-truck truck4 city3-2 city3-3 city3)
+(drive-truck truck16 city2-1 city2-3 city2)
+(drive-truck truck18 city1-2 city1-3 city1)
+(drive-truck truck3 city2-2 city2-3 city2)
+(drive-truck truck13 city1-3 city1-1 city1)
+(unload-truck package3 truck3 city2-3)
+(unload-truck package8 truck18 city1-3)
+(unload-truck package7 truck16 city2-3)
+(unload-truck package2 truck4 city3-3)
+(load-airplane package2 plane4 city3-3)
+(load-airplane package7 plane3 city2-3)
+(load-airplane package8 plane2 city1-3)
+(load-airplane package3 plane1 city2-3)
+(unload-truck package1 truck13 city1-1)
+(fly-airplane plane1 city2-3 city1-3)
+(fly-airplane plane2 city1-3 city3-3)
+(fly-airplane plane3 city2-3 city3-3)
+(fly-airplane plane4 city3-3 city2-3)
+(unload-airplane package2 plane4 city2-3)
+(unload-airplane package7 plane3 city3-3)
+(unload-airplane package8 plane2 city3-3)
+(unload-airplane package3 plane1 city1-3)
+(load-truck package3 truck2 city1-3)
+(drive-truck truck2 city1-3 city1-2 city1)
+(unload-truck package3 truck2 city1-2))
+12806
+strips-log-x-12
+NO SOLUTION
+13392
+strips-log-x-13
+NO SOLUTION
+1405810
+strips-log-x-14
+NO SOLUTION
+21916
+strips-log-x-15
+NO SOLUTION
+15872
+strips-log-x-16
+NO SOLUTION
+3332
+strips-log-x-17
+NO SOLUTION
+6654
+strips-log-x-18
+NO SOLUTION
+539134
+strips-log-x-19
+NO SOLUTION
+22501
+strips-log-x-20
+NO SOLUTION
+1236548
+strips-log-x-21
+NO SOLUTION
+921955
+strips-log-x-22
+NO SOLUTION
+599078
+strips-log-x-23
+NO SOLUTION
+10413
+strips-log-x-24
+NO SOLUTION
+1333297
+strips-log-x-25
+NO SOLUTION
+550552
+strips-log-x-26
+NO SOLUTION
+632122
+strips-log-x-27
+NO SOLUTION
+553967
+strips-log-x-28
+NO SOLUTION
+592706
+strips-log-x-29
+NO SOLUTION
+573980
+strips-log-x-30
+NO SOLUTION
+546275
+strips-movie-x-1
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+19
+strips-movie-x-2
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+18
+strips-movie-x-3
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+19
+strips-movie-x-4
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+20
+strips-movie-x-5
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+21
+strips-movie-x-6
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+22
+strips-movie-x-7
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+22
+strips-movie-x-8
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+23
+strips-movie-x-9
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+25
+strips-movie-x-10
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+26
+strips-movie-x-11
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+27
+strips-movie-x-12
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+28
+strips-movie-x-13
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+29
+strips-movie-x-14
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+31
+strips-movie-x-15
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+32
+strips-movie-x-16
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+34
+strips-movie-x-17
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+35
+strips-movie-x-18
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+37
+strips-movie-x-19
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+39
+strips-movie-x-20
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+40
+strips-movie-x-21
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+42
+strips-movie-x-22
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+45
+strips-movie-x-23
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+48
+strips-movie-x-24
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+50
+strips-movie-x-25
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+52
+strips-movie-x-26
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+54
+strips-movie-x-27
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+57
+strips-movie-x-28
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+62
+strips-movie-x-29
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+64
+strips-movie-x-30
+((rewind-movie)
+(get-crackers k1)
+(get-cheese z1)
+(get-pop p1)
+(get-dip d1)
+(get-chips c1)
+(reset-counter))
+67
+strips-mysty-x-1
+((overcome abrasion rest pork uranus venus)
+(feast rest pork okra alsace quebec)
+(feast rest okra pear quebec guanabara)
+(feast rest pear rice bosnia surrey)
+(succumb abrasion rest rice uranus venus))
+40
+strips-mysty-x-2
+((overcome grief-7 entertainment ham pluto jupiter)
+(feast satiety onion muffin kentucky bosnia)
+(overcome depression-1 satiety muffin mercury vulcan)
+(feast entertainment ham tuna bosnia surrey)
+(feast entertainment tuna beef arizona kentucky)
+(feast satiety muffin tuna arizona kentucky)
+(feast satiety tuna beef alsace arizona)
+(succumb grief-7 entertainment beef pluto jupiter)
+(succumb depression-1 satiety beef mercury vulcan))
+409
+strips-mysty-x-3
+((feast love orange chocolate guanabara bavaria)
+(overcome hangover love chocolate venus neptune)
+(feast love chocolate ham goias guanabara)
+(succumb hangover love ham venus neptune))
+197
+strips-mysty-x-4
+NO SOLUTION
+112
+strips-mysty-x-5
+NO SOLUTION
+461
+strips-mysty-x-6
+NO SOLUTION
+16791
+strips-mysty-x-7
+NO SOLUTION
+48
+strips-mysty-x-8
+NO SOLUTION
+2103
+strips-mysty-x-9
+((overcome sciatica entertainment flounder saturn venus)
+(overcome jealousy excitement guava earth uranus)
+(feast excitement guava apple manitoba kentucky)
+(feast entertainment flounder hamburger bavaria arizona)
+(succumb sciatica entertainment hamburger saturn venus)
+(feast excitement apple hotdog bavaria arizona)
+(feast excitement hotdog wurst bosnia bavaria)
+(succumb jealousy excitement wurst earth uranus))
+165
+strips-mysty-x-10
+((feast aesthetics flounder kale surrey moravia)
+(overcome jealousy-16 aesthetics kale mars neptune)
+(feast aesthetics kale arugula moravia quebec)
+(feast aesthetics arugula beef surrey moravia)
+(feast aesthetics beef snickers surrey moravia)
+(feast aesthetics snickers lamb oregon alsace)
+(feast aesthetics lamb tofu surrey moravia)
+(succumb jealousy-16 aesthetics tofu mars neptune))
+9163
+strips-mysty-x-11
+((overcome laceration lubricity pear uranus saturn)
+(feast lubricity pear sweetroll quebec bosnia)
+(overcome loneliness lubricity sweetroll neptune uranus)
+(feast lubricity sweetroll tomato alsace quebec)
+(feast lubricity tomato shrimp quebec bosnia)
+(succumb loneliness lubricity shrimp neptune uranus)
+(succumb laceration lubricity shrimp uranus saturn))
+109
+strips-mysty-x-12
+NO SOLUTION
+250
+strips-mysty-x-13
+((feast achievement turkey onion alsace bavaria)
+(feast aesthetics hamburger scallion alsace bavaria)
+(feast love baguette lemon alsace bavaria)
+(overcome laceration-20 love lemon vulcan venus)
+(feast aesthetics scallion flounder oregon alsace)
+(feast love lemon onion bavaria quebec)
+(feast aesthetics flounder lemon bavaria quebec)
+(overcome prostatitis-18 aesthetics lemon mars neptune)
+(feast love onion turkey oregon alsace)
+(feast love turkey potato oregon alsace)
+(feast aesthetics lemon baguette alsace bavaria)
+(feast aesthetics baguette lobster oregon alsace)
+(feast love potato muffin oregon alsace)
+(feast love muffin ham alsace bavaria)
+(succumb prostatitis-18 aesthetics lobster mars neptune)
+(succumb laceration-20 love ham vulcan venus))
+1789
+strips-mysty-x-14
+NO SOLUTION
+17518
+strips-mysty-x-15
+NO SOLUTION
+9549
+strips-mysty-x-16
+NO SOLUTION
+572
+strips-mysty-x-17
+((feast satisfaction potato yogurt guanabara bosnia)
+(overcome abrasion satisfaction yogurt mercury saturn)
+(feast satisfaction yogurt wonderbread guanabara bosnia)
+(succumb abrasion satisfaction wonderbread mercury saturn))
+1746
+strips-mysty-x-18
+NO SOLUTION
+1931
+strips-mysty-x-19
+((feast lubricity lemon beef bavaria manitoba)
+(feast stimulation lamb beef goias bosnia)
+(overcome abrasion lubricity beef saturn earth)
+(feast stimulation beef marzipan pennsylvania oregon)
+(feast lubricity beef lamb manitoba pennsylvania)
+(feast lubricity lamb haroset oregon goias)
+(feast lubricity haroset lobster bavaria manitoba)
+(succumb abrasion lubricity lobster saturn earth))
+877
+strips-mysty-x-20
+NO SOLUTION
+15438
+strips-mysty-x-21
+NO SOLUTION
+179
+strips-mysty-x-22
+NO SOLUTION
+13758
+strips-mysty-x-23
+NO SOLUTION
+1982
+strips-mysty-x-24
+NO SOLUTION
+2154
+strips-mysty-x-25
+((feast rest pistachio wurst surrey moravia)
+(feast expectation tuna wurst kentucky bavaria)
+(overcome depression rest wurst neptune earth)
+(feast expectation wurst chicken kentucky bavaria)
+(feast rest wurst chicken bosnia kentucky)
+(succumb depression rest chicken neptune earth))
+46
+strips-mysty-x-26
+((overcome boils entertainment haroset earth neptune)
+(feast empathy scallop rice manitoba oregon)
+(feast understanding papaya turkey moravia kentucky)
+(feast understanding turkey pistachio manitoba oregon)
+(feast empathy rice pistachio manitoba oregon)
+(feast entertainment haroset rice oregon bavaria)
+(feast entertainment rice pistachio quebec manitoba)
+(feast entertainment pistachio turkey moravia kentucky)
+(feast entertainment turkey papaya quebec manitoba)
+(succumb boils entertainment papaya earth neptune))
+685
+strips-mysty-x-27
+((overcome boils satisfaction scallion mars uranus)
+(feast love popover scallion kentucky oregon)
+(overcome grief love scallion mars uranus)
+(feast satisfaction scallion guava arizona pennsylvania)
+(succumb boils satisfaction guava mars uranus)
+(feast love scallion guava manitoba arizona)
+(succumb grief love guava mars uranus))
+281
+strips-mysty-x-28
+((feast intoxication wurst muffin goias bosnia)
+(overcome anger intoxication muffin vulcan earth)
+(feast intoxication muffin broccoli bosnia pennsylvania)
+(overcome boils intoxication broccoli neptune vulcan)
+(feast intoxication broccoli lamb alsace kentucky)
+(succumb boils intoxication lamb neptune vulcan)
+(succumb anger intoxication lamb vulcan earth))
+64
+strips-mysty-x-29
+((overcome jealousy excitement pork neptune uranus)
+(feast excitement pork broccoli manitoba bavaria)
+(feast excitement broccoli shrimp pennsylvania alsace)
+(succumb jealousy excitement shrimp neptune uranus))
+107
+strips-mysty-x-30
+((overcome boils expectation hamburger neptune venus)
+(feast intoxication beef baguette bosnia bavaria)
+(feast triumph turkey chicken surrey pennsylvania)
+(overcome dread intoxication baguette neptune venus)
+(feast triumph chicken hotdog manitoba surrey)
+(feast expectation hamburger hotdog bosnia bavaria)
+(feast intoxication baguette cucumber alsace guanabara)
+(feast expectation hotdog mutton moravia kentucky)
+(feast triumph hotdog hamburger bavaria moravia)
+(feast intoxication cucumber hotdog bosnia bavaria)
+(succumb boils expectation mutton neptune venus)
+(feast intoxication hotdog mutton bosnia bavaria)
+(succumb dread intoxication mutton neptune venus))
+7729
+strips-mprime-x-1
+((overcome abrasion rest pork uranus venus)
+(drink flounder lamb alsace pennsylvania surrey pennsylvania alsace)
+(drink pork pork quebec alsace pennsylvania quebec guanabara)
+(drink okra pear guanabara quebec alsace surrey pennsylvania)
+(drink okra okra quebec alsace pennsylvania quebec guanabara)
+(feast rest pork okra quebec guanabara)
+(drink lamb pear alsace pennsylvania surrey pennsylvania alsace)
+(drink pork pear alsace pennsylvania surrey alsace quebec)
+(feast rest okra pear pennsylvania alsace)
+(feast rest pear rice alsace quebec)
+(succumb abrasion rest rice uranus venus))
+2451
+strips-mprime-x-2
+((overcome grief-7 entertainment ham pluto jupiter)
+(drink tuna tuna kentucky arizona alsace kentucky bosnia)
+(feast satiety onion muffin kentucky bosnia)
+(drink ham muffin surrey bosnia kentucky kentucky bosnia)
+(overcome depression-1 satiety muffin mercury vulcan)
+(drink beef muffin surrey bosnia kentucky bosnia surrey)
+(drink cherry tuna surrey bosnia kentucky bosnia surrey)
+(feast entertainment ham tuna kentucky bosnia)
+(feast entertainment tuna beef alsace arizona)
+(feast satiety muffin tuna bosnia surrey)
+(feast satiety tuna beef bosnia surrey)
+(succumb grief-7 entertainment beef pluto jupiter)
+(succumb depression-1 satiety beef mercury vulcan))
+2839
+strips-mprime-x-3
+((feast love orange chocolate guanabara bavaria)
+(drink pea chocolate bavaria guanabara goias guanabara bavaria)
+(overcome hangover love chocolate venus neptune)
+(drink snickers chocolate bavaria guanabara goias bavaria arizona)
+(feast love chocolate ham bavaria arizona)
+(succumb hangover love ham venus neptune))
+10195
+strips-mprime-x-5
+((overcome grief satisfaction broccoli mercury earth)
+(drink broccoli scallop arizona goias kentucky alsace kentucky)
+(drink tuna sweetroll arizona goias kentucky alsace kentucky)
+(drink chocolate cherry goias kentucky alsace kentucky goias)
+(drink cherry cherry goias kentucky alsace goias arizona)
+(feast lubricity sweetroll scallop alsace kentucky)
+(drink tuna scallop goias kentucky alsace kentucky goias)
+(feast satisfaction broccoli chocolate kentucky goias)
+(overcome loneliness lubricity scallop mercury earth)
+(feast satisfaction chocolate shrimp alsace kentucky)
+(drink scallop scallop goias kentucky alsace goias arizona)
+(feast lubricity scallop cherry goias arizona)
+(succumb grief satisfaction shrimp mercury earth)
+(feast lubricity cherry shrimp goias arizona)
+(succumb loneliness lubricity shrimp mercury earth))
+1289
+strips-mprime-x-6
+NO SOLUTION
+1838
+strips-mprime-x-7
+((drink shrimp snickers moravia manitoba arizona arizona manitoba)
+(feast learning pea snickers manitoba moravia)
+(feast learning snickers popover arizona manitoba)
+(overcome jealousy learning popover mercury saturn)
+(feast learning popover muffin arizona manitoba)
+(succumb jealousy learning muffin mercury saturn))
+1345
+strips-mprime-x-8
+NO SOLUTION
+4004
+strips-mprime-x-9
+((overcome sciatica entertainment flounder saturn venus)
+(overcome jealousy excitement guava earth uranus)
+(drink flounder flounder arizona bavaria bosnia arizona manitoba)
+(drink haroset haroset arizona bavaria bosnia arizona manitoba)
+(drink guava hotdog kentucky manitoba arizona bavaria arizona)
+(drink apple apple arizona bavaria bosnia arizona manitoba)
+(drink apple apple manitoba arizona bavaria manitoba kentucky)
+(feast excitement guava apple arizona manitoba)
+(drink hotdog hotdog arizona bavaria bosnia arizona manitoba)
+(drink haroset haroset manitoba arizona bavaria manitoba kentucky)
+(feast entertainment flounder hamburger arizona manitoba)
+(succumb sciatica entertainment hamburger saturn venus)
+(drink haroset hotdog kentucky manitoba arizona manitoba kentucky)
+(feast excitement apple hotdog manitoba kentucky)
+(feast excitement hotdog wurst manitoba kentucky)
+(succumb jealousy excitement wurst earth uranus))
+2047
+strips-mprime-x-11
+((overcome laceration lubricity pear uranus saturn)
+(drink cherry cherry surrey bosnia quebec surrey manitoba)
+(drink shrimp shrimp manitoba surrey bosnia manitoba kentucky)
+(drink tomato tomato bosnia quebec alsace bosnia surrey)
+(drink pistachio pistachio surrey bosnia quebec surrey manitoba)
+(drink pear sweetroll bosnia quebec alsace quebec bosnia)
+(feast lubricity pear sweetroll alsace quebec)
+(drink pistachio tomato bosnia quebec alsace surrey manitoba)
+(drink cherry sweetroll manitoba surrey bosnia bosnia surrey)
+(drink chicken pistachio kentucky manitoba surrey manitoba kentucky)
+(overcome loneliness lubricity sweetroll neptune uranus)
+(drink pistachio sweetroll kentucky manitoba surrey surrey manitoba)
+(drink shrimp tomato kentucky manitoba surrey manitoba kentucky)
+(feast lubricity sweetroll tomato surrey manitoba)
+(feast lubricity tomato shrimp manitoba kentucky)
+(succumb loneliness lubricity shrimp neptune uranus)
+(succumb laceration lubricity shrimp uranus saturn))
+7005
+strips-mprime-x-12
+NO SOLUTION
+7646
+strips-mprime-x-14
+NO SOLUTION
+1700
+strips-mprime-x-15
+NO SOLUTION
+3133
+strips-mprime-x-16
+NO SOLUTION
+6881
+strips-mprime-x-17
+NO SOLUTION
+9417
+strips-mprime-x-18
+NO SOLUTION
+2361
+strips-mprime-x-19
+NO SOLUTION
+2277
+strips-mprime-x-20
+NO SOLUTION
+4093
+strips-mprime-x-21
+((feast learning lemon wurst alsace kentucky)
+(drink okra wurst goias kentucky alsace alsace kentucky)
+(overcome sciatica learning wurst neptune saturn)
+(drink popover wurst goias kentucky alsace kentucky goias)
+(feast learning wurst snickers kentucky goias)
+(feast learning snickers apple kentucky goias)
+(succumb sciatica learning apple neptune saturn))
+1063
+strips-mprime-x-23
+NO SOLUTION
+16341
+strips-mprime-x-25
+((drink wurst wurst bavaria kentucky bosnia bavaria pennsylvania)
+(feast rest pistachio wurst surrey moravia)
+(overcome depression rest wurst neptune earth)
+(drink pistachio wurst surrey pennsylvania bavaria pennsylvania surrey)
+(feast rest wurst chicken pennsylvania surrey)
+(succumb depression rest chicken neptune earth))
+276
+strips-mprime-x-26
+NO SOLUTION
+8554
+strips-mprime-x-27
+NO SOLUTION
+4699
+strips-mprime-x-28
+((feast intoxication wurst muffin goias bosnia)
+(drink broccoli shrimp kentucky alsace oregon alsace kentucky)
+(drink muffin muffin pennsylvania bosnia goias pennsylvania moravia)
+(overcome anger intoxication muffin vulcan earth)
+(drink broccoli broccoli alsace oregon quebec alsace kentucky)
+(drink shrimp wurst kentucky alsace oregon goias bosnia)
+(drink muffin muffin moravia pennsylvania bosnia moravia quebec)
+(feast intoxication muffin broccoli moravia quebec)
+(drink broccoli muffin oregon quebec moravia bosnia pennsylvania)
+(overcome boils intoxication broccoli neptune vulcan)
+(drink broccoli wurst quebec moravia pennsylvania bosnia pennsylvania)
+(feast intoxication broccoli lamb pennsylvania moravia)
+(succumb boils intoxication lamb neptune vulcan)
+(succumb anger intoxication lamb vulcan earth))
+2957
+strips-mprime-x-29
+((overcome jealousy excitement pork neptune uranus)
+(drink pork broccoli bavaria manitoba quebec alsace quebec)
+(drink popover shrimp bavaria manitoba quebec kentucky moravia)
+(drink popover broccoli manitoba quebec alsace quebec manitoba)
+(feast excitement pork broccoli quebec manitoba)
+(feast excitement broccoli shrimp quebec manitoba)
+(succumb jealousy excitement shrimp neptune uranus))
+13495
+strips-mprime-x-30
+NO SOLUTION
+8827
+strips-gripper-x-1
+((pick ball4 rooma left)
+(pick ball3 rooma right)
+(move rooma roomb)
+(drop ball4 roomb left)
+(drop ball3 roomb right)
+(move roomb rooma)
+(pick ball1 rooma left)
+(pick ball2 rooma right)
+(move rooma roomb)
+(drop ball2 roomb right)
+(drop ball1 roomb left))
+46
+strips-gripper-x-2
+((pick ball4 rooma left)
+(pick ball3 rooma right)
+(move rooma roomb)
+(drop ball4 roomb left)
+(drop ball3 roomb right)
+(move roomb rooma)
+(pick ball1 rooma left)
+(pick ball2 rooma right)
+(move rooma roomb)
+(drop ball2 roomb right)
+(drop ball1 roomb left)
+(move roomb rooma)
+(pick ball6 rooma right)
+(pick ball5 rooma left)
+(move rooma roomb)
+(drop ball6 roomb right)
+(drop ball5 roomb left))
+1075
+strips-gripper-x-3
+((pick ball8 rooma left)
+(pick ball7 rooma right)
+(move rooma roomb)
+(drop ball8 roomb left)
+(drop ball7 roomb right)
+(move roomb rooma)
+(pick ball5 rooma left)
+(pick ball6 rooma right)
+(move rooma roomb)
+(drop ball6 roomb right)
+(drop ball5 roomb left)
+(move roomb rooma)
+(pick ball2 rooma right)
+(pick ball1 rooma left)
+(move rooma roomb)
+(drop ball2 roomb right)
+(drop ball1 roomb left)
+(move roomb rooma)
+(pick ball4 rooma right)
+(pick ball3 rooma left)
+(move rooma roomb)
+(drop ball4 roomb right)
+(drop ball3 roomb left))
+54693
+strips-gripper-x-4
+((pick ball6 rooma left)
+(pick ball5 rooma right)
+(move rooma roomb)
+(drop ball6 roomb left)
+(drop ball5 roomb right)
+(move roomb rooma)
+(pick ball3 rooma left)
+(pick ball4 rooma right)
+(move rooma roomb)
+(drop ball4 roomb right)
+(drop ball3 roomb left)
+(move roomb rooma)
+(pick ball10 rooma right)
+(pick ball9 rooma left)
+(move rooma roomb)
+(drop ball10 roomb right)
+(drop ball9 roomb left)
+(move roomb rooma)
+(pick ball2 rooma right)
+(pick ball1 rooma left)
+(move rooma roomb)
+(drop ball2 roomb right)
+(drop ball1 roomb left)
+(move roomb rooma)
+(pick ball8 rooma right)
+(pick ball7 rooma left)
+(move rooma roomb)
+(drop ball8 roomb right)
+(drop ball7 roomb left))
+3038381
+strips-gripper-x-5
+NO SOLUTION
+3600100
+strips-gripper-x-6
+NO SOLUTION
+3600413
+strips-gripper-x-7
+NO SOLUTION
+3600862
+strips-gripper-x-8
+NO SOLUTION
+3600935
+strips-gripper-x-9
+NO SOLUTION
+3605896
+strips-gripper-x-10
+NO SOLUTION
+3602702
+strips-gripper-x-11
+NO SOLUTION
+3600646
+strips-gripper-x-12
+NO SOLUTION
+3600893
+strips-gripper-x-13
+NO SOLUTION
+3600621
+strips-gripper-x-14
+NO SOLUTION
+3600735
+strips-gripper-x-15
+NO SOLUTION
+3600666
+strips-gripper-x-16
+NO SOLUTION
+3600684
+strips-gripper-x-17
+NO SOLUTION
+3600716
+strips-gripper-x-18
+NO SOLUTION
+3600689
+strips-gripper-x-19
+NO SOLUTION
+3600699
+strips-gripper-x-20
+NO SOLUTION
+3600687
+strips-mprime-x-4
+NO SOLUTION
+40
+strips-mprime-x-10
+NO SOLUTION
+40
+strips-mprime-x-13
+NO SOLUTION
+40
+strips-mprime-x-22
+NO SOLUTION
+40
+
+
+
+
+
+
+
+
+
+

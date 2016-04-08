@@ -1,0 +1,16 @@
+(define (problem BLOCKS-10-0)
+(:domain BLOCKS)
+(:objects D A H G B J E I F C )
+(:INIT (CLEAR C) (CLEAR F) (ONTABLE I) (ONTABLE F) (ON C E) (ON E J) (ON J B)
+ (ON B G) (ON G H) (ON H A) (ON A D) (ON D I) (HANDEMPTY))
+(:goal (AND (ON D C) (ON C F) (ON F J) (ON J E) (ON E H) (ON H B) (ON B A)
+            (ON A G) (ON G I)))
+)
+
+
+O = domain(blocks,[strips],_h19905,_h19906,[on(?x,?y),ontable(?x),clear(?x),handempty,holding(?x)],_h19908,_h19906,[action(pick-up,[?x],[clear(?x),ontable(?x),handempty],[holding(?x)],[ontable(?x),clear(?x),handempty],[]),action(put-down,[?x],holding(?x),[clear(?x),handempty,ontable(?x)],[holding(?x)],[]),action(stack,[?x,?y],[holding(?x),clear(?y)],[clear(?x),handempty,on(?x,?y)],[holding(?x),clear(?y)],[]),action(unstack,[?x,?y],[on(?x,?y),clear(?x),handempty],[holding(?x),clear(?y)],[clear(?x),handempty,on(?x,?y)],[])])
+
+yes
+| ?- parseProblem('AIPS-2000DataFiles/2000-Tests/Blocks/Track1/Untyped/probBLOCKS-10-0.pddl',O).
+
+O = problem(blocks-10-0,blocks,_h9653,[d,a,h,g,b,j,e,i,f,c],[clear(c),clear(f),ontable(i),ontable(f),on(c,e),on(e,j),on(j,b),on(b,g),on(g,h),on(h,a),on(a,d),on(d,i),handempty],[on(d,c),on(c,f),on(f,j),on(j,e),on(e,h),on(h,b),on(b,a),on(a,g),on(g,i)],_h9657,_h9658,_h9659)

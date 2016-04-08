@@ -1,0 +1,45 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 4 Op-blocks world
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (domain BLOCKS)
+  (:requirements :strips)
+  (:predicates (on ?x ?y)
+	       (ontable ?x)
+	       (clear ?x)
+	       (handempty)
+	       (holding ?x)
+	       )
+
+  (:action pick-up
+	     :parameters (?x)
+	     :precondition (and (clear ?x) (ontable ?x) (handempty))
+	     :effect
+	     (and (not (ontable ?x))
+		   (not (clear ?x))
+		   (not (handempty))
+		   (holding ?x)))
+
+  (:action put-down
+	     :parameters (?x)
+	     :precondition (holding ?x)
+	     :effect
+	     (and (not (holding ?x))
+		   (clear ?x)
+		   (handempty)
+		   (ontable ?x)))
+  (:action stack
+	     :parameters (?x ?y)
+	     :precondition (and (holding ?x) (clear ?y))
+	     :effect
+	     (and (not (holding ?x))
+		   (not (clear ?y))
+		   (clear ?x)
+		   (handempty)
+		   (on ?x ?y)))
+O = domain(blocks,[strips],_h19905,_h19906,[on(?x,?y),ontable(?x),clear(?x),handempty,holding(?x)],_h19908,_h19906,[action(pick-up,[?x],[clear(?x),ontable(?x),handempty],[holding(?x)],[ontable(?x),clear(?x),handempty],[]),action(put-down,[?x],holding(?x),[clear(?x),handempty,ontable(?x)],[holding(?x)],[]),action(stack,[?x,?y],[holding(?x),clear(?y)],[clear(?x),handempty,on(?x,?y)],[holding(?x),clear(?y)],[]),action(unstack,[?x,?y],[on(?x,?y),clear(?x),handempty],[holding(?x),clear(?y)],[clear(?x),handempty,on(?x,?y)],[])])
+
+yes
+| ?- parseProblem('AIPS-2000DataFiles/2000-Tests/Blocks/Track1/Untyped/probBLOCKS-10-0.pddl',O).
+
+O = problem(blocks-10-0,blocks,_h9653,[d,a,h,g,b,j,e,i,f,c],[clear(c),clear(f),ontable(i),ontable(f),on(c,e),on(e,j),on(j,b),on(b,g),on(g,h),on(h,a),on(a,d),on(d,i),handempty],[on(d,c),on(c,f),on(f,j),on(j,e),on(e,h),on(h,b),on(b,a),on(a,g),on(g,i)],_h9657,_h9658,_h9659)

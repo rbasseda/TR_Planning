@@ -1,0 +1,55 @@
+%% Problem Name:tpp
+%% Domain Name:tpp
+%%%%%%%%%%%%%%%%%%%%%%  Test File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- compiler_options([xpp_on]).
+#include "../../tr_operators.P"
+#include "tpp.P"
+#include "tpp_data.P"
+
+tabled_predicate(tpp_STRIPS,0).
+tabled_predicate(tpp_Naive,0).
+%%%%%%%%%%%%%%%%%%%%%%    Goal     %%%%%%%%%%%%%%%%%%%%%%%%%%
+goods(goods1).
+goods(goods2).
+goods(goods3).
+truck(truck1).
+market(market1).
+depot(depot1).
+level(level0).
+level(level1).
+next(level1,level0).
+connected(depot1,market1).
+connected(market1,depot1).
+tr_database(ready_to_load(goods1,market1,level0)).
+tr_database(ready_to_load(goods2,market1,level0)).
+tr_database(ready_to_load(goods3,market1,level0)).
+tr_database(stored(goods1,level0)).
+tr_database(stored(goods2,level0)).
+tr_database(stored(goods3,level0)).
+tr_database(loaded(goods1,truck1,level0)).
+tr_database(loaded(goods2,truck1,level0)).
+tr_database(loaded(goods3,truck1,level0)).
+tr_database(on_sale(goods1,market1,level1)).
+tr_database(on_sale(goods2,market1,level1)).
+tr_database(on_sale(goods3,market1,level1)).
+tr_database(at(truck1,depot1)).
+
+
+tr_clause(
+	tpp_STRIPS,
+		seq(shuffle(
+			achieve(stored(goods1,level1)),
+			achieve(stored(goods2,level1)),
+			achieve(stored(goods3,level1))),
+		seq(stored(goods1,level1),
+		seq(stored(goods2,level1),stored(goods3,level1))))).
+
+tr_clause(
+	tpp_Naive,
+		seq(solutionPlan,
+		seq(stored(goods1,level1),
+		seq(stored(goods2,level1),stored(goods3,level1))))).
+
+test_description(test_elevator_planning_problem).
+test_query(tpp_STRIPS).

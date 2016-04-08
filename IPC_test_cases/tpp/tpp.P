@@ -1,0 +1,317 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% tpp%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(drive,3).
+tabled_predicate(load,7).
+tabled_predicate(unload,7).
+tabled_predicate(buy,7).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(loaded,3).
+dynamic_predicate(ready_to_load,3).
+dynamic_predicate(stored,2).
+dynamic_predicate(on_sale,3).
+dynamic_predicate(next,2).
+dynamic_predicate(at,2).
+dynamic_predicate(connected,2).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	drive(truck(VARt),place(VARfrom),place(VARto)),
+		seq(at(VARt,VARfrom),
+		seq(connected(VARfrom,VARto),
+		seq(ins(at(VARt,VARto)),del(at(VARt,VARfrom)))))).
+
+tr_clause(
+	planningAction,
+		drive(truck(VARt),place(VARfrom),place(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4)),
+		seq(at(VARt,VARm),
+		seq(loaded(VARg,VARt,VARl3),
+		seq(ready_to_load(VARg,VARm,VARl2),
+		seq(next(VARl2,VARl1),
+		seq(next(VARl4,VARl3),
+		seq(ins(loaded(VARg,VARt,VARl4)),
+		seq(ins(ready_to_load(VARg,VARm,VARl1)),
+		seq(del(loaded(VARg,VARt,VARl3)),del(ready_to_load(VARg,VARm,VARl2))))))))))).
+
+tr_clause(
+	planningAction,
+		load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4)),
+		seq(at(VARt,VARd),
+		seq(loaded(VARg,VARt,VARl2),
+		seq(stored(VARg,VARl3),
+		seq(next(VARl2,VARl1),
+		seq(next(VARl4,VARl3),
+		seq(ins(loaded(VARg,VARt,VARl1)),
+		seq(ins(stored(VARg,VARl4)),
+		seq(del(loaded(VARg,VARt,VARl2)),del(stored(VARg,VARl3))))))))))).
+
+tr_clause(
+	planningAction,
+		unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4)),
+		seq(at(VARt,VARm),
+		seq(on_sale(VARg,VARm,VARl2),
+		seq(ready_to_load(VARg,VARm,VARl3),
+		seq(next(VARl2,VARl1),
+		seq(next(VARl4,VARl3),
+		seq(ins(on_sale(VARg,VARm,VARl1)),
+		seq(ins(ready_to_load(VARg,VARm,VARl4)),
+		seq(del(on_sale(VARg,VARm,VARl2)),del(ready_to_load(VARg,VARm,VARl3))))))))))).
+
+tr_clause(
+	planningAction,
+		buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(loaded(VARg,VARt,VARl)),
+		loaded(VARg,VARt,VARl)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(ready_to_load(VARg,VARm,VARl)),
+		ready_to_load(VARg,VARm,VARl)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(stored(VARg,VARl)),
+		stored(VARg,VARl)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on_sale(VARg,VARm,VARl)),
+		on_sale(VARg,VARm,VARl)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(next(VARl1,VARl2)),
+		next(VARl1,VARl2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARt,VARp)),
+		at(VARt,VARp)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(connected(VARp1,VARp2)),
+		connected(VARp1,VARp2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(loaded(VARg,VARt,VARl)),
+		not(loaded(VARg,VARt,VARl))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(ready_to_load(VARg,VARm,VARl)),
+		not(ready_to_load(VARg,VARm,VARl))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(stored(VARg,VARl)),
+		not(stored(VARg,VARl))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on_sale(VARg,VARm,VARl)),
+		not(on_sale(VARg,VARm,VARl))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(next(VARl1,VARl2)),
+		not(next(VARl1,VARl2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARt,VARp)),
+		not(at(VARt,VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(connected(VARp1,VARp2)),
+		not(connected(VARp1,VARp2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARt,VARto)),
+		seq(not(at(VARt,VARto)),
+		execute(drive(truck(VARt),place(VARfrom),place(VARto))))).
+
+
+achieves(at(VARt,VARto),drive(truck(VARt),place(VARfrom),place(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(loaded(VARg,VARt,VARl4)),
+		seq(not(loaded(VARg,VARt,VARl4)),
+		execute(load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+achieves(loaded(VARg,VARt,VARl4),load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(ready_to_load(VARg,VARm,VARl1)),
+		seq(not(ready_to_load(VARg,VARm,VARl1)),
+		execute(load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+achieves(ready_to_load(VARg,VARm,VARl1),load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(loaded(VARg,VARt,VARl1)),
+		seq(not(loaded(VARg,VARt,VARl1)),
+		execute(unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+achieves(loaded(VARg,VARt,VARl1),unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(stored(VARg,VARl4)),
+		seq(not(stored(VARg,VARl4)),
+		execute(unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+achieves(stored(VARg,VARl4),unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on_sale(VARg,VARm,VARl1)),
+		seq(not(on_sale(VARg,VARm,VARl1)),
+		execute(buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+achieves(on_sale(VARg,VARm,VARl1),buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(ready_to_load(VARg,VARm,VARl4)),
+		seq(not(ready_to_load(VARg,VARm,VARl4)),
+		execute(buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+achieves(ready_to_load(VARg,VARm,VARl4),buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARt,VARfrom)),
+		seq(at(VARt,VARfrom),
+		execute(drive(truck(VARt),place(VARfrom),place(VARto))))).
+
+
+avoids(at(VARt,VARfrom),drive(truck(VARt),place(VARfrom),place(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(loaded(VARg,VARt,VARl3)),
+		seq(loaded(VARg,VARt,VARl3),
+		execute(load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+avoids(loaded(VARg,VARt,VARl3),load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(ready_to_load(VARg,VARm,VARl2)),
+		seq(ready_to_load(VARg,VARm,VARl2),
+		execute(load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+avoids(ready_to_load(VARg,VARm,VARl2),load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(loaded(VARg,VARt,VARl2)),
+		seq(loaded(VARg,VARt,VARl2),
+		execute(unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+avoids(loaded(VARg,VARt,VARl2),unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(stored(VARg,VARl3)),
+		seq(stored(VARg,VARl3),
+		execute(unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+avoids(stored(VARg,VARl3),unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on_sale(VARg,VARm,VARl2)),
+		seq(on_sale(VARg,VARm,VARl2),
+		execute(buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+avoids(on_sale(VARg,VARm,VARl2),buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(ready_to_load(VARg,VARm,VARl3)),
+		seq(ready_to_load(VARg,VARm,VARl3),
+		execute(buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))))).
+
+
+avoids(ready_to_load(VARg,VARm,VARl3),buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(drive(truck(VARt),place(VARfrom),place(VARto))),
+		seq(shuffle(
+			achieve(at(VARt,VARfrom)),
+			achieve(connected(VARfrom,VARto))),
+			drive(truck(VARt),place(VARfrom),place(VARto)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))),
+		seq(shuffle(
+			achieve(at(VARt,VARm)),
+			achieve(loaded(VARg,VARt,VARl3)),
+			achieve(ready_to_load(VARg,VARm,VARl2)),
+			achieve(next(VARl2,VARl1)),
+			achieve(next(VARl4,VARl3))),
+			load(goods(VARg),truck(VARt),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4))),
+		seq(shuffle(
+			achieve(at(VARt,VARd)),
+			achieve(loaded(VARg,VARt,VARl2)),
+			achieve(stored(VARg,VARl3)),
+			achieve(next(VARl2,VARl1)),
+			achieve(next(VARl4,VARl3))),
+			unload(goods(VARg),truck(VARt),depot(VARd),level(VARl1),level(VARl2),level(VARl3),level(VARl4)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4))),
+		seq(shuffle(
+			achieve(at(VARt,VARm)),
+			achieve(on_sale(VARg,VARm,VARl2)),
+			achieve(ready_to_load(VARg,VARm,VARl3)),
+			achieve(next(VARl2,VARl1)),
+			achieve(next(VARl4,VARl3))),
+			buy(truck(VARt),goods(VARg),market(VARm),level(VARl1),level(VARl2),level(VARl3),level(VARl4)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+

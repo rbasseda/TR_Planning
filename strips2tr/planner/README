@@ -1,0 +1,51 @@
+This is a compiler that compiles a PDDL 3.0 file to Transaction Logic syntax.
+Through this project, we show that Transaction Logic is an appropriate language
+and framework to study and compare these planning algorithms, which enables
+one to have more efficient planners in logic programming frameworks.
+More explanation of this compilation can be find in the following paper:
+
+Reza Basseda, Michael Kifer:
+State Space Planning Using Transaction Logic. PADL 2015: 17-33
+
+The above paper provides a formal representation of STRIPS planning algorithms
+in Transaction Logic. We use such formal representation to automatically 
+translate STRIPS planning problems in PDDL to Transaction Logic rules. 
+We use the resulting Transaction Logic rules to solve planning problems and 
+compare the performance of those algorithms in our simple interpreter 
+implemented in XSB Prolog.
+
+The project contains compliers for Naive, STRIPS, RSTRIPS and fSTRIPS planners.
+The interested reader may find the following papers related:
+
+Reza Basseda, Michael Kifer:
+Planning with Regression Analysis in Transaction Logic. RR 2015: 45-60
+
+Reza Basseda, Michael Kifer, Anthony J. Bonner:
+Planning with Transaction Logic. RR 2014: 29-44
+
+This project uses the translator project uses the PDDL parser developed by 
+Roman Bartak, which is available at:
+
+All of the files with pl extensions are not the contributions of the author and 
+imported from Bartak's project. To make PDDL files readable by our compiler,
+the variables should be changed and the prefix '?' must be replaced with a 
+capital letter. The bash script in 'pddl_cleaner.sh' can help the user to 
+fix this problem in PDDL files.
+
+To run the script you need to use the following procedure and signature:
+
+1- Run XSB prolog
+
+2- Load the appropriate compiler. For instance, if you want to generate FSTRIPS, load it as:
+
+:- ['FSTRIPS_Generator.P'].
+
+3- Query pddl2tr with the following signature:
+
+pddl2tr(SourceDir, DestDir,DomainFile,ProblemFile,Planner).
+
+To run the whole compiler from command line, you can use XSB '-e' option.
+
+For example:
+
+xsb -e "['FSTRIPS_Generator.P'],pddl2tr('~/Projects/SMP/src/smp_test/IPC/strips2tr/planner/aips00/Blocks/Track1/Typed/','~/Projects/SMP/src/smp_test/blocks/','domain.pddl','probBLOCKS-5-1.pddl','STRIPS'),halt."

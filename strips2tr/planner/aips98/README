@@ -1,0 +1,343 @@
+This directory contains the domains, problems, and results for the AIPS-98 
+Planning Competition.
+
+For clarity, the directory structure is not quite the same as it was
+for the actual competition.  All the domains have been collected in a
+single subdirectory, domains, with two subdirectories, adl and
+strips.  Most domains occur in two versions, one in each subdirectory.
+
+The problems and results have been collected in two subdirectories,
+round1 and round2.  
+
+Round 1 of the competition consisted of two tracks, labeled "ADL" and
+"Strips."  The difference between the two is that ADL allows
+context-dependent action effects and quantified preconditions.  (For
+details, see the PDDL manual.)  When there are both an ADL version and
+a Strips version of a domain, there is usually a slight difference
+between them.
+
+Here is a brief description of each domain (roughly in order of
+complexity).  Within each domain, problems are numbered in approximate
+order of increasing complexity, although for artificially generated
+problems it is hard to guarantee that kind of ordering.
+
+Movie: In this domain, the goal is always the same (to have lots of
+snacks in order to watch a movie), but the number of constants
+increases with problem number.  Some planners have combinatorial
+problems in such cases.  This domain was created by Corin Anderson.
+
+Gripper: There is a robot with two grippers.  It can carry a ball in
+each.  The goal is to take N balls from one room to another; N rises
+with problem number.  Some planners treat the two grippers
+asymmetrically, giving rise to an unnecessary combinatorial
+explosion.  This domain was created by Jana Koehler.
+
+Logistics: There are several cities, each containing several
+locations, some of which are airports.  There are also trucks, which
+can drive within a single city, and airplanes, which can fly between
+airports.   The goal is to get some packages from various locations to
+various new locations.  This domain was created by Bart Selman and
+Henry Kautz, based on an earlier domain by Manuela Veloso.
+
+Mystery: There is a planar graph of nodes.  At each node are vehicles,
+cargo items, and some amount of fuel.  Objects can be loaded onto
+vehicles (up to their capacity), and the vehicles can move between
+nodes; but a vehicle can leave a node only if there is a nonzero
+amount of fuel there, and the amount decreases by one unit.  The goal
+is to get cargo items from various nodes to various new nodes.  To
+disguise the domain, the nodes were called emotions, the cargo items
+were pains, the vehicles were pleasures, and fuel and capacity numbers
+were encoded as geographical entities.  This domain was created by
+Drew McDermott.
+
+Mprime: This is the mystery domain with one extra action, the ability
+to squirt a unit of fuel from any node to a neighboring node, provided
+the originating node has at least two units.  Created by Drew
+McDermott
+
+Grid: There is a square grid of locations.  A robot can move one grid
+square at a time horizontally and vertically.  If a square is locked,
+the robot can move to it only by unlocking it, which requires having a
+key of the same shape as the lock.  The goal is to get keys from
+various locations to various new locations.  This domain was created
+by Jana Koehler, based on an earlier domain by Drew McDermott.
+
+Assembly: The goal is to assemble a complex object made out of
+subassemblies.  The sequence of steps must obey a given partial
+order.  In addition, through poor engineering design, many
+subassemblies must be installed temporarily in one assembly, then
+removed and given a permanent home in another.  This domain was
+created by Drew McDermott.
+
+
+There were five competitors:
+
+Planner Name: Blackbox
+Creators: Henry Kautz (ATT) and Bart Selman (ATT & Cornell)
+Track: Strips
+Language: C
+
+Planner Name: HSP
+Creators: Blai Bonet and Hector Geffner (Simon Bolivar University)
+Track: Strips
+Language: C/gcc
+
+Planner name: IPP
+Creator: Jana Koehler (Freiburg University)
+Tracks: strips, adl
+Language: C/C++ (gcc/gpp)
+
+Planner Name: SGP
+Creators:  Corin Anderson and Dan Weld (University of Washington)
+Tracks: STRIPS, ADL
+Language/compiler:  Lisp
+
+Planner Name: STAN
+Creators: Derek Long and Maria Fox (Durham University)
+Tracks: strips
+Language/compiler: Gnu C++ (g++) and Gnu C (gcc).
+
+Two planners, IPP and SGP, competed in the ADL track.  Four, Blackbox,
+HSP, IPP, and STAN, competed in the Strips track.
+
+The ADL problems are given in the subdirectories 
+
+round1/assembly  [30 problems]
+round1/gripper/adl [20]
+round1/logistics/adl [30]
+round1/movie/adl [30]
+round1/mprime/adl [30]
+round1/mystery/adl [30, same as the mprime problems]
+
+The Strips problems are given in the subdirectories:
+
+round1/gripper/strips 
+round1/logistics/strips
+round1/movie/strips 
+round1/mprime/strips 
+round1/mystery/strips 
+
+In all cases, exactly the same problems were used for the Strips
+domains, except for minor compatibility changes.
+
+Note that we did not use the Grid domain in Round 1. 
+
+The contestants were given two or three days to run their planners on
+these systems (depending on when they arrived in Pittsburgh).  The
+idea was to allow them to do any last-minute tuning of their planners
+in Round 1, then do Round 2 without any further tuning.  Round 1 ended
+at 5 PM on Monday, June 8.  
+
+The output of the planners is given in the directory round1/results,
+in the files ipp-adl.round1, sgp-adl.round1, blackbox-strips.round1,
+hsp-strips.round1, ipp-strips.round1, stan-strips.round1.  Each file
+starts with the name of the planner, and then consists of a sequence
+of the form 
+
+problem name
+solution
+time
+
+for each problem.
+
+The Rules Committee had arrived at a scoring function before the
+competition (pardon the TeXism):
+
+The basic idea is to give each planner $j$ a score on problem $i$ equal to
+
+$$     (N_i-R_{ij})W_i $$
+
+where $N_i$ is the number of planners competing on problem $i$; $R_{ij}$
+is the rank of planner $j$ on problem $i$ (0 for best program, $N-1 $
+for worst, as explained below); and $W_i$ is the difficulty of a
+problem, defined as
+
+$$ W_i = {{\rm median}_j T_{ij} \over \sum_m{\rm median}_n T_{mn}}$$
+
+where $T_{bl}$ is the time taken by planner $l$ on problem $b$.
+
+Here is how we will compute $R_{ij}$: Rank all planners
+lexicographically as follows:
+
+\begin{itemize}
+\item Most important dimension: Correctness.
+There are two possible outcomes for planner $j$ on problem $i$, in
+order of decreasing winnitude: either it stops and reports a correct
+answer, or it doesn't.  In other words, either it
+\begin{enumerate}
+\item Prints a correct solution or returns "NO SOLUTION" when there
+isn't one.
+\item Or it prints an incorrect solution; or returns "NO SOLUTION"
+when there is one; or never stops and has to be stopped by hand.
+\end{enumerate}
+
+\item Second dimension: Advice.  Define 
+
+$$ A_{ij} = a_{ij}+ A_{D_i,j}/N(D_i) $$
+
+where $a_{ij}$ is the size of the advice given to planner $j$ for
+problem $i$; $A_{D_j}$ is the size of the advice given to planner $j$
+for domain $D$ ($D_i$ is the domain of problem $i$); and $N(D)$ is the
+number of problems in domain $D$.
+
+We will measure the size of a piece of advice by counting the
+number of symbols in it.
+
+\item Third dimension: Performance.  If a problem has no solution, this
+is just the measured CPU time of planner $j$ on problem $i$, or
+$T_{ij}$.  If it has a solution, and planner $j$ finds a solution, 
+then we will replace $T_{ij}$ with $T_{ij} (L_{ij})^h$, where
+$L_{ij}$ is the length of the solution and $h=0.5$.  Length is defined
+as number of steps, regardless of whether some could be executed in
+parallel.  (If $L=0$, we will treat the solution as of length 1.)
+\end{itemize}
+
+
+Comments:
+
+\begin{enumerate}
+\item We take solution length into account, but it becomes important
+only if planners have comparable solution times.  If planner $j'$ is 10
+times slower than planner $j$, it must produce a plan 100 times
+shorter to win.  If $j'$ produces a plan twice as long, it must run in
+70\% of the time $j$ takes.  This is to reflect the classical
+presupposition that existence of a plan is more important than its
+size. [Making $h$ 
+bigger would make length more relevant.]
+
+\item If a planner requires advice, it can never beat a planner that
+solves the same problems with no advice.  So it's
+worth giving a certain amount of advice only when you bet that no one
+will be able to solve the problem with less.
+
+\item For some of the more difficult machine-generated problems, we
+may not really know if there is a solution.  In that case, if no
+planner finds a solution, we will assume that "NO SOLUTION" is the
+correct answer.   If a planner has to be stopped by hand, then it will
+be taken to have returned "NO SOLUTION" after the amount of run time
+it actually spent (as close as that can be estimated).
+
+\end{enumerate}
+
+When we ran this scoring function on the data we had, we discovered
+some problems with it.  For one thing, we failed to anticipate that
+several of the contestants would simply not try to solve some of the
+problems.  If their planner failed on almost all of the easiest 10
+problems in a domain, they didn't see the point of letting it grind
+forever on the next 20.   The scoring function as originally designed
+gave one point to a program that tried a problem, failed, and took
+longer than any other program that tried and failed.  It gave zero to
+a program that didn't try.
+
+An even worse problem was that one planner spent an hour each on two
+of the problems, much longer than any other planner spent on any
+problem.  Only two planners tried those two problems, so the median
+time to solve it was quite large, and the two problems ended up
+carrying 90\% of the weight.  (The other planner ran faster on those
+two problems, so it came out far ahead of all the other systems.)  
+
+The Rules Committee met hastily and decided to make two changes: (1)
+Any planner that failed to find a solution to a problem got 0 points
+for it; (2) We replaced time in the weighting formula with the
+logarithm of the time.  
+
+With these changes, we get the results shown in files
+
+    round1/results/adl-round1.results
+    round1/results/strips-round1.results
+
+If you want to see the details of how it was done, load the PDDL
+solution checker (see the PDDL manual), then load the file
+scoring/score.system, after editing the directory names that appear in
+it.  Similarly, edit the file scoring/run-rounds.lisp, changing the
+directory aipscomp-directory* to a local directory.  Then do
+(mk:compile-system 'aips-scoring).  This will compile and load the
+files run-rounds and score-util.
+
+Now do (init-round1) and (run-adl-round1 <output-file>) and
+(run-strips-round1 <output-file>).
+
+The format of the solution files is fairly self-explanatory.  For each
+problem we give planners' statistics in decreasing order, including
+whether its answer was correct, how much advice it took (0 in all
+cases), how much time it took in milliseconds, the length of the plan
+it found (-1 if it found no solution), and the weighted score, based
+on the function above.  At the end of the file the summed scores are
+given, plus the total number of problems solved, and the total number
+for which the planner gave the best answer (the "Won" column).
+
+There was a slight bug in the solution checker which caused the actual
+results for the ADL track to differ slightly from the file above.
+However, it did not alter the result.  IPP did much better than SGP,
+solving more problems faster.  (There was also a bug in the ADL
+version of the logistics domain, which turned out to be irrelevant.  A
+corrected version appears in domains/logistics-adl-corrected.pddl.)
+
+The results for the Strips track were less clearcut.  By the scoring
+function, HSP was the winner, mainly because it solved more problems
+than any other program.  However, IPP finished faster than other
+programs on more problems.
+
+After much discussion (but, fortunately, no fatalities), the Committee
+decided to declare IPP the winner of the ADL track, and focus Round 2
+on Strips problems only, with all four Strips planners (Blackbox, HSP,
+IPP, and STAN) as finalists.  In addition, we decided to compute
+statistics for all the systems, but avoid assigning a single number
+and declaring a winner.  
+
+For Round 2, we used the Grid, Logistics, and Mprime domains, all in
+their Strips versions.  The problems appear in
+
+round2/grid [5 problems]
+round2/logistics [5]
+round2/mprime [5]
+
+In Round 1, we had 140 Strips problems, of which 52 could not be
+solved by any of the planners.  Having established the range they
+systems could realistically strive for, we deliberately chose a
+smaller number of problems, closer to that range, for Round 2.  
+
+The output of the planners is given in round2/results, files
+blackbox-strips.round2 hsp-strips.round2, ipp-strips.round2,
+stan-strips.round2.  The results of the scoring function are given in 
+round2/results/round2.results .
+
+To duplicate these results, proceed as before, but now execute
+(init-round2), and (run-round2 <output-file>).
+
+The results are still not satisfactory, for two reasons:
+
+(1) Three of IPP's solutions were checked and found to be wrong.  It
+turned out that the reason for this was a trivial bug in the output
+printer, which caused all occurrences of PICKUP to be printed as
+PICKUP-AND-LOOSE.  
+
+(2) We still had not dealt very consistently with the case where a
+problem had no solution, or no planner could find one.  In particular,
+if two planners worked on a problem, and both failed to find a
+solution, they were given credit for getting the right answer, while
+programs that didn't attempt it got nothing.  Contestants were
+told that not attempting a problem would not count against their
+systems, which turns out in this case to be wrong.
+
+These two glitches interacted badly for problem STRIPS-GRID-Y-2.  IPP
+solved it, but printed the solution wrong.  HSP did not attempt it.
+Blackbox and STAN tried and failed to solve it.  Hence Blackbox and
+STAN were credited with solving the problem!
+
+To clean all this up, we revised the scoring program one more time, to
+produce what we call the "uniform" scoring procedure, which just
+summarizes as many statistics are we could think of.  Its results are
+given in files 
+
+scoring/uniform-adl-round1.out,
+scoring/uniform-strips-round1.out, and 
+scoring/uniform-round2.out .  
+
+The planners are sorted in alphabetical order.
+
+It is hard to draw any conclusion from these data, except to note that
+all of these planners performed very well, compared to the state of
+the art a few years ago.  Many of the plans found were 30 or 40 steps
+long, and some were longer than 100 steps.  
+

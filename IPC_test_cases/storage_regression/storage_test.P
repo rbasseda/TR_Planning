@@ -1,0 +1,26 @@
+%% Problem Name:storage_1
+%% Domain Name:storage
+%%%%%%%%%%%%%%%%%%%%%%  Test File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- compiler_options([xpp_on]).
+#include "../../tr_operators.P"
+#include "storage.P"
+#include "storage_data.P"
+
+tabled_predicate(storage_1_RSTRIPS,0).
+tabled_predicate(storage_1_Naive,0).
+%%%%%%%%%%%%%%%%%%%%%%    Goal     %%%%%%%%%%%%%%%%%%%%%%%%%%
+planning_goal(in(crate0,depot0)).
+
+
+tr_clause(
+	storage_1_RSTRIPS,
+		seq(
+			achieve(in(crate0,depot0)),in(crate0,depot0))).
+
+tr_clause(
+	storage_1_Naive,
+		seq(solutionPlan,in(crate0,depot0))).
+
+test_description(test_elevator_planning_problem).
+test_query(storage_1_RSTRIPS).

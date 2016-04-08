@@ -1,0 +1,602 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% hiking%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(put_down,3).
+tabled_predicate(put_up,3).
+tabled_predicate(drive_passenger,5).
+tabled_predicate(drive,4).
+tabled_predicate(drive_tent,5).
+tabled_predicate(drive_tent_passenger,6).
+tabled_predicate(walk_together,6).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(at_tent,2).
+dynamic_predicate(at_person,2).
+dynamic_predicate(at_car,2).
+dynamic_predicate(partners,3).
+dynamic_predicate(up,1).
+dynamic_predicate(down,1).
+dynamic_predicate(walked,2).
+dynamic_predicate(next,2).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	put_down(person(? x1),place(? x2),tent(? x3)),
+		seq(at_person(? x1,? x2),
+		seq(at_tent(? x3,? x2),
+		seq(up(? x3),
+		seq(ins(down(? x3)),del(up(? x3))))))).
+
+tr_clause(
+	planningAction,
+		put_down(person(? x1),place(? x2),tent(? x3))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	put_up(person(? x1),place(? x2),tent(? x3)),
+		seq(at_person(? x1,? x2),
+		seq(at_tent(? x3,? x2),
+		seq(down(? x3),
+		seq(ins(up(? x3)),del(down(? x3))))))).
+
+tr_clause(
+	planningAction,
+		put_up(person(? x1),place(? x2),tent(? x3))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5)),
+		seq(at_person(? x1,? x2),
+		seq(at_car(? x4,? x2),
+		seq(at_person(? x5,? x2),
+		seq(? x1 = ? x5,
+		seq(ins(at_person(? x1,? x3)),
+		seq(ins(at_car(? x4,? x3)),
+		seq(ins(at_person(? x5,? x3)),
+		seq(del(at_person(? x1,? x2)),
+		seq(del(at_car(? x4,? x2)),del(at_person(? x5,? x2)))))))))))).
+
+tr_clause(
+	planningAction,
+		drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	drive(person(? x1),place(? x2),place(? x3),car(? x4)),
+		seq(at_person(? x1,? x2),
+		seq(at_car(? x4,? x2),
+		seq(ins(at_person(? x1,? x3)),
+		seq(ins(at_car(? x4,? x3)),
+		seq(del(at_person(? x1,? x2)),del(at_car(? x4,? x2)))))))).
+
+tr_clause(
+	planningAction,
+		drive(person(? x1),place(? x2),place(? x3),car(? x4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5)),
+		seq(at_person(? x1,? x2),
+		seq(at_car(? x4,? x2),
+		seq(at_tent(? x5,? x2),
+		seq(down(? x5),
+		seq(ins(at_person(? x1,? x3)),
+		seq(ins(at_car(? x4,? x3)),
+		seq(ins(at_tent(? x5,? x3)),
+		seq(del(at_person(? x1,? x2)),
+		seq(del(at_car(? x4,? x2)),del(at_tent(? x5,? x2)))))))))))).
+
+tr_clause(
+	planningAction,
+		drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6)),
+		seq(at_person(? x1,? x2),
+		seq(at_car(? x4,? x2),
+		seq(at_tent(? x5,? x2),
+		seq(down(? x5),
+		seq(at_person(? x6,? x2),
+		seq(? x1 = ? x6,
+		seq(ins(at_person(? x1,? x3)),
+		seq(ins(at_car(? x4,? x3)),
+		seq(ins(at_tent(? x5,? x3)),
+		seq(ins(at_person(? x6,? x3)),
+		seq(del(at_person(? x1,? x2)),
+		seq(del(at_car(? x4,? x2)),
+		seq(del(at_tent(? x5,? x2)),del(at_person(? x6,? x2)))))))))))))))).
+
+tr_clause(
+	planningAction,
+		drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6)),
+		seq(at_tent(? x1,? x2),
+		seq(up(? x1),
+		seq(at_person(? x3,? x4),
+		seq(next(? x4,? x2),
+		seq(at_person(? x5,? x4),
+		seq(? x3 = ? x5,
+		seq(walked(? x6,? x4),
+		seq(partners(? x6,? x3,? x5),
+		seq(ins(at_person(? x3,? x2)),
+		seq(ins(at_person(? x5,? x2)),
+		seq(ins(walked(? x6,? x2)),
+		seq(del(at_person(? x3,? x4)),
+		seq(del(at_person(? x5,? x4)),del(walked(? x6,? x4)))))))))))))))).
+
+tr_clause(
+	planningAction,
+		walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_tent(? x1,? x2)),
+		at_tent(? x1,? x2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_person(? x1,? x2)),
+		at_person(? x1,? x2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_car(? x1,? x2)),
+		at_car(? x1,? x2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(partners(? x1,? x2,? x3)),
+		partners(? x1,? x2,? x3)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(up(? x1)),
+		up(? x1)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(down(? x1)),
+		down(? x1)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(walked(? x1,? x2)),
+		walked(? x1,? x2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(next(? x1,? x2)),
+		next(? x1,? x2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_tent(? x1,? x2)),
+		not(at_tent(? x1,? x2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_person(? x1,? x2)),
+		not(at_person(? x1,? x2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_car(? x1,? x2)),
+		not(at_car(? x1,? x2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(partners(? x1,? x2,? x3)),
+		not(partners(? x1,? x2,? x3))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(up(? x1)),
+		not(up(? x1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(down(? x1)),
+		not(down(? x1))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(walked(? x1,? x2)),
+		not(walked(? x1,? x2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(next(? x1,? x2)),
+		not(next(? x1,? x2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(down(? x3)),
+		seq(not(down(? x3)),
+		execute(put_down(person(? x1),place(? x2),tent(? x3))))).
+
+
+achieves(down(? x3),put_down(person(? x1),place(? x2),tent(? x3))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(up(? x3)),
+		seq(not(up(? x3)),
+		execute(put_up(person(? x1),place(? x2),tent(? x3))))).
+
+
+achieves(up(? x3),put_up(person(? x1),place(? x2),tent(? x3))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_person(? x1,? x3)),
+		seq(not(at_person(? x1,? x3)),
+		execute(drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))))).
+
+
+achieves(at_person(? x1,? x3),drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_car(? x4,? x3)),
+		seq(not(at_car(? x4,? x3)),
+		execute(drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))))).
+
+
+achieves(at_car(? x4,? x3),drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_person(? x5,? x3)),
+		seq(not(at_person(? x5,? x3)),
+		execute(drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))))).
+
+
+achieves(at_person(? x5,? x3),drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_person(? x1,? x3)),
+		seq(not(at_person(? x1,? x3)),
+		execute(drive(person(? x1),place(? x2),place(? x3),car(? x4))))).
+
+
+achieves(at_person(? x1,? x3),drive(person(? x1),place(? x2),place(? x3),car(? x4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_car(? x4,? x3)),
+		seq(not(at_car(? x4,? x3)),
+		execute(drive(person(? x1),place(? x2),place(? x3),car(? x4))))).
+
+
+achieves(at_car(? x4,? x3),drive(person(? x1),place(? x2),place(? x3),car(? x4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_person(? x1,? x3)),
+		seq(not(at_person(? x1,? x3)),
+		execute(drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))))).
+
+
+achieves(at_person(? x1,? x3),drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_car(? x4,? x3)),
+		seq(not(at_car(? x4,? x3)),
+		execute(drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))))).
+
+
+achieves(at_car(? x4,? x3),drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_tent(? x5,? x3)),
+		seq(not(at_tent(? x5,? x3)),
+		execute(drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))))).
+
+
+achieves(at_tent(? x5,? x3),drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_person(? x1,? x3)),
+		seq(not(at_person(? x1,? x3)),
+		execute(drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))))).
+
+
+achieves(at_person(? x1,? x3),drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_car(? x4,? x3)),
+		seq(not(at_car(? x4,? x3)),
+		execute(drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))))).
+
+
+achieves(at_car(? x4,? x3),drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_tent(? x5,? x3)),
+		seq(not(at_tent(? x5,? x3)),
+		execute(drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))))).
+
+
+achieves(at_tent(? x5,? x3),drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_person(? x6,? x3)),
+		seq(not(at_person(? x6,? x3)),
+		execute(drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))))).
+
+
+achieves(at_person(? x6,? x3),drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_person(? x3,? x2)),
+		seq(not(at_person(? x3,? x2)),
+		execute(walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))))).
+
+
+achieves(at_person(? x3,? x2),walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at_person(? x5,? x2)),
+		seq(not(at_person(? x5,? x2)),
+		execute(walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))))).
+
+
+achieves(at_person(? x5,? x2),walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(walked(? x6,? x2)),
+		seq(not(walked(? x6,? x2)),
+		execute(walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))))).
+
+
+achieves(walked(? x6,? x2),walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(up(? x3)),
+		seq(up(? x3),
+		execute(put_down(person(? x1),place(? x2),tent(? x3))))).
+
+
+avoids(up(? x3),put_down(person(? x1),place(? x2),tent(? x3))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(down(? x3)),
+		seq(down(? x3),
+		execute(put_up(person(? x1),place(? x2),tent(? x3))))).
+
+
+avoids(down(? x3),put_up(person(? x1),place(? x2),tent(? x3))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_person(? x1,? x2)),
+		seq(at_person(? x1,? x2),
+		execute(drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))))).
+
+
+avoids(at_person(? x1,? x2),drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_car(? x4,? x2)),
+		seq(at_car(? x4,? x2),
+		execute(drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))))).
+
+
+avoids(at_car(? x4,? x2),drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_person(? x5,? x2)),
+		seq(at_person(? x5,? x2),
+		execute(drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))))).
+
+
+avoids(at_person(? x5,? x2),drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_person(? x1,? x2)),
+		seq(at_person(? x1,? x2),
+		execute(drive(person(? x1),place(? x2),place(? x3),car(? x4))))).
+
+
+avoids(at_person(? x1,? x2),drive(person(? x1),place(? x2),place(? x3),car(? x4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_car(? x4,? x2)),
+		seq(at_car(? x4,? x2),
+		execute(drive(person(? x1),place(? x2),place(? x3),car(? x4))))).
+
+
+avoids(at_car(? x4,? x2),drive(person(? x1),place(? x2),place(? x3),car(? x4))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_person(? x1,? x2)),
+		seq(at_person(? x1,? x2),
+		execute(drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))))).
+
+
+avoids(at_person(? x1,? x2),drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_car(? x4,? x2)),
+		seq(at_car(? x4,? x2),
+		execute(drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))))).
+
+
+avoids(at_car(? x4,? x2),drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_tent(? x5,? x2)),
+		seq(at_tent(? x5,? x2),
+		execute(drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))))).
+
+
+avoids(at_tent(? x5,? x2),drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_person(? x1,? x2)),
+		seq(at_person(? x1,? x2),
+		execute(drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))))).
+
+
+avoids(at_person(? x1,? x2),drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_car(? x4,? x2)),
+		seq(at_car(? x4,? x2),
+		execute(drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))))).
+
+
+avoids(at_car(? x4,? x2),drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_tent(? x5,? x2)),
+		seq(at_tent(? x5,? x2),
+		execute(drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))))).
+
+
+avoids(at_tent(? x5,? x2),drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_person(? x6,? x2)),
+		seq(at_person(? x6,? x2),
+		execute(drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))))).
+
+
+avoids(at_person(? x6,? x2),drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_person(? x3,? x4)),
+		seq(at_person(? x3,? x4),
+		execute(walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))))).
+
+
+avoids(at_person(? x3,? x4),walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at_person(? x5,? x4)),
+		seq(at_person(? x5,? x4),
+		execute(walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))))).
+
+
+avoids(at_person(? x5,? x4),walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(walked(? x6,? x4)),
+		seq(walked(? x6,? x4),
+		execute(walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))))).
+
+
+avoids(walked(? x6,? x4),walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(put_down(person(? x1),place(? x2),tent(? x3))),
+		seq(shuffle(
+			achieve(at_person(? x1,? x2)),
+			achieve(at_tent(? x3,? x2)),
+			achieve(up(? x3))),
+			put_down(person(? x1),place(? x2),tent(? x3)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(put_up(person(? x1),place(? x2),tent(? x3))),
+		seq(shuffle(
+			achieve(at_person(? x1,? x2)),
+			achieve(at_tent(? x3,? x2)),
+			achieve(down(? x3))),
+			put_up(person(? x1),place(? x2),tent(? x3)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5))),
+		seq(shuffle(
+			achieve(at_person(? x1,? x2)),
+			achieve(at_car(? x4,? x2)),
+			achieve(at_person(? x5,? x2)),
+			achieve(? x1 = ? x5)),
+			drive_passenger(person(? x1),place(? x2),place(? x3),car(? x4),person(? x5)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(drive(person(? x1),place(? x2),place(? x3),car(? x4))),
+		seq(shuffle(
+			achieve(at_person(? x1,? x2)),
+			achieve(at_car(? x4,? x2))),
+			drive(person(? x1),place(? x2),place(? x3),car(? x4)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5))),
+		seq(shuffle(
+			achieve(at_person(? x1,? x2)),
+			achieve(at_car(? x4,? x2)),
+			achieve(at_tent(? x5,? x2)),
+			achieve(down(? x5))),
+			drive_tent(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6))),
+		seq(shuffle(
+			achieve(at_person(? x1,? x2)),
+			achieve(at_car(? x4,? x2)),
+			achieve(at_tent(? x5,? x2)),
+			achieve(down(? x5)),
+			achieve(at_person(? x6,? x2)),
+			achieve(? x1 = ? x6)),
+			drive_tent_passenger(person(? x1),place(? x2),place(? x3),car(? x4),tent(? x5),person(? x6)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6))),
+		seq(shuffle(
+			achieve(at_tent(? x1,? x2)),
+			achieve(up(? x1)),
+			achieve(at_person(? x3,? x4)),
+			achieve(next(? x4,? x2)),
+			achieve(at_person(? x5,? x4)),
+			achieve(? x3 = ? x5),
+			achieve(walked(? x6,? x4)),
+			achieve(partners(? x6,? x3,? x5))),
+			walk_together(tent(? x1),place(? x2),person(? x3),place(? x4),person(? x5),couple(? x6)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		not(avoids(G2,planningAction)))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		not(avoids(G1,planningAction))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(2)).
+

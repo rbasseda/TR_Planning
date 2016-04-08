@@ -1,0 +1,213 @@
+Query 3  
+***********************************************************************************************************
+
+6 Facts
+
+Time: 0.2000
+Total memory used by the test: 	2515
+Memory used by the tabling: 	2514
+Interned tries space: 		0
+2515	2514	0	1	20
+Number of results: 20
+PROFILE FOR:  find_all( ~/Projects/SMP/src/smp_test/health_analysis/smp_test)  Total cputime: 0.2160 seconds
+
+Total Count: 23
+
+                    0% (0)  Unknown/?
+                    0% (0)  Garbage Collecting/
+0% (0)  Unknown
+                    9% (2)  debug_check_store_seen_state/1
+                    4% (1)  absolute_state/2
+                    22% (5)  dispatch/3
+                    4% (1)  tabled_predicate/1
+                    9% (2)  tr_clause/2
+                    4% (1)  fact_store/2
+                    4% (1)  db_ins_internal/5
+57% (13)  usermod
+                    4% (1)  functor/3
+4% (1)  standard
+                    4% (1)  search_module/6
+4% (1)  consult
+                    4% (1)  member/2
+4% (1)  basics
+                    4% (1)  read_tokens/4
+                    4% (1)  read_next_token_c/5
+9% (2)  xsb_read
+                    4% (1)  assert_in_db/3
+                    9% (2)  find_in_hash/5
+                    4% (1)  add_to_hash/8
+                    4% (1)  find_in_trie_list_#301/5
+22% (5)  prolog_db
+
+========================================================================
+9 Facts
+
+
+Time: 12.3080
+Total memory used by the test: 	97984
+Memory used by the tabling: 	97979
+Interned tries space: 		0
+97984	97979	0	5	152
+Number of results: 152
+PROFILE FOR:  find_all( ~/Projects/SMP/src/smp_test/health_analysis/smp_test)  Total cputime: 12.3560 seconds
+
+Total Count: 1236
+
+                    0% (0)  Unknown/?
+                    0% (0)  Garbage Collecting/
+0% (0)  Unknown
+                    2% (27)  tr_log/2
+                    7% (83)  tr_log_return/2
+                    6% (73)  debug_check_store_seen_state/1
+                    1% (14)  absolute_state/2
+                    1% (15)  debug_check_store_tabled_shell_state/1
+                    0% (6)  differential_state/2
+                    23% (290)  dispatch/3
+                    2% (26)  ctr_simplify/2
+                    3% (36)  ctr_atomic_query/3
+                    1% (16)  tabled_predicate/1
+                    2% (19)  tabled_ctr_atomic_query/3
+                    3% (32)  tr_clause/2
+                    0% (1)  db_ins/3
+                    0% (2)  db_del/3
+                    0% (2)  dynamic_predicate/1
+                    0% (6)  db_select/2
+                    0% (2)  ctr_atomic_query_#302/3
+                    1% (7)  dynamic_predicate/2
+                    1% (15)  tabled_predicate/2
+                    8% (100)  fact_store/2
+                    0% (4)  no_backtracking_fact_to_factid/2
+                    0% (5)  initial_state/1
+                    0% (5)  db_select_internal/3
+                    0% (6)  db_ins_internal/5
+                    1% (12)  db_del_internal/5
+65% (804)  usermod
+                    1% (10)  functor/3
+                    0% (3)  call/1
+                    0% (1)  call_goal_cut_trans/3
+1% (14)  standard
+                    0% (1)  findall/3
+                    1% (12)  bfindall/4
+1% (13)  setof
+                    0% (1)  search_module/6
+                    0% (1)  load_dyn_retracted/5
+0% (2)  consult
+                    2% (24)  term_hash/3
+                    0% (3)  sys_syscall/5
+2% (27)  machine
+                    1% (11)  member/2
+1% (11)  basics
+                    0% (3)  assert_in_db/3
+                    0% (4)  retractall_in_db/3
+                    0% (6)  clause_in_db/3
+                    0% (1)  add_to_trie/4
+                    0% (4)  retract_list_in_db/3
+                    1% (15)  find_in_trie/3
+                    0% (4)  find_in_trie_list/4
+                    1% (12)  my_unnumbervars/3
+                    7% (82)  find_in_hash/3
+                    0% (1)  add_to_ordered_list/3
+                    1% (8)  add_to_hash/5
+                    1% (16)  bind_from_hash/4
+                    6% (73)  find_in_hash/5
+                    2% (20)  my_member/2
+                    3% (33)  add_to_hash/8
+                    1% (9)  add_to_ordered_list/6
+                    0% (2)  remove_from_ordered_list/3
+                    1% (7)  remove_from_hash/4
+                    1% (15)  remove_from_hash/6
+                    1% (10)  add_all_terms/4
+                    3% (32)  find_in_trie_list_#301/5
+                    0% (5)  add_to_trie_ground_list_#302/5
+                    0% (3)  remove_from_trie_list_#303/5
+30% (365)  prolog_db
+
+***************************************************************************************************
+Time: 225.1340
+Total memory used by the test: 	1545587
+Memory used by the tabling: 	1545536
+Interned tries space: 		0
+1545587	1545536	0	51	1791
+Number of results: 1791
+PROFILE FOR:  find_all( ~/Projects/SMP/src/smp_test/health_analysis/smp_test)  Total cputime: 225.5180 seconds
+
+Total Count: 22517
+
+                    0% (0)  Unknown/?
+                    0% (2)  Garbage Collecting/
+0% (2)  Unknown
+                    2% (439)  tr_log/2
+                    8% (1792)  tr_log_return/2
+                    6% (1437)  debug_check_store_seen_state/1
+                    1% (289)  absolute_state/2
+                    2% (408)  debug_check_store_tabled_shell_state/1
+                    0% (41)  ctr_atomic_query_#301/3
+                    24% (5380)  dispatch/3
+                    1% (150)  differential_state/2
+                    2% (548)  ctr_atomic_query/3
+                    1% (205)  tabled_predicate/1
+                    2% (391)  tabled_ctr_atomic_query/3
+                    2% (537)  tr_clause/2
+                    0% (74)  db_ins/3
+                    0% (94)  db_del/3
+                    1% (122)  dynamic_predicate/1
+                    0% (89)  db_select/2
+                    2% (365)  ctr_simplify/2
+                    0% (31)  ctr_atomic_query_#302/3
+                    0% (64)  dynamic_predicate/2
+                    1% (310)  tabled_predicate/2
+                    8% (1797)  fact_store/2
+                    0% (91)  no_backtracking_fact_to_factid/2
+                    0% (15)  fact_to_factid/2
+                    0% (60)  initial_state/1
+                    1% (198)  db_select_internal/3
+                    1% (202)  db_ins_internal/5
+                    1% (222)  db_del_internal/5
+68% (15351)  usermod
+                    1% (236)  functor/3
+                    0% (37)  call/1
+                    0% (42)  call_goal_cut_trans/3
+1% (315)  standard
+                    0% (13)  findall/3
+                    1% (166)  bfindall/4
+1% (179)  setof
+                    0% (1)  search_module/6
+0% (1)  consult
+                    2% (361)  term_hash/3
+                    0% (37)  sys_syscall/5
+2% (398)  machine
+                    1% (213)  member/2
+1% (213)  basics
+                    0% (1)  read_next_token_c/5
+0% (1)  xsb_read
+                    0% (57)  assert_in_db/3
+                    0% (31)  retractall_in_db/3
+                    0% (63)  clause_in_db/3
+                    0% (41)  add_to_trie/4
+                    0% (65)  retract_list_in_db/3
+                    0% (15)  remove_from_trie/4
+                    1% (210)  find_in_trie/3
+                    0% (93)  find_in_trie_list/4
+                    1% (190)  my_unnumbervars/3
+                    6% (1294)  find_in_hash/3
+                    0% (16)  add_to_trie_ground_list/4
+                    0% (11)  add_to_ordered_list/3
+                    1% (272)  add_to_hash/5
+                    0% (16)  rebuild_hash/4
+                    0% (98)  bind_from_hash/4
+                    6% (1303)  find_in_hash/5
+                    1% (328)  my_member/2
+                    2% (514)  add_to_hash/8
+                    1% (150)  add_to_ordered_list/6
+                    0% (9)  remove_from_trie_list/4
+                    0% (11)  remove_from_ordered_list/3
+                    1% (163)  remove_from_hash/4
+                    1% (226)  remove_from_hash/6
+                    0% (50)  remove_from_ordered_list/4
+                    0% (56)  add_all_terms/4
+                    3% (605)  find_in_trie_list_#301/5
+                    0% (86)  add_to_trie_ground_list_#302/5
+                    0% (84)  remove_from_trie_list_#303/5
+27% (6057)  prolog_db
+
+

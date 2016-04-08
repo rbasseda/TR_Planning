@@ -1,0 +1,393 @@
+Not all planners worked on every problem
+No planner worked on the following problems:
+    (GRIPPER-X-20 GRIPPER-X-19 GRIPPER-X-18 GRIPPER-X-17 GRIPPER-X-16
+              GRIPPER-X-15 GRIPPER-X-14 GRIPPER-X-13 GRIPPER-X-12
+              GRIPPER-X-11 GRIPPER-X-10 GRIPPER-X-9 GRIPPER-X-8
+              GRIPPER-X-7 GRIPPER-X-6 ASSEM-X-30 ASSEM-X-29 ASSEM-X-28
+              ASSEM-X-27 ASSEM-X-26 ASSEM-X-25 ASSEM-X-24 ASSEM-X-23
+              ASSEM-X-22 ASSEM-X-21 ASSEM-X-20 ASSEM-X-19 ASSEM-X-18
+              ASSEM-X-17 ASSEM-X-16 ASSEM-X-15 ASSEM-X-14 ASSEM-X-13
+              ASSEM-X-12 ASSEM-X-11 ASSEM-X-10 ASSEM-X-9 ASSEM-X-8
+              ASSEM-X-7 ASSEM-X-6 ASSEM-X-5 ASSEM-X-4 ASSEM-X-3
+              ASSEM-X-2 ASSEM-X-1 MYSTY-X-4 LOG-X-30 LOG-X-29 LOG-X-28
+              LOG-X-27 LOG-X-26 LOG-X-25 LOG-X-24 LOG-X-23 LOG-X-22
+              LOG-X-21 LOG-X-20 LOG-X-19 LOG-X-18 LOG-X-17 LOG-X-16
+              LOG-X-15 LOG-X-14 LOG-X-13 LOG-X-12 LOG-X-10 LOG-X-9
+              LOG-X-8 LOG-X-6 LOG-X-4 LOG-X-3 LOG-X-1 MPRIME-X-30
+              MPRIME-X-24 MPRIME-X-23 MPRIME-X-22 MPRIME-X-21
+              MPRIME-X-20 MPRIME-X-19 MPRIME-X-18 MPRIME-X-17
+              MPRIME-X-15 MPRIME-X-14 MPRIME-X-13 MPRIME-X-10
+              MPRIME-X-6 MYSTY-X-24 MYSTY-X-23 MYSTY-X-22 MYSTY-X-21
+              MYSTY-X-18 MYSTY-X-16 MYSTY-X-15 MYSTY-X-14 MYSTY-X-13
+              MYSTY-X-12 MYSTY-X-10 MYSTY-X-8 MYSTY-X-7 MYSTY-X-6
+              MYSTY-X-5)
+SGP omitted (ASSEM-X-1 ASSEM-X-2 ASSEM-X-3 ASSEM-X-4 ASSEM-X-5 ASSEM-X-6 ASSEM-X-7
+           ASSEM-X-8 ASSEM-X-9 ASSEM-X-10 ASSEM-X-11 ASSEM-X-12
+           ASSEM-X-13 ASSEM-X-14 ASSEM-X-15 ASSEM-X-16 ASSEM-X-17
+           ASSEM-X-18 ASSEM-X-19 ASSEM-X-20 ASSEM-X-21 ASSEM-X-22
+           ASSEM-X-23 ASSEM-X-24 ASSEM-X-25 ASSEM-X-26 ASSEM-X-27
+           ASSEM-X-28 ASSEM-X-29 ASSEM-X-30 GRIPPER-X-2 GRIPPER-X-3
+           GRIPPER-X-4 GRIPPER-X-5 GRIPPER-X-6 GRIPPER-X-7 GRIPPER-X-8
+           GRIPPER-X-9 GRIPPER-X-10 GRIPPER-X-11 GRIPPER-X-12
+           GRIPPER-X-13 GRIPPER-X-14 GRIPPER-X-15 GRIPPER-X-16
+           GRIPPER-X-17 GRIPPER-X-18 GRIPPER-X-19 GRIPPER-X-20 LOG-X-1
+           LOG-X-2 LOG-X-3 LOG-X-4 LOG-X-5 LOG-X-6 LOG-X-7 LOG-X-8
+           LOG-X-9 LOG-X-10 LOG-X-11 LOG-X-12 LOG-X-13 LOG-X-14
+           LOG-X-15 LOG-X-16 LOG-X-17 LOG-X-18 LOG-X-19 LOG-X-20
+           LOG-X-21 LOG-X-22 LOG-X-23 LOG-X-24 LOG-X-25 LOG-X-26
+           LOG-X-27 LOG-X-28 LOG-X-29 LOG-X-30 MPRIME-X-5 MPRIME-X-6
+           MPRIME-X-7 MPRIME-X-8 MPRIME-X-9 MPRIME-X-10 MPRIME-X-11
+           MPRIME-X-12 MPRIME-X-13 MPRIME-X-14 MPRIME-X-15 MPRIME-X-16
+           MPRIME-X-17 MPRIME-X-18 MPRIME-X-19 MPRIME-X-20 MPRIME-X-21
+           MPRIME-X-22 MPRIME-X-23 MPRIME-X-24 MPRIME-X-25 MPRIME-X-26
+           MPRIME-X-27 MPRIME-X-28 MPRIME-X-29 MPRIME-X-30 MYSTY-X-4
+           MYSTY-X-5 MYSTY-X-6 MYSTY-X-7 MYSTY-X-8 MYSTY-X-9 MYSTY-X-10
+           MYSTY-X-11 MYSTY-X-12 MYSTY-X-13 MYSTY-X-14 MYSTY-X-15
+           MYSTY-X-16 MYSTY-X-17 MYSTY-X-18 MYSTY-X-19 MYSTY-X-20
+           MYSTY-X-21 MYSTY-X-22 MYSTY-X-23 MYSTY-X-24 MYSTY-X-25
+           MYSTY-X-26 MYSTY-X-27 MYSTY-X-28 MYSTY-X-29 MYSTY-X-30)
+IPP omitted (ASSEM-X-1 ASSEM-X-2 ASSEM-X-3 ASSEM-X-4 ASSEM-X-5 ASSEM-X-6 ASSEM-X-7
+           ASSEM-X-8 ASSEM-X-9 ASSEM-X-10 ASSEM-X-11 ASSEM-X-12
+           ASSEM-X-13 ASSEM-X-14 ASSEM-X-15 ASSEM-X-16 ASSEM-X-17
+           ASSEM-X-18 ASSEM-X-19 ASSEM-X-20 ASSEM-X-21 ASSEM-X-22
+           ASSEM-X-23 ASSEM-X-24 ASSEM-X-25 ASSEM-X-26 ASSEM-X-27
+           ASSEM-X-28 ASSEM-X-29 ASSEM-X-30 GRIPPER-X-6 GRIPPER-X-7
+           GRIPPER-X-8 GRIPPER-X-9 GRIPPER-X-10 GRIPPER-X-11
+           GRIPPER-X-12 GRIPPER-X-13 GRIPPER-X-14 GRIPPER-X-15
+           GRIPPER-X-16 GRIPPER-X-17 GRIPPER-X-18 GRIPPER-X-19
+           GRIPPER-X-20 LOG-X-1 LOG-X-3 LOG-X-4 LOG-X-6 LOG-X-8 LOG-X-9
+           LOG-X-10 LOG-X-12 LOG-X-13 LOG-X-14 LOG-X-15 LOG-X-16
+           LOG-X-17 LOG-X-18 LOG-X-19 LOG-X-20 LOG-X-21 LOG-X-22
+           LOG-X-23 LOG-X-24 LOG-X-25 LOG-X-26 LOG-X-27 LOG-X-28
+           LOG-X-29 LOG-X-30 MPRIME-X-6 MPRIME-X-10 MPRIME-X-13
+           MPRIME-X-14 MPRIME-X-15 MPRIME-X-17 MPRIME-X-18 MPRIME-X-19
+           MPRIME-X-20 MPRIME-X-21 MPRIME-X-22 MPRIME-X-23 MPRIME-X-24
+           MPRIME-X-30 MYSTY-X-4 MYSTY-X-5 MYSTY-X-6 MYSTY-X-7
+           MYSTY-X-8 MYSTY-X-10 MYSTY-X-12 MYSTY-X-13 MYSTY-X-14
+           MYSTY-X-15 MYSTY-X-16 MYSTY-X-18 MYSTY-X-21 MYSTY-X-22
+           MYSTY-X-23 MYSTY-X-24)
+
+1   GRIPPER-X-1 Weight 0.01314
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       40    11      2.63
+    1   SGP              *    0.0      380    11      1.31
+
+2   GRIPPER-X-2 Weight 0.01383
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0      520    17      2.77
+
+3   GRIPPER-X-3 Weight 0.02041
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0    10180    23      4.08
+
+4   GRIPPER-X-4 Weight 0.02276
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0    29430    29      4.55
+
+5   GRIPPER-X-5 Weight 0.02727
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0   225730    47      5.45
+
+6   LOG-X-2 Weight 0.01772
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     3020    23      3.54
+
+7   LOG-X-5 Weight 0.03044
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0   947830    19      6.09
+
+8   LOG-X-7 Weight 0.02160
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0    17400    26      4.32
+
+9   LOG-X-11 Weight 0.01907
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     5560    26      3.81
+
+10  MOVIE-X-1 Weight 0.00509
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.02
+    1   SGP              *    0.0       10     7      0.51
+
+11  MOVIE-X-2 Weight 0.00663
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      1.33
+    1   SGP              *    0.0       20     7      0.66
+
+12  MOVIE-X-3 Weight 0.00663
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.33
+    1   SGP              *    0.0       20     7      0.66
+
+13  MOVIE-X-4 Weight 0.00509
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0        0     7      1.02
+    1   SGP              *    0.0       10     7      0.51
+
+14  MOVIE-X-5 Weight 0.00663
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   SGP              *    0.0       10     7      1.33
+    1   IPP              *    0.0       20     7      0.66
+
+15  MOVIE-X-6 Weight 0.00663
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.33
+    1   SGP              *    0.0       20     7      0.66
+
+16  MOVIE-X-7 Weight 0.00663
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      1.33
+    1   SGP              *    0.0       20     7      0.66
+
+17  MOVIE-X-8 Weight 0.00663
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.33
+    1   SGP              *    0.0       20     7      0.66
+
+18  MOVIE-X-9 Weight 0.00752
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      1.50
+    1   SGP              *    0.0       30     7      0.75
+
+19  MOVIE-X-10 Weight 0.00752
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      1.50
+    1   SGP              *    0.0       30     7      0.75
+
+20  MOVIE-X-11 Weight 0.00752
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       10     7      1.50
+    1   SGP              *    0.0       30     7      0.75
+
+21  MOVIE-X-12 Weight 0.00752
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      1.50
+    1   SGP              *    0.0       30     7      0.75
+
+22  MOVIE-X-13 Weight 0.00816
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      1.63
+    1   SGP              *    0.0       40     7      0.82
+
+23  MOVIE-X-14 Weight 0.00816
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       40     7      1.63
+    1   SGP              *    0.0       40     7      0.82
+
+24  MOVIE-X-15 Weight 0.00865
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       30     7      1.73
+    1   SGP              *    0.0       50     7      0.87
+
+25  MOVIE-X-16 Weight 0.00865
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       30     7      1.73
+    1   SGP              *    0.0       50     7      0.87
+
+26  MOVIE-X-17 Weight 0.00865
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       30     7      1.73
+    1   SGP              *    0.0       50     7      0.87
+
+27  MOVIE-X-18 Weight 0.00906
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       30     7      1.81
+    1   SGP              *    0.0       60     7      0.91
+
+28  MOVIE-X-19 Weight 0.00940
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       40     7      1.88
+    1   SGP              *    0.0       70     7      0.94
+
+29  MOVIE-X-20 Weight 0.00969
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       40     7      1.94
+    1   SGP              *    0.0       80     7      0.97
+
+30  MOVIE-X-21 Weight 0.00969
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       20     7      1.94
+    1   SGP              *    0.0       80     7      0.97
+
+31  MOVIE-X-22 Weight 0.00995
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       50     7      1.99
+    1   SGP              *    0.0       90     7      1.00
+
+32  MOVIE-X-23 Weight 0.00995
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       40     7      1.99
+    1   SGP              *    0.0       90     7      1.00
+
+33  MOVIE-X-24 Weight 0.01019
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       50     7      2.04
+    1   SGP              *    0.0      100     7      1.02
+
+34  MOVIE-X-25 Weight 0.01019
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       40     7      2.04
+    1   SGP              *    0.0      100     7      1.02
+
+35  MOVIE-X-26 Weight 0.01040
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       50     7      2.08
+    1   SGP              *    0.0      110     7      1.04
+
+36  MOVIE-X-27 Weight 0.01059
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       40     7      2.12
+    1   SGP              *    0.0      120     7      1.06
+
+37  MOVIE-X-28 Weight 0.01059
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       60     7      2.12
+    1   SGP              *    0.0      120     7      1.06
+
+38  MOVIE-X-29 Weight 0.01093
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       50     7      2.19
+    1   SGP              *    0.0      140     7      1.09
+
+39  MOVIE-X-30 Weight 0.01108
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0       50     7      2.22
+    1   SGP              *    0.0      150     7      1.11
+
+40  MPRIME-X-1 Weight 0.01961
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     1070    11      3.92
+    1   SGP              *    0.0     7090     9      1.96
+
+41  MPRIME-X-2 Weight 0.02763
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0    15380     9      5.53
+    1   SGP              *    0.0   266180    12      2.76
+
+42  MPRIME-X-3 Weight 0.02220
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     3250     5      4.44
+    1   SGP              *    0.0    22900     5      2.22
+
+43  MPRIME-X-4 Weight 0.02342
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     1960    12      4.68
+    1   SGP              *    0.0    39710    17      2.34
+
+44  MPRIME-X-5 Weight 0.01990
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     8070    11      3.98
+
+45  MPRIME-X-7 Weight 0.01636
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     1630     5      3.27
+
+46  MPRIME-X-8 Weight 0.02233
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0    24240    10      4.47
+
+47  MPRIME-X-9 Weight 0.01804
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     3480     9      3.61
+
+48  MPRIME-X-11 Weight 0.01769
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     2980     8      3.54
+
+49  MPRIME-X-12 Weight 0.01860
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     4490     9      3.72
+
+50  MPRIME-X-16 Weight 0.02230
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0    23930    11      4.46
+
+51  MPRIME-X-25 Weight 0.01262
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0      300     4      2.52
+
+52  MPRIME-X-26 Weight 0.02100
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0    13280     7      4.20
+
+53  MPRIME-X-27 Weight 0.01994
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     8240     8      3.99
+
+54  MPRIME-X-28 Weight 0.01648
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     1720    10      3.30
+
+55  MPRIME-X-29 Weight 0.01909
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     5610     5      3.82
+
+56  MYSTY-X-1 Weight 0.01193
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0      100     5      2.39
+    1   SGP              *    0.0      220     5      1.19
+
+57  MYSTY-X-2 Weight 0.02703
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0    12180     9      5.41
+    1   SGP              *    0.0   203250    14      2.70
+
+58  MYSTY-X-3 Weight 0.01808
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     1050     4      3.62
+    1   SGP              *    0.0     3550     4      1.81
+
+59  MYSTY-X-9 Weight 0.01649
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     1730     8      3.30
+
+60  MYSTY-X-11 Weight 0.01314
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0      380     7      2.63
+
+61  MYSTY-X-17 Weight 0.02165
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0    17810     4      4.33
+
+62  MYSTY-X-19 Weight 0.02101
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0    13330     9      4.20
+
+63  MYSTY-X-20 Weight 0.02420
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0    56480    10      4.84
+
+64  MYSTY-X-25 Weight 0.01019
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0      100     4      2.04
+
+65  MYSTY-X-26 Weight 0.01655
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     1780     6      3.31
+
+66  MYSTY-X-27 Weight 0.01505
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0      900     7      3.01
+
+67  MYSTY-X-28 Weight 0.01221
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0      250     7      2.44
+
+68  MYSTY-X-29 Weight 0.01479
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0      800     4      2.96
+
+69  MYSTY-X-30 Weight 0.02021
+   Rank Planner          Corr Adv     Time  Length  Score
+    0   IPP              *    0.0     9280    13      4.04
+
+
+
+TOTAL SCORES: 
+
+Planner             Score     Problems Solved Won
+
+   IPP             199.34                69   68
+   SGP              42.37                38    1
+
+ Worked on 69 problems

@@ -1,0 +1,247 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% elevator%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(board,2).
+tabled_predicate(depart,2).
+tabled_predicate(up,2).
+tabled_predicate(down,2).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(origin,2).
+dynamic_predicate(destin,2).
+dynamic_predicate(above,2).
+dynamic_predicate(boarded,1).
+dynamic_predicate(not_boarded,1).
+dynamic_predicate(served,1).
+dynamic_predicate(not_served,1).
+dynamic_predicate(lift_at,1).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	board(floor(VARf),passenger(VARp)),
+		seq(lift_at(VARf),
+		seq(origin(VARp,VARf),ins(boarded(VARp))))).
+
+tr_clause(
+	planningAction,
+		board(floor(VARf),passenger(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	depart(floor(VARf),passenger(VARp)),
+		seq(lift_at(VARf),
+		seq(destin(VARp,VARf),
+		seq(boarded(VARp),
+		seq(ins(served(VARp)),del(boarded(VARp))))))).
+
+tr_clause(
+	planningAction,
+		depart(floor(VARf),passenger(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	up(floor(VARf1),floor(VARf2)),
+		seq(lift_at(VARf1),
+		seq(above(VARf1,VARf2),
+		seq(ins(lift_at(VARf2)),del(lift_at(VARf1)))))).
+
+tr_clause(
+	planningAction,
+		up(floor(VARf1),floor(VARf2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	down(floor(VARf1),floor(VARf2)),
+		seq(lift_at(VARf1),
+		seq(above(VARf2,VARf1),
+		seq(ins(lift_at(VARf2)),del(lift_at(VARf1)))))).
+
+tr_clause(
+	planningAction,
+		down(floor(VARf1),floor(VARf2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(origin(VARperson,VARfloor)),
+		origin(VARperson,VARfloor)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(destin(VARperson,VARfloor)),
+		destin(VARperson,VARfloor)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(above(VARfloor1,VARfloor2)),
+		above(VARfloor1,VARfloor2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(boarded(VARperson)),
+		boarded(VARperson)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_boarded(VARperson)),
+		not_boarded(VARperson)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(served(VARperson)),
+		served(VARperson)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(not_served(VARperson)),
+		not_served(VARperson)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(lift_at(VARfloor)),
+		lift_at(VARfloor)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(origin(VARperson,VARfloor)),
+		not(origin(VARperson,VARfloor))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(destin(VARperson,VARfloor)),
+		not(destin(VARperson,VARfloor))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(above(VARfloor1,VARfloor2)),
+		not(above(VARfloor1,VARfloor2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(boarded(VARperson)),
+		not(boarded(VARperson))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_boarded(VARperson)),
+		not(not_boarded(VARperson))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(served(VARperson)),
+		not(served(VARperson))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(not_served(VARperson)),
+		not(not_served(VARperson))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(lift_at(VARfloor)),
+		not(lift_at(VARfloor))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(boarded(VARp)),
+		seq(not(boarded(VARp)),
+		execute(board(floor(VARf),passenger(VARp))))).
+
+
+achieves(boarded(VARp),board(floor(VARf),passenger(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(served(VARp)),
+		seq(not(served(VARp)),
+		execute(depart(floor(VARf),passenger(VARp))))).
+
+
+achieves(served(VARp),depart(floor(VARf),passenger(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(lift_at(VARf2)),
+		seq(not(lift_at(VARf2)),
+		execute(up(floor(VARf1),floor(VARf2))))).
+
+
+achieves(lift_at(VARf2),up(floor(VARf1),floor(VARf2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(lift_at(VARf2)),
+		seq(not(lift_at(VARf2)),
+		execute(down(floor(VARf1),floor(VARf2))))).
+
+
+achieves(lift_at(VARf2),down(floor(VARf1),floor(VARf2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(boarded(VARp)),
+		seq(boarded(VARp),
+		execute(depart(floor(VARf),passenger(VARp))))).
+
+
+avoids(boarded(VARp),depart(floor(VARf),passenger(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(lift_at(VARf1)),
+		seq(lift_at(VARf1),
+		execute(up(floor(VARf1),floor(VARf2))))).
+
+
+avoids(lift_at(VARf1),up(floor(VARf1),floor(VARf2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(lift_at(VARf1)),
+		seq(lift_at(VARf1),
+		execute(down(floor(VARf1),floor(VARf2))))).
+
+
+avoids(lift_at(VARf1),down(floor(VARf1),floor(VARf2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(board(floor(VARf),passenger(VARp))),
+		seq(shuffle(
+			achieve(lift_at(VARf)),
+			achieve(origin(VARp,VARf))),
+			board(floor(VARf),passenger(VARp)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(depart(floor(VARf),passenger(VARp))),
+		seq(shuffle(
+			achieve(lift_at(VARf)),
+			achieve(destin(VARp,VARf)),
+			achieve(boarded(VARp))),
+			depart(floor(VARf),passenger(VARp)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(up(floor(VARf1),floor(VARf2))),
+		seq(shuffle(
+			achieve(lift_at(VARf1)),
+			achieve(above(VARf1,VARf2))),
+			up(floor(VARf1),floor(VARf2)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(down(floor(VARf1),floor(VARf2))),
+		seq(shuffle(
+			achieve(lift_at(VARf1)),
+			achieve(above(VARf2,VARf1))),
+			down(floor(VARf1),floor(VARf2)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+

@@ -1,0 +1,437 @@
+%%%%%%%%%%%%%%%%%%%%% Domain File  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% storage%%%%%%%%% 
+tabled_predicate(achieve,1). 
+tabled_predicate(execute,1). 
+tabled_predicate(avoid,1). 
+tabled_predicate(solutionPlan,0). 
+tabled_predicate(planningAction,0). 
+tabled_predicate(chooseAction,1). 
+tabled_predicate(lift,5).
+tabled_predicate(drop,5).
+tabled_predicate(move,3).
+tabled_predicate(go_out,3).
+tabled_predicate(go_in,3).
+%%%%%%%%%%%%%%%%%%%%%List of Predicates%%%%%%%%%%%%%%%%%%%%%%
+dynamic_predicate(clear,1).
+dynamic_predicate(in,2).
+dynamic_predicate(in,2).
+dynamic_predicate(available,1).
+dynamic_predicate(lifting,2).
+dynamic_predicate(at,2).
+dynamic_predicate(on,2).
+dynamic_predicate(connected,2).
+dynamic_predicate(compatible,2).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp)),
+		seq(connected(VARa1,VARa2),
+		seq(at(VARh,VARa2),
+		seq(available(VARh),
+		seq(on(VARc,VARa1),
+		seq(in(VARa1,VARp),
+		seq(ins(clear(VARa1)),
+		seq(ins(lifting(VARh,VARc)),
+		seq(del(on(VARc,VARa1)),
+		seq(del(available(VARh)),del(in(VARc,VARp)))))))))))).
+
+tr_clause(
+	planningAction,
+		lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp)),
+		seq(connected(VARa1,VARa2),
+		seq(at(VARh,VARa2),
+		seq(lifting(VARh,VARc),
+		seq(clear(VARa1),
+		seq(in(VARa1,VARp),
+		seq(ins(available(VARh)),
+		seq(ins(on(VARc,VARa1)),
+		seq(ins(in(VARc,VARp)),
+		seq(del(lifting(VARh,VARc)),del(clear(VARa1)))))))))))).
+
+tr_clause(
+	planningAction,
+		drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	move(hoist(VARh),storearea(VARfrom),storearea(VARto)),
+		seq(at(VARh,VARfrom),
+		seq(clear(VARto),
+		seq(connected(VARfrom,VARto),
+		seq(ins(at(VARh,VARto)),
+		seq(ins(clear(VARfrom)),
+		seq(del(at(VARh,VARfrom)),del(clear(VARto))))))))).
+
+tr_clause(
+	planningAction,
+		move(hoist(VARh),storearea(VARfrom),storearea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	go_out(hoist(VARh),storearea(VARfrom),transitarea(VARto)),
+		seq(at(VARh,VARfrom),
+		seq(connected(VARfrom,VARto),
+		seq(ins(at(VARh,VARto)),
+		seq(ins(clear(VARfrom)),del(at(VARh,VARfrom))))))).
+
+tr_clause(
+	planningAction,
+		go_out(hoist(VARh),storearea(VARfrom),transitarea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	go_in(hoist(VARh),transitarea(VARfrom),storearea(VARto)),
+		seq(at(VARh,VARfrom),
+		seq(connected(VARfrom,VARto),
+		seq(clear(VARto),
+		seq(ins(at(VARh,VARto)),
+		seq(del(at(VARh,VARfrom)),del(clear(VARto)))))))).
+
+tr_clause(
+	planningAction,
+		go_in(hoist(VARh),transitarea(VARfrom),storearea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARs)),
+		clear(VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(in(VARx,VARp)),
+		in(VARx,VARp)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(in(VARx,VARp)),
+		in(VARx,VARp)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(available(VARh)),
+		available(VARh)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(lifting(VARh,VARc)),
+		lifting(VARh,VARc)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARh,VARa)),
+		at(VARh,VARa)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARc,VARs)),
+		on(VARc,VARs)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(connected(VARa1,VARa2)),
+		connected(VARa1,VARa2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(compatible(VARc1,VARc2)),
+		compatible(VARc1,VARc2)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARs)),
+		not(clear(VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(in(VARx,VARp)),
+		not(in(VARx,VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(in(VARx,VARp)),
+		not(in(VARx,VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(available(VARh)),
+		not(available(VARh))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(lifting(VARh,VARc)),
+		not(lifting(VARh,VARc))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARh,VARa)),
+		not(at(VARh,VARa))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARc,VARs)),
+		not(on(VARc,VARs))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(connected(VARa1,VARa2)),
+		not(connected(VARa1,VARa2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(compatible(VARc1,VARc2)),
+		not(compatible(VARc1,VARc2))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARa1)),
+		seq(not(clear(VARa1)),
+		execute(lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))))).
+
+
+achieves(clear(VARa1),lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(lifting(VARh,VARc)),
+		seq(not(lifting(VARh,VARc)),
+		execute(lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))))).
+
+
+achieves(lifting(VARh,VARc),lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(available(VARh)),
+		seq(not(available(VARh)),
+		execute(drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))))).
+
+
+achieves(available(VARh),drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(on(VARc,VARa1)),
+		seq(not(on(VARc,VARa1)),
+		execute(drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))))).
+
+
+achieves(on(VARc,VARa1),drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(in(VARc,VARp)),
+		seq(not(in(VARc,VARp)),
+		execute(drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))))).
+
+
+achieves(in(VARc,VARp),drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARh,VARto)),
+		seq(not(at(VARh,VARto)),
+		execute(move(hoist(VARh),storearea(VARfrom),storearea(VARto))))).
+
+
+achieves(at(VARh,VARto),move(hoist(VARh),storearea(VARfrom),storearea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARfrom)),
+		seq(not(clear(VARfrom)),
+		execute(move(hoist(VARh),storearea(VARfrom),storearea(VARto))))).
+
+
+achieves(clear(VARfrom),move(hoist(VARh),storearea(VARfrom),storearea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARh,VARto)),
+		seq(not(at(VARh,VARto)),
+		execute(go_out(hoist(VARh),storearea(VARfrom),transitarea(VARto))))).
+
+
+achieves(at(VARh,VARto),go_out(hoist(VARh),storearea(VARfrom),transitarea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(clear(VARfrom)),
+		seq(not(clear(VARfrom)),
+		execute(go_out(hoist(VARh),storearea(VARfrom),transitarea(VARto))))).
+
+
+achieves(clear(VARfrom),go_out(hoist(VARh),storearea(VARfrom),transitarea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	achieve(at(VARh,VARto)),
+		seq(not(at(VARh,VARto)),
+		execute(go_in(hoist(VARh),transitarea(VARfrom),storearea(VARto))))).
+
+
+achieves(at(VARh,VARto),go_in(hoist(VARh),transitarea(VARfrom),storearea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(on(VARc,VARa1)),
+		seq(on(VARc,VARa1),
+		execute(lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))))).
+
+
+avoids(on(VARc,VARa1),lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(available(VARh)),
+		seq(available(VARh),
+		execute(lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))))).
+
+
+avoids(available(VARh),lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(in(VARc,VARp)),
+		seq(in(VARc,VARp),
+		execute(lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))))).
+
+
+avoids(in(VARc,VARp),lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(lifting(VARh,VARc)),
+		seq(lifting(VARh,VARc),
+		execute(drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))))).
+
+
+avoids(lifting(VARh,VARc),drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARa1)),
+		seq(clear(VARa1),
+		execute(drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))))).
+
+
+avoids(clear(VARa1),drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARh,VARfrom)),
+		seq(at(VARh,VARfrom),
+		execute(move(hoist(VARh),storearea(VARfrom),storearea(VARto))))).
+
+
+avoids(at(VARh,VARfrom),move(hoist(VARh),storearea(VARfrom),storearea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARto)),
+		seq(clear(VARto),
+		execute(move(hoist(VARh),storearea(VARfrom),storearea(VARto))))).
+
+
+avoids(clear(VARto),move(hoist(VARh),storearea(VARfrom),storearea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARh,VARfrom)),
+		seq(at(VARh,VARfrom),
+		execute(go_out(hoist(VARh),storearea(VARfrom),transitarea(VARto))))).
+
+
+avoids(at(VARh,VARfrom),go_out(hoist(VARh),storearea(VARfrom),transitarea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(at(VARh,VARfrom)),
+		seq(at(VARh,VARfrom),
+		execute(go_in(hoist(VARh),transitarea(VARfrom),storearea(VARto))))).
+
+
+avoids(at(VARh,VARfrom),go_in(hoist(VARh),transitarea(VARfrom),storearea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	avoid(clear(VARto)),
+		seq(clear(VARto),
+		execute(go_in(hoist(VARh),transitarea(VARfrom),storearea(VARto))))).
+
+
+avoids(clear(VARto),go_in(hoist(VARh),transitarea(VARfrom),storearea(VARto))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))),
+		seq(shuffle(
+			achieve(
+connected(VARa1,VARa2)),			achieve(
+at(VARh,VARa2)),			achieve(
+available(VARh)),			achieve(
+on(VARc,VARa1)),			achieve(in(VARa1,VARp))),
+			lift(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp))),
+		seq(shuffle(
+			achieve(
+connected(VARa1,VARa2)),			achieve(
+at(VARh,VARa2)),			achieve(
+lifting(VARh,VARc)),			achieve(
+clear(VARa1)),			achieve(in(VARa1,VARp))),
+			drop(hoist(VARh),crate(VARc),storearea(VARa1),area(VARa2),place(VARp)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(move(hoist(VARh),storearea(VARfrom),storearea(VARto))),
+		seq(shuffle(
+			achieve(
+at(VARh,VARfrom)),			achieve(
+clear(VARto)),			achieve(connected(VARfrom,VARto))),
+			move(hoist(VARh),storearea(VARfrom),storearea(VARto)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(go_out(hoist(VARh),storearea(VARfrom),transitarea(VARto))),
+		seq(shuffle(
+			achieve(
+at(VARh,VARfrom)),			achieve(connected(VARfrom,VARto))),
+			go_out(hoist(VARh),storearea(VARfrom),transitarea(VARto)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tr_clause(
+	execute(go_in(hoist(VARh),transitarea(VARfrom),storearea(VARto))),
+		seq(shuffle(
+			achieve(
+at(VARh,VARfrom)),			achieve(
+connected(VARfrom,VARto)),			achieve(clear(VARto))),
+			go_in(hoist(VARh),transitarea(VARfrom),storearea(VARto)))).
+
+%%%%%%%%% This part is reserved for Naive Planning %%%%%%%%%%
+
+tr_clause(
+	solutionPlan,
+		true).
+
+tr_clause(
+	solutionPlan,
+		seq(chooseAction(planningAction),
+		seq(planningAction,
+		solutionPlan))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(0)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(1),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(1)).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		achieves(G2,planningAction))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		seq(planning_goal(G2),
+		seq(G1 \= G2,
+		seq(achieves(G1,planningAction),
+		not(avoids(G2,planningAction)))))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		achieves(G1,planningAction)))).
+
+tr_clause(
+	chooseAction(planningAction),
+		seq(heuristic(2),
+		seq(planning_goal(G1),
+		not(avoids(G1,planningAction))))).
+
+tr_clause(
+	chooseAction(planningAction),
+		heuristic(2)).
+

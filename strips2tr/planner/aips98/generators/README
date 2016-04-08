@@ -1,0 +1,9 @@
+This directory contains problem generators used in the competition.
+
+Most of the generators produce problem definition in the form of a
+Lisp S-expression ("(define (problem ...) ...)") which is then printed
+or converted to Strips form using the utilities in genutil.lisp.  The
+file randogrid.lisp, however, which was written in collaboration with
+Manuela Veloso, prints problems directly to a file.
+
+
