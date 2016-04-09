@@ -1,9 +1,0 @@
-This subdirectory contains all the domains used in round1 and round2
-of the competition.  Most have two versions, one adl, one strips.
-"Assembly" has only an adl version.  "Grid" has only a strips
-version. 
-
-The logistics-adl domain was discovered to have a bug after round1.
-Although this had no effect on the competition, I include a corrected
-version here to forestall criticism.
-
