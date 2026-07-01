@@ -1,0 +1,6 @@
+TR_Planning
+Copyright 2016-2026 Reza Basseda
+
+This product includes a simplified implementation of the tabled Transaction
+Logic interpreter developed by Paul Fodor (the files named "tr_*"), as described
+in his Ph.D. dissertation. Please retain this attribution in redistributions.
